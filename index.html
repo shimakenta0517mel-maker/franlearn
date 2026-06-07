@@ -357,7 +357,7 @@
     <div class="timer" id="timer">⏱ 今日 <b>0</b>分<br>累計 0分</div>
   </div>
   <div class="controls">
-    <label>音声:<select id="ttsModeSel" title="ネイティブ高音質はネット経由でより自然な発音になります"><option value="online">🌐 ネイティブ高音質</option><option value="auto">端末の音声</option></select></label>
+    <label>音声:<select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">🎭 声優音声(高品質)</option><option value="online">🌐 オンライン音声</option><option value="auto">端末の音声</option></select></label>
     <label>仏語:<select id="voiceSel"></select></label>
     <label>日本語:<select id="voiceSelJa"></select></label>
     <label>速さ:<input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.9"></label>
@@ -4631,7 +4631,7 @@ VERBS.push(
 /* ---------- voices ---------- */
 const synth=window.speechSynthesis;
 let voices=[], frVoice=null, jaVoice=null;
-let ttsMode=ls('fl_ttsmode','"online"')||'online';   // 'online' (neural) | 'auto' (device) — declared early: loadVoices() reads it
+let ttsMode=ls('fl_ttsmode','"native"')||'native';   // 'native'(事前生成声優音声) | 'online'(Google) | 'auto'(端末) — loadVoices()が参照するため早期宣言
 let _onlineFails=0;                                   // consecutive online failures → auto-fallback for the session
 const voiceSel=document.getElementById('voiceSel'), voiceSelJa=document.getElementById('voiceSelJa'), warn=document.getElementById('voicewarn');
 // higher = more natural. Prefer neural/natural/online network voices over old robotic SAPI ones.
@@ -4705,36 +4705,50 @@ if(ttsModeSel){
     speak(ttsMode==='online'?"Bonjour ! Écoutez : c'est plus naturel.":'Bonjour, ça va ?');
   });
 }
-function ttsURL(text,lang){
-  const tl=(lang==='ja')?'ja':'fr-FR';
-  return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&total=1&idx=0&textlen='+text.length+'&tl='+tl+'&q='+encodeURIComponent(text);
-}
-function useOnline(text){return ttsMode==='online'&&_onlineFails<3&&!!text&&text.length<=200&&navigator.onLine!==false;}
+/* ---------- pre-generated native (voice-actor) audio: audio/<sha256-16>.mp3 ---------- */
+const audioSet=new Set();
+fetch('audio/index.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSet.add(h));}).catch(()=>{});
+function cleanTTS(t){return String(t).replace(/\//g,',').replace(/\([^)]*\)/g,'').replace(/…/g,' ').replace(/\s+/g,' ').trim();}
+async function sha16(s){try{const b=new TextEncoder().encode(s);const d=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(d)).map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,16);}catch(e){return '';}}
+async function nativeUrl(text){if(!audioSet.size)return null;const h=await sha16(cleanTTS(text));return (h&&audioSet.has(h))?('audio/'+h+'.mp3'):null;}
+function ttsURL(text,lang){const tl=(lang==='ja')?'ja':'fr-FR';return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&total=1&idx=0&textlen='+text.length+'&tl='+tl+'&q='+encodeURIComponent(text);}
 function rateFor(lang){return Math.max(0.5,Math.min(1.6,lang==='ja'?1:Number(rate.value)));}
+// resolve best audio URL: native file -> online Google -> null(=device speech)
+async function resolveUrl(text,lang){
+  if(ttsMode==='auto')return null;
+  if(lang==='fr'&&ttsMode==='native'){const u=await nativeUrl(text);if(u)return u;}
+  if(_onlineFails<3&&navigator.onLine!==false&&text&&text.length<=200)return ttsURL(text,lang);
+  return null;
+}
+function setMedia(title,sub){if(!('mediaSession' in navigator))return;try{navigator.mediaSession.metadata=new MediaMetadata({title:(title||'FranLearn'),artist:(sub||'FranLearn — フランス語'),album:'FranLearn'});navigator.mediaSession.playbackState='playing';}catch(e){}}
 let curAudio=null,_curFin=null;
 // fin(ok): true=played ok, false=failed (caller may fall back), 'cancel'=interrupted (no fallback)
 function audioStop(){var f=_curFin;_curFin=null;if(curAudio){try{curAudio.pause();curAudio.src='';}catch(e){}curAudio.onended=curAudio.onerror=null;curAudio=null;}if(f)f('cancel');}
-function playOnline(text,lang,btn){
+function playUrl(url,lang,btn){
   return new Promise(res=>{
     audioStop();
-    const a=new Audio();curAudio=a;a.playbackRate=rateFor(lang);
+    const a=new Audio();curAudio=a;a.playbackRate=rateFor(lang);a.preload='auto';
     let done=false;
     const fin=ok=>{if(done)return;done=true;if(_curFin===fin)_curFin=null;if(btn)btn.classList.remove('on');if(curAudio===a)curAudio=null;a.onended=a.onerror=null;res(ok);};
     _curFin=fin;
     a.onended=()=>fin(true);
     a.onerror=()=>fin(false);
     if(btn){if(lastBtn)lastBtn.classList.remove('on');btn.classList.add('on');lastBtn=btn;}
-    try{a.src=ttsURL(text,lang);const p=a.play();if(p&&p.catch)p.catch(()=>fin(false));}catch(e){fin(false);}
-    // safety: if nothing started playing within 8s, treat as failure → fall back
+    try{a.src=url;const p=a.play();if(p&&p.catch)p.catch(()=>fin(false));}catch(e){fin(false);}
     setTimeout(()=>{if(!done&&(a.paused||!a.currentTime))fin(false);},8000);
   });
 }
+const _isGoogle=u=>u&&u.indexOf('translate.google')>=0;
 let lastBtn=null;
 // fire-and-forget (used by tap-to-play); always French
 function speak(text,btn){
   audioStop();if(synth)synth.cancel();
-  if(useOnline(text)){playOnline(text,'fr',btn).then(ok=>{if(ok===true)_onlineFails=0;else if(ok===false){_onlineFails++;webSpeak(text,'fr',btn);}});return;}
-  webSpeak(text,'fr',btn);
+  if(ttsMode==='auto'){webSpeak(text,'fr',btn);return;}
+  setMedia(text,'');
+  resolveUrl(text,'fr').then(url=>{
+    if(!url){webSpeak(text,'fr',btn);return;}
+    playUrl(url,'fr',btn).then(ok=>{if(ok===true){_onlineFails=0;}else if(ok===false){if(_isGoogle(url))_onlineFails++;webSpeak(text,'fr',btn);}});
+  });
 }
 function webSpeak(text,lang,btn){
   if(!synth)return;synth.cancel();
@@ -4749,11 +4763,12 @@ function webSpeak(text,lang,btn){
 function speakLang(text,lang){
   return new Promise(res=>{
     audioStop();if(synth)synth.cancel();
-    if(useOnline(text)){
-      playOnline(text,lang,null).then(ok=>{if(ok===true){_onlineFails=0;res();}else if(ok===false){_onlineFails++;webSpeakLang(text,lang).then(res);}else res();});
-      return;
-    }
-    webSpeakLang(text,lang).then(res);
+    if(ttsMode==='auto'){webSpeakLang(text,lang).then(res);return;}
+    if(lang==='fr')setMedia(text,'');
+    resolveUrl(text,lang).then(url=>{
+      if(!url){webSpeakLang(text,lang).then(res);return;}
+      playUrl(url,lang,null).then(ok=>{if(ok===true){_onlineFails=0;res();}else if(ok===false){if(_isGoogle(url))_onlineFails++;webSpeakLang(text,lang).then(res);}else res();});
+    });
   });
 }
 function webSpeakLang(text,lang){
@@ -5738,6 +5753,21 @@ function setupPWA(){
   }catch(e){}
 }
 setupPWA();
+
+/* ---------- offline: service worker ---------- */
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
+
+/* ---------- background playback: lock-screen / MediaSession controls ---------- */
+if('mediaSession' in navigator){
+  const ms=navigator.mediaSession;
+  try{
+    ms.setActionHandler('play',()=>{if(mode==='hf')hfPlay();else if(curAudio){try{curAudio.play();}catch(e){}}});
+    ms.setActionHandler('pause',()=>{audioStop();if(synth)synth.cancel();if(mode==='hf')hfStop();try{ms.playbackState='paused';}catch(e){}});
+    ms.setActionHandler('stop',()=>{audioStop();if(synth)synth.cancel();if(mode==='hf')hfStop();if(mode==='learn')lpStop();});
+    ms.setActionHandler('nexttrack',()=>{const b=document.getElementById('hfnext');if(mode==='hf'&&b)b.click();});
+    ms.setActionHandler('previoustrack',()=>{const b=document.getElementById('hfprev');if(mode==='hf'&&b)b.click();});
+  }catch(e){}
+}
 
 current=tabKeys()[0];
 buildTabs();buildRange();buildFilter();renderAll();
