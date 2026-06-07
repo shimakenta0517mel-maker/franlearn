@@ -5757,6 +5757,22 @@ setupPWA();
 /* ---------- offline: service worker ---------- */
 if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
 
+/* ---------- offline: download all native audio into cache ---------- */
+let _dling=false;
+async function downloadAllAudio(){
+  if(_dling)return;
+  if(!audioSet.size){ try{const a=await (await fetch('audio/index.json',{cache:'no-cache'})).json();a.forEach(h=>audioSet.add(h));}catch(e){} }
+  if(!audioSet.size){toast('音声リストを取得できませんでした');return;}
+  _dling=true;const hashes=[...audioSet];let done=0;
+  if(typeof toast==='function')toast('📥 オフライン保存を開始（'+hashes.length+'件）…');
+  let i=0;const conc=8;
+  async function worker(){while(i<hashes.length){const h=hashes[i++];try{await fetch('audio/'+h+'.mp3',{cache:'force-cache'});}catch(e){}done++;if(done%300===0&&typeof toast==='function')toast('保存中… '+done+'/'+hashes.length);}}
+  try{await Promise.all(Array.from({length:conc},worker));}catch(e){}
+  _dling=false;
+  if(typeof toast==='function')toast('✅ オフライン保存完了（'+done+'件）。電波がなくても再生できます');
+}
+(function(){const c=document.querySelector('.controls');if(c){const b=document.createElement('button');b.id='offlineBtn';b.textContent='📥 オフライン保存';b.title='全音声(声優)を端末に保存して、オフライン/バックグラウンド再生';b.style.cssText='border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer';b.onclick=downloadAllAudio;c.appendChild(b);}})();
+
 /* ---------- background playback: lock-screen / MediaSession controls ---------- */
 if('mediaSession' in navigator){
   const ms=navigator.mediaSession;
