@@ -347,6 +347,24 @@
   .gbtn[data-g="3"]{background:#2f6fd0}
   .gbtn:hover{filter:brightness(1.07)}.gbtn:active{transform:scale(.94)}
   @media(max-width:420px){.gbtn{font-size:12.5px;padding:8px 2px}.gbtn .iv{font-size:10px}.gbtn .kc{display:none}}
+  /* ---- header control buttons + collapsible settings panel ---- */
+  .ctrlbtn{border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:9px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:.15s}
+  .ctrlbtn:hover{background:rgba(255,255,255,.30)}
+  .ctrlbtn.icon{padding:6px 10px}
+  .ctrlbtn.on{background:#fff;color:var(--bleu)}
+  .settings{max-width:980px;margin:9px auto 0;background:rgba(255,255,255,.13);border-radius:12px;padding:11px 13px;display:none}
+  .settings.open{display:block}
+  .setgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:9px 20px}
+  .setrow{display:flex;align-items:center;gap:9px;font-size:12.5px;min-height:30px}
+  .setrow .setlabel{flex:0 0 118px;opacity:.96;font-weight:600}
+  .setrow select{flex:1;min-width:0;border-radius:8px;padding:4px 6px;border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.92);color:#1a2233}
+  .setrow input[type=range]{flex:1;min-width:90px}
+  .setrow .setval{flex:0 0 48px;text-align:right;opacity:.9;font-variant-numeric:tabular-nums}
+  .setadv{margin-top:11px;border-top:1px solid rgba(255,255,255,.22);padding-top:9px;font-size:12px}
+  .setadv summary{cursor:pointer;opacity:.92;font-weight:600;list-style:revert}
+  .setadv .setrow{margin-top:7px}
+  .setadv p{opacity:.78;font-size:11px;line-height:1.5;margin:8px 0 0}
+  body.dark .settings{background:rgba(255,255,255,.06)}
 </style>
 </head>
 <body>
@@ -357,18 +375,30 @@
     <div class="timer" id="timer">⏱ 今日 <b>0</b>分<br>累計 0分</div>
   </div>
   <div class="controls">
-    <label>音声:<select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">🎭 声優音声(高品質)</option><option value="online">🌐 オンライン音声</option><option value="auto">端末の音声</option></select></label>
-    <label>声:<select id="voiceGender" title="声優音声の声を選択（女性=Denise / 男性=Henri）"><option value="f">👩 女性(Denise)</option><option value="m">👨 男性(Henri)</option></select></label>
-    <label>仏語:<select id="voiceSel"></select></label>
-    <label>日本語:<select id="voiceSelJa"></select></label>
-    <label title="読み上げの速さ（仏語・日本語とも）">速さ:<input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.9"></label>
-    <span id="rateval" style="opacity:.85">0.90×</span>
-    <label title="同じ語の中での音と音の間（仏語↔日本語など）">音間:<input type="range" id="gapInner" min="0" max="2" step="0.1" value="0.3"></label>
-    <span id="gapival" style="opacity:.85">0.3秒</span>
-    <label title="次の単語に進むまでの間">語間:<input type="range" id="gapCtl" min="0.2" max="3" step="0.1" value="0.7"></label>
-    <span id="gapval" style="opacity:.85">0.7秒</span>
-    <button id="sfxBtn" title="効果音 オン/オフ">🔊</button>
-    <button id="themeBtn" title="ダーク/ライト切替">🌙</button>
+    <button id="setBtn" class="ctrlbtn" title="音声・速さ・間隔などの設定">⚙️ 設定</button>
+    <button id="sfxBtn" class="ctrlbtn icon" title="効果音 オン/オフ">🔊</button>
+    <button id="themeBtn" class="ctrlbtn icon" title="ダーク/ライト切替">🌙</button>
+    <button id="offlineBtn" class="ctrlbtn" title="選択中の声(仏語)＋日本語の音声をまとめて端末に保存。オフライン/バックグラウンドで再生">📥 オフライン保存</button>
+  </div>
+  <div class="settings" id="settingsPanel">
+    <div class="setgrid">
+      <div class="setrow"><span class="setlabel">🔊 音声タイプ</span>
+        <select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">🎭 声優音声（高品質）</option><option value="online">🌐 オンライン音声</option><option value="auto">端末の音声</option></select></div>
+      <div class="setrow" id="genderRow"><span class="setlabel">🗣 声（仏語）</span>
+        <select id="voiceGender" title="声優音声の声（女性=Denise / 男性=Henri）"><option value="f">👩 女性（Denise）</option><option value="m">👨 男性（Henri）</option></select></div>
+      <div class="setrow"><span class="setlabel">⏩ 速さ</span>
+        <input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.9"><span class="setval" id="rateval">0.90×</span></div>
+      <div class="setrow"><span class="setlabel">⏸ 音の間隔<br>（語の中）</span>
+        <input type="range" id="gapInner" min="0" max="2" step="0.1" value="0.3"><span class="setval" id="gapival">0.3秒</span></div>
+      <div class="setrow"><span class="setlabel">⏭ 単語の間隔<br>（語と語）</span>
+        <input type="range" id="gapCtl" min="0.2" max="3" step="0.1" value="0.7"><span class="setval" id="gapval">0.7秒</span></div>
+    </div>
+    <details class="setadv">
+      <summary>詳細設定（端末の音声・通常は変更不要）</summary>
+      <div class="setrow"><span class="setlabel">端末の仏語音声</span><select id="voiceSel"></select></div>
+      <div class="setrow"><span class="setlabel">端末の日本語音声</span><select id="voiceSelJa"></select></div>
+      <p>「音声タイプ＝端末の音声」を選んだとき、またはネット不通で声優音声が使えないときに使う、お使いの端末内蔵の声です。声優音声を使う場合は変更不要です。</p>
+    </details>
   </div>
   <div class="catbar" id="catbar"></div>
   <div class="modebar" id="modebar">
@@ -4661,8 +4691,9 @@ function loadVoices(){
   const ja=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith('ja')).sort((a,b)=>vRank(b)-vRank(a));
   voiceSel.innerHTML='';voiceSelJa.innerHTML='';
   if(fr.length===0){
-    warn.style.display=(ttsMode==='online')?'none':'block';
-    warn.innerHTML='⚠️ 端末にフランス語音声がありません。上の「音声」を <b>🌐 ネイティブ高音質</b> にすると、ネット経由で自然な発音になります（推奨）。iPhoneは 設定→アクセシビリティ→読み上げコンテンツ→声→フランス語 で高品質版も追加できます。';
+    // 声優音声/オンライン音声なら端末の仏語音声は不要なので警告を出さない（端末の音声を選んだ時だけ）
+    warn.style.display=(ttsMode==='auto')?'block':'none';
+    warn.innerHTML='⚠️ 端末にフランス語音声がありません。⚙️設定の「音声タイプ」を <b>🎭 声優音声（高品質）</b> にすると自然な発音で再生できます（推奨）。iPhoneは 設定→アクセシビリティ→読み上げコンテンツ→声→フランス語 で高品質版も追加できます。';
     voices.forEach(v=>addOpt(voiceSel,v)); frVoice=voices[0]||null;
   }else{
     warn.style.display='none';
@@ -4704,6 +4735,15 @@ rate.addEventListener('input',()=>{rateval.textContent=Number(rate.value).toFixe
 gapCtl.addEventListener('input',()=>{gapval.textContent=Number(gapCtl.value).toFixed(1)+'秒';sv('fl_gap',gapCtl.value);});
 gapInner.addEventListener('input',()=>{gapival.textContent=Number(gapInner.value).toFixed(1)+'秒';sv('fl_gapinner',gapInner.value);});
 
+/* ---------- settings panel (collapsible) ---------- */
+const setBtn=document.getElementById('setBtn'), settingsPanel=document.getElementById('settingsPanel');
+function setSettingsOpen(open){if(!settingsPanel)return;settingsPanel.classList.toggle('open',open);if(setBtn)setBtn.classList.toggle('on',open);sv('fl_setopen',open?1:0);}
+if(setBtn)setBtn.onclick=()=>setSettingsOpen(!settingsPanel.classList.contains('open'));
+setSettingsOpen(!!Number(ls('fl_setopen','0')));
+// 性別(声)は声優音声(native)のときだけ意味があるので、それ以外は隠す
+function updGenderRow(){const gr=document.getElementById('genderRow');if(gr)gr.style.display=(ttsMode==='native')?'':'none';}
+updGenderRow();
+
 /* ---------- online neural TTS (no API key needed) ----------
    Streams natural neural-quality French/Japanese audio. Falls back to the
    device's Web Speech voice automatically if the network is unavailable. */
@@ -4711,7 +4751,7 @@ const ttsModeSel=document.getElementById('ttsModeSel');
 if(ttsModeSel){
   ttsModeSel.value=ttsMode;
   ttsModeSel.addEventListener('change',()=>{
-    ttsMode=ttsModeSel.value;sv('fl_ttsmode',ttsMode);_onlineFails=0;loadVoices();
+    ttsMode=ttsModeSel.value;sv('fl_ttsmode',ttsMode);_onlineFails=0;loadVoices();updGenderRow();
     speak(ttsMode==='online'?"Bonjour ! Écoutez : c'est plus naturel.":'Bonjour, ça va ?');
   });
 }
@@ -5843,7 +5883,7 @@ async function downloadAllAudio(){
   _dling=false;
   if(typeof toast==='function')toast('✅ オフライン保存完了（'+done+'件）。電波がなくても再生できます');
 }
-(function(){const c=document.querySelector('.controls');if(c){const b=document.createElement('button');b.id='offlineBtn';b.textContent='📥 オフライン保存';b.title='選択中の声(仏語)＋日本語の音声をまとめて端末に保存して、オフライン/バックグラウンド再生';b.style.cssText='border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer';b.onclick=downloadAllAudio;c.appendChild(b);}})();
+(function(){const b=document.getElementById('offlineBtn');if(b)b.onclick=downloadAllAudio;})();
 
 /* ---------- background playback: lock-screen / MediaSession controls ---------- */
 if('mediaSession' in navigator){
