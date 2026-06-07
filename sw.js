@@ -1,6 +1,6 @@
 /* FranLearn service worker — offline app shell + cache-on-demand audio */
 const CACHE = 'franlearn-v1';
-const SHELL = ['./', './index.html', './audio/index.json', './audio/index_m.json'];
+const SHELL = ['./', './index.html', './audio/index.json', './audio/index_m.json', './audio/index_ja.json'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(

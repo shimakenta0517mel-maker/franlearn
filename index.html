@@ -361,9 +361,11 @@
     <label>声:<select id="voiceGender" title="声優音声の声を選択（女性=Denise / 男性=Henri）"><option value="f">👩 女性(Denise)</option><option value="m">👨 男性(Henri)</option></select></label>
     <label>仏語:<select id="voiceSel"></select></label>
     <label>日本語:<select id="voiceSelJa"></select></label>
-    <label>速さ:<input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.9"></label>
+    <label title="読み上げの速さ（仏語・日本語とも）">速さ:<input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.9"></label>
     <span id="rateval" style="opacity:.85">0.90×</span>
-    <label>間隔:<input type="range" id="gapCtl" min="0.2" max="3" step="0.1" value="0.7"></label>
+    <label title="同じ語の中での音と音の間（仏語↔日本語など）">音間:<input type="range" id="gapInner" min="0" max="2" step="0.1" value="0.3"></label>
+    <span id="gapival" style="opacity:.85">0.3秒</span>
+    <label title="次の単語に進むまでの間">語間:<input type="range" id="gapCtl" min="0.2" max="3" step="0.1" value="0.7"></label>
     <span id="gapval" style="opacity:.85">0.7秒</span>
     <button id="sfxBtn" title="効果音 オン/オフ">🔊</button>
     <button id="themeBtn" title="ダーク/ライト切替">🌙</button>
@@ -424,9 +426,10 @@
         <button data-hm="fav">⭐ 保存</button>
       </div>
       <div class="hfopt">
-        <label><input type="checkbox" id="hfloop" checked> 区間リピート</label>
+        <label title="区間の最後まで行ったら最初へ戻り、止めるまで止まらず連続再生します"><input type="checkbox" id="hfloop" checked> 連続ループ</label>
         <label><input type="checkbox" id="hfex_chk" checked> 例文も読む</label>
-        <span style="opacity:.8">※速さ・間隔は上部のスライダーで調整</span>
+        <label title="1つの単語を何回くり返して読むか（1〜10回）">くり返し:<select id="hfRepeat" style="margin-left:4px"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>回</label>
+        <span style="opacity:.8">※速さ・音間・語間は上部スライダー、再生する範囲は「区間」で調整</span>
       </div>
       <div class="hfpreset">
         <span class="barlabel">対象:</span>
@@ -434,7 +437,7 @@
         <button class="chip" data-hp="review">🔁 復習だけ</button>
         <button class="chip" data-hp="fav">⭐ 保存だけ</button>
       </div>
-      <div style="font-size:11px;color:var(--muted);margin-top:11px">再生順：仏語 → 日本語 → 仏語 → 仏語例文 → 日本語例文。上の「区間」で 1-25 などに絞ってひたすら流せます。</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:11px">再生順：仏語 → 日本語 → 仏語 → 仏語例文 → 日本語例文 → 仏語例文。上の「区間」で 1-10・1-25 など好きな範囲に絞ってひたすら流せます（区間バーの「カスタム」で自由に範囲指定）。</div>
     </div>
   </section>
   <section id="numView" class="hide">
@@ -4690,11 +4693,16 @@ document.addEventListener('touchend',unlockAudio,{passive:true});
 document.addEventListener('click',unlockAudio);
 const rate=document.getElementById('rate'),rateval=document.getElementById('rateval');
 const gapCtl=document.getElementById('gapCtl'),gapval=document.getElementById('gapval');
-function gapMs(){return Math.round(Number(gapCtl.value)*1000);}
+const gapInner=document.getElementById('gapInner'),gapival=document.getElementById('gapival');
+function gapMs(){return Math.round(Number(gapCtl.value)*1000);}      // 語と語の間（次の単語まで）
+function gapInnerMs(){return Math.round(Number(gapInner.value)*1000);} // 語内の音と音の間（仏↔日など）
+let itemRepeat=Math.max(1,Math.min(10,Number(ls('fl_itemrep','1'))||1)); // ハンズフリー/連続：1語を何回くり返すか
 rate.value=ls('fl_rate','"0.9"')||'0.9';rateval.textContent=Number(rate.value).toFixed(2)+'×';
 gapCtl.value=ls('fl_gap','"0.7"')||'0.7';gapval.textContent=Number(gapCtl.value).toFixed(1)+'秒';
+gapInner.value=ls('fl_gapinner','"0.3"')||'0.3';gapival.textContent=Number(gapInner.value).toFixed(1)+'秒';
 rate.addEventListener('input',()=>{rateval.textContent=Number(rate.value).toFixed(2)+'×';sv('fl_rate',rate.value);});
 gapCtl.addEventListener('input',()=>{gapval.textContent=Number(gapCtl.value).toFixed(1)+'秒';sv('fl_gap',gapCtl.value);});
+gapInner.addEventListener('input',()=>{gapival.textContent=Number(gapInner.value).toFixed(1)+'秒';sv('fl_gapinner',gapInner.value);});
 
 /* ---------- online neural TTS (no API key needed) ----------
    Streams natural neural-quality French/Japanese audio. Falls back to the
@@ -4715,23 +4723,30 @@ if(voiceGenderSel){
     speak(voiceGender==='m'?'Bonjour, je suis Henri.':'Bonjour, je suis Denise.');
   });
 }
-/* ---------- pre-generated native (voice-actor) audio: audio/<sha256-16>.mp3 ---------- */
-const audioSet=new Set();      // 女性(Denise)のハッシュ → audio/<h>.mp3
-const audioSetM=new Set();     // 男性(Henri)のハッシュ  → audio/m/<h>.mp3
+/* ---------- pre-generated native (voice-actor) audio ----------
+   仏語(女)=audio/<h>.mp3  仏語(男)=audio/m/<h>.mp3  日本語=audio/ja/<h>.mp3
+   見出し語(w)・動詞原形(inf)・例文(ex)・和訳(jp)・例文和訳(exjp) すべて事前生成。 */
+const audioSet=new Set();      // 仏語 女性(Denise) → audio/<h>.mp3
+const audioSetM=new Set();     // 仏語 男性(Henri)  → audio/m/<h>.mp3
+const audioSetJa=new Set();    // 日本語(Nanami)    → audio/ja/<h>.mp3
 fetch('audio/index.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSet.add(h));}).catch(()=>{});
 fetch('audio/index_m.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSetM.add(h));}).catch(()=>{});
-function cleanTTS(t){return String(t).replace(/\//g,',').replace(/\([^)]*\)/g,'').replace(/…/g,' ').replace(/\s+/g,' ').trim();}
+fetch('audio/index_ja.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSetJa.add(h));}).catch(()=>{});
+// clean規則は Python generate_audio.py の clean() と完全一致させること
+function cleanTTS(t){return String(t).replace(/\//g,',').replace(/\([^)]*\)/g,'').replace(/／/g,'、').replace(/（[^）]*）/g,'').replace(/…/g,' ').replace(/\s+/g,' ').trim();}
 async function sha16(s){try{const b=new TextEncoder().encode(s);const d=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(d)).map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,16);}catch(e){return '';}}
-// 選択中の声(性別)で参照フォルダを切替。該当が無ければ null(→オンライン/端末へフォールバック)
-async function nativeUrl(text){const h=await sha16(cleanTTS(text));if(!h)return null;
+// 言語と選択中の声で参照フォルダを切替。該当が無ければ null(→オンライン/端末へフォールバック)
+async function nativeUrl(text,lang){const h=await sha16(cleanTTS(text));if(!h)return null;
+  if(lang==='ja')return audioSetJa.has(h)?('audio/ja/'+h+'.mp3'):null;
   if(voiceGender==='m')return audioSetM.has(h)?('audio/m/'+h+'.mp3'):null;
   return audioSet.has(h)?('audio/'+h+'.mp3'):null;}
 function ttsURL(text,lang){const tl=(lang==='ja')?'ja':'fr-FR';return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&total=1&idx=0&textlen='+text.length+'&tl='+tl+'&q='+encodeURIComponent(text);}
-function rateFor(lang){return Math.max(0.5,Math.min(1.6,lang==='ja'?1:Number(rate.value)));}
+// 速さスライダーは仏語・日本語の両方に適用（高音質mp3はplaybackRateで反映）
+function rateFor(lang){return Math.max(0.5,Math.min(1.6,Number(rate.value)));}
 // resolve best audio URL: native file -> online Google -> null(=device speech)
 async function resolveUrl(text,lang){
   if(ttsMode==='auto')return null;
-  if(lang==='fr'&&ttsMode==='native'){const u=await nativeUrl(text);if(u)return u;}
+  if(ttsMode==='native'){const u=await nativeUrl(text,lang);if(u)return u;}
   if(_onlineFails<3&&navigator.onLine!==false&&text&&text.length<=200)return ttsURL(text,lang);
   return null;
 }
@@ -5149,6 +5164,23 @@ function buildRange(){
     const e=Math.min(s+RSIZE-1,total);
     rangebar.appendChild(mkRange([s,e],s+'-'+e));
   }
+  rangebar.appendChild(mkCustomRange(total));
+}
+// 自由に範囲を指定（例：1-10 / 1-5 / 1-20）。Enter または OK で適用。
+function mkCustomRange(total){
+  const isCustom=Array.isArray(rangeSel);
+  const box=document.createElement('span');box.className='chip rngcustom'+(isCustom?' active':'');
+  box.style.cssText='display:inline-flex;align-items:center;gap:3px;padding:2px 8px';
+  const a=document.createElement('input'),b=document.createElement('input');
+  for(const el of [a,b]){el.type='number';el.min='1';el.max=String(total);el.style.cssText='width:46px;border:none;border-radius:6px;padding:3px 4px;font:inherit;text-align:center';}
+  a.placeholder='1';b.placeholder=String(total);a.title='開始';b.title='終了';
+  if(isCustom){a.value=rangeSel[0];b.value=rangeSel[1];}
+  const apply=()=>{let s=Math.max(1,Math.min(total,parseInt(a.value)||1)),e=Math.max(1,Math.min(total,parseInt(b.value)||total));if(s>e){const t=s;s=e;e=t;}rangeSel=[s,e];buildRange();renderAll();};
+  a.onkeydown=b.onkeydown=ev=>{if(ev.key==='Enter')apply();};
+  const ok=document.createElement('button');ok.textContent='OK';ok.style.cssText='border:none;border-radius:6px;padding:3px 8px;cursor:pointer;font:inherit;background:var(--bleu);color:#fff';ok.onclick=apply;
+  const lbl=document.createElement('span');lbl.textContent='カスタム';lbl.style.cssText='font-size:11px;opacity:.85;margin-right:2px';
+  box.append(lbl,a,document.createTextNode('-'),b,ok);
+  return box;
 }
 function mkRange(val,label){
   const active=(val==='all'&&rangeSel==='all')||(Array.isArray(val)&&Array.isArray(rangeSel)&&val[0]===rangeSel[0]&&val[1]===rangeSel[1]);
@@ -5311,14 +5343,22 @@ async function lpPlay(){
   while(true){
     if(token!==lpToken)return;
     if(i>=arr.length){if(lpLoop.checked){i=0;}else break;}
-    const o=arr[i], cardEl=grid.children[i];
+    const o=arr[i], cardEl=grid.children[i], it=o.it;
     document.querySelectorAll('.card.playing').forEach(x=>x.classList.remove('playing'));
     if(cardEl){cardEl.classList.add('playing');cardEl.scrollIntoView({block:'center',behavior:'smooth'});}
-    bump(keyOf(o.it));
-    await speakLang(o.it.w,'fr');
-    if(token!==lpToken)return;
-    await sleep(lpEx.checked&&o.it.ex?300:gapMs());
-    if(lpEx.checked&&o.it.ex){await speakLang(o.it.ex,'fr');if(token!==lpToken)return;await sleep(gapMs());}
+    bump(keyOf(it));
+    // 再生順：仏語 → 日本語 → 仏語 →（例文）仏語例文 → 日本語例文 → 仏語例文
+    const steps=[[it.w,'fr'],[it.jp,'ja'],[it.w,'fr']];
+    if(lpEx.checked&&it.ex){steps.push([it.ex,'fr']);if(it.exjp)steps.push([it.exjp,'ja']);steps.push([it.ex,'fr']);}
+    for(let rep=0;rep<itemRepeat;rep++){
+      for(let si=0;si<steps.length;si++){
+        if(token!==lpToken)return;
+        await speakLang(steps[si][0],steps[si][1]);
+        if(token!==lpToken)return;
+        const last=(rep===itemRepeat-1&&si===steps.length-1);
+        await sleep(last?gapMs():gapInnerMs());
+      }
+    }
     i++;
   }
   lpStop();
@@ -5524,6 +5564,8 @@ function doFlip(){flipped=true;renderTest();const it=deck[idx];setTimeout(()=>sp
 /* ---------- HANDS-FREE ---------- */
 let hfList=[], hfIdx=0, hfToken=0, hfPlaying=false;
 const hfloop=document.getElementById('hfloop'), hfexchk=document.getElementById('hfex_chk');
+const hfRepeat=document.getElementById('hfRepeat');
+if(hfRepeat){hfRepeat.value=String(itemRepeat);hfRepeat.addEventListener('change',()=>{itemRepeat=Math.max(1,Math.min(10,Number(hfRepeat.value)||1));sv('fl_itemrep',itemRepeat);});}
 const hffr=document.getElementById('hffr'), hffripa=document.getElementById('hffripa'), hfjp=document.getElementById('hfjp'), hfex=document.getElementById('hfex'), hfidxEl=document.getElementById('hfidx'), hfstage=document.getElementById('hfstage'), hfplayBtn=document.getElementById('hfplay');
 function hfBuild(){
   if(isVerb()){
@@ -5552,13 +5594,18 @@ async function hfPlay(){
   while(hfIdx<hfList.length){
     if(token!==hfToken)return;
     const it=hfList[hfIdx];hfShow();bump(it.k);
+    // 再生順：仏語 → 日本語 → 仏語 →（例文）仏語例文 → 日本語例文 → 仏語例文
     const steps=[['仏語',it.w,'fr'],['日本語',it.jp,'ja'],['仏語',it.w,'fr']];
-    if(hfexchk.checked&&it.ex){steps.push(['例文(仏)',it.ex,'fr']);if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);}
-    for(let si=0;si<steps.length;si++){
-      if(token!==hfToken)return;
-      hfstage.textContent='▶ '+steps[si][0];await speakLang(steps[si][1],steps[si][2]);
-      if(token!==hfToken)return;
-      await sleep(si<steps.length-1?300:gapMs()); // 項目内は0.3秒固定、項目間はスライダー
+    if(hfexchk.checked&&it.ex){steps.push(['例文(仏)',it.ex,'fr']);if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}
+    for(let rep=0;rep<itemRepeat;rep++){
+      for(let si=0;si<steps.length;si++){
+        if(token!==hfToken)return;
+        hfstage.textContent='▶ '+steps[si][0]+(itemRepeat>1?'　('+(rep+1)+'/'+itemRepeat+')':'');
+        await speakLang(steps[si][1],steps[si][2]);
+        if(token!==hfToken)return;
+        const last=(rep===itemRepeat-1&&si===steps.length-1);
+        await sleep(last?gapMs():gapInnerMs()); // 語内=音間スライダー / 次の単語へ=語間スライダー
+      }
     }
     if(token!==hfToken)return;
     hfIdx++;
@@ -5777,18 +5824,26 @@ let _dling=false;
 async function downloadAllAudio(){
   if(_dling)return;
   const useM=voiceGender==='m';
-  const set=useM?audioSetM:audioSet, idx=useM?'audio/index_m.json':'audio/index.json', pre=useM?'audio/m/':'audio/';
-  if(!set.size){ try{const a=await (await fetch(idx,{cache:'no-cache'})).json();a.forEach(h=>set.add(h));}catch(e){} }
-  if(!set.size){toast('音声リストを取得できませんでした');return;}
-  _dling=true;const hashes=[...set];let done=0;
-  if(typeof toast==='function')toast('📥 オフライン保存を開始（'+(useM?'男性':'女性')+'・'+hashes.length+'件）…');
+  // 選択中の仏語の声 + 日本語(共通) をまとめて保存
+  const groups=[
+    {set:useM?audioSetM:audioSet, idx:useM?'audio/index_m.json':'audio/index.json', pre:useM?'audio/m/':'audio/'},
+    {set:audioSetJa, idx:'audio/index_ja.json', pre:'audio/ja/'}
+  ];
+  const jobs=[];
+  for(const g of groups){
+    if(!g.set.size){ try{const a=await (await fetch(g.idx,{cache:'no-cache'})).json();a.forEach(h=>g.set.add(h));}catch(e){} }
+    g.set.forEach(h=>jobs.push(g.pre+h+'.mp3'));
+  }
+  if(!jobs.length){toast('音声リストを取得できませんでした');return;}
+  _dling=true;let done=0;
+  if(typeof toast==='function')toast('📥 オフライン保存を開始（'+(useM?'男性':'女性')+'仏語＋日本語・'+jobs.length+'件）…');
   let i=0;const conc=8;
-  async function worker(){while(i<hashes.length){const h=hashes[i++];try{await fetch(pre+h+'.mp3',{cache:'force-cache'});}catch(e){}done++;if(done%300===0&&typeof toast==='function')toast('保存中… '+done+'/'+hashes.length);}}
+  async function worker(){while(i<jobs.length){const u=jobs[i++];try{await fetch(u,{cache:'force-cache'});}catch(e){}done++;if(done%300===0&&typeof toast==='function')toast('保存中… '+done+'/'+jobs.length);}}
   try{await Promise.all(Array.from({length:conc},worker));}catch(e){}
   _dling=false;
-  if(typeof toast==='function')toast('✅ オフライン保存完了（'+(useM?'男性':'女性')+'・'+done+'件）。電波がなくても再生できます');
+  if(typeof toast==='function')toast('✅ オフライン保存完了（'+done+'件）。電波がなくても再生できます');
 }
-(function(){const c=document.querySelector('.controls');if(c){const b=document.createElement('button');b.id='offlineBtn';b.textContent='📥 オフライン保存';b.title='全音声(声優)を端末に保存して、オフライン/バックグラウンド再生';b.style.cssText='border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer';b.onclick=downloadAllAudio;c.appendChild(b);}})();
+(function(){const c=document.querySelector('.controls');if(c){const b=document.createElement('button');b.id='offlineBtn';b.textContent='📥 オフライン保存';b.title='選択中の声(仏語)＋日本語の音声をまとめて端末に保存して、オフライン/バックグラウンド再生';b.style.cssText='border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer';b.onclick=downloadAllAudio;c.appendChild(b);}})();
 
 /* ---------- background playback: lock-screen / MediaSession controls ---------- */
 if('mediaSession' in navigator){
