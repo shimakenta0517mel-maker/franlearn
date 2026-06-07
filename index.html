@@ -649,7 +649,7 @@ DECKS.delf={label:"📘 DELF単語",tabs:{
   {w:"palinodie",ipa:"[palinɔdi]",pos:"名詞",jp:"前言撤回",ex:"Ses palinodies lassent.",exjp:"彼の変節にはうんざりです。"}
  ]}
 }};
-DECKS.freq={label:"🔑 頻出これだけ",tabs:{
+DECKS.freq={label:"🗣 よく使うフレーズ",tabs:{
  "A1":{label:"まず覚える",items:[
   {w:"Comment ça va ?",ipa:"[kɔmɑ̃ sa va]",pos:"会話",jp:"元気?",pri:1,ex:"Salut ! Comment ça va ?",exjp:"やあ!元気?"},
   {w:"Je m'appelle…",ipa:"[ʒə mapɛl]",pos:"会話",jp:"私の名前は…",pri:1,ex:"Je m'appelle Léa.",exjp:"レアです。"},
@@ -5059,7 +5059,7 @@ function keyOf(it){return cat+'|'+current+'|'+it.w;}
 
 /* ---------- category bar ---------- */
 const deckbar=document.getElementById('deckbar'), teststyle=document.getElementById('teststyle');
-const CATS=[["delf","📘 DELF単語"],["freq","🔑 頻出これだけ"],["scene","💬 場面別"],["theme","📚 テーマ別"],["verb","🔧 動詞活用"]];
+const CATS=[["delf","📘 DELF単語"],["freq","🗣 よく使うフレーズ"],["scene","💬 場面別"],["theme","📚 テーマ別"],["verb","🔧 動詞活用"]];
 /* ☰ 目次 panel (opened from the header utility button) */
 const tocBtn=document.getElementById('tocBtn');
 const tocPanel=document.createElement('div');tocPanel.id='tocPanel';tocPanel.className='tocpanel hide';
