@@ -32,9 +32,15 @@
   .catbtn{flex:0 0 auto;padding:6px 12px;border-radius:20px;background:rgba(255,255,255,.16);color:#eaf1ff;
     cursor:pointer;font-weight:700;font-size:12.5px;user-select:none;white-space:nowrap;transition:.15s;border:none}
   .catbtn.active{background:#fff;color:var(--bleu)}
-  .modebar{max-width:980px;margin:8px auto 0;display:flex;background:rgba(255,255,255,.16);border-radius:10px;padding:3px;gap:3px}
-  .modebtn{flex:1;text-align:center;padding:6px;border-radius:8px;cursor:pointer;font-weight:700;font-size:12.5px;color:#eaf1ff;user-select:none;transition:.15s}
-  .modebtn.active{background:#fff;color:var(--bleu)}
+  .deckbar{margin-top:8px}
+  .deckbar .barlbl,.teststyle .barlbl{flex:0 0 auto;align-self:center;font-size:11px;font-weight:700;opacity:.78;margin-right:3px}
+  .teststyle{margin-top:7px;align-items:center}
+  .teststyle.hide{display:none}
+  .tsbtn{flex:0 0 auto;padding:5px 12px;border-radius:18px;background:rgba(255,255,255,.10);color:#dbe6ff;border:1px solid rgba(255,255,255,.30);font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:.15s}
+  .tsbtn.active{background:#fff;color:var(--bleu);border-color:#fff}
+  .modebar{max-width:980px;margin:10px auto 0;display:flex;background:rgba(255,255,255,.16);border-radius:11px;padding:4px;gap:4px}
+  .modebtn{flex:1;text-align:center;padding:9px 6px;border-radius:8px;cursor:pointer;font-weight:700;font-size:13.5px;color:#eaf1ff;user-select:none;transition:.15s}
+  .modebtn.active{background:#fff;color:var(--bleu);box-shadow:0 1px 4px rgba(0,0,0,.18)}
   .voicewarn{background:#fff3cd;color:#7a5b00;max-width:980px;margin:8px auto 0;padding:8px 12px;border-radius:8px;font-size:12px;display:none}
   .tabs{max-width:980px;margin:11px auto 0;display:flex;gap:6px;padding:0 14px;flex-wrap:wrap}
   .tab{flex:0 1 auto;text-align:center;padding:6px 11px;border-radius:10px;background:var(--card);
@@ -209,6 +215,8 @@
     h1{font-size:16px}.sub{display:none}
     .timer{font-size:10px}
     .controls{font-size:11px;gap:7px}.controls select{max-width:108px}
+    .modebtn{font-size:11.5px;padding:8px 2px;white-space:nowrap}
+    .ctrlbtn{padding:6px 9px;font-size:11.5px}
     .play{width:36px;height:36px}.play svg{width:17px;height:17px}
     .conj{padding:9px 10px}.conj .form{font-size:14px}
     .hfctrl button{width:52px;height:52px;font-size:19px}.hfctrl .main{width:66px;height:66px;font-size:25px}
@@ -376,6 +384,8 @@
   </div>
   <div class="controls">
     <button id="setBtn" class="ctrlbtn" title="音声・速さ・間隔などの設定">⚙️ 設定</button>
+    <button id="statsBtn" class="ctrlbtn" title="学習の記録・統計を見る">📊 記録</button>
+    <button id="tocBtn" class="ctrlbtn" title="全デッキの目次から探す">☰ 目次</button>
     <button id="sfxBtn" class="ctrlbtn icon" title="効果音 オン/オフ">🔊</button>
     <button id="themeBtn" class="ctrlbtn icon" title="ダーク/ライト切替">🌙</button>
     <button id="offlineBtn" class="ctrlbtn" title="選択中の声(仏語)＋日本語の音声をまとめて端末に保存。オフライン/バックグラウンドで再生">📥 オフライン保存</button>
@@ -400,12 +410,13 @@
       <p>「音声タイプ＝端末の音声」を選んだとき、またはネット不通で声優音声が使えないときに使う、お使いの端末内蔵の声です。声優音声を使う場合は変更不要です。</p>
     </details>
   </div>
-  <div class="catbar" id="catbar"></div>
   <div class="modebar" id="modebar">
     <div class="modebtn active" data-mode="learn">📖 学習</div>
-    <div class="modebtn" data-mode="test">🃏 テスト</div>
+    <div class="modebtn" data-mode="test">✍️ テスト</div>
     <div class="modebtn" data-mode="hf">🎧 ハンズフリー</div>
   </div>
+  <div class="catbar deckbar" id="deckbar"></div>
+  <div class="catbar teststyle hide" id="teststyle"></div>
   <div class="voicewarn" id="voicewarn"></div>
 </header>
 
@@ -5047,12 +5058,13 @@ function filtered(){
 function keyOf(it){return cat+'|'+current+'|'+it.w;}
 
 /* ---------- category bar ---------- */
-const catbar=document.getElementById('catbar');
+const deckbar=document.getElementById('deckbar'), teststyle=document.getElementById('teststyle');
 const CATS=[["delf","📘 DELF単語"],["freq","🔑 頻出これだけ"],["scene","💬 場面別"],["theme","📚 テーマ別"],["verb","🔧 動詞活用"]];
-const tocBtn=document.createElement('button');tocBtn.className='catbtn';tocBtn.textContent='☰ 目次';
-tocBtn.onclick=function(){toggleToc();};catbar.appendChild(tocBtn);
+/* ☰ 目次 panel (opened from the header utility button) */
+const tocBtn=document.getElementById('tocBtn');
 const tocPanel=document.createElement('div');tocPanel.id='tocPanel';tocPanel.className='tocpanel hide';
 document.body.insertBefore(tocPanel,document.getElementById('tabs'));
+if(tocBtn)tocBtn.onclick=function(){toggleToc();};
 function toggleToc(){statsPanel.classList.add('hide');if(tocPanel.classList.contains('hide')){buildToc();tocPanel.classList.remove('hide');}else tocPanel.classList.add('hide');}
 function buildToc(){
   let h='';
@@ -5069,23 +5081,51 @@ function buildToc(){
   tocPanel.innerHTML=h;
   tocPanel.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{const p=b.dataset.t.split('|');tocPanel.classList.add('hide');jumpTo(p[0],p[1]);});
 }
-/* stats panel */
-const statsBtn=document.createElement('button');statsBtn.className='catbtn';statsBtn.textContent='📊 記録';
-statsBtn.onclick=function(){toggleStats();};catbar.appendChild(statsBtn);
-const todayBtn=document.createElement('button');todayBtn.className='catbtn';todayBtn.textContent='📅 今日';
-todayBtn.onclick=function(){todayMode=true;setMode('test');};
-catbar.appendChild(todayBtn);
-function updateTodayBadge(){try{const t=buildTodayDeck();todayBtn.textContent='📅 今日 '+(t.due.length+t.news.length);}catch(e){}}
+/* 📊 記録 panel (opened from the header utility button) */
+const statsBtn=document.getElementById('statsBtn');
+if(statsBtn)statsBtn.onclick=function(){toggleStats();};
+
+/* ===== content decks (Tier 2): 今日 + DELF/頻出/場面別/テーマ別/動詞 ===== */
+let todayBtn=null;
+function buildDeckbar(){
+  deckbar.innerHTML='';
+  const lbl=document.createElement('span');lbl.className='barlbl';lbl.textContent='中身';deckbar.appendChild(lbl);
+  todayBtn=document.createElement('button');todayBtn.className='catbtn';todayBtn.textContent='📅 今日';
+  todayBtn.title='今日やるべき復習＋新規（SRS）をまとめてテスト';
+  todayBtn.onclick=function(){todayMode=true;setMode('test');};
+  deckbar.appendChild(todayBtn);
+  CATS.forEach(([id,label])=>{
+    const b=document.createElement('button');b.className='catbtn';b.textContent=label;b.dataset.cat=id;
+    b.onclick=()=>{todayMode=false;cat=id;posFilter='all';freqOnly=false;rangeSel='all';resetSearch();
+      if(id!=='verb')current=tabKeys()[0];
+      highlightDeckbar();buildTabs();buildRange();buildFilter();renderAll();};
+    deckbar.appendChild(b);
+  });
+  highlightDeckbar();updateTodayBadge();
+}
+function highlightDeckbar(){
+  if(!deckbar)return;
+  deckbar.querySelectorAll('.catbtn').forEach(x=>{
+    const on = x===todayBtn ? todayMode : (!todayMode && x.dataset.cat===cat);
+    x.classList.toggle('active',!!on);
+  });
+}
+function updateTodayBadge(){try{const t=buildTodayDeck();if(todayBtn)todayBtn.textContent='📅 今日 '+(t.due.length+t.news.length);}catch(e){}}
 setTimeout(updateTodayBadge,300);
-const numBtn=document.createElement('button');numBtn.className='catbtn';numBtn.textContent='🔢 数字';
-numBtn.onclick=function(){todayMode=false;setMode('num');};
-catbar.appendChild(numBtn);
-const pronBtn=document.createElement('button');pronBtn.className='catbtn';pronBtn.textContent='🎤 発音';
-pronBtn.onclick=function(){todayMode=false;setMode('pron');};
-catbar.appendChild(pronBtn);
-const matchBtn=document.createElement('button');matchBtn.className='catbtn';matchBtn.textContent='🃏 マッチ';
-matchBtn.onclick=function(){todayMode=false;setMode('match');};
-catbar.appendChild(matchBtn);
+
+/* ===== test styles (inside テスト): カード / マッチ / 発音 / 数字 ===== */
+const TEST_STYLES=[['test','📝 カード'],['match','🃏 マッチ'],['pron','🎤 発音'],['num','🔢 数字']];
+function buildTeststyle(){
+  teststyle.innerHTML='';
+  const lbl=document.createElement('span');lbl.className='barlbl';lbl.textContent='形式';teststyle.appendChild(lbl);
+  TEST_STYLES.forEach(([m,label])=>{
+    const b=document.createElement('button');b.className='tsbtn';b.textContent=label;b.dataset.ts=m;
+    b.title=({test:'カード式テスト（仏→日／日→仏／4択／穴埋め／入力。カード上のボタンで切替）',match:'仏語と日本語をペアで合わせるゲーム',pron:'マイクに発音して判定（Chrome/Edge推奨）',num:'フランス語の数字を聞き取って入力'})[m]||'';
+    b.onclick=()=>{todayMode=false;setMode(m);};
+    teststyle.appendChild(b);
+  });
+}
+function highlightTeststyle(){if(teststyle)teststyle.querySelectorAll('.tsbtn').forEach(x=>x.classList.toggle('active',x.dataset.ts===mode));}
 const statsPanel=document.createElement('div');statsPanel.id='statsPanel';statsPanel.className='tocpanel hide';
 document.body.insertBefore(statsPanel,document.getElementById('tabs'));
 function toggleStats(){
@@ -5157,14 +5197,8 @@ function applyTheme(t){document.body.classList.toggle('dark',t==='dark');themeBt
 let curTheme=ls('fl_theme','""')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
 applyTheme(curTheme);
 themeBtn.onclick=()=>{curTheme=curTheme==='dark'?'light':'dark';applyTheme(curTheme);};
-CATS.forEach(([id,label])=>{
-  const b=document.createElement('button');b.className='catbtn'+(id===cat?' active':'');b.textContent=label;b.dataset.cat=id;
-  b.onclick=()=>{todayMode=false;cat=id;document.querySelectorAll('.catbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');
-    posFilter='all';freqOnly=false;rangeSel='all';resetSearch();
-    if(id!=='verb')current=tabKeys()[0];
-    buildTabs();buildRange();buildFilter();renderAll();};
-  catbar.appendChild(b);
-});
+buildDeckbar();
+buildTeststyle();
 
 /* ---------- tabs ---------- */
 const tabsEl=document.getElementById('tabs');
@@ -5277,19 +5311,24 @@ function mkView(id,label,n){
 /* ---------- mode switch ---------- */
 function setMode(m){
   mode=m;
-  document.querySelectorAll('.modebtn').forEach(x=>x.classList.toggle('active',x.dataset.mode===m));
+  // カード/マッチ/発音/数字 はすべて「テスト」系。上段モードバーは3つだけ光らせる
+  const pm=(m==='learn')?'learn':(m==='hf')?'hf':'test';
+  document.querySelectorAll('.modebtn').forEach(x=>x.classList.toggle('active',x.dataset.mode===pm));
+  teststyle.classList.toggle('hide',pm!=='test'); highlightTeststyle();
   document.getElementById('learnView').classList.toggle('hide',m!=='learn');
   document.getElementById('testView').classList.toggle('hide',m!=='test');
   document.getElementById('hfView').classList.toggle('hide',m!=='hf');
   document.getElementById('numView').classList.toggle('hide',m!=='num');
   document.getElementById('pronView').classList.toggle('hide',m!=='pron');
   document.getElementById('matchView').classList.toggle('hide',m!=='match');
-  if(m==='num'){tabsEl.classList.add('hide');rangebar.classList.add('hide');filterbar.classList.add('hide');}
-  else{rangebar.classList.remove('hide');filterbar.classList.remove('hide');buildTabs();buildFilter();}
+  // 数字は語彙デッキを使わないので、デッキ行・タブ・区間・絞り込みを隠す
+  if(m==='num'){deckbar.classList.add('hide');tabsEl.classList.add('hide');rangebar.classList.add('hide');filterbar.classList.add('hide');}
+  else{deckbar.classList.remove('hide');rangebar.classList.remove('hide');filterbar.classList.remove('hide');buildTabs();buildFilter();}
   if(m!=='hf')hfStop();
   if(m!=='learn')lpStop();
   if(m!=='pron')pronStop();
   if(m!=='match')matchStopTimer();
+  highlightDeckbar();
   renderAll();
 }
 document.querySelectorAll('.modebtn').forEach(b=>{b.onclick=()=>{todayMode=false;setMode(b.dataset.mode);};});
