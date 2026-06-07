@@ -358,6 +358,7 @@
   </div>
   <div class="controls">
     <label>音声:<select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">🎭 声優音声(高品質)</option><option value="online">🌐 オンライン音声</option><option value="auto">端末の音声</option></select></label>
+    <label>声:<select id="voiceGender" title="声優音声の声を選択（女性=Denise / 男性=Henri）"><option value="f">👩 女性(Denise)</option><option value="m">👨 男性(Henri)</option></select></label>
     <label>仏語:<select id="voiceSel"></select></label>
     <label>日本語:<select id="voiceSelJa"></select></label>
     <label>速さ:<input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.9"></label>
@@ -4632,6 +4633,7 @@ VERBS.push(
 const synth=window.speechSynthesis;
 let voices=[], frVoice=null, jaVoice=null;
 let ttsMode=ls('fl_ttsmode','"native"')||'native';   // 'native'(事前生成声優音声) | 'online'(Google) | 'auto'(端末) — loadVoices()が参照するため早期宣言
+let voiceGender=ls('fl_voicegender','"f"')||'f';      // 声優音声の声: 'f'(Denise/audio/) | 'm'(Henri/audio/m/)
 let _onlineFails=0;                                   // consecutive online failures → auto-fallback for the session
 const voiceSel=document.getElementById('voiceSel'), voiceSelJa=document.getElementById('voiceSelJa'), warn=document.getElementById('voicewarn');
 // higher = more natural. Prefer neural/natural/online network voices over old robotic SAPI ones.
@@ -4705,12 +4707,25 @@ if(ttsModeSel){
     speak(ttsMode==='online'?"Bonjour ! Écoutez : c'est plus naturel.":'Bonjour, ça va ?');
   });
 }
+const voiceGenderSel=document.getElementById('voiceGender');
+if(voiceGenderSel){
+  voiceGenderSel.value=voiceGender;
+  voiceGenderSel.addEventListener('change',()=>{
+    voiceGender=voiceGenderSel.value;sv('fl_voicegender',voiceGender);_onlineFails=0;
+    speak(voiceGender==='m'?'Bonjour, je suis Henri.':'Bonjour, je suis Denise.');
+  });
+}
 /* ---------- pre-generated native (voice-actor) audio: audio/<sha256-16>.mp3 ---------- */
-const audioSet=new Set();
+const audioSet=new Set();      // 女性(Denise)のハッシュ → audio/<h>.mp3
+const audioSetM=new Set();     // 男性(Henri)のハッシュ  → audio/m/<h>.mp3
 fetch('audio/index.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSet.add(h));}).catch(()=>{});
+fetch('audio/index_m.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSetM.add(h));}).catch(()=>{});
 function cleanTTS(t){return String(t).replace(/\//g,',').replace(/\([^)]*\)/g,'').replace(/…/g,' ').replace(/\s+/g,' ').trim();}
 async function sha16(s){try{const b=new TextEncoder().encode(s);const d=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(d)).map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,16);}catch(e){return '';}}
-async function nativeUrl(text){if(!audioSet.size)return null;const h=await sha16(cleanTTS(text));return (h&&audioSet.has(h))?('audio/'+h+'.mp3'):null;}
+// 選択中の声(性別)で参照フォルダを切替。該当が無ければ null(→オンライン/端末へフォールバック)
+async function nativeUrl(text){const h=await sha16(cleanTTS(text));if(!h)return null;
+  if(voiceGender==='m')return audioSetM.has(h)?('audio/m/'+h+'.mp3'):null;
+  return audioSet.has(h)?('audio/'+h+'.mp3'):null;}
 function ttsURL(text,lang){const tl=(lang==='ja')?'ja':'fr-FR';return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&total=1&idx=0&textlen='+text.length+'&tl='+tl+'&q='+encodeURIComponent(text);}
 function rateFor(lang){return Math.max(0.5,Math.min(1.6,lang==='ja'?1:Number(rate.value)));}
 // resolve best audio URL: native file -> online Google -> null(=device speech)
@@ -5761,15 +5776,17 @@ if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.s
 let _dling=false;
 async function downloadAllAudio(){
   if(_dling)return;
-  if(!audioSet.size){ try{const a=await (await fetch('audio/index.json',{cache:'no-cache'})).json();a.forEach(h=>audioSet.add(h));}catch(e){} }
-  if(!audioSet.size){toast('音声リストを取得できませんでした');return;}
-  _dling=true;const hashes=[...audioSet];let done=0;
-  if(typeof toast==='function')toast('📥 オフライン保存を開始（'+hashes.length+'件）…');
+  const useM=voiceGender==='m';
+  const set=useM?audioSetM:audioSet, idx=useM?'audio/index_m.json':'audio/index.json', pre=useM?'audio/m/':'audio/';
+  if(!set.size){ try{const a=await (await fetch(idx,{cache:'no-cache'})).json();a.forEach(h=>set.add(h));}catch(e){} }
+  if(!set.size){toast('音声リストを取得できませんでした');return;}
+  _dling=true;const hashes=[...set];let done=0;
+  if(typeof toast==='function')toast('📥 オフライン保存を開始（'+(useM?'男性':'女性')+'・'+hashes.length+'件）…');
   let i=0;const conc=8;
-  async function worker(){while(i<hashes.length){const h=hashes[i++];try{await fetch('audio/'+h+'.mp3',{cache:'force-cache'});}catch(e){}done++;if(done%300===0&&typeof toast==='function')toast('保存中… '+done+'/'+hashes.length);}}
+  async function worker(){while(i<hashes.length){const h=hashes[i++];try{await fetch(pre+h+'.mp3',{cache:'force-cache'});}catch(e){}done++;if(done%300===0&&typeof toast==='function')toast('保存中… '+done+'/'+hashes.length);}}
   try{await Promise.all(Array.from({length:conc},worker));}catch(e){}
   _dling=false;
-  if(typeof toast==='function')toast('✅ オフライン保存完了（'+done+'件）。電波がなくても再生できます');
+  if(typeof toast==='function')toast('✅ オフライン保存完了（'+(useM?'男性':'女性')+'・'+done+'件）。電波がなくても再生できます');
 }
 (function(){const c=document.querySelector('.controls');if(c){const b=document.createElement('button');b.id='offlineBtn';b.textContent='📥 オフライン保存';b.title='全音声(声優)を端末に保存して、オフライン/バックグラウンド再生';b.style.cssText='border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:4px 9px;font-size:12px;cursor:pointer';b.onclick=downloadAllAudio;c.appendChild(b);}})();
 
