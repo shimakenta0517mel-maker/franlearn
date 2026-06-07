@@ -373,6 +373,42 @@
   .setadv .setrow{margin-top:7px}
   .setadv p{opacity:.78;font-size:11px;line-height:1.5;margin:8px 0 0}
   body.dark .settings{background:rgba(255,255,255,.06)}
+  /* ===== premium visual upgrade (2026-06-07) ===== */
+  header{
+    background:
+      radial-gradient(900px 220px at 12% -60%, rgba(255,255,255,.25), transparent 60%),
+      linear-gradient(135deg,#013a78 0%,#0055A4 44%,#2f7ad0 100%);
+    box-shadow:0 8px 26px rgba(0,40,100,.30);
+    border-bottom:2px solid rgba(239,65,53,.9);
+  }
+  h1{letter-spacing:.3px;text-shadow:0 1px 2px rgba(0,0,0,.18)}
+  .flag{box-shadow:0 1px 4px rgba(0,0,0,.4)}
+  .ctrlbtn{-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);box-shadow:0 1px 3px rgba(0,0,0,.14)}
+  .modebar{background:rgba(255,255,255,.14);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 4px 14px rgba(0,30,80,.18)}
+  .modebtn.active{background:linear-gradient(180deg,#ffffff,#eef3ff);box-shadow:0 4px 12px rgba(0,20,60,.28)}
+  .settings{-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.10)}
+  .catbtn.active,.tsbtn.active{box-shadow:0 4px 12px rgba(0,20,60,.22)}
+  .card,.verbcard{border:1px solid rgba(22,32,58,.06);border-radius:16px}
+  .card:hover,.verbcard:hover{box-shadow:0 12px 32px rgba(22,32,58,.15)}
+  body.dark .card,body.dark .verbcard{border-color:rgba(255,255,255,.06)}
+  .play{box-shadow:0 3px 9px rgba(0,60,140,.28)}
+  .play:hover{box-shadow:0 6px 16px rgba(0,85,164,.42);transform:translateY(-1px)}
+  .bigplay{background:linear-gradient(135deg,#063e86,#2f7ad0);box-shadow:0 7px 18px rgba(0,55,130,.32);font-size:13px;padding:10px 18px}
+  .bigplay:hover{filter:brightness(1.06)}
+  .flipbtn{background:linear-gradient(135deg,#063e86,#2f7ad0);box-shadow:0 7px 18px rgba(0,55,130,.30)}
+  .flipbtn:hover{filter:brightness(1.06)}
+  .flash{border-radius:22px;box-shadow:0 14px 40px rgba(22,32,58,.12)}
+  #topBtn{background:linear-gradient(135deg,#063e86,#2f7ad0);box-shadow:0 6px 18px rgba(0,40,100,.42)}
+  /* universal stop button — appears while any audio is playing */
+  .stopfab{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%) translateY(150%);z-index:60;
+    border:none;border-radius:30px;padding:12px 24px;font-size:14px;font-weight:800;color:#fff;cursor:pointer;
+    background:linear-gradient(135deg,#ef4135,#c81f12);box-shadow:0 10px 26px rgba(200,30,18,.5);
+    display:inline-flex;align-items:center;gap:9px;opacity:0;pointer-events:none;
+    transition:transform .28s cubic-bezier(.2,.9,.3,1.25),opacity .2s,filter .15s}
+  .stopfab.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto}
+  .stopfab:hover{filter:brightness(1.07)}
+  .stopfab:active{transform:translateX(-50%) translateY(2px)}
+  .stopfab .dot{width:13px;height:13px;border-radius:3px;background:#fff;box-shadow:0 0 0 4px rgba(255,255,255,.22)}
 </style>
 </head>
 <body>
@@ -5708,6 +5744,22 @@ document.querySelectorAll('[data-hp]').forEach(b=>b.onclick=()=>{viewMode=b.data
 const topBtn=document.createElement('button');topBtn.id='topBtn';topBtn.textContent='↑';document.body.appendChild(topBtn);
 topBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 window.addEventListener('scroll',()=>{topBtn.classList.toggle('show',window.scrollY>400);},{passive:true});
+/* ---------- universal STOP button (shows while any audio is playing) ---------- */
+const stopFab=document.createElement('button');stopFab.id='stopBtn';stopFab.className='stopfab';
+stopFab.setAttribute('aria-label','音声を止める');stopFab.innerHTML='<span class="dot"></span> 停止';
+document.body.appendChild(stopFab);
+function stopAllAudio(){
+  try{audioStop();}catch(e){}
+  try{if(synth)synth.cancel();}catch(e){}
+  try{lpStop();}catch(e){}
+  try{hfStop();}catch(e){}
+  try{if(typeof pronStop==='function')pronStop();}catch(e){}
+  document.querySelectorAll('.card.playing').forEach(x=>x.classList.remove('playing'));
+  stopFab.classList.remove('show');
+}
+stopFab.onclick=stopAllAudio;
+function _audioActive(){return !!curAudio||!!(synth&&synth.speaking)||(typeof lpPlaying!=='undefined'&&lpPlaying)||(typeof hfPlaying!=='undefined'&&hfPlaying);}
+setInterval(()=>{try{stopFab.classList.toggle('show',_audioActive());}catch(e){}},250);
 /* swipe grading on test card */
 let _tsX=0,_tsY=0;
 cardArea.addEventListener('touchstart',e=>{const t=e.touches[0];_tsX=t.clientX;_tsY=t.clientY;},{passive:true});
