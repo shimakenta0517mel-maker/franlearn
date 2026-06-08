@@ -8110,6 +8110,367 @@ DECKS.theme.tabs["お金・支払いの表現"]={label:"お金・支払いの表
  {w:"la TVA",ipa:"[la tevea]",pos:"名詞",jp:"付加価値税(消費税)",ex:"la TVA est incluse.",exjp:"消費税込み。"},
  {w:"un pourboire",ipa:"[œ̃ puʁbwaʁ]",pos:"名詞",jp:"チップ",ex:"laisser un pourboire.",exjp:"チップを置く。"}
 ]};
+/*===DECKS16：2026-06-08 第12弾（場面12＋語彙12）===*/
+DECKS.scene.tabs["税務署・確定申告で"]={label:"税務署・確定申告で",items:[
+ {w:"Je dois faire ma déclaration d'impôts.",ipa:"[ʒə dwa fɛʁ ma deklaʁasjɔ̃ dɛ̃po]",pos:"会話",jp:"確定申告をしなければ",pri:1,ex:"Avant fin mai, je dois faire ma déclaration d'impôts.",exjp:"5月末までに確定申告をしなきゃ。"},
+ {w:"C'est la date limite quand ?",ipa:"[sɛ la dat limit kɑ̃]",pos:"会話",jp:"締切はいつですか?",ex:"C'est la date limite quand ?",exjp:"提出の締切はいつ?"},
+ {w:"Je déclare en ligne.",ipa:"[ʒə deklaʁ ɑ̃ liɲ]",pos:"会話",jp:"オンラインで申告します",ex:"Cette année, je déclare en ligne.",exjp:"今年はネットで申告する。"},
+ {w:"Quels justificatifs il faut ?",ipa:"[kɛl ʒystifikatif il fo]",pos:"会話",jp:"どんな証明書が要る?",ex:"Quels justificatifs il faut joindre ?",exjp:"どの証明書を添付する?"},
+ {w:"J'ai des revenus à l'étranger.",ipa:"[ʒe de ʁəvəny a letʁɑ̃ʒe]",pos:"会話",jp:"海外収入があります",ex:"J'ai des revenus à l'étranger à déclarer.",exjp:"申告すべき海外収入があります。"},
+ {w:"Je peux déduire ça ?",ipa:"[ʒə pø dedɥiʁ sa]",pos:"会話",jp:"これは控除できますか?",ex:"Ces frais, je peux déduire ça ?",exjp:"この費用は控除できる?"},
+ {w:"Combien je dois payer ?",ipa:"[kɔ̃bjɛ̃ ʒə dwa peje]",pos:"会話",jp:"いくら払うのですか?",ex:"Au total, combien je dois payer ?",exjp:"結局いくら払うの?"},
+ {w:"Je vais être remboursé ?",ipa:"[ʒə vɛ ɛtʁ ʁɑ̃buʁse]",pos:"会話",jp:"還付されますか?",ex:"Cette fois, je vais être remboursé ?",exjp:"今回は還付がある?"},
+ {w:"Voici mon avis d'imposition.",ipa:"[vwasi mɔ̃n‿avi dɛ̃pozisjɔ̃]",pos:"会話",jp:"これが課税通知書です",ex:"Voici mon avis d'imposition.",exjp:"こちらが課税通知書です。"},
+ {w:"J'ai une question sur ma fiche de paie.",ipa:"[ʒe yn kɛstjɔ̃ syʁ ma fiʃ də pɛ]",pos:"会話",jp:"給与明細について質問が",ex:"J'ai une question sur ma fiche de paie.",exjp:"給与明細のことで質問があります。"}
+]};
+DECKS.scene.tabs["引っ越しの手続き"]={label:"引っ越しの手続き",items:[
+ {w:"Je déménage le mois prochain.",ipa:"[ʒə demenaʒ lə mwa pʁɔʃɛ̃]",pos:"会話",jp:"来月引っ越します",pri:1,ex:"Je déménage le mois prochain à Lyon.",exjp:"来月リヨンに引っ越します。"},
+ {w:"Il faut signaler le changement d'adresse.",ipa:"[il fo siɲale lə ʃɑ̃ʒmɑ̃ dadʁɛs]",pos:"会話",jp:"住所変更を届けなきゃ",ex:"Il faut signaler le changement d'adresse partout.",exjp:"あちこちに住所変更を届けなきゃ。"},
+ {w:"Je résilie le bail.",ipa:"[ʒə ʁezili lə baj]",pos:"会話",jp:"賃貸契約を解約します",ex:"Le mois prochain, je résilie le bail.",exjp:"来月、賃貸契約を解約する。"},
+ {w:"On fait l'état des lieux.",ipa:"[ɔ̃ fɛ leta de ljø]",pos:"会話",jp:"物件の状況確認をします",ex:"Demain, on fait l'état des lieux.",exjp:"明日、物件の状況確認をします。"},
+ {w:"Je récupère ma caution.",ipa:"[ʒə ʁekypɛʁ ma kosjɔ̃]",pos:"会話",jp:"敷金を返してもらいます",ex:"J'espère récupérer ma caution.",exjp:"敷金が戻るといいな。"},
+ {w:"Vous avez réservé un camion ?",ipa:"[vuz‿ave ʁezɛʁve œ̃ kamjɔ̃]",pos:"会話",jp:"トラックは予約した?",ex:"Pour le déménagement, vous avez réservé un camion ?",exjp:"引っ越し用のトラックは予約した?"},
+ {w:"On emballe les cartons.",ipa:"[ɔ̃n‿ɑ̃bal le kaʁtɔ̃]",pos:"会話",jp:"段ボールに荷造りします",ex:"Ce week-end, on emballe les cartons.",exjp:"今週末、段ボールに荷造りする。"},
+ {w:"Faites suivre le courrier.",ipa:"[fɛt sɥivʁ lə kuʁje]",pos:"会話",jp:"郵便を転送してください",ex:"À la poste, faites suivre le courrier.",exjp:"郵便局で転送手続きを。"},
+ {w:"Le déménagement est prévu samedi.",ipa:"[lə demenaʒmɑ̃ ɛ pʁevy samdi]",pos:"会話",jp:"引っ越しは土曜の予定",ex:"Le déménagement est prévu samedi matin.",exjp:"引っ越しは土曜の朝の予定。"},
+ {w:"N'oubliez pas de rendre les clés.",ipa:"[nublije pa də ʁɑ̃dʁ le kle]",pos:"会話",jp:"鍵を返すのを忘れずに",ex:"N'oubliez pas de rendre les clés au propriétaire.",exjp:"大家に鍵を返すのを忘れずに。"}
+]};
+DECKS.scene.tabs["電気・ガス・水道の開通"]={label:"電気・ガス・水道の開通",items:[
+ {w:"Je voudrais ouvrir un compteur.",ipa:"[ʒə vudʁɛ uvʁiʁ œ̃ kɔ̃tœʁ]",pos:"会話",jp:"メーターを開通したい",pri:1,ex:"Je voudrais ouvrir un compteur d'électricité.",exjp:"電気のメーターを開通したい。"},
+ {w:"L'électricité est coupée.",ipa:"[lelɛktʁisite ɛ kupe]",pos:"会話",jp:"電気が止まっています",ex:"Dans l'appartement, l'électricité est coupée.",exjp:"部屋の電気が止まってる。"},
+ {w:"À quel nom est le contrat ?",ipa:"[a kɛl nɔ̃ ɛ lə kɔ̃tʁa]",pos:"会話",jp:"契約は誰の名義?",ex:"À quel nom est le contrat actuel ?",exjp:"今の契約は誰の名義?"},
+ {w:"Quand ça sera branché ?",ipa:"[kɑ̃ sa səʁa bʁɑ̃ʃe]",pos:"会話",jp:"いつ通じますか?",ex:"Quand ça sera branché, le gaz ?",exjp:"ガスはいつ通じる?"},
+ {w:"Il faut relever le compteur.",ipa:"[il fo ʁəlve lə kɔ̃tœʁ]",pos:"会話",jp:"メーターを検針しなきゃ",ex:"Avant de partir, il faut relever le compteur.",exjp:"退去前にメーターを検針しなきゃ。"},
+ {w:"Je veux changer de fournisseur.",ipa:"[ʒə vø ʃɑ̃ʒe də fuʁnisœʁ]",pos:"会話",jp:"供給会社を変えたい",ex:"C'est trop cher, je veux changer de fournisseur.",exjp:"高いので会社を変えたい。"},
+ {w:"La facture est trop élevée.",ipa:"[la faktyʁ ɛ tʁoz‿elve]",pos:"会話",jp:"請求が高すぎます",ex:"Ce mois-ci, la facture est trop élevée.",exjp:"今月は請求が高すぎる。"},
+ {w:"Il y a une fuite d'eau.",ipa:"[il i a yn fɥit do]",pos:"会話",jp:"水漏れがあります",ex:"Sous l'évier, il y a une fuite d'eau.",exjp:"流し台の下に水漏れがある。"},
+ {w:"Vous payez par prélèvement ?",ipa:"[vu peje paʁ pʁelɛvmɑ̃]",pos:"会話",jp:"口座引き落としですか?",ex:"Vous payez par prélèvement automatique ?",exjp:"自動引き落としで払う?"},
+ {w:"Je résilie mon abonnement.",ipa:"[ʒə ʁezili mɔn‿abɔnmɑ̃]",pos:"会話",jp:"契約を解約します",ex:"Je déménage, je résilie mon abonnement.",exjp:"引っ越すので契約を解約する。"}
+]};
+DECKS.scene.tabs["インターネット契約"]={label:"インターネット契約",items:[
+ {w:"Je voudrais une connexion internet.",ipa:"[ʒə vudʁɛ yn kɔnɛksjɔ̃ ɛ̃tɛʁnɛt]",pos:"会話",jp:"ネット回線を契約したい",pri:1,ex:"Je voudrais une connexion internet chez moi.",exjp:"自宅にネット回線を引きたい。"},
+ {w:"C'est quoi le débit ?",ipa:"[sɛ kwa lə debi]",pos:"会話",jp:"通信速度はどれくらい?",ex:"C'est quoi le débit de cette offre ?",exjp:"このプランの速度は?"},
+ {w:"Y a-t-il la fibre ici ?",ipa:"[i a til la fibʁ isi]",pos:"会話",jp:"ここは光回線がありますか?",ex:"Y a-t-il la fibre ici, dans ce quartier ?",exjp:"この地区は光回線がある?"},
+ {w:"L'installation est gratuite ?",ipa:"[lɛ̃stalasjɔ̃ ɛ ɡʁatɥit]",pos:"会話",jp:"工事は無料ですか?",ex:"L'installation est gratuite ?",exjp:"開通工事は無料?"},
+ {w:"Ma connexion est lente.",ipa:"[ma kɔnɛksjɔ̃ ɛ lɑ̃t]",pos:"会話",jp:"接続が遅いです",ex:"Le soir, ma connexion est lente.",exjp:"夜は接続が遅い。"},
+ {w:"La box ne marche pas.",ipa:"[la bɔks nə maʁʃ pa]",pos:"会話",jp:"ルーターが動きません",ex:"Depuis ce matin, la box ne marche pas.",exjp:"今朝からルーターが動かない。"},
+ {w:"Je n'ai plus de wifi.",ipa:"[ʒə ne ply də wifi]",pos:"会話",jp:"Wi-Fiが切れました",ex:"D'un coup, je n'ai plus de wifi.",exjp:"急にWi-Fiが切れた。"},
+ {w:"Quel est le mot de passe ?",ipa:"[kɛl ɛ lə mo də pas]",pos:"会話",jp:"パスワードは何ですか?",ex:"Quel est le mot de passe du wifi ?",exjp:"Wi-Fiのパスワードは?"},
+ {w:"Il y a un engagement ?",ipa:"[il i a œ̃n‿ɑ̃ɡaʒmɑ̃]",pos:"会話",jp:"契約の縛りはありますか?",ex:"Pour ce forfait, il y a un engagement ?",exjp:"このプランは縛りがある?"},
+ {w:"Un technicien va passer.",ipa:"[œ̃ tɛknisjɛ̃ va pase]",pos:"会話",jp:"技術者が来ます",ex:"Mardi, un technicien va passer.",exjp:"火曜に技術者が来ます。"}
+]};
+DECKS.scene.tabs["携帯電話の契約"]={label:"携帯電話の契約",items:[
+ {w:"Je cherche un forfait mobile.",ipa:"[ʒə ʃɛʁʃ œ̃ fɔʁfɛ mɔbil]",pos:"会話",jp:"携帯プランを探しています",pri:1,ex:"Je cherche un forfait mobile pas cher.",exjp:"安い携帯プランを探してる。"},
+ {w:"Avec combien de données ?",ipa:"[avɛk kɔ̃bjɛ̃ də dɔne]",pos:"会話",jp:"データはどのくらい?",ex:"Ce forfait, avec combien de données ?",exjp:"このプラン、データは何GB?"},
+ {w:"Les appels sont illimités ?",ipa:"[lez‿apɛl sɔ̃t‿ilimite]",pos:"会話",jp:"通話は無制限ですか?",ex:"Les appels sont illimités ?",exjp:"通話はかけ放題?"},
+ {w:"Je veux garder mon numéro.",ipa:"[ʒə vø ɡaʁde mɔ̃ nymeʁo]",pos:"会話",jp:"番号を引き継ぎたい",ex:"En changeant, je veux garder mon numéro.",exjp:"乗り換えても番号を残したい。"},
+ {w:"Il me faut une carte SIM.",ipa:"[il mə fo yn kaʁt sim]",pos:"会話",jp:"SIMカードが要ります",ex:"Pour ce téléphone, il me faut une carte SIM.",exjp:"このスマホにSIMカードが要る。"},
+ {w:"C'est sans engagement ?",ipa:"[sɛ sɑ̃z‿ɑ̃ɡaʒmɑ̃]",pos:"会話",jp:"縛りなしですか?",ex:"Cette offre, c'est sans engagement ?",exjp:"このプランは縛りなし?"},
+ {w:"Je n'ai plus de forfait.",ipa:"[ʒə ne ply də fɔʁfɛ]",pos:"会話",jp:"データを使い切りました",ex:"Avant la fin du mois, je n'ai plus de forfait.",exjp:"月末前にデータを使い切った。"},
+ {w:"Mon téléphone est bloqué.",ipa:"[mɔ̃ telefɔn ɛ blɔke]",pos:"会話",jp:"スマホがロックされました",ex:"Mon téléphone est bloqué, que faire ?",exjp:"スマホがロックされた、どうしよう?"},
+ {w:"Comment activer la ligne ?",ipa:"[kɔmɑ̃ aktive la liɲ]",pos:"会話",jp:"回線をどう開通する?",ex:"Comment activer la ligne maintenant ?",exjp:"今すぐ回線を開通するには?"},
+ {w:"Je voudrais résilier.",ipa:"[ʒə vudʁɛ ʁezilje]",pos:"会話",jp:"解約したいのですが",ex:"Bonjour, je voudrais résilier mon forfait.",exjp:"プランを解約したいです。"}
+]};
+DECKS.scene.tabs["車の修理工場で"]={label:"車の修理工場で",items:[
+ {w:"Ma voiture fait un bruit bizarre.",ipa:"[ma vwatyʁ fɛ œ̃ bʁɥi bizaʁ]",pos:"会話",jp:"車が変な音がします",pri:1,ex:"Depuis hier, ma voiture fait un bruit bizarre.",exjp:"昨日から車が変な音がする。"},
+ {w:"Le moteur ne démarre pas.",ipa:"[lə mɔtœʁ nə demaʁ pa]",pos:"会話",jp:"エンジンがかかりません",ex:"Ce matin, le moteur ne démarre pas.",exjp:"今朝、エンジンがかからない。"},
+ {w:"Pouvez-vous regarder les freins ?",ipa:"[puve vu ʁəɡaʁde le fʁɛ̃]",pos:"会話",jp:"ブレーキを見てもらえる?",ex:"Pouvez-vous regarder les freins ?",exjp:"ブレーキを見てもらえますか?"},
+ {w:"C'est grave ?",ipa:"[sɛ ɡʁav]",pos:"会話",jp:"重症ですか?",ex:"Alors docteur, c'est grave ?",exjp:"で、重症ですか?"},
+ {w:"Ça va coûter combien ?",ipa:"[sa va kute kɔ̃bjɛ̃]",pos:"会話",jp:"いくらかかりますか?",ex:"La réparation, ça va coûter combien ?",exjp:"修理はいくらかかる?"},
+ {w:"La réparation prend combien de temps ?",ipa:"[la ʁepaʁasjɔ̃ pʁɑ̃ kɔ̃bjɛ̃ də tɑ̃]",pos:"会話",jp:"修理はどのくらいかかる?",ex:"La réparation prend combien de temps ?",exjp:"修理はどのくらい時間がかかる?"},
+ {w:"Il faut changer la pièce.",ipa:"[il fo ʃɑ̃ʒe la pjɛs]",pos:"会話",jp:"部品交換が必要です",ex:"Il faut changer la pièce défectueuse.",exjp:"故障した部品を交換する必要が。"},
+ {w:"Le pneu est crevé.",ipa:"[lə pnø ɛ kʁəve]",pos:"会話",jp:"タイヤがパンクしました",ex:"L'avant droit, le pneu est crevé.",exjp:"右前のタイヤがパンクした。"},
+ {w:"Vous avez un devis ?",ipa:"[vuz‿ave œ̃ dəvi]",pos:"会話",jp:"見積もりはありますか?",ex:"Avant de réparer, vous avez un devis ?",exjp:"修理前に見積もりをもらえる?"},
+ {w:"La voiture est prête.",ipa:"[la vwatyʁ ɛ pʁɛt]",pos:"会話",jp:"車ができました",ex:"Bonne nouvelle, la voiture est prête.",exjp:"朗報、車ができました。"}
+]};
+DECKS.scene.tabs["車検・点検で"]={label:"車検・点検で",items:[
+ {w:"C'est l'heure du contrôle technique.",ipa:"[sɛ lœʁ dy kɔ̃tʁol tɛknik]",pos:"会話",jp:"車検の時期です",pri:1,ex:"Cette année, c'est l'heure du contrôle technique.",exjp:"今年は車検の時期だ。"},
+ {w:"Il faut faire la révision.",ipa:"[il fo fɛʁ la ʁevizjɔ̃]",pos:"会話",jp:"点検をしなければ",ex:"Avant l'été, il faut faire la révision.",exjp:"夏前に点検しなきゃ。"},
+ {w:"Vérifiez le niveau d'huile.",ipa:"[veʁifje lə nivo dɥil]",pos:"会話",jp:"オイルの量を確認して",ex:"Vérifiez le niveau d'huile, s'il vous plaît.",exjp:"オイルの量を確認してください。"},
+ {w:"Les phares fonctionnent ?",ipa:"[le faʁ fɔ̃ksjɔn]",pos:"会話",jp:"ライトはつきますか?",ex:"Les phares fonctionnent bien ?",exjp:"ライトはちゃんとつく?"},
+ {w:"La vidange est à faire.",ipa:"[la vidɑ̃ʒ ɛt‿a fɛʁ]",pos:"会話",jp:"オイル交換が必要です",ex:"La vidange est à faire bientôt.",exjp:"もうすぐオイル交換が必要。"},
+ {w:"Le contrôle est valable deux ans.",ipa:"[lə kɔ̃tʁol ɛ valabl døz‿ɑ̃]",pos:"会話",jp:"車検は2年有効です",ex:"Le contrôle est valable deux ans.",exjp:"車検は2年間有効です。"},
+ {w:"Il y a un voyant allumé.",ipa:"[il i a œ̃ vwajɑ̃ alyme]",pos:"会話",jp:"警告灯が点いています",ex:"Au tableau de bord, il y a un voyant allumé.",exjp:"メーターに警告灯が点いてる。"},
+ {w:"La batterie est faible.",ipa:"[la batʁi ɛ fɛbl]",pos:"会話",jp:"バッテリーが弱っています",ex:"La batterie est faible, il faut la changer.",exjp:"バッテリーが弱い、交換しないと。"},
+ {w:"Tout est en ordre.",ipa:"[tut‿ɛt‿ɑ̃n‿ɔʁdʁ]",pos:"会話",jp:"すべて問題ありません",ex:"Rassurez-vous, tout est en ordre.",exjp:"ご安心を、すべて問題なし。"},
+ {w:"Voici le certificat.",ipa:"[vwasi lə sɛʁtifika]",pos:"会話",jp:"これが証明書です",ex:"Voici le certificat de contrôle.",exjp:"これが車検証明書です。"}
+]};
+DECKS.scene.tabs["駐車場で"]={label:"駐車場で",items:[
+ {w:"Où je peux me garer ?",ipa:"[u ʒə pø mə ɡaʁe]",pos:"会話",jp:"どこに駐車できますか?",pri:1,ex:"Excusez-moi, où je peux me garer ?",exjp:"すみません、どこに停められる?"},
+ {w:"Le parking est complet.",ipa:"[lə paʁkiŋ ɛ kɔ̃plɛ]",pos:"会話",jp:"駐車場は満車です",ex:"Désolé, le parking est complet.",exjp:"すみません、満車です。"},
+ {w:"C'est payant ?",ipa:"[sɛ pɛjɑ̃]",pos:"会話",jp:"有料ですか?",ex:"Ce parking, c'est payant ?",exjp:"この駐車場は有料?"},
+ {w:"Prenez un ticket à l'entrée.",ipa:"[pʁəne œ̃ tikɛ a lɑ̃tʁe]",pos:"会話",jp:"入口で券を取って",ex:"Prenez un ticket à l'entrée du parking.",exjp:"駐車場の入口で券を取って。"},
+ {w:"Je ne trouve plus ma voiture.",ipa:"[ʒə nə tʁuv ply ma vwatyʁ]",pos:"会話",jp:"車が見つかりません",ex:"Zut, je ne trouve plus ma voiture.",exjp:"あれ、車が見つからない。"},
+ {w:"La barrière ne s'ouvre pas.",ipa:"[la baʁjɛʁ nə suvʁ pa]",pos:"会話",jp:"ゲートが開きません",ex:"La barrière ne s'ouvre pas, à l'aide.",exjp:"ゲートが開かない、助けて。"},
+ {w:"C'est une place pour handicapés.",ipa:"[sɛt‿yn plas puʁ ɑ̃dikape]",pos:"会話",jp:"身障者用スペースです",ex:"Attention, c'est une place pour handicapés.",exjp:"注意、身障者用スペースだ。"},
+ {w:"Je suis en double file.",ipa:"[ʒə sɥiz‿ɑ̃ dubl fil]",pos:"会話",jp:"二重駐車しています",ex:"Je fais vite, je suis en double file.",exjp:"急ぐ、二重駐車中だから。"},
+ {w:"Combien coûte l'heure ?",ipa:"[kɔ̃bjɛ̃ kut lœʁ]",pos:"会話",jp:"1時間いくらですか?",ex:"Combien coûte l'heure de stationnement ?",exjp:"駐車1時間でいくら?"},
+ {w:"Validez votre ticket.",ipa:"[valide vɔtʁ tikɛ]",pos:"会話",jp:"駐車券を精算してください",ex:"Avant de sortir, validez votre ticket.",exjp:"出る前に駐車券を精算して。"}
+]};
+DECKS.scene.tabs["交通違反で"]={label:"交通違反で",items:[
+ {w:"Vous avez dépassé la vitesse.",ipa:"[vuz‿ave depase la vitɛs]",pos:"会話",jp:"速度超過です",pri:1,ex:"Monsieur, vous avez dépassé la vitesse.",exjp:"速度超過ですよ。"},
+ {w:"Vos papiers, s'il vous plaît.",ipa:"[vo papje sil vu plɛ]",pos:"会話",jp:"免許証などを見せて",ex:"Vos papiers, s'il vous plaît.",exjp:"免許証等を見せてください。"},
+ {w:"Je n'ai rien fait de mal.",ipa:"[ʒə ne ʁjɛ̃ fɛ də mal]",pos:"会話",jp:"何も悪いことしていません",ex:"Mais je n'ai rien fait de mal.",exjp:"でも何も悪いことしてない。"},
+ {w:"C'est une amende de combien ?",ipa:"[sɛt‿yn‿amɑ̃d də kɔ̃bjɛ̃]",pos:"会話",jp:"罰金はいくらですか?",ex:"C'est une amende de combien ?",exjp:"罰金はいくらになる?"},
+ {w:"Vous étiez mal garé.",ipa:"[vuz‿etje mal ɡaʁe]",pos:"会話",jp:"駐車違反でした",ex:"Là, vous étiez mal garé.",exjp:"そこ、駐車違反でしたよ。"},
+ {w:"Vous avez brûlé un feu rouge.",ipa:"[vuz‿ave bʁyle œ̃ fø ʁuʒ]",pos:"会話",jp:"信号無視をしましたね",ex:"Au carrefour, vous avez brûlé un feu rouge.",exjp:"交差点で信号無視しましたね。"},
+ {w:"Je conteste cette amende.",ipa:"[ʒə kɔ̃tɛst sɛt‿amɑ̃d]",pos:"会話",jp:"この罰金に異議があります",ex:"Je conteste cette amende.",exjp:"この罰金に異議を申し立てます。"},
+ {w:"Vous perdez des points.",ipa:"[vu pɛʁde de pwɛ̃]",pos:"会話",jp:"免許の点数が引かれます",ex:"Pour ça, vous perdez des points.",exjp:"これで点数が引かれます。"},
+ {w:"Soufflez dans le ballon.",ipa:"[sufle dɑ̃ lə balɔ̃]",pos:"会話",jp:"飲酒検査をします",ex:"Soufflez dans le ballon, s'il vous plaît.",exjp:"風船(検知器)に息を吹いて。"},
+ {w:"Faites attention la prochaine fois.",ipa:"[fɛt‿atɑ̃sjɔ̃ la pʁɔʃɛn fwa]",pos:"会話",jp:"次から気をつけて",ex:"Ça ira, faites attention la prochaine fois.",exjp:"今回は大丈夫、次は気をつけて。"}
+]};
+DECKS.scene.tabs["カーシェア・レンタカー"]={label:"カーシェア・レンタカー",items:[
+ {w:"Je voudrais louer une voiture.",ipa:"[ʒə vudʁɛ lwe yn vwatyʁ]",pos:"会話",jp:"車を借りたいです",pri:1,ex:"Bonjour, je voudrais louer une voiture.",exjp:"車を借りたいのですが。"},
+ {w:"Pour combien de jours ?",ipa:"[puʁ kɔ̃bjɛ̃ də ʒuʁ]",pos:"会話",jp:"何日間ですか?",ex:"C'est pour combien de jours ?",exjp:"何日間のご利用?"},
+ {w:"L'assurance est comprise ?",ipa:"[lasyʁɑ̃s ɛ kɔ̃pʁiz]",pos:"会話",jp:"保険は込みですか?",ex:"Dans le prix, l'assurance est comprise ?",exjp:"料金に保険は込み?"},
+ {w:"Le plein est à rendre ?",ipa:"[lə plɛ̃ ɛt‿a ʁɑ̃dʁ]",pos:"会話",jp:"満タン返しですか?",ex:"Le plein est à rendre ?",exjp:"ガソリン満タンで返す?"},
+ {w:"Quel est le kilométrage ?",ipa:"[kɛl ɛ lə kilɔmetʁaʒ]",pos:"会話",jp:"走行距離の制限は?",ex:"Quel est le kilométrage autorisé ?",exjp:"走行距離制限はどのくらい?"},
+ {w:"Je récupère la voiture où ?",ipa:"[ʒə ʁekypɛʁ la vwatyʁ u]",pos:"会話",jp:"どこで車を受け取る?",ex:"Je récupère la voiture où exactement ?",exjp:"車はどこで受け取るの?"},
+ {w:"Il y a une franchise ?",ipa:"[il i a yn fʁɑ̃ʃiz]",pos:"会話",jp:"免責額はありますか?",ex:"En cas d'accident, il y a une franchise ?",exjp:"事故時の免責額はある?"},
+ {w:"La voiture a une rayure.",ipa:"[la vwatyʁ a yn ʁɛjyʁ]",pos:"会話",jp:"車に傷があります",ex:"Attention, la voiture a une rayure ici.",exjp:"注意、ここに傷があります。"},
+ {w:"Je la rends demain soir.",ipa:"[ʒə la ʁɑ̃ dəmɛ̃ swaʁ]",pos:"会話",jp:"明日の夜に返します",ex:"Je la rends demain soir avant vingt heures.",exjp:"明日20時までに返します。"},
+ {w:"Voici les clés et les papiers.",ipa:"[vwasi le kle e le papje]",pos:"会話",jp:"鍵と書類です",ex:"Voici les clés et les papiers de la voiture.",exjp:"車の鍵と書類です。"}
+]};
+DECKS.scene.tabs["不用品・リサイクルで"]={label:"不用品・リサイクルで",items:[
+ {w:"Je veux jeter ce vieux meuble.",ipa:"[ʒə vø ʒəte sə vjø mœbl]",pos:"会話",jp:"この古い家具を捨てたい",pri:1,ex:"Je veux jeter ce vieux meuble.",exjp:"この古い家具を処分したい。"},
+ {w:"C'est un encombrant.",ipa:"[sɛt‿œ̃n‿ɑ̃kɔ̃bʁɑ̃]",pos:"会話",jp:"粗大ごみです",ex:"Ce canapé, c'est un encombrant.",exjp:"このソファは粗大ごみです。"},
+ {w:"Où est la déchetterie ?",ipa:"[u ɛ la deʃɛtʁi]",pos:"会話",jp:"ごみ処理場はどこ?",ex:"Excusez-moi, où est la déchetterie ?",exjp:"すみません、ごみ処理場は?"},
+ {w:"Il faut trier les déchets.",ipa:"[il fo tʁije le deʃɛ]",pos:"会話",jp:"ごみを分別しなきゃ",ex:"Ici, il faut trier les déchets.",exjp:"ここではごみを分別しなきゃ。"},
+ {w:"Le verre va dans ce bac.",ipa:"[lə vɛʁ va dɑ̃ sə bak]",pos:"会話",jp:"ガラスはこの箱へ",ex:"Le verre va dans ce bac vert.",exjp:"ガラスは緑の容器へ。"},
+ {w:"On peut donner aux associations.",ipa:"[ɔ̃ pø dɔne oz‿asɔsjasjɔ̃]",pos:"会話",jp:"団体に寄付できます",ex:"Ces vêtements, on peut donner aux associations.",exjp:"この服は団体に寄付できる。"},
+ {w:"Ça se recycle ?",ipa:"[sa sə ʁəsikl]",pos:"会話",jp:"これリサイクルできる?",ex:"Ce plastique, ça se recycle ?",exjp:"このプラはリサイクルできる?"},
+ {w:"Le ramassage est quel jour ?",ipa:"[lə ʁamasaʒ ɛ kɛl ʒuʁ]",pos:"会話",jp:"収集は何曜日ですか?",ex:"Le ramassage est quel jour ici ?",exjp:"ここの収集は何曜日?"},
+ {w:"Je le revends d'occasion.",ipa:"[ʒə lə ʁəvɑ̃ dɔkazjɔ̃]",pos:"会話",jp:"中古で売ります",ex:"Plutôt que jeter, je le revends d'occasion.",exjp:"捨てずに中古で売る。"},
+ {w:"Réduisons le gaspillage.",ipa:"[ʁedɥizɔ̃ lə ɡaspijaʒ]",pos:"会話",jp:"無駄を減らそう",ex:"Ensemble, réduisons le gaspillage.",exjp:"みんなで無駄を減らそう。"}
+]};
+DECKS.scene.tabs["町内会・近所付き合い"]={label:"町内会・近所付き合い",items:[
+ {w:"Bonjour, je viens d'emménager.",ipa:"[bɔ̃ʒuʁ ʒə vjɛ̃ demenaʒe]",pos:"会話",jp:"こんにちは、越してきました",pri:1,ex:"Bonjour, je viens d'emménager au troisième.",exjp:"こんにちは、4階に越してきました。"},
+ {w:"Je me présente, je suis votre voisin.",ipa:"[ʒə mə pʁezɑ̃t ʒə sɥi vɔtʁ vwazɛ̃]",pos:"会話",jp:"ご近所の者です(自己紹介)",ex:"Je me présente, je suis votre voisin du dessus.",exjp:"上の階のご近所です。"},
+ {w:"Il y a une réunion de quartier.",ipa:"[il i a yn ʁeynjɔ̃ də kaʁtje]",pos:"会話",jp:"町内会の集まりがあります",ex:"Samedi, il y a une réunion de quartier.",exjp:"土曜に町内会の集まりがある。"},
+ {w:"Pouvez-vous baisser le son ?",ipa:"[puve vu bɛse lə sɔ̃]",pos:"会話",jp:"音量を下げてもらえる?",ex:"Il est tard, pouvez-vous baisser le son ?",exjp:"遅いので音量を下げてもらえる?"},
+ {w:"Désolé pour le bruit.",ipa:"[dezɔle puʁ lə bʁɥi]",pos:"会話",jp:"騒音すみません",ex:"Désolé pour le bruit d'hier soir.",exjp:"昨夜は騒音すみません。"},
+ {w:"On organise une fête des voisins.",ipa:"[ɔ̃n‿ɔʁɡaniz yn fɛt de vwazɛ̃]",pos:"会話",jp:"ご近所パーティーをします",ex:"Ce week-end, on organise une fête des voisins.",exjp:"今週末ご近所パーティーをする。"},
+ {w:"Vous pouvez garder mon colis ?",ipa:"[vu puve ɡaʁde mɔ̃ kɔli]",pos:"会話",jp:"荷物を預かってもらえる?",ex:"Vous pouvez garder mon colis aujourd'hui ?",exjp:"今日、荷物を預かってもらえる?"},
+ {w:"Faites attention aux poubelles.",ipa:"[fɛt‿atɑ̃sjɔ̃ o pubɛl]",pos:"会話",jp:"ごみ出しに気をつけて",ex:"Faites attention aux poubelles le mardi.",exjp:"火曜のごみ出しに気をつけて。"},
+ {w:"C'est à votre tour de nettoyer.",ipa:"[sɛt‿a vɔtʁ tuʁ də nɛtwaje]",pos:"会話",jp:"掃除はあなたの番です",ex:"Cette semaine, c'est à votre tour de nettoyer.",exjp:"今週は掃除当番ですよ。"},
+ {w:"N'hésitez pas si besoin.",ipa:"[nezite pa si bəzwɛ̃]",pos:"会話",jp:"困ったら遠慮なく",ex:"N'hésitez pas si besoin d'aide.",exjp:"手助けが要れば遠慮なく。"}
+]};
+DECKS.theme.tabs["税金・行政"]={label:"税金・行政",items:[
+ {w:"les impôts",ipa:"[lez‿ɛ̃po]",pos:"名詞",jp:"税金",pri:1,ex:"payer ses impôts.",exjp:"税金を払う。"},
+ {w:"une déclaration",ipa:"[yn deklaʁasjɔ̃]",pos:"名詞",jp:"申告",pri:1,ex:"remplir une déclaration.",exjp:"申告書を記入する。"},
+ {w:"un formulaire",ipa:"[œ̃ fɔʁmylɛʁ]",pos:"名詞",jp:"用紙・書式",pri:1,ex:"signer le formulaire.",exjp:"用紙に署名する。"},
+ {w:"une administration",ipa:"[yn‿administʁasjɔ̃]",pos:"名詞",jp:"役所・行政",ex:"les lenteurs de l'administration.",exjp:"お役所仕事の遅さ。"},
+ {w:"un fonctionnaire",ipa:"[œ̃ fɔ̃ksjɔnɛʁ]",pos:"名詞",jp:"公務員",ex:"un fonctionnaire de l'État.",exjp:"国家公務員。"},
+ {w:"une taxe",ipa:"[yn taks]",pos:"名詞",jp:"税・課徴金",ex:"la taxe d'habitation.",exjp:"住民税。"},
+ {w:"un justificatif",ipa:"[œ̃ ʒystifikatif]",pos:"名詞",jp:"証明書類",ex:"fournir un justificatif de domicile.",exjp:"住所証明を提出する。"},
+ {w:"une amende",ipa:"[yn‿amɑ̃d]",pos:"名詞",jp:"罰金",pri:1,ex:"recevoir une amende.",exjp:"罰金を受ける。"},
+ {w:"un délai",ipa:"[œ̃ delɛ]",pos:"名詞",jp:"期限・猶予",pri:1,ex:"respecter le délai.",exjp:"期限を守る。"},
+ {w:"une démarche",ipa:"[yn demaʁʃ]",pos:"名詞",jp:"手続き",pri:1,ex:"faire les démarches.",exjp:"手続きをする。"},
+ {w:"un dossier",ipa:"[œ̃ dosje]",pos:"名詞",jp:"書類一式",pri:1,ex:"déposer un dossier.",exjp:"書類一式を提出する。"},
+ {w:"déclarer",ipa:"[deklaʁe]",pos:"動詞",jp:"申告する",ex:"déclarer ses revenus.",exjp:"収入を申告する。"},
+ {w:"cotiser",ipa:"[kɔtize]",pos:"動詞",jp:"拠出する・掛金を払う",ex:"cotiser pour la retraite.",exjp:"年金のために掛金を払う。"},
+ {w:"un timbre fiscal",ipa:"[œ̃ tɛ̃bʁ fiskal]",pos:"名詞",jp:"収入印紙",ex:"acheter un timbre fiscal.",exjp:"収入印紙を買う。"},
+ {w:"obligatoire",ipa:"[ɔbliɡatwaʁ]",pos:"形容詞",jp:"義務的な",pri:1,ex:"une démarche obligatoire.",exjp:"義務の手続き。"},
+ {w:"en règle",ipa:"[ɑ̃ ʁɛɡl]",pos:"表現",jp:"規則に適った・きちんとした",ex:"être en règle.",exjp:"きちんと手続きが済んでいる。"}
+]};
+DECKS.theme.tabs["住居・賃貸契約"]={label:"住居・賃貸契約",items:[
+ {w:"un loyer",ipa:"[œ̃ lwaje]",pos:"名詞",jp:"家賃",pri:1,ex:"payer le loyer.",exjp:"家賃を払う。"},
+ {w:"un bail",ipa:"[œ̃ baj]",pos:"名詞",jp:"賃貸契約",ex:"signer un bail.",exjp:"賃貸契約を結ぶ。"},
+ {w:"une caution",ipa:"[yn kosjɔ̃]",pos:"名詞",jp:"敷金・保証金",ex:"verser une caution.",exjp:"敷金を支払う。"},
+ {w:"un propriétaire",ipa:"[œ̃ pʁɔpʁijetɛʁ]",pos:"名詞",jp:"大家・所有者",pri:1,ex:"contacter le propriétaire.",exjp:"大家に連絡する。"},
+ {w:"un locataire",ipa:"[œ̃ lɔkatɛʁ]",pos:"名詞",jp:"借主・賃借人",pri:1,ex:"un bon locataire.",exjp:"よい借主。"},
+ {w:"une agence immobilière",ipa:"[yn‿aʒɑ̃s imɔbiljɛʁ]",pos:"名詞",jp:"不動産屋",ex:"passer par une agence immobilière.",exjp:"不動産屋を通す。"},
+ {w:"l'état des lieux",ipa:"[leta de ljø]",pos:"名詞",jp:"物件状況の確認",ex:"faire l'état des lieux d'entrée.",exjp:"入居時の状況確認をする。"},
+ {w:"les charges",ipa:"[le ʃaʁʒ]",pos:"名詞",jp:"共益費・管理費",ex:"le loyer charges comprises.",exjp:"共益費込みの家賃。"},
+ {w:"un préavis",ipa:"[œ̃ pʁeavi]",pos:"名詞",jp:"(解約の)予告",ex:"un préavis d'un mois.",exjp:"1か月前の解約予告。"},
+ {w:"emménager",ipa:"[ɑ̃menaʒe]",pos:"動詞",jp:"入居する",ex:"emménager dans un studio.",exjp:"ワンルームに入居する。"},
+ {w:"déménager",ipa:"[demenaʒe]",pos:"動詞",jp:"引っ越す",pri:1,ex:"déménager à Paris.",exjp:"パリに引っ越す。"},
+ {w:"résilier",ipa:"[ʁezilje]",pos:"動詞",jp:"解約する",ex:"résilier le bail.",exjp:"賃貸契約を解約する。"},
+ {w:"meublé",ipa:"[møble]",pos:"形容詞",jp:"家具付きの",ex:"un appartement meublé.",exjp:"家具付きの部屋。"},
+ {w:"la superficie",ipa:"[la sypɛʁfisi]",pos:"名詞",jp:"面積",ex:"une superficie de quarante mètres carrés.",exjp:"40平米の面積。"},
+ {w:"une quittance",ipa:"[yn kitɑ̃s]",pos:"名詞",jp:"(家賃の)領収書",ex:"demander une quittance de loyer.",exjp:"家賃の領収書を求める。"},
+ {w:"un studio",ipa:"[œ̃ stydjo]",pos:"名詞",jp:"ワンルーム",ex:"louer un studio.",exjp:"ワンルームを借りる。"}
+]};
+DECKS.theme.tabs["公共料金・契約"]={label:"公共料金・契約",items:[
+ {w:"une facture",ipa:"[yn faktyʁ]",pos:"名詞",jp:"請求書",pri:1,ex:"recevoir une facture.",exjp:"請求書が届く。"},
+ {w:"un abonnement",ipa:"[œ̃n‿abɔnmɑ̃]",pos:"名詞",jp:"契約・定期",pri:1,ex:"un abonnement mensuel.",exjp:"月額契約。"},
+ {w:"un compteur",ipa:"[œ̃ kɔ̃tœʁ]",pos:"名詞",jp:"メーター",ex:"relever le compteur.",exjp:"メーターを検針する。"},
+ {w:"un fournisseur",ipa:"[œ̃ fuʁnisœʁ]",pos:"名詞",jp:"供給会社",ex:"changer de fournisseur d'énergie.",exjp:"エネルギー会社を変える。"},
+ {w:"la consommation",ipa:"[la kɔ̃sɔmasjɔ̃]",pos:"名詞",jp:"使用量・消費",ex:"réduire sa consommation.",exjp:"使用量を減らす。"},
+ {w:"un prélèvement",ipa:"[œ̃ pʁelɛvmɑ̃]",pos:"名詞",jp:"口座引き落とし",ex:"un prélèvement automatique.",exjp:"自動引き落とし。"},
+ {w:"l'électricité",ipa:"[lelɛktʁisite]",pos:"名詞",jp:"電気",pri:1,ex:"une coupure d'électricité.",exjp:"停電。"},
+ {w:"le gaz",ipa:"[lə ɡaz]",pos:"名詞",jp:"ガス",pri:1,ex:"la facture de gaz.",exjp:"ガス料金。"},
+ {w:"l'eau",ipa:"[lo]",pos:"名詞",jp:"水道・水",pri:1,ex:"la consommation d'eau.",exjp:"水の使用量。"},
+ {w:"un relevé",ipa:"[œ̃ ʁəlve]",pos:"名詞",jp:"検針・明細",ex:"un relevé de compteur.",exjp:"メーターの検針値。"},
+ {w:"un contrat",ipa:"[œ̃ kɔ̃tʁa]",pos:"名詞",jp:"契約",pri:1,ex:"signer un contrat.",exjp:"契約を結ぶ。"},
+ {w:"souscrire",ipa:"[suskʁiʁ]",pos:"動詞",jp:"加入する・契約する",ex:"souscrire un abonnement.",exjp:"契約に加入する。"},
+ {w:"mensuel",ipa:"[mɑ̃sɥɛl]",pos:"形容詞",jp:"毎月の",ex:"un paiement mensuel.",exjp:"毎月の支払い。"},
+ {w:"une échéance",ipa:"[yn‿eʃeɑ̃s]",pos:"名詞",jp:"支払期日",ex:"respecter l'échéance.",exjp:"支払期日を守る。"},
+ {w:"couper",ipa:"[kupe]",pos:"動詞",jp:"(供給を)止める",ex:"couper l'eau.",exjp:"水道を止める。"},
+ {w:"brancher",ipa:"[bʁɑ̃ʃe]",pos:"動詞",jp:"つなぐ・通電する",ex:"brancher l'électricité.",exjp:"電気を通す。"}
+]};
+DECKS.theme.tabs["車の部品"]={label:"車の部品",items:[
+ {w:"le moteur",ipa:"[lə mɔtœʁ]",pos:"名詞",jp:"エンジン",pri:1,ex:"un moteur puissant.",exjp:"パワフルなエンジン。"},
+ {w:"un pneu",ipa:"[œ̃ pnø]",pos:"名詞",jp:"タイヤ",pri:1,ex:"un pneu crevé.",exjp:"パンクしたタイヤ。"},
+ {w:"le volant",ipa:"[lə vɔlɑ̃]",pos:"名詞",jp:"ハンドル",ex:"tenir le volant.",exjp:"ハンドルを握る。"},
+ {w:"les freins",ipa:"[le fʁɛ̃]",pos:"名詞",jp:"ブレーキ",pri:1,ex:"les freins sont usés.",exjp:"ブレーキが摩耗している。"},
+ {w:"le pare-brise",ipa:"[lə paʁ bʁiz]",pos:"名詞",jp:"フロントガラス",ex:"un pare-brise fissuré.",exjp:"ひびの入ったフロントガラス。"},
+ {w:"un phare",ipa:"[œ̃ faʁ]",pos:"名詞",jp:"ヘッドライト",ex:"allumer les phares.",exjp:"ヘッドライトをつける。"},
+ {w:"le coffre",ipa:"[lə kɔfʁ]",pos:"名詞",jp:"トランク",ex:"ouvrir le coffre.",exjp:"トランクを開ける。"},
+ {w:"la portière",ipa:"[la pɔʁtjɛʁ]",pos:"名詞",jp:"(車の)ドア",ex:"fermer la portière.",exjp:"車のドアを閉める。"},
+ {w:"le rétroviseur",ipa:"[lə ʁetʁɔvizœʁ]",pos:"名詞",jp:"バックミラー",ex:"régler le rétroviseur.",exjp:"ミラーを調整する。"},
+ {w:"la ceinture de sécurité",ipa:"[la sɛ̃tyʁ də sekyʁite]",pos:"名詞",jp:"シートベルト",pri:1,ex:"attacher sa ceinture de sécurité.",exjp:"シートベルトを締める。"},
+ {w:"le clignotant",ipa:"[lə kliɲɔtɑ̃]",pos:"名詞",jp:"ウィンカー",ex:"mettre le clignotant.",exjp:"ウィンカーを出す。"},
+ {w:"la batterie",ipa:"[la batʁi]",pos:"名詞",jp:"バッテリー",ex:"recharger la batterie.",exjp:"バッテリーを充電する。"},
+ {w:"le réservoir",ipa:"[lə ʁezɛʁvwaʁ]",pos:"名詞",jp:"燃料タンク",ex:"un réservoir plein.",exjp:"満タンの燃料タンク。"},
+ {w:"l'embrayage",ipa:"[lɑ̃bʁɛjaʒ]",pos:"名詞",jp:"クラッチ",ex:"l'embrayage patine.",exjp:"クラッチが滑る。"},
+ {w:"le capot",ipa:"[lə kapo]",pos:"名詞",jp:"ボンネット",ex:"soulever le capot.",exjp:"ボンネットを開ける。"},
+ {w:"un essuie-glace",ipa:"[œ̃n‿esɥi ɡlas]",pos:"名詞",jp:"ワイパー",ex:"les essuie-glaces sous la pluie.",exjp:"雨の中のワイパー。"}
+]};
+DECKS.theme.tabs["運転・道路の動詞"]={label:"運転・道路の動詞",items:[
+ {w:"conduire",ipa:"[kɔ̃dɥiʁ]",pos:"動詞",jp:"運転する",pri:1,ex:"conduire prudemment.",exjp:"慎重に運転する。"},
+ {w:"démarrer",ipa:"[demaʁe]",pos:"動詞",jp:"発進する・始動する",pri:1,ex:"La voiture démarre.",exjp:"車が発進する。"},
+ {w:"freiner",ipa:"[fʁɛne]",pos:"動詞",jp:"ブレーキをかける",pri:1,ex:"freiner brusquement.",exjp:"急ブレーキをかける。"},
+ {w:"accélérer",ipa:"[akseleʁe]",pos:"動詞",jp:"加速する",ex:"accélérer sur l'autoroute.",exjp:"高速で加速する。"},
+ {w:"doubler",ipa:"[duble]",pos:"動詞",jp:"追い越す",ex:"doubler un camion.",exjp:"トラックを追い越す。"},
+ {w:"se garer",ipa:"[sə ɡaʁe]",pos:"動詞",jp:"駐車する",pri:1,ex:"se garer dans la rue.",exjp:"路上に駐車する。"},
+ {w:"tourner",ipa:"[tuʁne]",pos:"動詞",jp:"曲がる",pri:1,ex:"tourner à droite.",exjp:"右に曲がる。"},
+ {w:"reculer",ipa:"[ʁəkyle]",pos:"動詞",jp:"バックする・後退する",ex:"reculer doucement.",exjp:"ゆっくりバックする。"},
+ {w:"ralentir",ipa:"[ʁalɑ̃tiʁ]",pos:"動詞",jp:"減速する",pri:1,ex:"ralentir avant le virage.",exjp:"カーブ前で減速する。"},
+ {w:"klaxonner",ipa:"[klaksɔne]",pos:"動詞",jp:"クラクションを鳴らす",ex:"klaxonner pour prévenir.",exjp:"警告のためクラクションを鳴らす。"},
+ {w:"céder le passage",ipa:"[sede lə pasaʒ]",pos:"表現",jp:"道を譲る",ex:"céder le passage aux piétons.",exjp:"歩行者に道を譲る。"},
+ {w:"faire le plein",ipa:"[fɛʁ lə plɛ̃]",pos:"表現",jp:"給油する・満タンにする",ex:"faire le plein d'essence.",exjp:"ガソリンを満タンにする。"},
+ {w:"caler",ipa:"[kale]",pos:"動詞",jp:"エンスト・止まる",ex:"caler au feu rouge.",exjp:"赤信号でエンストする。"},
+ {w:"déraper",ipa:"[deʁape]",pos:"動詞",jp:"スリップする",ex:"déraper sur le verglas.",exjp:"路面凍結でスリップする。"},
+ {w:"stationner",ipa:"[stasjɔne]",pos:"動詞",jp:"駐車する",ex:"interdiction de stationner.",exjp:"駐車禁止。"},
+ {w:"suivre la route",ipa:"[sɥivʁ la ʁut]",pos:"表現",jp:"道なりに進む",ex:"suivre la route principale.",exjp:"幹線道路を道なりに進む。"}
+]};
+DECKS.theme.tabs["交通標識・ルール"]={label:"交通標識・ルール",items:[
+ {w:"un feu rouge",ipa:"[œ̃ fø ʁuʒ]",pos:"名詞",jp:"赤信号",pri:1,ex:"s'arrêter au feu rouge.",exjp:"赤信号で止まる。"},
+ {w:"un feu vert",ipa:"[œ̃ fø vɛʁ]",pos:"名詞",jp:"青信号",pri:1,ex:"passer au feu vert.",exjp:"青信号で進む。"},
+ {w:"un stop",ipa:"[œ̃ stɔp]",pos:"名詞",jp:"一時停止(標識)",ex:"marquer le stop.",exjp:"一時停止する。"},
+ {w:"un sens interdit",ipa:"[œ̃ sɑ̃s‿ɛ̃tɛʁdi]",pos:"名詞",jp:"進入禁止",ex:"C'est un sens interdit.",exjp:"そこは進入禁止だ。"},
+ {w:"un passage piéton",ipa:"[œ̃ pasaʒ pjetɔ̃]",pos:"名詞",jp:"横断歩道",pri:1,ex:"traverser au passage piéton.",exjp:"横断歩道を渡る。"},
+ {w:"un rond-point",ipa:"[œ̃ ʁɔ̃ pwɛ̃]",pos:"名詞",jp:"ロータリー・環状交差点",ex:"prendre le rond-point.",exjp:"ロータリーに入る。"},
+ {w:"une priorité",ipa:"[yn pʁijɔʁite]",pos:"名詞",jp:"優先権",ex:"laisser la priorité à droite.",exjp:"右側に優先権を譲る。"},
+ {w:"la limitation de vitesse",ipa:"[la limitasjɔ̃ də vitɛs]",pos:"名詞",jp:"速度制限",ex:"respecter la limitation de vitesse.",exjp:"速度制限を守る。"},
+ {w:"un sens unique",ipa:"[œ̃ sɑ̃s ynik]",pos:"名詞",jp:"一方通行",ex:"une rue en sens unique.",exjp:"一方通行の道。"},
+ {w:"une voie",ipa:"[yn vwa]",pos:"名詞",jp:"車線",ex:"changer de voie.",exjp:"車線変更する。"},
+ {w:"un péage",ipa:"[œ̃ peaʒ]",pos:"名詞",jp:"料金所",ex:"payer au péage.",exjp:"料金所で支払う。"},
+ {w:"un panneau",ipa:"[œ̃ pano]",pos:"名詞",jp:"標識",pri:1,ex:"lire le panneau.",exjp:"標識を読む。"},
+ {w:"interdit",ipa:"[ɛ̃tɛʁdi]",pos:"形容詞",jp:"禁止された",pri:1,ex:"stationnement interdit.",exjp:"駐車禁止。"},
+ {w:"autorisé",ipa:"[otɔʁize]",pos:"形容詞",jp:"許可された",ex:"demi-tour autorisé.",exjp:"Uターン可。"},
+ {w:"un piéton",ipa:"[œ̃ pjetɔ̃]",pos:"名詞",jp:"歩行者",pri:1,ex:"attention aux piétons.",exjp:"歩行者に注意。"},
+ {w:"un carrefour",ipa:"[œ̃ kaʁfuʁ]",pos:"名詞",jp:"交差点",pri:1,ex:"au prochain carrefour.",exjp:"次の交差点で。"}
+]};
+DECKS.theme.tabs["ガソリン・整備"]={label:"ガソリン・整備",items:[
+ {w:"l'essence",ipa:"[lesɑ̃s]",pos:"名詞",jp:"ガソリン",pri:1,ex:"le prix de l'essence.",exjp:"ガソリンの値段。"},
+ {w:"le diesel",ipa:"[lə djezɛl]",pos:"名詞",jp:"軽油・ディーゼル",ex:"une voiture au diesel.",exjp:"ディーゼル車。"},
+ {w:"une station-service",ipa:"[yn stasjɔ̃ sɛʁvis]",pos:"名詞",jp:"ガソリンスタンド",pri:1,ex:"s'arrêter à une station-service.",exjp:"ガソリンスタンドに寄る。"},
+ {w:"une pompe",ipa:"[yn pɔ̃p]",pos:"名詞",jp:"給油機・ポンプ",ex:"la pompe numéro trois.",exjp:"3番の給油機。"},
+ {w:"la vidange",ipa:"[la vidɑ̃ʒ]",pos:"名詞",jp:"オイル交換",ex:"faire la vidange.",exjp:"オイル交換をする。"},
+ {w:"l'huile",ipa:"[lɥil]",pos:"名詞",jp:"オイル・油",ex:"vérifier l'huile moteur.",exjp:"エンジンオイルを確認する。"},
+ {w:"le contrôle technique",ipa:"[lə kɔ̃tʁol tɛknik]",pos:"名詞",jp:"車検",ex:"passer le contrôle technique.",exjp:"車検を受ける。"},
+ {w:"la révision",ipa:"[la ʁevizjɔ̃]",pos:"名詞",jp:"点検整備",ex:"la révision des 20 000 km.",exjp:"2万kmの点検。"},
+ {w:"un garagiste",ipa:"[œ̃ ɡaʁaʒist]",pos:"名詞",jp:"整備士・自動車修理工",ex:"appeler le garagiste.",exjp:"整備士を呼ぶ。"},
+ {w:"un devis",ipa:"[œ̃ dəvi]",pos:"名詞",jp:"見積もり",pri:1,ex:"demander un devis.",exjp:"見積もりを頼む。"},
+ {w:"une panne",ipa:"[yn pan]",pos:"名詞",jp:"故障",pri:1,ex:"tomber en panne.",exjp:"故障する。"},
+ {w:"crevé",ipa:"[kʁəve]",pos:"形容詞",jp:"パンクした",ex:"un pneu crevé.",exjp:"パンクしたタイヤ。"},
+ {w:"un voyant",ipa:"[œ̃ vwajɑ̃]",pos:"名詞",jp:"警告ランプ",ex:"un voyant rouge clignote.",exjp:"赤い警告灯が点滅する。"},
+ {w:"gonfler les pneus",ipa:"[ɡɔ̃fle le pnø]",pos:"表現",jp:"タイヤに空気を入れる",ex:"gonfler les pneus avant le voyage.",exjp:"旅行前にタイヤに空気を入れる。"},
+ {w:"dépanner",ipa:"[depane]",pos:"動詞",jp:"修理する・助ける",ex:"se faire dépanner.",exjp:"修理してもらう。"},
+ {w:"une borne de recharge",ipa:"[yn bɔʁn də ʁəʃaʁʒ]",pos:"名詞",jp:"(EV)充電スタンド",ex:"chercher une borne de recharge.",exjp:"充電スタンドを探す。"}
+]};
+DECKS.theme.tabs["通信・インターネット用語"]={label:"通信・インターネット用語",items:[
+ {w:"internet",ipa:"[ɛ̃tɛʁnɛt]",pos:"名詞",jp:"インターネット",pri:1,ex:"surfer sur internet.",exjp:"ネットを閲覧する。"},
+ {w:"le wifi",ipa:"[lə wifi]",pos:"名詞",jp:"Wi-Fi",pri:1,ex:"se connecter au wifi.",exjp:"Wi-Fiに接続する。"},
+ {w:"une connexion",ipa:"[yn kɔnɛksjɔ̃]",pos:"名詞",jp:"接続",pri:1,ex:"une connexion stable.",exjp:"安定した接続。"},
+ {w:"un réseau",ipa:"[œ̃ ʁezo]",pos:"名詞",jp:"ネットワーク・回線網",ex:"le réseau mobile.",exjp:"携帯回線網。"},
+ {w:"un mot de passe",ipa:"[œ̃ mo də pas]",pos:"名詞",jp:"パスワード",pri:1,ex:"oublier son mot de passe.",exjp:"パスワードを忘れる。"},
+ {w:"télécharger",ipa:"[teleʃaʁʒe]",pos:"動詞",jp:"ダウンロードする",pri:1,ex:"télécharger une application.",exjp:"アプリをダウンロードする。"},
+ {w:"un débit",ipa:"[œ̃ debi]",pos:"名詞",jp:"通信速度",ex:"un débit élevé.",exjp:"高速な通信速度。"},
+ {w:"la fibre",ipa:"[la fibʁ]",pos:"名詞",jp:"光回線",ex:"installer la fibre.",exjp:"光回線を引く。"},
+ {w:"un forfait",ipa:"[œ̃ fɔʁfɛ]",pos:"名詞",jp:"料金プラン",pri:1,ex:"un forfait internet.",exjp:"ネット料金プラン。"},
+ {w:"les données",ipa:"[le dɔne]",pos:"名詞",jp:"データ",pri:1,ex:"consommer ses données.",exjp:"データを消費する。"},
+ {w:"une application",ipa:"[yn‿aplikasjɔ̃]",pos:"名詞",jp:"アプリ",pri:1,ex:"ouvrir l'application.",exjp:"アプリを開く。"},
+ {w:"un identifiant",ipa:"[œ̃n‿idɑ̃tifjɑ̃]",pos:"名詞",jp:"ユーザーID",ex:"saisir son identifiant.",exjp:"IDを入力する。"},
+ {w:"se connecter",ipa:"[sə kɔnɛkte]",pos:"動詞",jp:"ログインする・接続する",pri:1,ex:"se connecter à son compte.",exjp:"アカウントにログインする。"},
+ {w:"un navigateur",ipa:"[œ̃ naviɡatœʁ]",pos:"名詞",jp:"ブラウザ",ex:"ouvrir le navigateur.",exjp:"ブラウザを開く。"},
+ {w:"en ligne",ipa:"[ɑ̃ liɲ]",pos:"表現",jp:"オンラインで",pri:1,ex:"acheter en ligne.",exjp:"オンラインで買う。"},
+ {w:"un opérateur",ipa:"[œ̃n‿ɔpeʁatœʁ]",pos:"名詞",jp:"通信会社",ex:"changer d'opérateur.",exjp:"通信会社を変える。"}
+]};
+DECKS.theme.tabs["家電製品"]={label:"家電製品",items:[
+ {w:"un réfrigérateur",ipa:"[œ̃ ʁefʁiʒeʁatœʁ]",pos:"名詞",jp:"冷蔵庫",pri:1,ex:"ranger dans le réfrigérateur.",exjp:"冷蔵庫にしまう。"},
+ {w:"un lave-linge",ipa:"[œ̃ lav lɛ̃ʒ]",pos:"名詞",jp:"洗濯機",pri:1,ex:"lancer le lave-linge.",exjp:"洗濯機を回す。"},
+ {w:"un lave-vaisselle",ipa:"[œ̃ lav vɛsɛl]",pos:"名詞",jp:"食洗機",ex:"vider le lave-vaisselle.",exjp:"食洗機の中を出す。"},
+ {w:"un four",ipa:"[œ̃ fuʁ]",pos:"名詞",jp:"オーブン",pri:1,ex:"préchauffer le four.",exjp:"オーブンを予熱する。"},
+ {w:"un micro-ondes",ipa:"[œ̃ mikʁo ɔ̃d]",pos:"名詞",jp:"電子レンジ",pri:1,ex:"réchauffer au micro-ondes.",exjp:"電子レンジで温める。"},
+ {w:"un aspirateur",ipa:"[œ̃n‿aspiʁatœʁ]",pos:"名詞",jp:"掃除機",pri:1,ex:"passer l'aspirateur.",exjp:"掃除機をかける。"},
+ {w:"un sèche-cheveux",ipa:"[œ̃ sɛʃ ʃəvø]",pos:"名詞",jp:"ドライヤー",ex:"un sèche-cheveux puissant.",exjp:"パワフルなドライヤー。"},
+ {w:"un grille-pain",ipa:"[œ̃ ɡʁij pɛ̃]",pos:"名詞",jp:"トースター",ex:"du pain au grille-pain.",exjp:"トースターでパンを焼く。"},
+ {w:"une bouilloire",ipa:"[yn bujwaʁ]",pos:"名詞",jp:"電気ケトル",ex:"faire chauffer la bouilloire.",exjp:"電気ケトルを沸かす。"},
+ {w:"un climatiseur",ipa:"[œ̃ klimatizœʁ]",pos:"名詞",jp:"エアコン",pri:1,ex:"allumer le climatiseur.",exjp:"エアコンをつける。"},
+ {w:"un radiateur",ipa:"[œ̃ ʁadjatœʁ]",pos:"名詞",jp:"暖房・ヒーター",ex:"un radiateur électrique.",exjp:"電気ヒーター。"},
+ {w:"un ventilateur",ipa:"[œ̃ vɑ̃tilatœʁ]",pos:"名詞",jp:"扇風機",ex:"mettre le ventilateur.",exjp:"扇風機をつける。"},
+ {w:"un fer à repasser",ipa:"[œ̃ fɛʁ a ʁəpase]",pos:"名詞",jp:"アイロン",ex:"chauffer le fer à repasser.",exjp:"アイロンを熱する。"},
+ {w:"une prise",ipa:"[yn pʁiz]",pos:"名詞",jp:"コンセント",pri:1,ex:"brancher à la prise.",exjp:"コンセントに差す。"},
+ {w:"allumer",ipa:"[alyme]",pos:"動詞",jp:"つける・点ける",pri:1,ex:"allumer la télé.",exjp:"テレビをつける。"},
+ {w:"éteindre",ipa:"[etɛ̃dʁ]",pos:"動詞",jp:"消す",pri:1,ex:"éteindre la lumière.",exjp:"明かりを消す。"}
+]};
+DECKS.theme.tabs["修理・メンテナンス"]={label:"修理・メンテナンス",items:[
+ {w:"réparer",ipa:"[ʁepaʁe]",pos:"動詞",jp:"修理する",pri:1,ex:"réparer la fuite.",exjp:"水漏れを直す。"},
+ {w:"un outil",ipa:"[œ̃n‿uti]",pos:"名詞",jp:"工具・道具",pri:1,ex:"une boîte à outils.",exjp:"工具箱。"},
+ {w:"un tournevis",ipa:"[œ̃ tuʁnəvi]",pos:"名詞",jp:"ドライバー",ex:"un tournevis cruciforme.",exjp:"プラスドライバー。"},
+ {w:"un marteau",ipa:"[œ̃ maʁto]",pos:"名詞",jp:"ハンマー・金槌",ex:"taper avec un marteau.",exjp:"金槌で叩く。"},
+ {w:"une vis",ipa:"[yn vis]",pos:"名詞",jp:"ねじ",ex:"serrer une vis.",exjp:"ねじを締める。"},
+ {w:"un clou",ipa:"[œ̃ klu]",pos:"名詞",jp:"釘",ex:"planter un clou.",exjp:"釘を打つ。"},
+ {w:"une perceuse",ipa:"[yn pɛʁsøz]",pos:"名詞",jp:"電動ドリル",ex:"utiliser une perceuse.",exjp:"電動ドリルを使う。"},
+ {w:"de la colle",ipa:"[də la kɔl]",pos:"名詞",jp:"のり・接着剤",ex:"un tube de colle.",exjp:"接着剤1本。"},
+ {w:"du ruban adhésif",ipa:"[dy ʁybɑ̃ adezif]",pos:"名詞",jp:"テープ",ex:"coller avec du ruban adhésif.",exjp:"テープで留める。"},
+ {w:"bricoler",ipa:"[bʁikɔle]",pos:"動詞",jp:"日曜大工をする",ex:"bricoler le week-end.",exjp:"週末に日曜大工をする。"},
+ {w:"cassé",ipa:"[kase]",pos:"形容詞",jp:"壊れた",pri:1,ex:"un objet cassé.",exjp:"壊れた物。"},
+ {w:"en panne",ipa:"[ɑ̃ pan]",pos:"表現",jp:"故障中",pri:1,ex:"L'ascenseur est en panne.",exjp:"エレベーターが故障中。"},
+ {w:"serrer",ipa:"[seʁe]",pos:"動詞",jp:"締める",ex:"serrer le boulon.",exjp:"ボルトを締める。"},
+ {w:"visser",ipa:"[vise]",pos:"動詞",jp:"ねじで留める",ex:"visser la planche.",exjp:"板をねじで留める。"},
+ {w:"remplacer",ipa:"[ʁɑ̃plase]",pos:"動詞",jp:"交換する・取り替える",pri:1,ex:"remplacer l'ampoule.",exjp:"電球を交換する。"},
+ {w:"une pile",ipa:"[yn pil]",pos:"名詞",jp:"電池",ex:"changer les piles.",exjp:"電池を交換する。"}
+]};
+DECKS.theme.tabs["地域・コミュニティ"]={label:"地域・コミュニティ",items:[
+ {w:"un voisin",ipa:"[œ̃ vwazɛ̃]",pos:"名詞",jp:"隣人・ご近所",pri:1,ex:"un voisin sympathique.",exjp:"感じのいい隣人。"},
+ {w:"un quartier",ipa:"[œ̃ kaʁtje]",pos:"名詞",jp:"地区・界隈",pri:1,ex:"un quartier animé.",exjp:"賑やかな界隈。"},
+ {w:"une réunion",ipa:"[yn ʁeynjɔ̃]",pos:"名詞",jp:"会合・集まり",pri:1,ex:"assister à une réunion.",exjp:"会合に出席する。"},
+ {w:"une association",ipa:"[yn‿asɔsjasjɔ̃]",pos:"名詞",jp:"団体・協会",ex:"rejoindre une association.",exjp:"団体に加わる。"},
+ {w:"un bénévole",ipa:"[œ̃ benevɔl]",pos:"名詞",jp:"ボランティア",ex:"travailler comme bénévole.",exjp:"ボランティアとして働く。"},
+ {w:"la mairie",ipa:"[la meʁi]",pos:"名詞",jp:"市役所・町役場",pri:1,ex:"aller à la mairie.",exjp:"市役所へ行く。"},
+ {w:"un événement",ipa:"[œ̃n‿evɛnmɑ̃]",pos:"名詞",jp:"イベント・行事",pri:1,ex:"organiser un événement.",exjp:"イベントを企画する。"},
+ {w:"la solidarité",ipa:"[la sɔlidaʁite]",pos:"名詞",jp:"助け合い・連帯",ex:"un élan de solidarité.",exjp:"助け合いの動き。"},
+ {w:"un commerce de proximité",ipa:"[œ̃ kɔmɛʁs də pʁɔksimite]",pos:"名詞",jp:"地元の店",ex:"soutenir les commerces de proximité.",exjp:"地元の店を応援する。"},
+ {w:"participer",ipa:"[paʁtisipe]",pos:"動詞",jp:"参加する",pri:1,ex:"participer à la vie locale.",exjp:"地域活動に参加する。"},
+ {w:"s'entraider",ipa:"[sɑ̃tʁɛde]",pos:"動詞",jp:"助け合う",ex:"les voisins s'entraident.",exjp:"近所同士で助け合う。"},
+ {w:"un règlement",ipa:"[œ̃ ʁɛɡləmɑ̃]",pos:"名詞",jp:"規則・規約",ex:"respecter le règlement.",exjp:"規約を守る。"},
+ {w:"le voisinage",ipa:"[lə vwazinaʒ]",pos:"名詞",jp:"近所(の人々)",ex:"des troubles de voisinage.",exjp:"近隣トラブル。"},
+ {w:"accueillant",ipa:"[akœjɑ̃]",pos:"形容詞",jp:"親切な・温かく迎える",ex:"un quartier accueillant.",exjp:"温かい雰囲気の地区。"},
+ {w:"une fête de quartier",ipa:"[yn fɛt də kaʁtje]",pos:"名詞",jp:"地域の祭り",ex:"la fête de quartier annuelle.",exjp:"毎年恒例の地域祭り。"},
+ {w:"cohabiter",ipa:"[kɔabite]",pos:"動詞",jp:"共に暮らす",ex:"cohabiter en bonne entente.",exjp:"仲良く共に暮らす。"}
+]};
+DECKS.theme.tabs["ゴミ・分別・リサイクル"]={label:"ゴミ・分別・リサイクル",items:[
+ {w:"les déchets",ipa:"[le deʃɛ]",pos:"名詞",jp:"ごみ・廃棄物",pri:1,ex:"jeter ses déchets.",exjp:"ごみを捨てる。"},
+ {w:"une poubelle",ipa:"[yn pubɛl]",pos:"名詞",jp:"ごみ箱",pri:1,ex:"sortir la poubelle.",exjp:"ごみを出す。"},
+ {w:"le tri",ipa:"[lə tʁi]",pos:"名詞",jp:"分別",ex:"le tri sélectif.",exjp:"分別収集。"},
+ {w:"le recyclage",ipa:"[lə ʁəsiklaʒ]",pos:"名詞",jp:"リサイクル",ex:"le recyclage du papier.",exjp:"紙のリサイクル。"},
+ {w:"le verre",ipa:"[lə vɛʁ]",pos:"名詞",jp:"ガラス",ex:"recycler le verre.",exjp:"ガラスを再生する。"},
+ {w:"le plastique",ipa:"[lə plastik]",pos:"名詞",jp:"プラスチック",pri:1,ex:"trop de plastique.",exjp:"プラスチックが多すぎる。"},
+ {w:"le carton",ipa:"[lə kaʁtɔ̃]",pos:"名詞",jp:"段ボール・厚紙",ex:"plier le carton.",exjp:"段ボールをたたむ。"},
+ {w:"un encombrant",ipa:"[œ̃n‿ɑ̃kɔ̃bʁɑ̃]",pos:"名詞",jp:"粗大ごみ",ex:"sortir les encombrants.",exjp:"粗大ごみを出す。"},
+ {w:"une déchetterie",ipa:"[yn deʃɛtʁi]",pos:"名詞",jp:"ごみ処理場",ex:"aller à la déchetterie.",exjp:"ごみ処理場へ行く。"},
+ {w:"le compost",ipa:"[lə kɔ̃pɔst]",pos:"名詞",jp:"堆肥・コンポスト",ex:"faire du compost.",exjp:"堆肥を作る。"},
+ {w:"le ramassage",ipa:"[lə ʁamasaʒ]",pos:"名詞",jp:"(ごみの)収集",ex:"le jour de ramassage.",exjp:"収集日。"},
+ {w:"trier",ipa:"[tʁije]",pos:"動詞",jp:"分別する",pri:1,ex:"trier ses déchets.",exjp:"ごみを分別する。"},
+ {w:"jeter",ipa:"[ʒəte]",pos:"動詞",jp:"捨てる",pri:1,ex:"jeter à la poubelle.",exjp:"ごみ箱に捨てる。"},
+ {w:"recycler",ipa:"[ʁəsikle]",pos:"動詞",jp:"再利用する",ex:"recycler le plastique.",exjp:"プラを再生利用する。"},
+ {w:"réutiliser",ipa:"[ʁeytilize]",pos:"動詞",jp:"再使用する",ex:"réutiliser un sac.",exjp:"袋を再利用する。"},
+ {w:"le gaspillage",ipa:"[lə ɡaspijaʒ]",pos:"名詞",jp:"無駄・浪費",ex:"lutter contre le gaspillage.",exjp:"無駄に立ち向かう。"}
+]};
 const VERBGROUPS={"irr":"不規則(最重要)","er":"-er規則","ir":"-ir規則","re":"-re規則"};
 const TENSES=[
  ["pres","現在"],["pc","複合過去"],["imp","半過去"],["fut","単純未来"],
