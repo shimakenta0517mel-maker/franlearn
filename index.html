@@ -8471,6 +8471,367 @@ DECKS.theme.tabs["ゴミ・分別・リサイクル"]={label:"ゴミ・分別・
  {w:"réutiliser",ipa:"[ʁeytilize]",pos:"動詞",jp:"再使用する",ex:"réutiliser un sac.",exjp:"袋を再利用する。"},
  {w:"le gaspillage",ipa:"[lə ɡaspijaʒ]",pos:"名詞",jp:"無駄・浪費",ex:"lutter contre le gaspillage.",exjp:"無駄に立ち向かう。"}
 ]};
+/*===DECKS17：2026-06-08 第13弾（場面12＋語彙12・7000突破）===*/
+DECKS.scene.tabs["結婚式に参列する"]={label:"結婚式に参列する",items:[
+ {w:"Félicitations aux mariés !",ipa:"[felisitasjɔ̃ o maʁje]",pos:"会話",jp:"新郎新婦おめでとう!",pri:1,ex:"Toutes nos félicitations aux mariés !",exjp:"新郎新婦に心からおめでとう!"},
+ {w:"Je suis invité au mariage.",ipa:"[ʒə sɥiz‿ɛ̃vite o maʁjaʒ]",pos:"会話",jp:"結婚式に招待されています",ex:"Samedi, je suis invité au mariage de Paul.",exjp:"土曜にポールの結婚式に招かれてる。"},
+ {w:"La mariée est magnifique.",ipa:"[la maʁje ɛ maɲifik]",pos:"会話",jp:"花嫁が美しい",ex:"Dans sa robe, la mariée est magnifique.",exjp:"ドレス姿の花嫁が美しい。"},
+ {w:"Où est la cérémonie ?",ipa:"[u ɛ la seʁemɔni]",pos:"会話",jp:"式はどこですか?",ex:"Où est la cérémonie, à l'église ?",exjp:"式はどこ、教会?"},
+ {w:"Vive les mariés !",ipa:"[viv le maʁje]",pos:"会話",jp:"新郎新婦万歳!",ex:"Levons nos verres, vive les mariés !",exjp:"グラスを上げて、新郎新婦万歳!"},
+ {w:"Ils échangent les alliances.",ipa:"[ilz‿eʃɑ̃ʒ lez‿aljɑ̃s]",pos:"会話",jp:"指輪を交換します",ex:"Maintenant, ils échangent les alliances.",exjp:"今、指輪を交換します。"},
+ {w:"On porte un toast.",ipa:"[ɔ̃ pɔʁt œ̃ tost]",pos:"会話",jp:"乾杯の音頭をとります",ex:"Le père de la mariée porte un toast.",exjp:"花嫁の父が乾杯の音頭をとる。"},
+ {w:"Le repas est servi.",ipa:"[lə ʁəpa ɛ sɛʁvi]",pos:"会話",jp:"食事が出されます",ex:"À présent, le repas est servi.",exjp:"いよいよ食事が始まります。"},
+ {w:"On danse jusqu'au bout de la nuit.",ipa:"[ɔ̃ dɑ̃s ʒysko bu də la nɥi]",pos:"会話",jp:"夜通し踊ります",ex:"À la fête, on danse jusqu'au bout de la nuit.",exjp:"披露宴で夜通し踊る。"},
+ {w:"Quel beau couple !",ipa:"[kɛl bo kupl]",pos:"会話",jp:"素敵なカップル!",ex:"Ils vont bien ensemble, quel beau couple !",exjp:"お似合い、素敵なカップル!"}
+]};
+DECKS.scene.tabs["お葬式・お悔やみ"]={label:"お葬式・お悔やみ",items:[
+ {w:"Toutes mes condoléances.",ipa:"[tut me kɔ̃dɔleɑ̃s]",pos:"会話",jp:"お悔やみ申し上げます",pri:1,ex:"Toutes mes condoléances à votre famille.",exjp:"ご家族にお悔やみ申し上げます。"},
+ {w:"Je suis de tout cœur avec vous.",ipa:"[ʒə sɥi də tu kœʁ avɛk vu]",pos:"会話",jp:"心からお察しします",ex:"En ce moment difficile, je suis de tout cœur avec vous.",exjp:"このつらい時、心から寄り添います。"},
+ {w:"C'est une grande perte.",ipa:"[sɛt‿yn ɡʁɑ̃d pɛʁt]",pos:"会話",jp:"大きな喪失です",ex:"Pour nous tous, c'est une grande perte.",exjp:"私たち皆にとって大きな喪失です。"},
+ {w:"Il repose en paix.",ipa:"[il ʁəpoz ɑ̃ pɛ]",pos:"会話",jp:"安らかに眠っています",ex:"Maintenant, il repose en paix.",exjp:"今は安らかに眠っています。"},
+ {w:"L'enterrement est demain.",ipa:"[lɑ̃tɛʁmɑ̃ ɛ dəmɛ̃]",pos:"会話",jp:"葬儀は明日です",ex:"L'enterrement est demain à dix heures.",exjp:"葬儀は明日10時です。"},
+ {w:"Nous pensons à vous.",ipa:"[nu pɑ̃sɔ̃z‿a vu]",pos:"会話",jp:"あなたのことを思っています",ex:"En ces moments, nous pensons à vous.",exjp:"こんな時、あなたを思っています。"},
+ {w:"Je partage votre peine.",ipa:"[ʒə paʁtaʒ vɔtʁ pɛn]",pos:"会話",jp:"悲しみを分かち合います",ex:"Je partage votre peine sincèrement.",exjp:"心から悲しみを分かち合います。"},
+ {w:"Il nous manquera.",ipa:"[il nu mɑ̃kəʁa]",pos:"会話",jp:"彼がいなくて寂しくなります",ex:"Il nous manquera à tous.",exjp:"みんな彼がいなくて寂しくなる。"},
+ {w:"Présentons nos respects.",ipa:"[pʁezɑ̃tɔ̃ no ʁɛspɛ]",pos:"会話",jp:"弔意を表しましょう",ex:"Allons présenter nos respects.",exjp:"弔意を表しに行きましょう。"},
+ {w:"Soyez forts.",ipa:"[swaje fɔʁ]",pos:"会話",jp:"気を強く持って",ex:"Courage, soyez forts.",exjp:"頑張って、気を強く持って。"}
+]};
+DECKS.scene.tabs["誕生日を祝う"]={label:"誕生日を祝う",items:[
+ {w:"Joyeux anniversaire !",ipa:"[ʒwajøz‿anivɛʁsɛʁ]",pos:"会話",jp:"誕生日おめでとう!",pri:1,ex:"Joyeux anniversaire, mon ami !",exjp:"誕生日おめでとう、友よ!"},
+ {w:"Tu as quel âge ?",ipa:"[ty a kɛl ɑʒ]",pos:"会話",jp:"何歳になった?",ex:"Alors, tu as quel âge aujourd'hui ?",exjp:"で、今日で何歳?"},
+ {w:"Fais un vœu !",ipa:"[fɛ œ̃ vø]",pos:"会話",jp:"願い事をして!",ex:"Avant de souffler, fais un vœu !",exjp:"吹き消す前に願い事を!"},
+ {w:"Souffle les bougies.",ipa:"[sufl le buʒi]",pos:"会話",jp:"ろうそくを吹き消して",ex:"Allez, souffle les bougies !",exjp:"さあ、ろうそくを吹き消して!"},
+ {w:"J'ai un cadeau pour toi.",ipa:"[ʒe œ̃ kado puʁ twa]",pos:"会話",jp:"プレゼントがあるよ",ex:"Tiens, j'ai un cadeau pour toi.",exjp:"はい、君にプレゼント。"},
+ {w:"On coupe le gâteau.",ipa:"[ɔ̃ kup lə ɡato]",pos:"会話",jp:"ケーキを切ろう",ex:"Maintenant, on coupe le gâteau.",exjp:"では、ケーキを切ろう。"},
+ {w:"Que tous tes vœux se réalisent.",ipa:"[kə tu te vø sə ʁealiz]",pos:"会話",jp:"願いが叶いますように",ex:"Que tous tes vœux se réalisent cette année.",exjp:"今年、君の願いが叶いますように。"},
+ {w:"Tu ne fais pas ton âge.",ipa:"[ty nə fɛ pa tɔ̃n‿ɑʒ]",pos:"会話",jp:"年齢より若く見える",ex:"Vraiment, tu ne fais pas ton âge.",exjp:"本当に、年齢より若いね。"},
+ {w:"On fait la fête !",ipa:"[ɔ̃ fɛ la fɛt]",pos:"会話",jp:"パーティーだ!",ex:"C'est ton jour, on fait la fête !",exjp:"君の日だ、パーティーしよう!"},
+ {w:"Merci d'être venus.",ipa:"[mɛʁsi dɛtʁ vəny]",pos:"会話",jp:"来てくれてありがとう",ex:"Merci à tous d'être venus.",exjp:"みんな来てくれてありがとう。"}
+]};
+DECKS.scene.tabs["出産祝い・お見舞い"]={label:"出産祝い・お見舞い",items:[
+ {w:"Félicitations pour le bébé !",ipa:"[felisitasjɔ̃ puʁ lə bebe]",pos:"会話",jp:"赤ちゃんおめでとう!",pri:1,ex:"Félicitations pour le bébé, il est adorable !",exjp:"赤ちゃんおめでとう、かわいい!"},
+ {w:"Il ressemble à son papa.",ipa:"[il ʁəsɑ̃bl a sɔ̃ papa]",pos:"会話",jp:"パパに似ています",ex:"Regarde, il ressemble à son papa.",exjp:"見て、パパそっくり。"},
+ {w:"Comment va la maman ?",ipa:"[kɔmɑ̃ va la mamɑ̃]",pos:"会話",jp:"ママは元気ですか?",ex:"Et comment va la maman ?",exjp:"それでママは元気?"},
+ {w:"Il est tout petit.",ipa:"[il ɛ tu pəti]",pos:"会話",jp:"とても小さいですね",ex:"Qu'il est tout petit !",exjp:"なんて小さいの!"},
+ {w:"Je peux le prendre dans mes bras ?",ipa:"[ʒə pø lə pʁɑ̃dʁ dɑ̃ me bʁa]",pos:"会話",jp:"抱っこしてもいい?",ex:"Je peux le prendre dans mes bras ?",exjp:"抱っこしてもいいですか?"},
+ {w:"Quel joli prénom.",ipa:"[kɛl ʒɔli pʁenɔ̃]",pos:"会話",jp:"かわいい名前ですね",ex:"Quel joli prénom vous avez choisi.",exjp:"選んだ名前、すてきですね。"},
+ {w:"Il dort comme un ange.",ipa:"[il dɔʁ kɔm œ̃n‿ɑ̃ʒ]",pos:"会話",jp:"天使のように眠っています",ex:"Chut, il dort comme un ange.",exjp:"しーっ、天使のように眠ってる。"},
+ {w:"Reposez-vous bien.",ipa:"[ʁəpoze vu bjɛ̃]",pos:"会話",jp:"よく休んでくださいね",ex:"Ne vous fatiguez pas, reposez-vous bien.",exjp:"無理せず、よく休んで。"},
+ {w:"Voici un petit cadeau.",ipa:"[vwasi œ̃ pəti kado]",pos:"会話",jp:"ささやかな贈り物です",ex:"Voici un petit cadeau pour le bébé.",exjp:"赤ちゃんへささやかな贈り物です。"},
+ {w:"Toutes mes félicitations.",ipa:"[tut me felisitasjɔ̃]",pos:"会話",jp:"心からおめでとう",ex:"Toutes mes félicitations aux parents.",exjp:"ご両親に心からおめでとう。"}
+]};
+DECKS.scene.tabs["教会・ミサで"]={label:"教会・ミサで",items:[
+ {w:"La messe commence à dix heures.",ipa:"[la mɛs kɔmɑ̃s a diz‿œʁ]",pos:"会話",jp:"ミサは10時から始まります",pri:1,ex:"Le dimanche, la messe commence à dix heures.",exjp:"日曜のミサは10時から。"},
+ {w:"On se recueille un instant.",ipa:"[ɔ̃ sə ʁəkœj œ̃n‿ɛ̃stɑ̃]",pos:"会話",jp:"少し黙祷します",ex:"On se recueille un instant en silence.",exjp:"静かに少し黙祷します。"},
+ {w:"Chantons ensemble.",ipa:"[ʃɑ̃tɔ̃z‿ɑ̃sɑ̃bl]",pos:"会話",jp:"一緒に歌いましょう",ex:"Chantons ensemble ce cantique.",exjp:"この賛美歌を一緒に歌いましょう。"},
+ {w:"Le prêtre fait son sermon.",ipa:"[lə pʁɛtʁ fɛ sɔ̃ sɛʁmɔ̃]",pos:"会話",jp:"司祭が説教します",ex:"Maintenant, le prêtre fait son sermon.",exjp:"今、司祭が説教します。"},
+ {w:"On prie en silence.",ipa:"[ɔ̃ pʁi ɑ̃ silɑ̃s]",pos:"会話",jp:"静かに祈ります",ex:"Un moment, on prie en silence.",exjp:"しばし、静かに祈ります。"},
+ {w:"C'est un lieu sacré.",ipa:"[sɛt‿œ̃ ljø sakʁe]",pos:"会話",jp:"神聖な場所です",ex:"Respectez le calme, c'est un lieu sacré.",exjp:"静粛に、神聖な場所です。"},
+ {w:"Allumez un cierge.",ipa:"[alyme œ̃ sjɛʁʒ]",pos:"会話",jp:"ろうそくを灯してください",ex:"Vous pouvez allumer un cierge.",exjp:"ろうそくを灯してもいいですよ。"},
+ {w:"Que la paix soit avec vous.",ipa:"[kə la pɛ swat‿avɛk vu]",pos:"会話",jp:"あなたに平安がありますように",ex:"Que la paix soit avec vous tous.",exjp:"皆さんに平安がありますように。"},
+ {w:"On fait le signe de croix.",ipa:"[ɔ̃ fɛ lə siɲ də kʁwa]",pos:"会話",jp:"十字を切ります",ex:"En entrant, on fait le signe de croix.",exjp:"入る時に十字を切る。"},
+ {w:"Amen.",ipa:"[amɛn]",pos:"会話",jp:"アーメン",ex:"… pour les siècles des siècles, amen.",exjp:"…世々に至るまで、アーメン。"}
+]};
+DECKS.scene.tabs["クリスマスの準備"]={label:"クリスマスの準備",items:[
+ {w:"On décore le sapin.",ipa:"[ɔ̃ dekɔʁ lə sapɛ̃]",pos:"会話",jp:"ツリーを飾ります",pri:1,ex:"Ce soir, on décore le sapin.",exjp:"今夜、ツリーを飾る。"},
+ {w:"Tu as fait ta liste au Père Noël ?",ipa:"[ty a fɛ ta list o pɛʁ nɔɛl]",pos:"会話",jp:"サンタへの手紙を書いた?",ex:"Tu as fait ta liste au Père Noël ?",exjp:"サンタへの欲しい物リスト書いた?"},
+ {w:"On accroche les guirlandes.",ipa:"[ɔ̃n‿akʁɔʃ le ɡiʁlɑ̃d]",pos:"会話",jp:"飾りを掛けます",ex:"On accroche les guirlandes lumineuses.",exjp:"イルミネーションを掛ける。"},
+ {w:"Le réveillon est en famille.",ipa:"[lə ʁevɛjɔ̃ ɛt‿ɑ̃ famij]",pos:"会話",jp:"イブは家族で過ごします",ex:"Cette année, le réveillon est en famille.",exjp:"今年のイブは家族で過ごす。"},
+ {w:"J'emballe les cadeaux.",ipa:"[ʒɑ̃bal le kado]",pos:"会話",jp:"プレゼントを包みます",ex:"Ce soir, j'emballe les cadeaux.",exjp:"今夜プレゼントを包む。"},
+ {w:"On prépare la dinde.",ipa:"[ɔ̃ pʁepaʁ la dɛ̃d]",pos:"会話",jp:"七面鳥を用意します",ex:"Pour le repas, on prépare la dinde.",exjp:"食事に七面鳥を用意する。"},
+ {w:"Joyeux Noël !",ipa:"[ʒwajø nɔɛl]",pos:"会話",jp:"メリークリスマス!",ex:"Joyeux Noël à toute la famille !",exjp:"家族みんなにメリークリスマス!"},
+ {w:"Les enfants sont impatients.",ipa:"[lez‿ɑ̃fɑ̃ sɔ̃t‿ɛ̃pasjɑ̃]",pos:"会話",jp:"子供たちがそわそわしています",ex:"Les enfants sont impatients d'ouvrir les cadeaux.",exjp:"子供たちがプレゼントを開けたくてそわそわ。"},
+ {w:"On ouvre les cadeaux demain.",ipa:"[ɔ̃n‿uvʁ le kado dəmɛ̃]",pos:"会話",jp:"明日プレゼントを開けます",ex:"Patience, on ouvre les cadeaux demain.",exjp:"我慢、プレゼントは明日開ける。"},
+ {w:"Quelle belle ambiance !",ipa:"[kɛl bɛl ɑ̃bjɑ̃s]",pos:"会話",jp:"素敵な雰囲気!",ex:"Avec les lumières, quelle belle ambiance !",exjp:"灯りがついて、素敵な雰囲気!"}
+]};
+DECKS.scene.tabs["大晦日・新年"]={label:"大晦日・新年",items:[
+ {w:"Bonne année !",ipa:"[bɔn‿ane]",pos:"会話",jp:"明けましておめでとう!",pri:1,ex:"Bonne année et bonne santé !",exjp:"明けましておめでとう、健康第一!"},
+ {w:"On fête le réveillon du Nouvel An.",ipa:"[ɔ̃ fɛt lə ʁevɛjɔ̃ dy nuvɛl‿ɑ̃]",pos:"会話",jp:"年越しを祝います",ex:"Chez des amis, on fête le réveillon du Nouvel An.",exjp:"友人宅で年越しを祝う。"},
+ {w:"Bonne santé pour cette année.",ipa:"[bɔn sɑ̃te puʁ sɛt‿ane]",pos:"会話",jp:"今年も健康でありますように",ex:"Je te souhaite une bonne santé pour cette année.",exjp:"今年の健康を祈ってるよ。"},
+ {w:"On compte à rebours.",ipa:"[ɔ̃ kɔ̃t a ʁəbuʁ]",pos:"会話",jp:"カウントダウンします",ex:"À minuit moins dix, on compte à rebours.",exjp:"0時10分前、カウントダウン。"},
+ {w:"Tu as pris de bonnes résolutions ?",ipa:"[ty a pʁi də bɔn ʁezɔlysjɔ̃]",pos:"会話",jp:"新年の抱負は?",ex:"Pour janvier, tu as pris de bonnes résolutions ?",exjp:"1月に向けて抱負はある?"},
+ {w:"On trinque à minuit.",ipa:"[ɔ̃ tʁɛ̃k a minɥi]",pos:"会話",jp:"0時に乾杯します",ex:"On trinque au champagne à minuit.",exjp:"0時にシャンパンで乾杯。"},
+ {w:"Que tous tes souhaits se réalisent.",ipa:"[kə tu te swɛ sə ʁealiz]",pos:"会話",jp:"願いが叶いますように",ex:"Que tous tes souhaits se réalisent en cette année.",exjp:"今年、願いが叶いますように。"},
+ {w:"On regarde le feu d'artifice.",ipa:"[ɔ̃ ʁəɡaʁd lə fø daʁtifis]",pos:"会話",jp:"花火を見ます",ex:"Du balcon, on regarde le feu d'artifice.",exjp:"バルコニーから花火を見る。"},
+ {w:"Meilleurs vœux !",ipa:"[mɛjœʁ vø]",pos:"会話",jp:"良いお年を!/お祝いを!",ex:"Meilleurs vœux pour la nouvelle année !",exjp:"新年のお祝いを申し上げます!"},
+ {w:"On s'embrasse pour la nouvelle année.",ipa:"[ɔ̃ sɑ̃bʁas puʁ la nuvɛl‿ane]",pos:"会話",jp:"新年のあいさつを交わします",ex:"À minuit, on s'embrasse pour la nouvelle année.",exjp:"0時に新年のあいさつを交わす。"}
+]};
+DECKS.scene.tabs["記念日のお祝い"]={label:"記念日のお祝い",items:[
+ {w:"Bon anniversaire de mariage !",ipa:"[bɔn‿anivɛʁsɛʁ də maʁjaʒ]",pos:"会話",jp:"結婚記念日おめでとう!",pri:1,ex:"Bon anniversaire de mariage, mes chéris !",exjp:"結婚記念日おめでとう、二人とも!"},
+ {w:"Ça fait dix ans aujourd'hui.",ipa:"[sa fɛ diz‿ɑ̃ oʒuʁdɥi]",pos:"会話",jp:"今日で10年です",ex:"On s'est rencontrés, ça fait dix ans aujourd'hui.",exjp:"出会って今日で10年だ。"},
+ {w:"J'ai réservé un restaurant.",ipa:"[ʒe ʁezɛʁve œ̃ ʁɛstoʁɑ̃]",pos:"会話",jp:"レストランを予約しました",ex:"Pour fêter ça, j'ai réservé un restaurant.",exjp:"お祝いにレストランを予約した。"},
+ {w:"C'est notre jour spécial.",ipa:"[sɛ nɔtʁ ʒuʁ spesjal]",pos:"会話",jp:"私たちの特別な日です",ex:"Aujourd'hui, c'est notre jour spécial.",exjp:"今日は私たちの特別な日。"},
+ {w:"Je t'ai préparé une surprise.",ipa:"[ʒə te pʁepaʁe yn syʁpʁiz]",pos:"会話",jp:"サプライズを用意したよ",ex:"Ferme les yeux, je t'ai préparé une surprise.",exjp:"目を閉じて、サプライズがあるの。"},
+ {w:"À nous deux !",ipa:"[a nu dø]",pos:"会話",jp:"私たちに乾杯!",ex:"Lève ton verre, à nous deux !",exjp:"グラスを上げて、私たちに乾杯!"},
+ {w:"Le temps passe vite.",ipa:"[lə tɑ̃ pas vit]",pos:"会話",jp:"時が経つのは早いね",ex:"Déjà dix ans, le temps passe vite.",exjp:"もう10年、時が経つのは早い。"},
+ {w:"Merci pour ces belles années.",ipa:"[mɛʁsi puʁ se bɛlz‿ane]",pos:"会話",jp:"素敵な年月をありがとう",ex:"Merci pour ces belles années ensemble.",exjp:"共に過ごした素敵な年月をありがとう。"},
+ {w:"Je t'aime toujours autant.",ipa:"[ʒə tɛm tuʒuʁ otɑ̃]",pos:"会話",jp:"今も変わらず愛してる",ex:"Après tout ce temps, je t'aime toujours autant.",exjp:"これだけ経っても変わらず愛してる。"},
+ {w:"À nos prochaines années !",ipa:"[a no pʁɔʃɛnz‿ane]",pos:"会話",jp:"これからの年月に乾杯!",ex:"À nos prochaines années ensemble !",exjp:"これから共に過ごす年月に!"}
+]};
+DECKS.scene.tabs["送別会・歓迎会"]={label:"送別会・歓迎会",items:[
+ {w:"On organise un pot de départ.",ipa:"[ɔ̃n‿ɔʁɡaniz œ̃ po də depaʁ]",pos:"会話",jp:"送別会を開きます",pri:1,ex:"Vendredi, on organise un pot de départ.",exjp:"金曜に送別会を開く。"},
+ {w:"Bienvenue dans l'équipe !",ipa:"[bjɛ̃vəny dɑ̃ lekip]",pos:"会話",jp:"チームへようこそ!",ex:"Bienvenue dans l'équipe, on est ravis !",exjp:"チームへようこそ、嬉しいよ!"},
+ {w:"Tu vas nous manquer.",ipa:"[ty va nu mɑ̃ke]",pos:"会話",jp:"君がいなくて寂しくなる",ex:"Sans toi, tu vas nous manquer.",exjp:"君がいないと寂しくなるよ。"},
+ {w:"On te souhaite bonne chance.",ipa:"[ɔ̃ tə swɛt bɔn ʃɑ̃s]",pos:"会話",jp:"幸運を祈っています",ex:"Pour la suite, on te souhaite bonne chance.",exjp:"これからの幸運を祈ってる。"},
+ {w:"Quelques mots pour toi.",ipa:"[kɛlk mo puʁ twa]",pos:"会話",jp:"君に一言",ex:"Avant de partir, quelques mots pour toi.",exjp:"行く前に、君に一言。"},
+ {w:"On a un cadeau d'adieu.",ipa:"[ɔ̃n‿a œ̃ kado dadjø]",pos:"会話",jp:"餞別があります",ex:"De la part de tous, on a un cadeau d'adieu.",exjp:"みんなからの餞別だよ。"},
+ {w:"Reste en contact.",ipa:"[ʁɛst ɑ̃ kɔ̃takt]",pos:"会話",jp:"連絡を取り合おう",ex:"Surtout, reste en contact.",exjp:"とにかく連絡を取り合おう。"},
+ {w:"Fais-nous signe.",ipa:"[fɛ nu siɲ]",pos:"会話",jp:"また声をかけて",ex:"Si tu passes, fais-nous signe.",exjp:"近くに来たら声をかけて。"},
+ {w:"Bon courage pour la suite.",ipa:"[bɔ̃ kuʁaʒ puʁ la sɥit]",pos:"会話",jp:"これからも頑張って",ex:"Bon courage pour la suite de ta carrière.",exjp:"今後のキャリアも頑張って。"},
+ {w:"C'était un plaisir de travailler avec toi.",ipa:"[setɛt‿œ̃ plɛziʁ də tʁavaje avɛk twa]",pos:"会話",jp:"一緒に働けて楽しかった",ex:"Vraiment, c'était un plaisir de travailler avec toi.",exjp:"本当に一緒に働けて楽しかった。"}
+]};
+DECKS.scene.tabs["同窓会で"]={label:"同窓会で",items:[
+ {w:"Ça fait une éternité !",ipa:"[sa fɛ yn‿etɛʁnite]",pos:"会話",jp:"久しぶりすぎる!",pri:1,ex:"Salut ! Ça fait une éternité !",exjp:"やあ!久しぶりすぎる!"},
+ {w:"Tu n'as pas changé.",ipa:"[ty na pa ʃɑ̃ʒe]",pos:"会話",jp:"変わってないね",ex:"Toi, tu n'as pas changé du tout.",exjp:"君、全然変わってないね。"},
+ {w:"Tu te souviens de moi ?",ipa:"[ty tə suvjɛ̃ də mwa]",pos:"会話",jp:"僕を覚えてる?",ex:"Tu te souviens de moi, du lycée ?",exjp:"高校の僕、覚えてる?"},
+ {w:"Qu'est-ce que tu deviens ?",ipa:"[kɛs kə ty dəvjɛ̃]",pos:"会話",jp:"最近どうしてる?",ex:"Alors, qu'est-ce que tu deviens ?",exjp:"で、最近どうしてるの?"},
+ {w:"On était dans la même classe.",ipa:"[ɔ̃n‿etɛ dɑ̃ la mɛm klas]",pos:"会話",jp:"同じクラスだったね",ex:"En seconde, on était dans la même classe.",exjp:"高1で同じクラスだったね。"},
+ {w:"Tu te rappelles le prof de maths ?",ipa:"[ty tə ʁapɛl lə pʁɔf də mat]",pos:"会話",jp:"数学の先生覚えてる?",ex:"Tu te rappelles le prof de maths sévère ?",exjp:"あの厳しい数学の先生覚えてる?"},
+ {w:"Que de souvenirs !",ipa:"[kə də suvniʁ]",pos:"会話",jp:"思い出がいっぱい!",ex:"En revoyant tout ça, que de souvenirs !",exjp:"これを見ると思い出がいっぱい!"},
+ {w:"On devrait se revoir plus souvent.",ipa:"[ɔ̃ dəvʁɛ sə ʁəvwaʁ ply suvɑ̃]",pos:"会話",jp:"もっと会おうよ",ex:"On devrait se revoir plus souvent, promis ?",exjp:"もっと会おうよ、約束?"},
+ {w:"Tu as des nouvelles des autres ?",ipa:"[ty a de nuvɛl dez‿otʁ]",pos:"会話",jp:"他のみんなの近況は?",ex:"Tu as des nouvelles des autres copains ?",exjp:"他の友達の近況知ってる?"},
+ {w:"On échange nos numéros ?",ipa:"[ɔ̃n‿eʃɑ̃ʒ no nymeʁo]",pos:"会話",jp:"連絡先を交換する?",ex:"Avant de partir, on échange nos numéros ?",exjp:"帰る前に連絡先を交換する?"}
+]};
+DECKS.scene.tabs["お見合い・デート"]={label:"お見合い・デート",items:[
+ {w:"Tu veux prendre un verre ?",ipa:"[ty vø pʁɑ̃dʁ œ̃ vɛʁ]",pos:"会話",jp:"一杯どう?",pri:1,ex:"Ce soir, tu veux prendre un verre ?",exjp:"今夜、一杯どう?"},
+ {w:"On se voit ce soir ?",ipa:"[ɔ̃ sə vwa sə swaʁ]",pos:"会話",jp:"今夜会わない?",ex:"On se voit ce soir, vers vingt heures ?",exjp:"今夜20時頃会わない?"},
+ {w:"Tu es très élégante.",ipa:"[ty ɛ tʁɛz‿eleɡɑ̃t]",pos:"会話",jp:"とても素敵だね",ex:"Ce soir, tu es très élégante.",exjp:"今夜はとても素敵だね。"},
+ {w:"J'ai passé un super moment.",ipa:"[ʒe pase œ̃ sypɛʁ mɔmɑ̃]",pos:"会話",jp:"楽しい時間だった",ex:"Merci, j'ai passé un super moment.",exjp:"ありがとう、楽しい時間だった。"},
+ {w:"On se revoit quand ?",ipa:"[ɔ̃ sə ʁəvwa kɑ̃]",pos:"会話",jp:"次いつ会う?",ex:"Alors, on se revoit quand ?",exjp:"で、次いつ会う?"},
+ {w:"Tu me plais beaucoup.",ipa:"[ty mə plɛ boku]",pos:"会話",jp:"とても惹かれてる",ex:"Je dois te le dire, tu me plais beaucoup.",exjp:"言わなきゃ、君にとても惹かれてる。"},
+ {w:"C'est moi qui invite.",ipa:"[sɛ mwa ki ɛ̃vit]",pos:"会話",jp:"ここは僕がおごるよ",ex:"Range ton argent, c'est moi qui invite.",exjp:"お金はしまって、僕がおごる。"},
+ {w:"On a beaucoup de points communs.",ipa:"[ɔ̃n‿a boku də pwɛ̃ kɔmœ̃]",pos:"会話",jp:"共通点が多いね",ex:"C'est fou, on a beaucoup de points communs.",exjp:"すごい、共通点が多いね。"},
+ {w:"Je peux avoir ton numéro ?",ipa:"[ʒə pø avwaʁ tɔ̃ nymeʁo]",pos:"会話",jp:"連絡先もらえる?",ex:"Je peux avoir ton numéro de téléphone ?",exjp:"電話番号もらえる?"},
+ {w:"À très bientôt, j'espère.",ipa:"[a tʁɛ bjɛ̃to ʒɛspɛʁ]",pos:"会話",jp:"また近いうちに、ぜひ",ex:"À très bientôt, j'espère vraiment.",exjp:"また近いうちに、本当に会いたい。"}
+]};
+DECKS.scene.tabs["プロポーズ・婚約"]={label:"プロポーズ・婚約",items:[
+ {w:"Veux-tu m'épouser ?",ipa:"[vø ty mepuze]",pos:"会話",jp:"結婚してくれる?",pri:1,ex:"Mon amour, veux-tu m'épouser ?",exjp:"ねえ、結婚してくれる?"},
+ {w:"Je veux passer ma vie avec toi.",ipa:"[ʒə vø pase ma vi avɛk twa]",pos:"会話",jp:"君と一生を共にしたい",ex:"Je veux passer ma vie avec toi.",exjp:"君と一生を共にしたいんだ。"},
+ {w:"On se fiance.",ipa:"[ɔ̃ sə fjɑ̃s]",pos:"会話",jp:"婚約します",ex:"On a décidé, on se fiance !",exjp:"決めたよ、私たち婚約する!"},
+ {w:"C'est une bague magnifique.",ipa:"[sɛt‿yn baɡ maɲifik]",pos:"会話",jp:"素敵な指輪",ex:"Oh, c'est une bague magnifique !",exjp:"わあ、なんて素敵な指輪!"},
+ {w:"Oui, mille fois oui !",ipa:"[wi mil fwa wi]",pos:"会話",jp:"はい、何度でもはい!",ex:"Oui, mille fois oui, je t'épouse !",exjp:"はい、何度でもはい、結婚する!"},
+ {w:"J'ai demandé sa main.",ipa:"[ʒe dəmɑ̃de sa mɛ̃]",pos:"会話",jp:"結婚を申し込んだ",ex:"Hier soir, j'ai demandé sa main.",exjp:"昨夜、彼女に結婚を申し込んだ。"},
+ {w:"On annonce la nouvelle.",ipa:"[ɔ̃n‿anɔ̃s la nuvɛl]",pos:"会話",jp:"知らせを発表します",ex:"Ce week-end, on annonce la nouvelle à la famille.",exjp:"今週末、家族に発表する。"},
+ {w:"On prépare le mariage.",ipa:"[ɔ̃ pʁepaʁ lə maʁjaʒ]",pos:"会話",jp:"結婚式の準備をします",ex:"Dès maintenant, on prépare le mariage.",exjp:"今から結婚式の準備をする。"},
+ {w:"Tu me rends si heureux.",ipa:"[ty mə ʁɑ̃ si œʁø]",pos:"会話",jp:"君のおかげで幸せだ",ex:"Tu me rends si heureux chaque jour.",exjp:"毎日君のおかげで幸せだ。"},
+ {w:"C'est le plus beau jour de ma vie.",ipa:"[sɛ lə ply bo ʒuʁ də ma vi]",pos:"会話",jp:"人生最高の日だ",ex:"Aujourd'hui, c'est le plus beau jour de ma vie.",exjp:"今日は人生最高の日だ。"}
+]};
+DECKS.theme.tabs["メディア・報道"]={label:"メディア・報道",items:[
+ {w:"les médias",ipa:"[le medja]",pos:"名詞",jp:"メディア",pri:1,ex:"les médias en parlent.",exjp:"メディアがそれを報じている。"},
+ {w:"une chaîne",ipa:"[yn ʃɛn]",pos:"名詞",jp:"(テレビの)チャンネル・局",ex:"changer de chaîne.",exjp:"チャンネルを変える。"},
+ {w:"un journal",ipa:"[œ̃ ʒuʁnal]",pos:"名詞",jp:"新聞",pri:1,ex:"lire le journal.",exjp:"新聞を読む。"},
+ {w:"une émission",ipa:"[yn‿emisjɔ̃]",pos:"名詞",jp:"(放送)番組",pri:1,ex:"une émission de télé.",exjp:"テレビ番組。"},
+ {w:"un journaliste",ipa:"[œ̃ ʒuʁnalist]",pos:"名詞",jp:"ジャーナリスト・記者",ex:"un journaliste d'investigation.",exjp:"調査報道記者。"},
+ {w:"une information",ipa:"[yn‿ɛ̃fɔʁmasjɔ̃]",pos:"名詞",jp:"情報・ニュース",pri:1,ex:"une information importante.",exjp:"重要な情報。"},
+ {w:"les actualités",ipa:"[lez‿aktɥalite]",pos:"名詞",jp:"時事ニュース",ex:"suivre les actualités.",exjp:"時事ニュースを追う。"},
+ {w:"un reportage",ipa:"[œ̃ ʁəpɔʁtaʒ]",pos:"名詞",jp:"ルポ・取材記事",ex:"un reportage sur la guerre.",exjp:"戦争に関するルポ。"},
+ {w:"la presse",ipa:"[la pʁɛs]",pos:"名詞",jp:"報道機関・新聞各紙",ex:"la liberté de la presse.",exjp:"報道の自由。"},
+ {w:"un article",ipa:"[œ̃n‿aʁtikl]",pos:"名詞",jp:"記事",pri:1,ex:"un article de fond.",exjp:"特集記事。"},
+ {w:"diffuser",ipa:"[difyze]",pos:"動詞",jp:"放送する・流す",ex:"diffuser un documentaire.",exjp:"ドキュメンタリーを放送する。"},
+ {w:"une interview",ipa:"[yn‿ɛ̃tɛʁvju]",pos:"名詞",jp:"インタビュー",ex:"accorder une interview.",exjp:"インタビューに応じる。"},
+ {w:"un titre",ipa:"[œ̃ titʁ]",pos:"名詞",jp:"見出し・タイトル",ex:"un titre accrocheur.",exjp:"目を引く見出し。"},
+ {w:"en direct",ipa:"[ɑ̃ diʁɛkt]",pos:"表現",jp:"生放送で",ex:"un match en direct.",exjp:"生中継の試合。"},
+ {w:"une rumeur",ipa:"[yn ʁymœʁ]",pos:"名詞",jp:"うわさ・風評",ex:"démentir une rumeur.",exjp:"うわさを否定する。"},
+ {w:"fiable",ipa:"[fjabl]",pos:"形容詞",jp:"信頼できる",ex:"une source fiable.",exjp:"信頼できる情報源。"}
+]};
+DECKS.theme.tabs["年中行事・祝日"]={label:"年中行事・祝日",items:[
+ {w:"Noël",ipa:"[nɔɛl]",pos:"名詞",jp:"クリスマス",pri:1,ex:"fêter Noël en famille.",exjp:"家族でクリスマスを祝う。"},
+ {w:"le Nouvel An",ipa:"[lə nuvɛl‿ɑ̃]",pos:"名詞",jp:"新年",pri:1,ex:"le réveillon du Nouvel An.",exjp:"年越しの夜会。"},
+ {w:"Pâques",ipa:"[pɑk]",pos:"名詞",jp:"復活祭・イースター",ex:"les œufs de Pâques.",exjp:"イースターエッグ。"},
+ {w:"un jour férié",ipa:"[œ̃ ʒuʁ feʁje]",pos:"名詞",jp:"祝日",pri:1,ex:"Lundi est un jour férié.",exjp:"月曜は祝日だ。"},
+ {w:"une fête",ipa:"[yn fɛt]",pos:"名詞",jp:"祭り・祝日",pri:1,ex:"une fête de village.",exjp:"村の祭り。"},
+ {w:"un anniversaire",ipa:"[œ̃n‿anivɛʁsɛʁ]",pos:"名詞",jp:"誕生日・記念日",pri:1,ex:"fêter son anniversaire.",exjp:"誕生日を祝う。"},
+ {w:"le réveillon",ipa:"[lə ʁevɛjɔ̃]",pos:"名詞",jp:"大晦日・イブの夜会",ex:"le réveillon de Noël.",exjp:"クリスマスイブの夜会。"},
+ {w:"un défilé",ipa:"[œ̃ defile]",pos:"名詞",jp:"パレード・行進",ex:"un défilé dans les rues.",exjp:"街でのパレード。"},
+ {w:"un feu d'artifice",ipa:"[œ̃ fø daʁtifis]",pos:"名詞",jp:"花火",ex:"un feu d'artifice spectaculaire.",exjp:"壮観な花火。"},
+ {w:"la Toussaint",ipa:"[la tusɛ̃]",pos:"名詞",jp:"万聖節",ex:"fleurir les tombes à la Toussaint.",exjp:"万聖節に墓に花を供える。"},
+ {w:"le carnaval",ipa:"[lə kaʁnaval]",pos:"名詞",jp:"カーニバル・謝肉祭",ex:"le carnaval de Nice.",exjp:"ニースのカーニバル。"},
+ {w:"la fête nationale",ipa:"[la fɛt nasjɔnal]",pos:"名詞",jp:"建国記念日・革命記念日",ex:"la fête nationale du 14 juillet.",exjp:"7月14日の革命記念日。"},
+ {w:"fêter",ipa:"[fete]",pos:"動詞",jp:"祝う",pri:1,ex:"fêter une réussite.",exjp:"成功を祝う。"},
+ {w:"traditionnel",ipa:"[tʁadisjɔnɛl]",pos:"形容詞",jp:"伝統的な",ex:"un plat traditionnel.",exjp:"伝統料理。"},
+ {w:"un cadeau",ipa:"[œ̃ kado]",pos:"名詞",jp:"贈り物",pri:1,ex:"offrir un cadeau.",exjp:"贈り物をする。"},
+ {w:"les vacances",ipa:"[le vakɑ̃s]",pos:"名詞",jp:"休暇・バカンス",pri:1,ex:"les vacances de Noël.",exjp:"クリスマス休暇。"}
+]};
+DECKS.theme.tabs["人生の節目"]={label:"人生の節目",items:[
+ {w:"la naissance",ipa:"[la nɛsɑ̃s]",pos:"名詞",jp:"誕生",pri:1,ex:"la naissance d'un enfant.",exjp:"子供の誕生。"},
+ {w:"l'enfance",ipa:"[lɑ̃fɑ̃s]",pos:"名詞",jp:"子供時代",ex:"des souvenirs d'enfance.",exjp:"子供時代の思い出。"},
+ {w:"l'adolescence",ipa:"[ladɔlesɑ̃s]",pos:"名詞",jp:"思春期・青春期",ex:"pendant l'adolescence.",exjp:"思春期の間。"},
+ {w:"la jeunesse",ipa:"[la ʒœnɛs]",pos:"名詞",jp:"青年期・若さ",ex:"profiter de sa jeunesse.",exjp:"若さを謳歌する。"},
+ {w:"l'âge adulte",ipa:"[lɑʒ adylt]",pos:"名詞",jp:"成人期",ex:"entrer dans l'âge adulte.",exjp:"成人期に入る。"},
+ {w:"la vieillesse",ipa:"[la vjɛjɛs]",pos:"名詞",jp:"老年期",ex:"une vieillesse paisible.",exjp:"穏やかな老年期。"},
+ {w:"la mort",ipa:"[la mɔʁ]",pos:"名詞",jp:"死",pri:1,ex:"après la mort.",exjp:"死後。"},
+ {w:"grandir",ipa:"[ɡʁɑ̃diʁ]",pos:"動詞",jp:"成長する",pri:1,ex:"Les enfants grandissent vite.",exjp:"子供はすぐ大きくなる。"},
+ {w:"vieillir",ipa:"[vjɛjiʁ]",pos:"動詞",jp:"年をとる",ex:"vieillir en bonne santé.",exjp:"健康に年をとる。"},
+ {w:"une étape",ipa:"[yn‿etap]",pos:"名詞",jp:"段階・節目",pri:1,ex:"une étape importante.",exjp:"大事な節目。"},
+ {w:"un souvenir",ipa:"[œ̃ suvniʁ]",pos:"名詞",jp:"思い出",pri:1,ex:"un beau souvenir.",exjp:"いい思い出。"},
+ {w:"l'avenir",ipa:"[lavniʁ]",pos:"名詞",jp:"将来・未来",pri:1,ex:"penser à l'avenir.",exjp:"将来を考える。"},
+ {w:"le passé",ipa:"[lə pase]",pos:"名詞",jp:"過去",pri:1,ex:"oublier le passé.",exjp:"過去を忘れる。"},
+ {w:"mûrir",ipa:"[myʁiʁ]",pos:"動詞",jp:"成熟する",ex:"mûrir avec l'âge.",exjp:"年とともに成熟する。"},
+ {w:"une génération",ipa:"[yn ʒeneʁasjɔ̃]",pos:"名詞",jp:"世代",ex:"la nouvelle génération.",exjp:"新しい世代。"},
+ {w:"le destin",ipa:"[lə dɛstɛ̃]",pos:"名詞",jp:"運命",ex:"croire au destin.",exjp:"運命を信じる。"}
+]};
+DECKS.theme.tabs["法律・裁判"]={label:"法律・裁判",items:[
+ {w:"la loi",ipa:"[la lwa]",pos:"名詞",jp:"法律",pri:1,ex:"respecter la loi.",exjp:"法律を守る。"},
+ {w:"un avocat",ipa:"[œ̃n‿avɔka]",pos:"名詞",jp:"弁護士",pri:1,ex:"engager un avocat.",exjp:"弁護士を雇う。"},
+ {w:"un juge",ipa:"[œ̃ ʒyʒ]",pos:"名詞",jp:"裁判官",ex:"Le juge rend son verdict.",exjp:"裁判官が判決を下す。"},
+ {w:"un tribunal",ipa:"[œ̃ tʁibynal]",pos:"名詞",jp:"裁判所",ex:"comparaître au tribunal.",exjp:"裁判所に出廷する。"},
+ {w:"un procès",ipa:"[œ̃ pʁɔsɛ]",pos:"名詞",jp:"裁判・訴訟",ex:"gagner son procès.",exjp:"訴訟に勝つ。"},
+ {w:"un crime",ipa:"[œ̃ kʁim]",pos:"名詞",jp:"犯罪",pri:1,ex:"commettre un crime.",exjp:"罪を犯す。"},
+ {w:"coupable",ipa:"[kupabl]",pos:"形容詞",jp:"有罪の",ex:"être reconnu coupable.",exjp:"有罪と認められる。"},
+ {w:"innocent",ipa:"[inɔsɑ̃]",pos:"形容詞",jp:"無罪の・無実の",ex:"se déclarer innocent.",exjp:"無実を主張する。"},
+ {w:"un témoin",ipa:"[œ̃ temwɛ̃]",pos:"名詞",jp:"証人",ex:"un témoin oculaire.",exjp:"目撃証人。"},
+ {w:"une preuve",ipa:"[yn pʁœv]",pos:"名詞",jp:"証拠",pri:1,ex:"apporter une preuve.",exjp:"証拠を出す。"},
+ {w:"condamner",ipa:"[kɔ̃dane]",pos:"動詞",jp:"有罪を宣告する",ex:"condamner à la prison.",exjp:"禁錮刑を宣告する。"},
+ {w:"un jugement",ipa:"[œ̃ ʒyʒmɑ̃]",pos:"名詞",jp:"判決",ex:"rendre un jugement.",exjp:"判決を下す。"},
+ {w:"une peine",ipa:"[yn pɛn]",pos:"名詞",jp:"刑罰",ex:"purger sa peine.",exjp:"刑に服する。"},
+ {w:"la justice",ipa:"[la ʒystis]",pos:"名詞",jp:"司法・正義",pri:1,ex:"rendre la justice.",exjp:"裁きを下す。"},
+ {w:"un droit",ipa:"[œ̃ dʁwa]",pos:"名詞",jp:"権利",pri:1,ex:"défendre ses droits.",exjp:"自分の権利を守る。"},
+ {w:"accuser",ipa:"[akyze]",pos:"動詞",jp:"告発する・非難する",ex:"accuser quelqu'un de vol.",exjp:"窃盗で人を告発する。"}
+]};
+DECKS.theme.tabs["恋愛・カップル"]={label:"恋愛・カップル",items:[
+ {w:"l'amour",ipa:"[lamuʁ]",pos:"名詞",jp:"愛",pri:1,ex:"tomber amoureux par amour.",exjp:"愛によって恋に落ちる。"},
+ {w:"tomber amoureux",ipa:"[tɔ̃be amuʁø]",pos:"表現",jp:"恋に落ちる",pri:1,ex:"tomber amoureux au premier regard.",exjp:"一目で恋に落ちる。"},
+ {w:"un petit ami",ipa:"[œ̃ pəti ami]",pos:"名詞",jp:"彼氏",pri:1,ex:"présenter son petit ami.",exjp:"彼氏を紹介する。"},
+ {w:"une petite amie",ipa:"[yn pətit‿ami]",pos:"名詞",jp:"彼女",pri:1,ex:"sortir avec sa petite amie.",exjp:"彼女とデートする。"},
+ {w:"un couple",ipa:"[œ̃ kupl]",pos:"名詞",jp:"カップル・夫婦",pri:1,ex:"un couple heureux.",exjp:"幸せなカップル。"},
+ {w:"un rendez-vous",ipa:"[œ̃ ʁɑ̃devu]",pos:"名詞",jp:"デート・約束",pri:1,ex:"un premier rendez-vous.",exjp:"初デート。"},
+ {w:"un baiser",ipa:"[œ̃ beze]",pos:"名詞",jp:"キス",ex:"un baiser tendre.",exjp:"優しいキス。"},
+ {w:"s'embrasser",ipa:"[sɑ̃bʁase]",pos:"動詞",jp:"キスする・抱き合う",ex:"Ils s'embrassent sous la pluie.",exjp:"雨の中キスをする。"},
+ {w:"un coup de foudre",ipa:"[œ̃ ku də fudʁ]",pos:"名詞",jp:"ひとめぼれ",ex:"Ça a été le coup de foudre.",exjp:"ひとめぼれだった。"},
+ {w:"la jalousie",ipa:"[la ʒaluzi]",pos:"名詞",jp:"嫉妬",ex:"une crise de jalousie.",exjp:"嫉妬の発作。"},
+ {w:"une rupture",ipa:"[yn ʁyptyʁ]",pos:"名詞",jp:"別れ・破局",ex:"une rupture difficile.",exjp:"つらい破局。"},
+ {w:"séduire",ipa:"[sedɥiʁ]",pos:"動詞",jp:"魅了する・口説く",ex:"chercher à séduire.",exjp:"気を引こうとする。"},
+ {w:"flirter",ipa:"[flœʁte]",pos:"動詞",jp:"いちゃつく・口説く",ex:"flirter avec quelqu'un.",exjp:"誰かといちゃつく。"},
+ {w:"fidèle",ipa:"[fidɛl]",pos:"形容詞",jp:"誠実な・浮気しない",ex:"rester fidèle.",exjp:"誠実でいる。"},
+ {w:"une relation",ipa:"[yn ʁəlasjɔ̃]",pos:"名詞",jp:"関係・交際",pri:1,ex:"une relation sérieuse.",exjp:"真剣な交際。"},
+ {w:"amoureux",ipa:"[amuʁø]",pos:"形容詞",jp:"恋している",pri:1,ex:"être amoureux d'elle.",exjp:"彼女に恋している。"}
+]};
+DECKS.theme.tabs["結婚・家庭"]={label:"結婚・家庭",items:[
+ {w:"un époux",ipa:"[œ̃n‿epu]",pos:"名詞",jp:"夫",pri:1,ex:"son époux travaille à l'étranger.",exjp:"夫は海外で働いている。"},
+ {w:"une épouse",ipa:"[yn‿epuz]",pos:"名詞",jp:"妻",pri:1,ex:"présenter son épouse.",exjp:"妻を紹介する。"},
+ {w:"un foyer",ipa:"[œ̃ fwaje]",pos:"名詞",jp:"家庭",ex:"fonder un foyer.",exjp:"家庭を築く。"},
+ {w:"se marier",ipa:"[sə maʁje]",pos:"動詞",jp:"結婚する",pri:1,ex:"se marier à l'église.",exjp:"教会で結婚する。"},
+ {w:"divorcer",ipa:"[divɔʁse]",pos:"動詞",jp:"離婚する",ex:"décider de divorcer.",exjp:"離婚を決める。"},
+ {w:"un divorce",ipa:"[œ̃ divɔʁs]",pos:"名詞",jp:"離婚",ex:"un divorce à l'amiable.",exjp:"円満離婚。"},
+ {w:"une belle-mère",ipa:"[yn bɛl mɛʁ]",pos:"名詞",jp:"義母・継母",ex:"s'entendre avec sa belle-mère.",exjp:"義母と仲良くする。"},
+ {w:"un beau-père",ipa:"[œ̃ bo pɛʁ]",pos:"名詞",jp:"義父・継父",ex:"rencontrer son beau-père.",exjp:"義父に会う。"},
+ {w:"un gendre",ipa:"[œ̃ ʒɑ̃dʁ]",pos:"名詞",jp:"婿・娘の夫",ex:"un gendre idéal.",exjp:"理想の婿。"},
+ {w:"une belle-fille",ipa:"[yn bɛl fij]",pos:"名詞",jp:"嫁・義理の娘",ex:"une gentille belle-fille.",exjp:"優しい嫁。"},
+ {w:"un ménage",ipa:"[œ̃ menaʒ]",pos:"名詞",jp:"所帯・夫婦",ex:"un jeune ménage.",exjp:"若い夫婦。"},
+ {w:"élever",ipa:"[elve]",pos:"動詞",jp:"(子を)育てる",pri:1,ex:"élever ses enfants.",exjp:"子供を育てる。"},
+ {w:"une famille nombreuse",ipa:"[yn famij nɔ̃bʁøz]",pos:"名詞",jp:"大家族",ex:"venir d'une famille nombreuse.",exjp:"大家族の出身だ。"},
+ {w:"un foyer heureux",ipa:"[œ̃ fwaje œʁø]",pos:"名詞",jp:"幸せな家庭",ex:"bâtir un foyer heureux.",exjp:"幸せな家庭を築く。"},
+ {w:"s'installer",ipa:"[sɛ̃stale]",pos:"動詞",jp:"身を落ち着ける・暮らし始める",ex:"s'installer ensemble.",exjp:"一緒に暮らし始める。"},
+ {w:"un anniversaire de mariage",ipa:"[œ̃n‿anivɛʁsɛʁ də maʁjaʒ]",pos:"名詞",jp:"結婚記念日",ex:"fêter son anniversaire de mariage.",exjp:"結婚記念日を祝う。"}
+]};
+DECKS.theme.tabs["招待・お祝いの表現"]={label:"招待・お祝いの表現",items:[
+ {w:"inviter",ipa:"[ɛ̃vite]",pos:"動詞",jp:"招待する",pri:1,ex:"inviter des amis à dîner.",exjp:"友人を夕食に招く。"},
+ {w:"une invitation",ipa:"[yn‿ɛ̃vitasjɔ̃]",pos:"名詞",jp:"招待",pri:1,ex:"accepter une invitation.",exjp:"招待を受ける。"},
+ {w:"Félicitations !",ipa:"[felisitasjɔ̃]",pos:"表現",jp:"おめでとう!",pri:1,ex:"Félicitations pour ton diplôme !",exjp:"卒業おめでとう!"},
+ {w:"Joyeux anniversaire !",ipa:"[ʒwajøz‿anivɛʁsɛʁ]",pos:"表現",jp:"誕生日おめでとう!",pri:1,ex:"Joyeux anniversaire, papa !",exjp:"誕生日おめでとう、パパ!"},
+ {w:"Bonne année !",ipa:"[bɔn‿ane]",pos:"表現",jp:"明けましておめでとう!",pri:1,ex:"Bonne année à tous !",exjp:"みんな明けましておめでとう!"},
+ {w:"Bon courage !",ipa:"[bɔ̃ kuʁaʒ]",pos:"表現",jp:"頑張って!",pri:1,ex:"Bon courage pour ton examen !",exjp:"試験頑張って!"},
+ {w:"Bienvenue !",ipa:"[bjɛ̃vəny]",pos:"表現",jp:"ようこそ!",pri:1,ex:"Bienvenue chez nous !",exjp:"我が家へようこそ!"},
+ {w:"Santé !",ipa:"[sɑ̃te]",pos:"表現",jp:"乾杯!",pri:1,ex:"À ta réussite, santé !",exjp:"君の成功に、乾杯!"},
+ {w:"accepter",ipa:"[aksɛpte]",pos:"動詞",jp:"受ける・承諾する",pri:1,ex:"accepter avec joie.",exjp:"喜んで受ける。"},
+ {w:"refuser",ipa:"[ʁəfyze]",pos:"動詞",jp:"断る",pri:1,ex:"refuser poliment.",exjp:"丁寧に断る。"},
+ {w:"souhaiter",ipa:"[swɛte]",pos:"動詞",jp:"願う・祈る",pri:1,ex:"souhaiter bonne chance.",exjp:"幸運を祈る。"},
+ {w:"remercier",ipa:"[ʁəmɛʁsje]",pos:"動詞",jp:"感謝する・礼を言う",pri:1,ex:"remercier un ami.",exjp:"友人に礼を言う。"},
+ {w:"un toast",ipa:"[œ̃ tost]",pos:"名詞",jp:"乾杯の音頭",ex:"porter un toast.",exjp:"乾杯の音頭をとる。"},
+ {w:"convier",ipa:"[kɔ̃vje]",pos:"動詞",jp:"招く",ex:"convier à une réception.",exjp:"レセプションに招く。"},
+ {w:"Bravo !",ipa:"[bʁavo]",pos:"表現",jp:"よくやった!",pri:1,ex:"Bravo pour ton travail !",exjp:"いい仕事、ブラボー!"},
+ {w:"Meilleurs vœux !",ipa:"[mɛjœʁ vø]",pos:"表現",jp:"心よりお祝いを",ex:"Meilleurs vœux de bonheur !",exjp:"末永いお幸せを!"}
+]};
+DECKS.theme.tabs["贈り物・プレゼント"]={label:"贈り物・プレゼント",items:[
+ {w:"un cadeau",ipa:"[œ̃ kado]",pos:"名詞",jp:"プレゼント",pri:1,ex:"un cadeau d'anniversaire.",exjp:"誕生日プレゼント。"},
+ {w:"offrir",ipa:"[ɔfʁiʁ]",pos:"動詞",jp:"贈る",pri:1,ex:"offrir des fleurs.",exjp:"花を贈る。"},
+ {w:"un paquet cadeau",ipa:"[œ̃ pakɛ kado]",pos:"名詞",jp:"ギフト包装",ex:"faire un paquet cadeau.",exjp:"ギフト包装にする。"},
+ {w:"emballer",ipa:"[ɑ̃bale]",pos:"動詞",jp:"包む",ex:"emballer un cadeau.",exjp:"プレゼントを包む。"},
+ {w:"un ruban",ipa:"[œ̃ ʁybɑ̃]",pos:"名詞",jp:"リボン",ex:"un ruban rouge.",exjp:"赤いリボン。"},
+ {w:"une carte",ipa:"[yn kaʁt]",pos:"名詞",jp:"カード",pri:1,ex:"écrire une carte de vœux.",exjp:"お祝いカードを書く。"},
+ {w:"une surprise",ipa:"[yn syʁpʁiz]",pos:"名詞",jp:"サプライズ・驚き",pri:1,ex:"préparer une surprise.",exjp:"サプライズを用意する。"},
+ {w:"un bouquet",ipa:"[œ̃ bukɛ]",pos:"名詞",jp:"花束",ex:"un bouquet de roses.",exjp:"バラの花束。"},
+ {w:"faire plaisir",ipa:"[fɛʁ plɛziʁ]",pos:"表現",jp:"喜ばせる",pri:1,ex:"Ça lui fera plaisir.",exjp:"彼(女)は喜ぶだろう。"},
+ {w:"recevoir",ipa:"[ʁəsəvwaʁ]",pos:"動詞",jp:"受け取る",pri:1,ex:"recevoir un cadeau.",exjp:"プレゼントを受け取る。"},
+ {w:"un souvenir",ipa:"[œ̃ suvniʁ]",pos:"名詞",jp:"記念品・土産",ex:"rapporter un souvenir.",exjp:"土産を持ち帰る。"},
+ {w:"déballer",ipa:"[debale]",pos:"動詞",jp:"開封する",ex:"déballer ses cadeaux.",exjp:"プレゼントを開ける。"},
+ {w:"un chèque-cadeau",ipa:"[œ̃ ʃɛk kado]",pos:"名詞",jp:"商品券・ギフト券",ex:"offrir un chèque-cadeau.",exjp:"商品券を贈る。"},
+ {w:"généreux",ipa:"[ʒeneʁø]",pos:"形容詞",jp:"気前のいい",ex:"un geste généreux.",exjp:"気前のいい行い。"},
+ {w:"une attention",ipa:"[yn‿atɑ̃sjɔ̃]",pos:"名詞",jp:"心遣い・心づくし",ex:"une petite attention.",exjp:"ちょっとした心遣い。"},
+ {w:"gâter",ipa:"[ɡɑte]",pos:"動詞",jp:"甘やかす・たっぷり贈る",ex:"gâter ses petits-enfants.",exjp:"孫を甘やかす。"}
+]};
+DECKS.theme.tabs["パーティー・集まり"]={label:"パーティー・集まり",items:[
+ {w:"une fête",ipa:"[yn fɛt]",pos:"名詞",jp:"パーティー・祝い",pri:1,ex:"organiser une fête.",exjp:"パーティーを開く。"},
+ {w:"une soirée",ipa:"[yn swaʁe]",pos:"名詞",jp:"夜会・パーティー",pri:1,ex:"une soirée entre amis.",exjp:"友人との夜の集まり。"},
+ {w:"un invité",ipa:"[œ̃n‿ɛ̃vite]",pos:"名詞",jp:"招待客",ex:"accueillir les invités.",exjp:"招待客を迎える。"},
+ {w:"un hôte",ipa:"[œ̃n‿ot]",pos:"名詞",jp:"主催者・もてなす人",ex:"remercier l'hôte.",exjp:"主催者に礼を言う。"},
+ {w:"une ambiance",ipa:"[yn‿ɑ̃bjɑ̃s]",pos:"名詞",jp:"雰囲気",pri:1,ex:"une bonne ambiance.",exjp:"いい雰囲気。"},
+ {w:"de la musique",ipa:"[də la myzik]",pos:"名詞",jp:"音楽",pri:1,ex:"mettre de la musique.",exjp:"音楽をかける。"},
+ {w:"danser",ipa:"[dɑ̃se]",pos:"動詞",jp:"踊る",pri:1,ex:"danser toute la nuit.",exjp:"一晩中踊る。"},
+ {w:"s'amuser",ipa:"[samyze]",pos:"動詞",jp:"楽しむ",pri:1,ex:"bien s'amuser.",exjp:"大いに楽しむ。"},
+ {w:"fêter",ipa:"[fete]",pos:"動詞",jp:"祝う",ex:"fêter ça ensemble.",exjp:"一緒にお祝いする。"},
+ {w:"un buffet",ipa:"[œ̃ byfɛ]",pos:"名詞",jp:"ビュッフェ",ex:"un buffet froid.",exjp:"冷たい料理のビュッフェ。"},
+ {w:"trinquer",ipa:"[tʁɛ̃ke]",pos:"動詞",jp:"乾杯する",ex:"trinquer entre amis.",exjp:"友人同士で乾杯する。"},
+ {w:"rire",ipa:"[ʁiʁ]",pos:"動詞",jp:"笑う",pri:1,ex:"rire aux éclats.",exjp:"大笑いする。"},
+ {w:"un déguisement",ipa:"[œ̃ deɡizmɑ̃]",pos:"名詞",jp:"仮装・コスチューム",ex:"une fête à déguisement.",exjp:"仮装パーティー。"},
+ {w:"festif",ipa:"[fɛstif]",pos:"形容詞",jp:"お祭り気分の",ex:"une ambiance festive.",exjp:"お祭りムード。"},
+ {w:"se réunir",ipa:"[sə ʁeyniʁ]",pos:"動詞",jp:"集まる",ex:"se réunir en famille.",exjp:"家族で集まる。"},
+ {w:"convivial",ipa:"[kɔ̃vivjal]",pos:"形容詞",jp:"和やかな",ex:"un moment convivial.",exjp:"和やかなひととき。"}
+]};
+DECKS.theme.tabs["感謝・お祝いのことば"]={label:"感謝・お祝いのことば",items:[
+ {w:"Merci beaucoup.",ipa:"[mɛʁsi boku]",pos:"表現",jp:"どうもありがとう",pri:1,ex:"Merci beaucoup pour votre aide.",exjp:"ご協力どうもありがとう。"},
+ {w:"Je vous remercie.",ipa:"[ʒə vu ʁəmɛʁsi]",pos:"表現",jp:"感謝します",pri:1,ex:"Je vous remercie infiniment.",exjp:"心より感謝します。"},
+ {w:"C'est très gentil.",ipa:"[sɛ tʁɛ ʒɑ̃ti]",pos:"表現",jp:"とても親切ですね",pri:1,ex:"C'est très gentil de votre part.",exjp:"ご親切にどうも。"},
+ {w:"De rien.",ipa:"[də ʁjɛ̃]",pos:"表現",jp:"どういたしまして",pri:1,ex:"Merci ! — De rien.",exjp:"ありがとう!—どういたしまして。"},
+ {w:"Avec plaisir.",ipa:"[avɛk plɛziʁ]",pos:"表現",jp:"喜んで",pri:1,ex:"Bien sûr, avec plaisir.",exjp:"もちろん、喜んで。"},
+ {w:"Je vous en prie.",ipa:"[ʒə vuz‿ɑ̃ pʁi]",pos:"表現",jp:"どういたしまして・どうぞ",pri:1,ex:"Merci ! — Je vous en prie.",exjp:"ありがとう!—どういたしまして。"},
+ {w:"Ça me touche.",ipa:"[sa mə tuʃ]",pos:"表現",jp:"感動しました",ex:"Votre geste, ça me touche.",exjp:"あなたの心遣いに感動しました。"},
+ {w:"Je n'oublierai pas.",ipa:"[ʒə nubliʁe pa]",pos:"表現",jp:"忘れません",ex:"Ce que vous avez fait, je n'oublierai pas.",exjp:"してくれたこと、忘れません。"},
+ {w:"Vous êtes trop aimable.",ipa:"[vuz‿ɛt tʁo ɛmabl]",pos:"表現",jp:"ご親切に痛み入ります",ex:"Vraiment, vous êtes trop aimable.",exjp:"本当にご親切に痛み入ります。"},
+ {w:"C'est grâce à vous.",ipa:"[sɛ ɡʁɑs a vu]",pos:"表現",jp:"あなたのおかげです",ex:"Si j'ai réussi, c'est grâce à vous.",exjp:"成功できたのはあなたのおかげ。"},
+ {w:"Quelle belle surprise !",ipa:"[kɛl bɛl syʁpʁiz]",pos:"表現",jp:"嬉しい驚きです!",ex:"Vous voilà ! Quelle belle surprise !",exjp:"来てくれたの!嬉しい驚き!"},
+ {w:"Ça me fait très plaisir.",ipa:"[sa mə fɛ tʁɛ plɛziʁ]",pos:"表現",jp:"とても嬉しいです",ex:"Votre visite, ça me fait très plaisir.",exjp:"来てくれてとても嬉しい。"},
+ {w:"Je suis reconnaissant.",ipa:"[ʒə sɥi ʁəkɔnɛsɑ̃]",pos:"表現",jp:"感謝しています",ex:"Je suis très reconnaissant envers vous.",exjp:"あなたにとても感謝しています。"},
+ {w:"Mille mercis.",ipa:"[mil mɛʁsi]",pos:"表現",jp:"本当にありがとう",ex:"Mille mercis pour tout.",exjp:"何もかも本当にありがとう。"},
+ {w:"C'est trop.",ipa:"[sɛ tʁo]",pos:"表現",jp:"(恐縮で)もったいない",ex:"Un tel cadeau, c'est trop !",exjp:"こんな贈り物、もったいない!"},
+ {w:"Tout le plaisir est pour moi.",ipa:"[tu lə plɛziʁ ɛ puʁ mwa]",pos:"表現",jp:"こちらこそ光栄です",ex:"Merci ! — Tout le plaisir est pour moi.",exjp:"ありがとう!—こちらこそ光栄です。"}
+]};
+DECKS.theme.tabs["別れ・再会の表現"]={label:"別れ・再会の表現",items:[
+ {w:"Au revoir.",ipa:"[o ʁəvwaʁ]",pos:"表現",jp:"さようなら",pri:1,ex:"Au revoir, à demain !",exjp:"さようなら、また明日!"},
+ {w:"À bientôt.",ipa:"[a bjɛ̃to]",pos:"表現",jp:"またね・近いうちに",pri:1,ex:"Merci, à bientôt !",exjp:"ありがとう、またね!"},
+ {w:"À la prochaine.",ipa:"[a la pʁɔʃɛn]",pos:"表現",jp:"また今度",pri:1,ex:"Salut, à la prochaine !",exjp:"じゃあ、また今度!"},
+ {w:"Prends soin de toi.",ipa:"[pʁɑ̃ swɛ̃ də twa]",pos:"表現",jp:"元気でね",pri:1,ex:"Au revoir, prends soin de toi.",exjp:"さよなら、元気でね。"},
+ {w:"Bon voyage.",ipa:"[bɔ̃ vwajaʒ]",pos:"表現",jp:"良い旅を",pri:1,ex:"Bon voyage et reviens vite !",exjp:"良い旅を、早く帰ってきて!"},
+ {w:"Reste en contact.",ipa:"[ʁɛst ɑ̃ kɔ̃takt]",pos:"表現",jp:"連絡を取り合おう",ex:"Surtout, reste en contact.",exjp:"とにかく連絡を取り合おう。"},
+ {w:"Tu vas me manquer.",ipa:"[ty va mə mɑ̃ke]",pos:"表現",jp:"君がいなくて寂しくなる",ex:"Déjà, tu vas me manquer.",exjp:"もう、君がいないと寂しいよ。"},
+ {w:"On se reverra.",ipa:"[ɔ̃ sə ʁəvɛʁa]",pos:"表現",jp:"また会えるよ",ex:"Ne sois pas triste, on se reverra.",exjp:"悲しまないで、また会えるよ。"},
+ {w:"Ça fait longtemps !",ipa:"[sa fɛ lɔ̃tɑ̃]",pos:"表現",jp:"久しぶり!",pri:1,ex:"Tiens, ça fait longtemps !",exjp:"おや、久しぶり!"},
+ {w:"Quelle surprise de te voir !",ipa:"[kɛl syʁpʁiz də tə vwaʁ]",pos:"表現",jp:"会えてびっくり!",ex:"Ici ? Quelle surprise de te voir !",exjp:"ここで?会えてびっくり!"},
+ {w:"Salut !",ipa:"[saly]",pos:"表現",jp:"やあ!/じゃあね!",pri:1,ex:"Salut, comment ça va ?",exjp:"やあ、元気?"},
+ {w:"Adieu.",ipa:"[adjø]",pos:"表現",jp:"(永の)別れ・さらば",ex:"Adieu, sans rancune.",exjp:"さらば、恨みっこなしで。"},
+ {w:"faire ses adieux",ipa:"[fɛʁ sez‿adjø]",pos:"表現",jp:"別れを告げる",ex:"faire ses adieux à tous.",exjp:"皆に別れを告げる。"},
+ {w:"se quitter",ipa:"[sə kite]",pos:"動詞",jp:"別れる",ex:"se quitter bons amis.",exjp:"友好的に別れる。"},
+ {w:"se retrouver",ipa:"[sə ʁətʁuve]",pos:"動詞",jp:"再会する",ex:"se retrouver après des années.",exjp:"何年ぶりかに再会する。"},
+ {w:"À plus tard.",ipa:"[a ply taʁ]",pos:"表現",jp:"また後で",pri:1,ex:"Je file, à plus tard !",exjp:"行くね、また後で!"}
+]};
+DECKS.theme.tabs["人間関係・付き合い"]={label:"人間関係・付き合い",items:[
+ {w:"un ami",ipa:"[œ̃n‿ami]",pos:"名詞",jp:"友達",pri:1,ex:"un ami d'enfance.",exjp:"幼なじみ。"},
+ {w:"une connaissance",ipa:"[yn kɔnɛsɑ̃s]",pos:"名詞",jp:"知り合い",ex:"une simple connaissance.",exjp:"ただの知り合い。"},
+ {w:"un collègue",ipa:"[œ̃ kɔlɛɡ]",pos:"名詞",jp:"同僚",pri:1,ex:"un collègue de bureau.",exjp:"職場の同僚。"},
+ {w:"la confiance",ipa:"[la kɔ̃fjɑ̃s]",pos:"名詞",jp:"信頼",pri:1,ex:"faire confiance.",exjp:"信頼する。"},
+ {w:"une dispute",ipa:"[yn dispyt]",pos:"名詞",jp:"口論・けんか",ex:"une dispute stupide.",exjp:"くだらない口論。"},
+ {w:"se réconcilier",ipa:"[sə ʁekɔ̃silje]",pos:"動詞",jp:"仲直りする",ex:"se réconcilier après une dispute.",exjp:"けんかの後に仲直りする。"},
+ {w:"s'entendre",ipa:"[sɑ̃tɑ̃dʁ]",pos:"動詞",jp:"気が合う・仲がいい",ex:"bien s'entendre avec ses voisins.",exjp:"近所と仲良くする。"},
+ {w:"fréquenter",ipa:"[fʁekɑ̃te]",pos:"動詞",jp:"付き合う・通う",ex:"fréquenter les mêmes gens.",exjp:"同じ人たちと付き合う。"},
+ {w:"un proche",ipa:"[œ̃ pʁɔʃ]",pos:"名詞",jp:"身近な人・親しい人",ex:"un proche de la famille.",exjp:"家族に近しい人。"},
+ {w:"proche",ipa:"[pʁɔʃ]",pos:"形容詞",jp:"親しい",ex:"un ami proche.",exjp:"親しい友人。"},
+ {w:"sympathique",ipa:"[sɛ̃patik]",pos:"形容詞",jp:"感じのいい",pri:1,ex:"des gens sympathiques.",exjp:"感じのいい人たち。"},
+ {w:"un lien",ipa:"[œ̃ ljɛ̃]",pos:"名詞",jp:"絆・つながり",ex:"un lien fort.",exjp:"強い絆。"},
+ {w:"respecter",ipa:"[ʁɛspɛkte]",pos:"動詞",jp:"尊重する",pri:1,ex:"respecter les autres.",exjp:"他人を尊重する。"},
+ {w:"un malentendu",ipa:"[œ̃ malɑ̃tɑ̃dy]",pos:"名詞",jp:"誤解",ex:"un simple malentendu.",exjp:"ただの誤解。"},
+ {w:"soutenir",ipa:"[sutniʁ]",pos:"動詞",jp:"支える",ex:"soutenir un ami.",exjp:"友を支える。"},
+ {w:"une amitié",ipa:"[yn‿amitje]",pos:"名詞",jp:"友情",ex:"une amitié sincère.",exjp:"心からの友情。"}
+]};
 const VERBGROUPS={"irr":"不規則(最重要)","er":"-er規則","ir":"-ir規則","re":"-re規則"};
 const TENSES=[
  ["pres","現在"],["pc","複合過去"],["imp","半過去"],["fut","単純未来"],
