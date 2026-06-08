@@ -6305,6 +6305,367 @@ DECKS.theme.tabs["愛情・友情の表現"]={label:"愛情・友情の表現",i
  {w:"l'amitié",ipa:"[lamitje]",pos:"名詞",jp:"友情",ex:"une amitié sincère.",exjp:"誠実な友情。"},
  {w:"câliner",ipa:"[kaline]",pos:"動詞",jp:"抱きしめる・甘える",ex:"câliner son enfant.",exjp:"子供を抱きしめる。"}
 ]};
+/*===DECKS11：2026-06-08 第7弾（場面12＋語彙12）===*/
+DECKS.scene.tabs["住宅ローン相談"]={label:"住宅ローン相談",items:[
+ {w:"Je voudrais un prêt immobilier.",ipa:"[ʒə vudʁɛ œ̃ pʁɛ imɔbilje]",pos:"会話",jp:"住宅ローンを組みたい",pri:1,ex:"Bonjour, je voudrais un prêt immobilier.",exjp:"住宅ローンを組みたいのですが。"},
+ {w:"Quel est le taux ?",ipa:"[kɛl ɛ lə to]",pos:"会話",jp:"金利は何%ですか?",ex:"Quel est le taux actuel ?",exjp:"現在の金利は何%ですか?"},
+ {w:"Sur combien d'années ?",ipa:"[syʁ kɔ̃bjɛ̃ dane]",pos:"会話",jp:"何年返済ですか?",ex:"Le prêt, c'est sur combien d'années ?",exjp:"ローンは何年返済?"},
+ {w:"Quel est l'apport nécessaire ?",ipa:"[kɛl ɛ lapɔʁ nesesɛʁ]",pos:"会話",jp:"頭金はいくら必要?",ex:"Quel est l'apport nécessaire ?",exjp:"必要な頭金はいくらですか?"},
+ {w:"Quelles sont les mensualités ?",ipa:"[kɛl sɔ̃ le mɑ̃sɥalite]",pos:"会話",jp:"月々の返済額は?",ex:"Quelles sont les mensualités ?",exjp:"月々の返済はいくら?"},
+ {w:"Il faut une assurance emprunteur.",ipa:"[il fo yn‿asyʁɑ̃s ɑ̃pʁœ̃tœʁ]",pos:"会話",jp:"団信(借入保険)が必要です",ex:"Il faut une assurance emprunteur.",exjp:"借入保険が必要です。"},
+ {w:"Mon dossier est-il accepté ?",ipa:"[mɔ̃ dosje ɛt‿il aksɛpte]",pos:"会話",jp:"審査は通りましたか?",ex:"Mon dossier est-il accepté ?",exjp:"私の審査は通りましたか?"},
+ {w:"Je peux rembourser par anticipation ?",ipa:"[ʒə pø ʁɑ̃buʁse paʁ ɑ̃tisipasjɔ̃]",pos:"会話",jp:"繰上返済できますか?",ex:"Je peux rembourser par anticipation ?",exjp:"繰り上げ返済はできますか?"},
+ {w:"Comparez les offres.",ipa:"[kɔ̃paʁe lez‿ɔfʁ]",pos:"会話",jp:"各社を比較して",ex:"Avant de signer, comparez les offres.",exjp:"契約前に各社を比較して。"},
+ {w:"C'est dans mon budget.",ipa:"[sɛ dɑ̃ mɔ̃ bydʒɛ]",pos:"会話",jp:"予算内です",ex:"Cet appartement, c'est dans mon budget.",exjp:"このアパートは予算内です。"}
+]};
+DECKS.scene.tabs["不動産の契約・購入"]={label:"不動産の契約・購入",items:[
+ {w:"Je voudrais acheter un appartement.",ipa:"[ʒə vudʁɛ aʃte œ̃n‿apaʁtəmɑ̃]",pos:"会話",jp:"アパートを買いたい",pri:1,ex:"Je voudrais acheter un appartement.",exjp:"アパートを購入したいです。"},
+ {w:"Quel est le prix au mètre carré ?",ipa:"[kɛl ɛ lə pʁi o mɛtʁ kaʁe]",pos:"会話",jp:"平米単価はいくら?",ex:"Quel est le prix au mètre carré ?",exjp:"1平米あたりいくらですか?"},
+ {w:"Y a-t-il des frais de notaire ?",ipa:"[i a til de fʁɛ də nɔtɛʁ]",pos:"会話",jp:"公証人費用はかかる?",ex:"Y a-t-il des frais de notaire ?",exjp:"公証人費用はかかりますか?"},
+ {w:"Le quartier est-il calme ?",ipa:"[lə kaʁtje ɛt‿il kalm]",pos:"会話",jp:"地区は静かですか?",ex:"Le quartier est-il calme ?",exjp:"この地区は静かですか?"},
+ {w:"On peut négocier le prix ?",ipa:"[ɔ̃ pø neɡɔsje lə pʁi]",pos:"会話",jp:"値引き交渉できますか?",ex:"On peut négocier le prix ?",exjp:"価格は交渉できますか?"},
+ {w:"Quand signe-t-on chez le notaire ?",ipa:"[kɑ̃ siɲ tɔ̃ ʃe lə nɔtɛʁ]",pos:"会話",jp:"公証人での署名はいつ?",ex:"Quand signe-t-on chez le notaire ?",exjp:"公証人での署名はいつ?"},
+ {w:"Il y a des travaux à prévoir ?",ipa:"[il i a de tʁavo a pʁevwaʁ]",pos:"会話",jp:"工事は必要ですか?",ex:"Il y a des travaux à prévoir ?",exjp:"予定すべき工事はありますか?"},
+ {w:"Je fais une offre.",ipa:"[ʒə fɛ yn‿ɔfʁ]",pos:"会話",jp:"購入を申し込みます",ex:"C'est décidé, je fais une offre.",exjp:"決めました、申し込みます。"},
+ {w:"Quelles sont les charges de copropriété ?",ipa:"[kɛl sɔ̃ le ʃaʁʒ də kopʁɔpʁijete]",pos:"会話",jp:"管理費はいくら?",ex:"Quelles sont les charges de copropriété ?",exjp:"管理費はいくらですか?"},
+ {w:"On signe le compromis de vente.",ipa:"[ɔ̃ siɲ lə kɔ̃pʁɔmi də vɑ̃t]",pos:"会話",jp:"売買予約契約を結ぶ",ex:"Demain, on signe le compromis de vente.",exjp:"明日、売買予約契約を結びます。"}
+]};
+DECKS.scene.tabs["旅行代理店で"]={label:"旅行代理店で",items:[
+ {w:"Je cherche un séjour pas cher.",ipa:"[ʒə ʃɛʁʃ œ̃ seʒuʁ pa ʃɛʁ]",pos:"会話",jp:"安い旅行を探してる",pri:1,ex:"Je cherche un séjour pas cher.",exjp:"安い旅行を探しています。"},
+ {w:"Vol et hôtel compris ?",ipa:"[vɔl e otɛl kɔ̃pʁi]",pos:"会話",jp:"航空券とホテル込み?",ex:"Le forfait, vol et hôtel compris ?",exjp:"このパック、航空券とホテル込み?"},
+ {w:"Quelles dates vous arrangent ?",ipa:"[kɛl dat vuz‿aʁɑ̃ʒ]",pos:"会話",jp:"いつがご都合よいですか?",ex:"Quelles dates vous arrangent ?",exjp:"どの日程がご都合よいですか?"},
+ {w:"C'est tout compris ?",ipa:"[sɛ tu kɔ̃pʁi]",pos:"会話",jp:"オールインクルーシブ?",ex:"Ce séjour, c'est tout compris ?",exjp:"この旅行は全込みですか?"},
+ {w:"Y a-t-il des excursions ?",ipa:"[i a til dez‿ɛkskyʁsjɔ̃]",pos:"会話",jp:"オプショナルツアーはある?",ex:"Y a-t-il des excursions sur place ?",exjp:"現地ツアーはありますか?"},
+ {w:"L'assurance annulation est incluse ?",ipa:"[lasyʁɑ̃s anylasjɔ̃ ɛt‿ɛ̃klyz]",pos:"会話",jp:"キャンセル保険は込み?",ex:"L'assurance annulation est incluse ?",exjp:"キャンセル保険は含まれてる?"},
+ {w:"Je voudrais une chambre avec vue mer.",ipa:"[ʒə vudʁɛ yn ʃɑ̃bʁ avɛk vy mɛʁ]",pos:"会話",jp:"海の見える部屋がいい",ex:"Je voudrais une chambre avec vue mer.",exjp:"海の見える部屋がいいです。"},
+ {w:"Faut-il un visa ?",ipa:"[fot‿il œ̃ viza]",pos:"会話",jp:"ビザは必要ですか?",ex:"Pour ce pays, faut-il un visa ?",exjp:"この国にはビザが必要?"},
+ {w:"Quel est le budget par personne ?",ipa:"[kɛl ɛ lə bydʒɛ paʁ pɛʁsɔn]",pos:"会話",jp:"一人いくらですか?",ex:"Quel est le budget par personne ?",exjp:"一人あたりの予算は?"},
+ {w:"Je réserve pour deux personnes.",ipa:"[ʒə ʁezɛʁv puʁ dø pɛʁsɔn]",pos:"会話",jp:"2名で予約します",ex:"Parfait, je réserve pour deux personnes.",exjp:"完璧、2名で予約します。"}
+]};
+DECKS.scene.tabs["クリーニング店で"]={label:"クリーニング店で",items:[
+ {w:"Je voudrais faire nettoyer ce manteau.",ipa:"[ʒə vudʁɛ fɛʁ nɛtwaje sə mɑ̃to]",pos:"会話",jp:"このコートをクリーニングに",pri:1,ex:"Je voudrais faire nettoyer ce manteau.",exjp:"このコートをクリーニングしたい。"},
+ {w:"C'est prêt pour quand ?",ipa:"[sɛ pʁɛ puʁ kɑ̃]",pos:"会話",jp:"いつ仕上がりますか?",ex:"C'est prêt pour quand ?",exjp:"いつ仕上がりますか?"},
+ {w:"Il y a une tache ici.",ipa:"[il i a yn taʃ isi]",pos:"会話",jp:"ここにシミがあります",ex:"Attention, il y a une tache ici.",exjp:"ここにシミがあります。"},
+ {w:"Vous pouvez l'enlever ?",ipa:"[vu puve lɑ̃lve]",pos:"会話",jp:"落とせますか?",ex:"Cette tache, vous pouvez l'enlever ?",exjp:"このシミ、落とせますか?"},
+ {w:"Le repassage est compris ?",ipa:"[lə ʁəpasaʒ ɛ kɔ̃pʁi]",pos:"会話",jp:"アイロンがけは込み?",ex:"Le repassage est compris ?",exjp:"アイロンがけは込みですか?"},
+ {w:"C'est du cuir, faites attention.",ipa:"[sɛ dy kɥiʁ fɛt‿atɑ̃sjɔ̃]",pos:"会話",jp:"革なので注意して",ex:"C'est du cuir, faites attention.",exjp:"革なので扱いに注意して。"},
+ {w:"Voici mon ticket.",ipa:"[vwasi mɔ̃ tikɛ]",pos:"会話",jp:"引換券です",ex:"Bonjour, voici mon ticket.",exjp:"こんにちは、引換券です。"},
+ {w:"C'est pour une retouche.",ipa:"[sɛ puʁ yn ʁətuʃ]",pos:"会話",jp:"お直しをお願いします",ex:"C'est pour une retouche, l'ourlet.",exjp:"裾上げの直しをお願いします。"},
+ {w:"Mon pull a rétréci.",ipa:"[mɔ̃ pyl a ʁetʁesi]",pos:"会話",jp:"セーターが縮んだ",ex:"Mon pull a rétréci au lavage.",exjp:"洗濯でセーターが縮んだ。"},
+ {w:"Lavage à sec uniquement.",ipa:"[lavaʒ a sɛk ynikmɑ̃]",pos:"会話",jp:"ドライクリーニングのみ",ex:"Pour ce tissu, lavage à sec uniquement.",exjp:"この生地はドライのみです。"}
+]};
+DECKS.scene.tabs["証明写真・写真スタジオ"]={label:"証明写真・写真スタジオ",items:[
+ {w:"Je voudrais des photos d'identité.",ipa:"[ʒə vudʁɛ de fɔto didɑ̃tite]",pos:"会話",jp:"証明写真がほしい",pri:1,ex:"Je voudrais des photos d'identité.",exjp:"証明写真をお願いします。"},
+ {w:"C'est pour un passeport.",ipa:"[sɛ puʁ œ̃ paspɔʁ]",pos:"会話",jp:"パスポート用です",ex:"C'est pour un passeport.",exjp:"パスポート用です。"},
+ {w:"Ne souriez pas.",ipa:"[nə suʁije pa]",pos:"会話",jp:"笑わないでください",ex:"Pour la photo, ne souriez pas.",exjp:"写真では笑わないで。"},
+ {w:"Regardez l'objectif.",ipa:"[ʁəɡaʁde lɔbʒɛktif]",pos:"会話",jp:"レンズを見てください",ex:"Regardez bien l'objectif.",exjp:"レンズをしっかり見て。"},
+ {w:"Dégagez votre visage.",ipa:"[deɡaʒe vɔtʁ vizaʒ]",pos:"会話",jp:"顔を出してください",ex:"Dégagez votre visage, s'il vous plaît.",exjp:"顔がよく見えるように。"},
+ {w:"C'est aux normes ?",ipa:"[sɛt‿o nɔʁm]",pos:"会話",jp:"規格に合ってる?",ex:"Ces photos, c'est aux normes ?",exjp:"この写真は規格通り?"},
+ {w:"J'en voudrais quatre.",ipa:"[ʒɑ̃ vudʁɛ katʁ]",pos:"会話",jp:"4枚ほしいです",ex:"J'en voudrais quatre tirages.",exjp:"4枚プリントしてほしい。"},
+ {w:"Vous les avez en combien de temps ?",ipa:"[vu lez‿ave ɑ̃ kɔ̃bjɛ̃ də tɑ̃]",pos:"会話",jp:"どのくらいで仕上がる?",ex:"Vous les avez en combien de temps ?",exjp:"どのくらいでできますか?"},
+ {w:"On peut faire une photo de famille ?",ipa:"[ɔ̃ pø fɛʁ yn fɔto də famij]",pos:"会話",jp:"家族写真は撮れますか?",ex:"On peut faire une photo de famille ?",exjp:"家族写真も撮れますか?"},
+ {w:"Le menton un peu plus haut.",ipa:"[lə mɛ̃tɔ̃ œ̃ pø ply o]",pos:"会話",jp:"あごを少し上げて",ex:"Le menton un peu plus haut.",exjp:"あごをもう少し上げて。"}
+]};
+DECKS.scene.tabs["ペットショップで"]={label:"ペットショップで",items:[
+ {w:"Je cherche de la nourriture pour chat.",ipa:"[ʒə ʃɛʁʃ də la nuʁityʁ puʁ ʃa]",pos:"会話",jp:"猫の餌を探してる",pri:1,ex:"Je cherche de la nourriture pour chat.",exjp:"キャットフードを探しています。"},
+ {w:"Avez-vous des jouets pour chien ?",ipa:"[ave vu de ʒwɛ puʁ ʃjɛ̃]",pos:"会話",jp:"犬のおもちゃはある?",ex:"Avez-vous des jouets pour chien ?",exjp:"犬用のおもちゃはありますか?"},
+ {w:"Il a quel âge ?",ipa:"[il a kɛl‿aʒ]",pos:"会話",jp:"何歳ですか?",ex:"Ce chiot, il a quel âge ?",exjp:"この子犬は何歳?"},
+ {w:"Il est sociable ?",ipa:"[il ɛ sɔsjabl]",pos:"会話",jp:"人懐っこいですか?",ex:"Ce chaton, il est sociable ?",exjp:"この子猫は人懐っこい?"},
+ {w:"Il faut quel type de litière ?",ipa:"[il fo kɛl tip də litjɛʁ]",pos:"会話",jp:"どの猫砂がいい?",ex:"Il faut quel type de litière ?",exjp:"どんな猫砂がいいですか?"},
+ {w:"Vous vendez des poissons rouges ?",ipa:"[vu vɑ̃de de pwasɔ̃ ʁuʒ]",pos:"会話",jp:"金魚を売ってますか?",ex:"Vous vendez des poissons rouges ?",exjp:"金魚は売っていますか?"},
+ {w:"Comment l'entretenir ?",ipa:"[kɔmɑ̃ lɑ̃tʁətəniʁ]",pos:"会話",jp:"世話の仕方は?",ex:"Cet animal, comment l'entretenir ?",exjp:"この動物の世話はどうすれば?"},
+ {w:"Il est vacciné ?",ipa:"[il ɛ vaksine]",pos:"会話",jp:"予防接種は済んでる?",ex:"Le chiot est vacciné ?",exjp:"子犬は予防接種済み?"},
+ {w:"Je voudrais une cage.",ipa:"[ʒə vudʁɛ yn kaʒ]",pos:"会話",jp:"ケージがほしい",ex:"Je voudrais une cage pour hamster.",exjp:"ハムスターのケージがほしい。"},
+ {w:"Adoptez, n'achetez pas.",ipa:"[adɔpte naʃte pa]",pos:"会話",jp:"買わずに里親になって",ex:"Le refuge dit : adoptez, n'achetez pas.",exjp:"保護施設は「買わず里親に」と言う。"}
+]};
+DECKS.scene.tabs["園芸店で"]={label:"園芸店で",items:[
+ {w:"Je cherche une plante facile.",ipa:"[ʒə ʃɛʁʃ yn plɑ̃t fasil]",pos:"会話",jp:"育てやすい植物を探してる",pri:1,ex:"Je cherche une plante facile d'entretien.",exjp:"手のかからない植物を探してます。"},
+ {w:"Ça pousse à l'ombre ?",ipa:"[sa pus a lɔ̃bʁ]",pos:"会話",jp:"日陰で育ちますか?",ex:"Cette plante, ça pousse à l'ombre ?",exjp:"この植物は日陰で育つ?"},
+ {w:"Il faut l'arroser souvent ?",ipa:"[il fo laʁoze suvɑ̃]",pos:"会話",jp:"よく水やりが要る?",ex:"Il faut l'arroser souvent ?",exjp:"頻繁に水やりが必要?"},
+ {w:"C'est pour l'intérieur ?",ipa:"[sɛ puʁ lɛ̃teʁjœʁ]",pos:"会話",jp:"室内用ですか?",ex:"Cette fleur, c'est pour l'intérieur ?",exjp:"この花は室内用?"},
+ {w:"Vous avez des graines de tomates ?",ipa:"[vuz‿ave de ɡʁɛn də tɔmat]",pos:"会話",jp:"トマトの種はある?",ex:"Vous avez des graines de tomates ?",exjp:"トマトの種はありますか?"},
+ {w:"Quel terreau choisir ?",ipa:"[kɛl teʁo ʃwaziʁ]",pos:"会話",jp:"どの培養土を選べば?",ex:"Quel terreau choisir pour les rosiers ?",exjp:"バラにはどの土を?"},
+ {w:"Ça fleurit en quelle saison ?",ipa:"[sa flœʁi ɑ̃ kɛl sɛzɔ̃]",pos:"会話",jp:"いつ花が咲く?",ex:"Ça fleurit en quelle saison ?",exjp:"どの季節に咲きますか?"},
+ {w:"Il me faut un arrosoir.",ipa:"[il mə fo œ̃n‿aʁozwaʁ]",pos:"会話",jp:"じょうろが要る",ex:"Il me faut un arrosoir.",exjp:"じょうろが必要です。"},
+ {w:"Mes feuilles jaunissent.",ipa:"[me fœj ʒonis]",pos:"会話",jp:"葉が黄色くなります",ex:"Mes feuilles jaunissent, pourquoi ?",exjp:"葉が黄色くなる、なぜ?"},
+ {w:"Rempotez au printemps.",ipa:"[ʁɑ̃pɔte o pʁɛ̃tɑ̃]",pos:"会話",jp:"春に植え替えて",ex:"Rempotez au printemps, c'est mieux.",exjp:"春に植え替えるといいですよ。"}
+]};
+DECKS.scene.tabs["楽器店で"]={label:"楽器店で",items:[
+ {w:"Je débute la guitare.",ipa:"[ʒə debyt la ɡitaʁ]",pos:"会話",jp:"ギターを始めたばかり",pri:1,ex:"Je débute la guitare.",exjp:"ギターを始めたばかりです。"},
+ {w:"Vous avez des pianos numériques ?",ipa:"[vuz‿ave de pjano nymeʁik]",pos:"会話",jp:"電子ピアノはある?",ex:"Vous avez des pianos numériques ?",exjp:"電子ピアノはありますか?"},
+ {w:"Je peux l'essayer ?",ipa:"[ʒə pø leseje]",pos:"会話",jp:"試奏できますか?",ex:"Cette guitare, je peux l'essayer ?",exjp:"このギター、試奏できますか?"},
+ {w:"Il faut l'accorder.",ipa:"[il fo lakɔʁde]",pos:"会話",jp:"調律が必要です",ex:"Cet instrument, il faut l'accorder.",exjp:"この楽器は調律が必要です。"},
+ {w:"Quel modèle pour un débutant ?",ipa:"[kɛl mɔdɛl puʁ œ̃ debytɑ̃]",pos:"会話",jp:"初心者向けはどれ?",ex:"Quel modèle pour un débutant ?",exjp:"初心者にはどのモデル?"},
+ {w:"Vous donnez des cours ?",ipa:"[vu dɔne de kuʁ]",pos:"会話",jp:"レッスンはしてますか?",ex:"Vous donnez des cours de musique ?",exjp:"音楽のレッスンはありますか?"},
+ {w:"Il me faut des cordes neuves.",ipa:"[il mə fo de kɔʁd nœv]",pos:"会話",jp:"新しい弦が要る",ex:"Il me faut des cordes neuves.",exjp:"新しい弦が必要です。"},
+ {w:"C'est quel budget ?",ipa:"[sɛ kɛl bydʒɛ]",pos:"会話",jp:"予算はどれくらい?",ex:"Pour un bon violon, c'est quel budget ?",exjp:"いいバイオリンの予算は?"},
+ {w:"Vous réparez les instruments ?",ipa:"[vu ʁepaʁe lez‿ɛ̃stʁymɑ̃]",pos:"会話",jp:"楽器の修理はしてる?",ex:"Vous réparez les instruments ?",exjp:"楽器の修理はできますか?"},
+ {w:"Je le prends.",ipa:"[ʒə lə pʁɑ̃]",pos:"会話",jp:"これにします",ex:"Parfait, je le prends.",exjp:"完璧、これにします。"}
+]};
+DECKS.scene.tabs["スポーツ用品店で"]={label:"スポーツ用品店で",items:[
+ {w:"Je cherche des chaussures de course.",ipa:"[ʒə ʃɛʁʃ de ʃosyʁ də kuʁs]",pos:"会話",jp:"ランニングシューズを探してる",pri:1,ex:"Je cherche des chaussures de course.",exjp:"ランニングシューズを探してます。"},
+ {w:"Vous faites quelle pointure ?",ipa:"[vu fɛt kɛl pwɛ̃tyʁ]",pos:"会話",jp:"靴のサイズは?",ex:"Vous faites quelle pointure ?",exjp:"靴のサイズはいくつ?"},
+ {w:"C'est pour quel sport ?",ipa:"[sɛ puʁ kɛl spɔʁ]",pos:"会話",jp:"どのスポーツ用?",ex:"C'est pour quel sport ?",exjp:"どのスポーツ用ですか?"},
+ {w:"Je peux les essayer ?",ipa:"[ʒə pø lez‿eseje]",pos:"会話",jp:"試着できますか?",ex:"Je peux les essayer ?",exjp:"試着できますか?"},
+ {w:"Elles sont confortables.",ipa:"[ɛl sɔ̃ kɔ̃fɔʁtabl]",pos:"会話",jp:"履き心地がいい",ex:"Ces baskets, elles sont confortables.",exjp:"このスニーカー、履き心地いい。"},
+ {w:"Avez-vous un ballon de foot ?",ipa:"[ave vu œ̃ balɔ̃ də fut]",pos:"会話",jp:"サッカーボールはある?",ex:"Avez-vous un ballon de foot ?",exjp:"サッカーボールはありますか?"},
+ {w:"Il me faut un maillot.",ipa:"[il mə fo œ̃ majo]",pos:"会話",jp:"ユニフォームが要る",ex:"Il me faut un maillot de l'équipe.",exjp:"チームのユニフォームが要る。"},
+ {w:"C'est imperméable ?",ipa:"[sɛt‿ɛ̃pɛʁmeabl]",pos:"会話",jp:"防水ですか?",ex:"Cette veste, c'est imperméable ?",exjp:"このジャケットは防水?"},
+ {w:"Vous avez ça en plus grand ?",ipa:"[vuz‿ave sa ɑ̃ ply ɡʁɑ̃]",pos:"会話",jp:"もっと大きいサイズある?",ex:"Vous avez ça en plus grand ?",exjp:"これのもっと大きいのある?"},
+ {w:"C'est en solde ?",ipa:"[sɛt‿ɑ̃ sɔld]",pos:"会話",jp:"セール中ですか?",ex:"Ce modèle, c'est en solde ?",exjp:"このモデルはセール中?"}
+]};
+DECKS.scene.tabs["フリマ・中古売買"]={label:"フリマ・中古売買",items:[
+ {w:"C'est combien ?",ipa:"[sɛ kɔ̃bjɛ̃]",pos:"会話",jp:"いくらですか?",pri:1,ex:"Ce vase, c'est combien ?",exjp:"この花瓶、いくら?"},
+ {w:"Vous baissez le prix ?",ipa:"[vu bɛse lə pʁi]",pos:"会話",jp:"安くなりますか?",ex:"À dix euros, vous baissez le prix ?",exjp:"10ユーロ、安くなる?"},
+ {w:"C'est d'occasion.",ipa:"[sɛ dɔkazjɔ̃]",pos:"会話",jp:"中古です",ex:"Tout est d'occasion ici.",exjp:"ここは全部中古です。"},
+ {w:"C'est en bon état ?",ipa:"[sɛt‿ɑ̃ bɔn‿eta]",pos:"会話",jp:"状態はいいですか?",ex:"Ce vélo, c'est en bon état ?",exjp:"この自転車、状態いい?"},
+ {w:"Ça marche encore ?",ipa:"[sa maʁʃ ɑ̃kɔʁ]",pos:"会話",jp:"まだ動きますか?",ex:"Cette radio, ça marche encore ?",exjp:"このラジオ、まだ動く?"},
+ {w:"Je vous l'échange contre…",ipa:"[ʒə vu leʃɑ̃ʒ kɔ̃tʁ]",pos:"会話",jp:"…と交換しませんか?",ex:"Je vous l'échange contre ce livre ?",exjp:"この本と交換しません?"},
+ {w:"Je vends tout.",ipa:"[ʒə vɑ̃ tu]",pos:"会話",jp:"全部売ります",ex:"Je déménage, je vends tout.",exjp:"引っ越すので全部売ります。"},
+ {w:"Faites-moi un prix pour le lot.",ipa:"[fɛt mwa œ̃ pʁi puʁ lə lo]",pos:"会話",jp:"まとめていくらにして",ex:"Faites-moi un prix pour le lot.",exjp:"まとめ買いで安くして。"},
+ {w:"Il manque une pièce.",ipa:"[il mɑ̃k yn pjɛs]",pos:"会話",jp:"部品が一つ足りない",ex:"Attention, il manque une pièce.",exjp:"注意、部品が一つ足りない。"},
+ {w:"Vendu pour cinq euros.",ipa:"[vɑ̃dy puʁ sɛ̃k øʁo]",pos:"会話",jp:"5ユーロで売れた",ex:"Vendu pour cinq euros !",exjp:"5ユーロで売れた!"}
+]};
+DECKS.scene.tabs["子供の入学手続き"]={label:"子供の入学手続き",items:[
+ {w:"Je voudrais inscrire mon enfant.",ipa:"[ʒə vudʁɛ‿ɛ̃skʁiʁ mɔn‿ɑ̃fɑ̃]",pos:"会話",jp:"子供を入学させたい",pri:1,ex:"Je voudrais inscrire mon enfant à l'école.",exjp:"子供を学校に入れたいです。"},
+ {w:"Quels papiers faut-il ?",ipa:"[kɛl papje fot‿il]",pos:"会話",jp:"必要書類は何?",ex:"Quels papiers faut-il fournir ?",exjp:"どの書類を提出すれば?"},
+ {w:"C'est dans quel secteur ?",ipa:"[sɛ dɑ̃ kɛl sɛktœʁ]",pos:"会話",jp:"どの学区ですか?",ex:"On habite ici, c'est dans quel secteur ?",exjp:"ここに住んでるが、何区?"},
+ {w:"La rentrée est quand ?",ipa:"[la ʁɑ̃tʁe ɛ kɑ̃]",pos:"会話",jp:"始業はいつですか?",ex:"La rentrée est quand cette année ?",exjp:"今年の始業はいつ?"},
+ {w:"Voici la liste de fournitures.",ipa:"[vwasi la list də fuʁnityʁ]",pos:"会話",jp:"これが持ち物リストです",ex:"Voici la liste de fournitures.",exjp:"これが学用品リストです。"},
+ {w:"Y a-t-il une cantine ?",ipa:"[i a til yn kɑ̃tin]",pos:"会話",jp:"給食はありますか?",ex:"Y a-t-il une cantine à l'école ?",exjp:"学校に給食はありますか?"},
+ {w:"Mon enfant a une allergie.",ipa:"[mɔn‿ɑ̃fɑ̃ a yn‿alɛʁʒi]",pos:"会話",jp:"うちの子はアレルギーがある",ex:"Mon enfant a une allergie alimentaire.",exjp:"うちの子は食物アレルギーがある。"},
+ {w:"Il faut un certificat médical.",ipa:"[il fo œ̃ sɛʁtifika medikal]",pos:"会話",jp:"健康診断書が必要です",ex:"Il faut un certificat médical.",exjp:"健康診断書が必要です。"},
+ {w:"Comment se passe l'adaptation ?",ipa:"[kɔmɑ̃ sə pas ladaptasjɔ̃]",pos:"会話",jp:"慣らしはどう進みますか?",ex:"Comment se passe l'adaptation ?",exjp:"慣らし保育はどう進みますか?"},
+ {w:"À quelle heure dépose-t-on les enfants ?",ipa:"[a kɛl œʁ depoz tɔ̃ lez‿ɑ̃fɑ̃]",pos:"会話",jp:"子供は何時に預ける?",ex:"À quelle heure dépose-t-on les enfants ?",exjp:"子供は何時に預ければいい?"}
+]};
+DECKS.scene.tabs["美容クリニック相談"]={label:"美容クリニック相談",items:[
+ {w:"Je voudrais un conseil.",ipa:"[ʒə vudʁɛ œ̃ kɔ̃sɛj]",pos:"会話",jp:"アドバイスがほしい",pri:1,ex:"Je voudrais un conseil pour ma peau.",exjp:"肌のアドバイスがほしいです。"},
+ {w:"J'ai la peau sèche.",ipa:"[ʒe la po sɛʃ]",pos:"会話",jp:"乾燥肌です",ex:"En hiver, j'ai la peau sèche.",exjp:"冬は乾燥肌になります。"},
+ {w:"Que recommandez-vous ?",ipa:"[kə ʁəkɔmɑ̃de vu]",pos:"会話",jp:"何がおすすめですか?",ex:"Pour les rides, que recommandez-vous ?",exjp:"しわには何がおすすめ?"},
+ {w:"C'est douloureux ?",ipa:"[sɛ dulœʁø]",pos:"会話",jp:"痛いですか?",ex:"Ce soin, c'est douloureux ?",exjp:"この施術は痛いですか?"},
+ {w:"Combien de séances faut-il ?",ipa:"[kɔ̃bjɛ̃ də seɑ̃s fot‿il]",pos:"会話",jp:"何回必要ですか?",ex:"Combien de séances faut-il ?",exjp:"何回の施術が必要?"},
+ {w:"Y a-t-il des effets secondaires ?",ipa:"[i a til dez‿efɛ səɡɔ̃dɛʁ]",pos:"会話",jp:"副作用はありますか?",ex:"Y a-t-il des effets secondaires ?",exjp:"副作用はありますか?"},
+ {w:"Quel est le tarif ?",ipa:"[kɛl ɛ lə taʁif]",pos:"会話",jp:"料金はいくらですか?",ex:"Quel est le tarif de la consultation ?",exjp:"相談の料金はいくら?"},
+ {w:"C'est naturel comme résultat ?",ipa:"[sɛ natyʁɛl kɔm ʁezylta]",pos:"会話",jp:"自然な仕上がりですか?",ex:"C'est naturel comme résultat ?",exjp:"自然な仕上がりになりますか?"},
+ {w:"Il faut éviter le soleil.",ipa:"[il fo evite lə sɔlɛj]",pos:"会話",jp:"日焼けを避けてください",ex:"Après, il faut éviter le soleil.",exjp:"施術後は日焼けを避けて。"},
+ {w:"Quand reprend-on rendez-vous ?",ipa:"[kɑ̃ ʁəpʁɑ̃ tɔ̃ ʁɑ̃devu]",pos:"会話",jp:"次回はいつにしますか?",ex:"Quand reprend-on rendez-vous ?",exjp:"次の予約はいつにしますか?"}
+]};
+DECKS.theme.tabs["物理・力学"]={label:"物理・力学",items:[
+ {w:"la force",ipa:"[la fɔʁs]",pos:"名詞",jp:"力",pri:1,ex:"appliquer une force.",exjp:"力を加える。"},
+ {w:"la masse",ipa:"[la mas]",pos:"名詞",jp:"質量",ex:"la masse d'un objet.",exjp:"物体の質量。"},
+ {w:"le poids",ipa:"[lə pwa]",pos:"名詞",jp:"重さ",pri:1,ex:"le poids d'un corps.",exjp:"物体の重さ。"},
+ {w:"la pesanteur",ipa:"[la pəzɑ̃tœʁ]",pos:"名詞",jp:"重力",ex:"la pesanteur terrestre.",exjp:"地球の重力。"},
+ {w:"le mouvement",ipa:"[lə muvmɑ̃]",pos:"名詞",jp:"運動・動き",pri:1,ex:"un mouvement rapide.",exjp:"速い動き。"},
+ {w:"la friction",ipa:"[la fʁiksjɔ̃]",pos:"名詞",jp:"摩擦",ex:"réduire la friction.",exjp:"摩擦を減らす。"},
+ {w:"l'électricité",ipa:"[lelɛktʁisite]",pos:"名詞",jp:"電気",pri:1,ex:"produire de l'électricité.",exjp:"電気を作る。"},
+ {w:"le magnétisme",ipa:"[lə maɲetism]",pos:"名詞",jp:"磁気",ex:"le magnétisme d'un aimant.",exjp:"磁石の磁気。"},
+ {w:"un aimant",ipa:"[œ̃n‿ɛmɑ̃]",pos:"名詞",jp:"磁石",ex:"un aimant puissant.",exjp:"強力な磁石。"},
+ {w:"la lumière",ipa:"[la lymjɛʁ]",pos:"名詞",jp:"光",pri:1,ex:"la vitesse de la lumière.",exjp:"光の速さ。"},
+ {w:"le son",ipa:"[lə sɔ̃]",pos:"名詞",jp:"音",pri:1,ex:"la propagation du son.",exjp:"音の伝わり方。"},
+ {w:"la chaleur",ipa:"[la ʃalœʁ]",pos:"名詞",jp:"熱・暑さ",ex:"transmettre la chaleur.",exjp:"熱を伝える。"},
+ {w:"l'accélération",ipa:"[lakseleʁasjɔ̃]",pos:"名詞",jp:"加速",ex:"une forte accélération.",exjp:"強い加速。"},
+ {w:"l'équilibre",ipa:"[lekilibʁ]",pos:"名詞",jp:"均衡・バランス",ex:"perdre l'équilibre.",exjp:"バランスを失う。"},
+ {w:"la densité",ipa:"[la dɑ̃site]",pos:"名詞",jp:"密度",ex:"la densité de l'eau.",exjp:"水の密度。"},
+ {w:"une onde",ipa:"[yn‿ɔ̃d]",pos:"名詞",jp:"波・波動",ex:"une onde sonore.",exjp:"音波。"}
+]};
+DECKS.theme.tabs["生物・進化"]={label:"生物・進化",items:[
+ {w:"une espèce",ipa:"[yn‿ɛspɛs]",pos:"名詞",jp:"種(しゅ)",ex:"une espèce rare.",exjp:"珍しい種。"},
+ {w:"l'évolution",ipa:"[levɔlysjɔ̃]",pos:"名詞",jp:"進化",ex:"la théorie de l'évolution.",exjp:"進化論。"},
+ {w:"un organisme",ipa:"[œ̃n‿ɔʁɡanism]",pos:"名詞",jp:"生物・有機体",ex:"un organisme vivant.",exjp:"生きている生物。"},
+ {w:"l'ADN",ipa:"[ladeɛn]",pos:"名詞",jp:"DNA・遺伝情報",ex:"analyser l'ADN.",exjp:"DNAを分析する。"},
+ {w:"un gène",ipa:"[œ̃ ʒɛn]",pos:"名詞",jp:"遺伝子",ex:"un gène dominant.",exjp:"優性遺伝子。"},
+ {w:"la reproduction",ipa:"[la ʁəpʁɔdyksjɔ̃]",pos:"名詞",jp:"繁殖・生殖",ex:"la reproduction des plantes.",exjp:"植物の繁殖。"},
+ {w:"un écosystème",ipa:"[œ̃n‿ekɔsistɛm]",pos:"名詞",jp:"生態系",ex:"un écosystème fragile.",exjp:"もろい生態系。"},
+ {w:"une chaîne alimentaire",ipa:"[yn ʃɛn alimɑ̃tɛʁ]",pos:"名詞",jp:"食物連鎖",ex:"la chaîne alimentaire.",exjp:"食物連鎖。"},
+ {w:"un prédateur",ipa:"[œ̃ pʁedatœʁ]",pos:"名詞",jp:"捕食者",ex:"un prédateur redoutable.",exjp:"恐るべき捕食者。"},
+ {w:"une proie",ipa:"[yn pʁwa]",pos:"名詞",jp:"獲物",ex:"chasser une proie.",exjp:"獲物を狩る。"},
+ {w:"s'adapter",ipa:"[sadapte]",pos:"動詞",jp:"適応する",pri:1,ex:"s'adapter au milieu.",exjp:"環境に適応する。"},
+ {w:"la photosynthèse",ipa:"[la fɔtosɛ̃tɛz]",pos:"名詞",jp:"光合成",ex:"la photosynthèse des plantes.",exjp:"植物の光合成。"},
+ {w:"un mammifère",ipa:"[œ̃ mamifɛʁ]",pos:"名詞",jp:"哺乳類",ex:"un mammifère marin.",exjp:"海生哺乳類。"},
+ {w:"un fossile",ipa:"[œ̃ fɔsil]",pos:"名詞",jp:"化石",ex:"découvrir un fossile.",exjp:"化石を発見する。"},
+ {w:"l'habitat",ipa:"[labita]",pos:"名詞",jp:"生息地",ex:"protéger l'habitat.",exjp:"生息地を守る。"},
+ {w:"muter",ipa:"[myte]",pos:"動詞",jp:"突然変異する",ex:"un virus qui mute.",exjp:"変異するウイルス。"}
+]};
+DECKS.theme.tabs["ファッション・着こなし"]={label:"ファッション・着こなし",items:[
+ {w:"une tenue",ipa:"[yn təny]",pos:"名詞",jp:"服装・コーデ",pri:1,ex:"une belle tenue.",exjp:"素敵な服装。"},
+ {w:"un style",ipa:"[œ̃ stil]",pos:"名詞",jp:"スタイル",ex:"un style élégant.",exjp:"上品なスタイル。"},
+ {w:"à la mode",ipa:"[a la mɔd]",pos:"表現",jp:"流行の",pri:1,ex:"C'est très à la mode.",exjp:"とても流行している。"},
+ {w:"démodé",ipa:"[demɔde]",pos:"形容詞",jp:"時代遅れの",ex:"un vêtement démodé.",exjp:"時代遅れの服。"},
+ {w:"assorti",ipa:"[asɔʁti]",pos:"形容詞",jp:"お揃いの・合った",ex:"des couleurs assorties.",exjp:"調和した色。"},
+ {w:"un accessoire",ipa:"[œ̃n‿akseswaʁ]",pos:"名詞",jp:"アクセサリー・小物",ex:"un accessoire chic.",exjp:"おしゃれな小物。"},
+ {w:"une marque",ipa:"[yn maʁk]",pos:"名詞",jp:"ブランド・銘柄",pri:1,ex:"une marque de luxe.",exjp:"高級ブランド。"},
+ {w:"essayer",ipa:"[eseje]",pos:"動詞",jp:"試着する",pri:1,ex:"essayer une robe.",exjp:"ワンピースを試着する。"},
+ {w:"la taille",ipa:"[la taj]",pos:"名詞",jp:"サイズ",pri:1,ex:"Quelle taille faites-vous ?",exjp:"サイズはいくつですか?"},
+ {w:"moulant",ipa:"[mulɑ̃]",pos:"形容詞",jp:"体にぴったりの",ex:"un pull moulant.",exjp:"ぴったりしたセーター。"},
+ {w:"ample",ipa:"[ɑ̃pl]",pos:"形容詞",jp:"ゆったりした",ex:"un pantalon ample.",exjp:"ゆったりしたズボン。"},
+ {w:"chic",ipa:"[ʃik]",pos:"形容詞",jp:"おしゃれな・上品な",pri:1,ex:"une tenue chic.",exjp:"おしゃれな装い。"},
+ {w:"décontracté",ipa:"[dekɔ̃tʁakte]",pos:"形容詞",jp:"カジュアルな",ex:"un look décontracté.",exjp:"カジュアルな装い。"},
+ {w:"un défilé",ipa:"[œ̃ defile]",pos:"名詞",jp:"ファッションショー",ex:"un défilé de mode.",exjp:"ファッションショー。"},
+ {w:"coordonner",ipa:"[kɔɔʁdɔne]",pos:"動詞",jp:"コーディネートする",ex:"coordonner ses vêtements.",exjp:"服を組み合わせる。"},
+ {w:"une retouche",ipa:"[yn ʁətuʃ]",pos:"名詞",jp:"お直し",ex:"faire une retouche.",exjp:"お直しをする。"}
+]};
+DECKS.theme.tabs["世界の国・地域"]={label:"世界の国・地域",items:[
+ {w:"la France",ipa:"[la fʁɑ̃s]",pos:"名詞",jp:"フランス",pri:1,ex:"vivre en France.",exjp:"フランスに住む。"},
+ {w:"le Japon",ipa:"[lə ʒapɔ̃]",pos:"名詞",jp:"日本",pri:1,ex:"voyager au Japon.",exjp:"日本を旅する。"},
+ {w:"l'Allemagne",ipa:"[lalmaɲ]",pos:"名詞",jp:"ドイツ",ex:"visiter l'Allemagne.",exjp:"ドイツを訪れる。"},
+ {w:"l'Espagne",ipa:"[lɛspaɲ]",pos:"名詞",jp:"スペイン",ex:"partir en Espagne.",exjp:"スペインへ行く。"},
+ {w:"l'Italie",ipa:"[litali]",pos:"名詞",jp:"イタリア",ex:"l'Italie du Sud.",exjp:"南イタリア。"},
+ {w:"les États-Unis",ipa:"[lez‿etazyni]",pos:"名詞",jp:"アメリカ合衆国",pri:1,ex:"les États-Unis d'Amérique.",exjp:"アメリカ合衆国。"},
+ {w:"la Chine",ipa:"[la ʃin]",pos:"名詞",jp:"中国",ex:"la Chine moderne.",exjp:"現代の中国。"},
+ {w:"le Royaume-Uni",ipa:"[lə ʁwajom yni]",pos:"名詞",jp:"イギリス",ex:"le Royaume-Uni.",exjp:"イギリス。"},
+ {w:"le Brésil",ipa:"[lə bʁezil]",pos:"名詞",jp:"ブラジル",ex:"le carnaval du Brésil.",exjp:"ブラジルのカーニバル。"},
+ {w:"l'Afrique",ipa:"[lafʁik]",pos:"名詞",jp:"アフリカ",ex:"le continent de l'Afrique.",exjp:"アフリカ大陸。"},
+ {w:"l'Europe",ipa:"[løʁɔp]",pos:"名詞",jp:"ヨーロッパ",pri:1,ex:"l'Union européenne.",exjp:"欧州連合(EU)。"},
+ {w:"l'Asie",ipa:"[lazi]",pos:"名詞",jp:"アジア",ex:"l'Asie du Sud-Est.",exjp:"東南アジア。"},
+ {w:"le Canada",ipa:"[lə kanada]",pos:"名詞",jp:"カナダ",ex:"l'hiver au Canada.",exjp:"カナダの冬。"},
+ {w:"l'Australie",ipa:"[lostʁali]",pos:"名詞",jp:"オーストラリア",ex:"un voyage en Australie.",exjp:"オーストラリア旅行。"},
+ {w:"la Suisse",ipa:"[la sɥis]",pos:"名詞",jp:"スイス",ex:"les montagnes de Suisse.",exjp:"スイスの山々。"},
+ {w:"l'étranger",ipa:"[letʁɑ̃ʒe]",pos:"名詞",jp:"外国",pri:1,ex:"partir à l'étranger.",exjp:"外国へ行く。"}
+]};
+DECKS.theme.tabs["都市・観光名所"]={label:"都市・観光名所",items:[
+ {w:"la capitale",ipa:"[la kapital]",pos:"名詞",jp:"首都",pri:1,ex:"Paris est la capitale.",exjp:"パリは首都だ。"},
+ {w:"une cathédrale",ipa:"[yn katedʁal]",pos:"名詞",jp:"大聖堂",ex:"visiter la cathédrale.",exjp:"大聖堂を訪れる。"},
+ {w:"un musée",ipa:"[œ̃ myze]",pos:"名詞",jp:"美術館・博物館",pri:1,ex:"un musée célèbre.",exjp:"有名な美術館。"},
+ {w:"une place",ipa:"[yn plas]",pos:"名詞",jp:"広場",pri:1,ex:"une grande place.",exjp:"大きな広場。"},
+ {w:"un quartier",ipa:"[œ̃ kaʁtje]",pos:"名詞",jp:"地区",pri:1,ex:"un quartier animé.",exjp:"にぎやかな地区。"},
+ {w:"la banlieue",ipa:"[la bɑ̃ljø]",pos:"名詞",jp:"郊外",ex:"habiter en banlieue.",exjp:"郊外に住む。"},
+ {w:"le centre-ville",ipa:"[lə sɑ̃tʁ vil]",pos:"名詞",jp:"中心街",pri:1,ex:"aller au centre-ville.",exjp:"中心街へ行く。"},
+ {w:"une fontaine",ipa:"[yn fɔ̃tɛn]",pos:"名詞",jp:"噴水",ex:"une jolie fontaine.",exjp:"きれいな噴水。"},
+ {w:"un pont",ipa:"[œ̃ pɔ̃]",pos:"名詞",jp:"橋",pri:1,ex:"traverser le pont.",exjp:"橋を渡る。"},
+ {w:"une tour",ipa:"[yn tuʁ]",pos:"名詞",jp:"塔・タワー",ex:"la tour Eiffel.",exjp:"エッフェル塔。"},
+ {w:"un parc",ipa:"[œ̃ paʁk]",pos:"名詞",jp:"公園",pri:1,ex:"se promener dans le parc.",exjp:"公園を散歩する。"},
+ {w:"une avenue",ipa:"[yn‿avny]",pos:"名詞",jp:"大通り",ex:"une large avenue.",exjp:"広い大通り。"},
+ {w:"un marché",ipa:"[œ̃ maʁʃe]",pos:"名詞",jp:"市場",pri:1,ex:"un marché en plein air.",exjp:"屋外市場。"},
+ {w:"un site touristique",ipa:"[œ̃ sit tuʁistik]",pos:"名詞",jp:"観光地",ex:"un site touristique connu.",exjp:"有名な観光地。"},
+ {w:"un village",ipa:"[œ̃ vilaʒ]",pos:"名詞",jp:"村",pri:1,ex:"un village pittoresque.",exjp:"絵になる村。"},
+ {w:"une ruelle",ipa:"[yn ʁɥɛl]",pos:"名詞",jp:"路地",ex:"une ruelle étroite.",exjp:"狭い路地。"}
+]};
+DECKS.theme.tabs["専門職・資格"]={label:"専門職・資格",items:[
+ {w:"un ingénieur",ipa:"[œ̃n‿ɛ̃ʒenjœʁ]",pos:"名詞",jp:"エンジニア",pri:1,ex:"un ingénieur en informatique.",exjp:"ITエンジニア。"},
+ {w:"un comptable",ipa:"[œ̃ kɔ̃tabl]",pos:"名詞",jp:"会計士・経理",ex:"un comptable expérimenté.",exjp:"経験豊富な会計士。"},
+ {w:"un chercheur",ipa:"[œ̃ ʃɛʁʃœʁ]",pos:"名詞",jp:"研究者",ex:"un chercheur en biologie.",exjp:"生物学の研究者。"},
+ {w:"un chirurgien",ipa:"[œ̃ ʃiʁyʁʒjɛ̃]",pos:"名詞",jp:"外科医",ex:"un chirurgien réputé.",exjp:"評判の外科医。"},
+ {w:"un dentiste",ipa:"[œ̃ dɑ̃tist]",pos:"名詞",jp:"歯科医",pri:1,ex:"un rendez-vous chez le dentiste.",exjp:"歯医者の予約。"},
+ {w:"un notaire",ipa:"[œ̃ nɔtɛʁ]",pos:"名詞",jp:"公証人",ex:"signer chez le notaire.",exjp:"公証人のもとで署名する。"},
+ {w:"un pharmacien",ipa:"[œ̃ faʁmasjɛ̃]",pos:"名詞",jp:"薬剤師",ex:"demander au pharmacien.",exjp:"薬剤師に尋ねる。"},
+ {w:"un électricien",ipa:"[œ̃n‿elɛktʁisjɛ̃]",pos:"名詞",jp:"電気工",ex:"appeler un électricien.",exjp:"電気工を呼ぶ。"},
+ {w:"un plombier",ipa:"[œ̃ plɔ̃bje]",pos:"名詞",jp:"配管工",ex:"un bon plombier.",exjp:"腕のいい配管工。"},
+ {w:"un vétérinaire",ipa:"[œ̃ veteʁinɛʁ]",pos:"名詞",jp:"獣医",ex:"emmener chez le vétérinaire.",exjp:"獣医に連れていく。"},
+ {w:"un traducteur",ipa:"[œ̃ tʁadyktœʁ]",pos:"名詞",jp:"翻訳者",ex:"un traducteur professionnel.",exjp:"プロの翻訳者。"},
+ {w:"un fonctionnaire",ipa:"[œ̃ fɔ̃ksjɔnɛʁ]",pos:"名詞",jp:"公務員",ex:"un fonctionnaire d'État.",exjp:"国家公務員。"},
+ {w:"un diplôme",ipa:"[œ̃ diplom]",pos:"名詞",jp:"学位・資格",pri:1,ex:"obtenir un diplôme.",exjp:"学位を取得する。"},
+ {w:"une licence",ipa:"[yn lisɑ̃s]",pos:"名詞",jp:"学士号",ex:"une licence de droit.",exjp:"法学の学士号。"},
+ {w:"une qualification",ipa:"[yn kalifikasjɔ̃]",pos:"名詞",jp:"資格・技能",ex:"une qualification reconnue.",exjp:"公認の資格。"},
+ {w:"exercer",ipa:"[ɛɡzɛʁse]",pos:"動詞",jp:"(職を)営む・行使する",ex:"exercer un métier.",exjp:"ある職業に就く。"}
+]};
+DECKS.theme.tabs["園芸・植物の世話"]={label:"園芸・植物の世話",items:[
+ {w:"arroser",ipa:"[aʁoze]",pos:"動詞",jp:"水をやる",pri:1,ex:"arroser les plantes.",exjp:"植物に水をやる。"},
+ {w:"planter",ipa:"[plɑ̃te]",pos:"動詞",jp:"植える",pri:1,ex:"planter des fleurs.",exjp:"花を植える。"},
+ {w:"semer",ipa:"[səme]",pos:"動詞",jp:"種をまく",ex:"semer des graines.",exjp:"種をまく。"},
+ {w:"tailler",ipa:"[tɑje]",pos:"動詞",jp:"剪定する",ex:"tailler la haie.",exjp:"生け垣を刈り込む。"},
+ {w:"un pot",ipa:"[œ̃ po]",pos:"名詞",jp:"鉢",ex:"un pot de fleurs.",exjp:"植木鉢。"},
+ {w:"la terre",ipa:"[la tɛʁ]",pos:"名詞",jp:"土",pri:1,ex:"de la bonne terre.",exjp:"良い土。"},
+ {w:"une graine",ipa:"[yn ɡʁɛn]",pos:"名詞",jp:"種",ex:"semer une graine.",exjp:"種をまく。"},
+ {w:"une racine",ipa:"[yn ʁasin]",pos:"名詞",jp:"根",ex:"des racines profondes.",exjp:"深い根。"},
+ {w:"une feuille",ipa:"[yn fœj]",pos:"名詞",jp:"葉",pri:1,ex:"une feuille verte.",exjp:"緑の葉。"},
+ {w:"une tige",ipa:"[yn tiʒ]",pos:"名詞",jp:"茎",ex:"une tige fragile.",exjp:"もろい茎。"},
+ {w:"un bourgeon",ipa:"[œ̃ buʁʒɔ̃]",pos:"名詞",jp:"芽・つぼみ",ex:"un bourgeon au printemps.",exjp:"春の芽。"},
+ {w:"fleurir",ipa:"[flœʁiʁ]",pos:"動詞",jp:"花が咲く",ex:"Les roses fleurissent.",exjp:"バラが咲く。"},
+ {w:"faner",ipa:"[fane]",pos:"動詞",jp:"しおれる",ex:"Les fleurs fanent.",exjp:"花がしおれる。"},
+ {w:"l'engrais",ipa:"[lɑ̃ɡʁɛ]",pos:"名詞",jp:"肥料",ex:"mettre de l'engrais.",exjp:"肥料をやる。"},
+ {w:"récolter",ipa:"[ʁekɔlte]",pos:"動詞",jp:"収穫する",ex:"récolter les légumes.",exjp:"野菜を収穫する。"},
+ {w:"arracher",ipa:"[aʁaʃe]",pos:"動詞",jp:"引き抜く",ex:"arracher les mauvaises herbes.",exjp:"雑草を抜く。"}
+]};
+DECKS.theme.tabs["フランスの郷土料理"]={label:"フランスの郷土料理",items:[
+ {w:"la ratatouille",ipa:"[la ʁatatuj]",pos:"名詞",jp:"ラタトゥイユ",ex:"préparer une ratatouille.",exjp:"ラタトゥイユを作る。"},
+ {w:"le cassoulet",ipa:"[lə kasulɛ]",pos:"名詞",jp:"カスレ(豆と肉の煮込み)",ex:"un cassoulet du Sud-Ouest.",exjp:"南西部のカスレ。"},
+ {w:"la quiche",ipa:"[la kiʃ]",pos:"名詞",jp:"キッシュ",ex:"une quiche lorraine.",exjp:"キッシュ・ロレーヌ。"},
+ {w:"le coq au vin",ipa:"[lə kɔk o vɛ̃]",pos:"名詞",jp:"鶏の赤ワイン煮",ex:"un bon coq au vin.",exjp:"おいしいコック・オ・ヴァン。"},
+ {w:"la bouillabaisse",ipa:"[la bujabɛs]",pos:"名詞",jp:"ブイヤベース",ex:"la bouillabaisse de Marseille.",exjp:"マルセイユのブイヤベース。"},
+ {w:"un croissant",ipa:"[œ̃ kʁwasɑ̃]",pos:"名詞",jp:"クロワッサン",pri:1,ex:"un croissant au beurre.",exjp:"バタークロワッサン。"},
+ {w:"une crêpe",ipa:"[yn kʁɛp]",pos:"名詞",jp:"クレープ",pri:1,ex:"une crêpe au sucre.",exjp:"砂糖クレープ。"},
+ {w:"le pot-au-feu",ipa:"[lə pɔt o fø]",pos:"名詞",jp:"ポトフ",ex:"un pot-au-feu d'hiver.",exjp:"冬のポトフ。"},
+ {w:"la tarte tatin",ipa:"[la taʁt tatɛ̃]",pos:"名詞",jp:"タルトタタン",ex:"une tarte tatin maison.",exjp:"自家製タルトタタン。"},
+ {w:"les escargots",ipa:"[lez‿ɛskaʁɡo]",pos:"名詞",jp:"エスカルゴ",ex:"des escargots de Bourgogne.",exjp:"ブルゴーニュ風エスカルゴ。"},
+ {w:"le foie gras",ipa:"[lə fwa ɡʁa]",pos:"名詞",jp:"フォアグラ",ex:"du foie gras pour Noël.",exjp:"クリスマスのフォアグラ。"},
+ {w:"le gratin",ipa:"[lə ɡʁatɛ̃]",pos:"名詞",jp:"グラタン",ex:"un gratin dauphinois.",exjp:"グラタン・ドフィノワ。"},
+ {w:"la mousse au chocolat",ipa:"[la mus o ʃɔkɔla]",pos:"名詞",jp:"チョコムース",ex:"une mousse au chocolat.",exjp:"チョコレートムース。"},
+ {w:"le boeuf bourguignon",ipa:"[lə bœf buʁɡiɲɔ̃]",pos:"名詞",jp:"牛肉の赤ワイン煮込み",ex:"un boeuf bourguignon mijoté.",exjp:"じっくり煮たブフ・ブルギニョン。"},
+ {w:"une spécialité",ipa:"[yn spesjalite]",pos:"名詞",jp:"名物・特産",pri:1,ex:"une spécialité régionale.",exjp:"地方の名物。"},
+ {w:"fait maison",ipa:"[fɛ mɛzɔ̃]",pos:"表現",jp:"自家製の",pri:1,ex:"un plat fait maison.",exjp:"自家製の料理。"}
+]};
+DECKS.theme.tabs["ことわざ・名言3"]={label:"ことわざ・名言3",items:[
+ {w:"Rome ne s'est pas faite en un jour.",ipa:"[ʁɔm nə sɛ pa fɛt ɑ̃n‿œ̃ ʒuʁ]",pos:"ことわざ",jp:"ローマは一日にして成らず",ex:"Patience, Rome ne s'est pas faite en un jour.",exjp:"焦らず、大事は一日にして成らず。"},
+ {w:"Tous les chemins mènent à Rome.",ipa:"[tu le ʃəmɛ̃ mɛn a ʁɔm]",pos:"ことわざ",jp:"すべての道はローマに通ず",ex:"Tous les chemins mènent à Rome.",exjp:"目的への道は一つではない。"},
+ {w:"L'union fait la force.",ipa:"[lynjɔ̃ fɛ la fɔʁs]",pos:"ことわざ",jp:"団結は力なり",ex:"Ensemble : l'union fait la force.",exjp:"みんなで、団結は力なり。"},
+ {w:"Qui sème le vent récolte la tempête.",ipa:"[ki sɛm lə vɑ̃ ʁekɔlt la tɑ̃pɛt]",pos:"ことわざ",jp:"風を蒔く者は嵐を刈る",ex:"Qui sème le vent récolte la tempête.",exjp:"悪い行いは悪い結果を招く。"},
+ {w:"Il n'y a pas de fumée sans feu.",ipa:"[il ni a pa də fyme sɑ̃ fø]",pos:"ことわざ",jp:"火のない所に煙は立たぬ",ex:"Il n'y a pas de fumée sans feu.",exjp:"噂には何か根拠がある。"},
+ {w:"Le mieux est l'ennemi du bien.",ipa:"[lə mjø ɛ lɛnəmi dy bjɛ̃]",pos:"ことわざ",jp:"完璧を求めすぎると損なう",ex:"Arrête : le mieux est l'ennemi du bien.",exjp:"やめて、欲張ると台無しだよ。"},
+ {w:"On récolte ce que l'on sème.",ipa:"[ɔ̃ ʁekɔlt sə kə lɔ̃ sɛm]",pos:"ことわざ",jp:"蒔いた種は自分で刈る",ex:"On récolte ce que l'on sème.",exjp:"自分の行いの報いを受ける。"},
+ {w:"Chose promise, chose due.",ipa:"[ʃoz pʁɔmiz ʃoz dy]",pos:"ことわざ",jp:"約束は守るもの",ex:"Chose promise, chose due !",exjp:"約束は約束、必ず守る!"},
+ {w:"Les bons comptes font les bons amis.",ipa:"[le bɔ̃ kɔ̃t fɔ̃ le bɔ̃z‿ami]",pos:"ことわざ",jp:"金銭をきちんとすれば友情も続く",ex:"Les bons comptes font les bons amis.",exjp:"お金をきれいにすれば仲も続く。"},
+ {w:"Aide-toi, le ciel t'aidera.",ipa:"[ɛd twa lə sjɛl tɛdʁa]",pos:"ことわざ",jp:"天は自ら助くる者を助く",ex:"Aide-toi, le ciel t'aidera.",exjp:"まず自分で努力せよ。"},
+ {w:"À chaque jour suffit sa peine.",ipa:"[a ʃak ʒuʁ syfi sa pɛn]",pos:"ことわざ",jp:"明日のことは明日心配せよ",ex:"À chaque jour suffit sa peine.",exjp:"一日の苦労は一日で十分。"},
+ {w:"Pierre qui roule n'amasse pas mousse.",ipa:"[pjɛʁ ki ʁul namas pa mus]",pos:"ことわざ",jp:"転石苔むさず",ex:"Pierre qui roule n'amasse pas mousse.",exjp:"落ち着かない者は富を築けぬ。"},
+ {w:"Le temps, c'est de l'argent.",ipa:"[lə tɑ̃ sɛ də laʁʒɑ̃]",pos:"ことわざ",jp:"時は金なり",ex:"Dépêchons : le temps, c'est de l'argent.",exjp:"急ごう、時は金なり。"},
+ {w:"Mieux vaut un tiens que deux tu l'auras.",ipa:"[mjø vo œ̃ tjɛ̃ kə dø ty loʁa]",pos:"ことわざ",jp:"明日の百より今日の五十",ex:"Mieux vaut un tiens que deux tu l'auras.",exjp:"確実な今の方が不確かな未来より良い。"},
+ {w:"Qui ne tente rien n'a rien.",ipa:"[ki nə tɑ̃t ʁjɛ̃ na ʁjɛ̃]",pos:"ことわざ",jp:"挑戦せねば何も得られぬ",ex:"Qui ne tente rien n'a rien.",exjp:"やってみなきゃ何も得られない。"},
+ {w:"Un homme averti en vaut deux.",ipa:"[œ̃n‿ɔm avɛʁti ɑ̃ vo dø]",pos:"ことわざ",jp:"備えあれば憂いなし",ex:"Un homme averti en vaut deux.",exjp:"用心していれば被害は少ない。"}
+]};
+DECKS.theme.tabs["慣用句(数字・お金)"]={label:"慣用句(数字・お金)",items:[
+ {w:"couper la poire en deux",ipa:"[kupe la pwaʁ ɑ̃ dø]",pos:"慣用句",jp:"折半する・歩み寄る",ex:"On coupe la poire en deux ?",exjp:"折半にしない?"},
+ {w:"être sur son trente et un",ipa:"[ɛtʁ syʁ sɔ̃ tʁɑ̃t e œ̃]",pos:"慣用句",jp:"めかし込む",ex:"Elle était sur son trente et un.",exjp:"彼女は着飾っていた。"},
+ {w:"en deux temps trois mouvements",ipa:"[ɑ̃ dø tɑ̃ tʁwa muvmɑ̃]",pos:"慣用句",jp:"あっという間に",ex:"Il l'a fait en deux temps trois mouvements.",exjp:"彼はあっという間にやった。"},
+ {w:"coûter les yeux de la tête",ipa:"[kute lez‿jø də la tɛt]",pos:"慣用句",jp:"目玉が飛び出るほど高い",ex:"Ça coûte les yeux de la tête.",exjp:"べらぼうに高い。"},
+ {w:"jeter l'argent par les fenêtres",ipa:"[ʒəte laʁʒɑ̃ paʁ le fənɛtʁ]",pos:"慣用句",jp:"金を湯水のように使う",ex:"Arrête de jeter l'argent par les fenêtres.",exjp:"無駄遣いはやめて。"},
+ {w:"être fauché",ipa:"[ɛtʁ foʃe]",pos:"慣用句",jp:"一文無しだ",ex:"En fin de mois, je suis fauché.",exjp:"月末は金欠だ。"},
+ {w:"mettre de côté",ipa:"[mɛtʁ də kote]",pos:"慣用句",jp:"貯金する・取っておく",ex:"mettre de l'argent de côté.",exjp:"お金を貯める。"},
+ {w:"ne pas y aller par quatre chemins",ipa:"[nə pa i ale paʁ katʁ ʃəmɛ̃]",pos:"慣用句",jp:"単刀直入に言う",ex:"Il n'y va pas par quatre chemins.",exjp:"彼は遠回しに言わない。"},
+ {w:"faire d'une pierre deux coups",ipa:"[fɛʁ dyn pjɛʁ dø ku]",pos:"慣用句",jp:"一石二鳥",ex:"On fait d'une pierre deux coups.",exjp:"一石二鳥だね。"},
+ {w:"avoir un budget serré",ipa:"[avwaʁ œ̃ bydʒɛ seʁe]",pos:"慣用句",jp:"予算が厳しい",ex:"Ce mois-ci, j'ai un budget serré.",exjp:"今月は予算が厳しい。"},
+ {w:"ça vaut son pesant d'or",ipa:"[sa vo sɔ̃ pəzɑ̃ dɔʁ]",pos:"慣用句",jp:"非常に価値がある",ex:"Ce conseil vaut son pesant d'or.",exjp:"この助言は金以上の価値だ。"},
+ {w:"rouler sur l'or",ipa:"[ʁule syʁ lɔʁ]",pos:"慣用句",jp:"大金持ちだ",ex:"Il roule sur l'or.",exjp:"彼は大金持ちだ。"},
+ {w:"joindre les deux bouts",ipa:"[ʒwɛ̃dʁ le dø bu]",pos:"慣用句",jp:"収支をやりくりする",ex:"J'ai du mal à joindre les deux bouts.",exjp:"家計のやりくりが大変だ。"},
+ {w:"repartir à zéro",ipa:"[ʁəpaʁtiʁ a zeʁo]",pos:"慣用句",jp:"ゼロからやり直す",ex:"On repart à zéro.",exjp:"ゼロからやり直そう。"},
+ {w:"un compte rond",ipa:"[œ̃ kɔ̃t ʁɔ̃]",pos:"慣用句",jp:"きりのいい数",ex:"Disons cinquante, un compte rond.",exjp:"50にしよう、きりがいい。"},
+ {w:"être à découvert",ipa:"[ɛtʁ a dekuvɛʁ]",pos:"慣用句",jp:"口座残高がマイナスだ",ex:"Mon compte est à découvert.",exjp:"口座が残高不足だ。"}
+]};
+DECKS.theme.tabs["グラフ・図表の読み方"]={label:"グラフ・図表の読み方",items:[
+ {w:"un graphique",ipa:"[œ̃ ɡʁafik]",pos:"名詞",jp:"グラフ",pri:1,ex:"lire un graphique.",exjp:"グラフを読む。"},
+ {w:"une courbe",ipa:"[yn kuʁb]",pos:"名詞",jp:"曲線",ex:"une courbe ascendante.",exjp:"上昇する曲線。"},
+ {w:"un diagramme",ipa:"[œ̃ djaɡʁam]",pos:"名詞",jp:"図表・ダイアグラム",ex:"un diagramme circulaire.",exjp:"円グラフ。"},
+ {w:"un axe",ipa:"[œ̃n‿aks]",pos:"名詞",jp:"軸",ex:"l'axe horizontal.",exjp:"横軸。"},
+ {w:"une colonne",ipa:"[yn kɔlɔn]",pos:"名詞",jp:"列・縦棒",ex:"une colonne du tableau.",exjp:"表の一列。"},
+ {w:"une ligne",ipa:"[yn liɲ]",pos:"名詞",jp:"線・行",pri:1,ex:"la ligne du haut.",exjp:"一番上の行。"},
+ {w:"augmenter",ipa:"[oɡmɑ̃te]",pos:"動詞",jp:"増加する",pri:1,ex:"Les ventes augmentent.",exjp:"売上が増える。"},
+ {w:"diminuer",ipa:"[diminɥe]",pos:"動詞",jp:"減少する",pri:1,ex:"La courbe diminue.",exjp:"曲線が下がる。"},
+ {w:"stagner",ipa:"[staɲe]",pos:"動詞",jp:"横ばいである",ex:"Les chiffres stagnent.",exjp:"数字が横ばいだ。"},
+ {w:"une tendance",ipa:"[yn tɑ̃dɑ̃s]",pos:"名詞",jp:"傾向",pri:1,ex:"une tendance à la hausse.",exjp:"上昇傾向。"},
+ {w:"un pic",ipa:"[œ̃ pik]",pos:"名詞",jp:"ピーク・頂点",ex:"un pic en juillet.",exjp:"7月のピーク。"},
+ {w:"une proportion",ipa:"[yn pʁɔpɔʁsjɔ̃]",pos:"名詞",jp:"割合",ex:"une forte proportion.",exjp:"高い割合。"},
+ {w:"une donnée",ipa:"[yn dɔne]",pos:"名詞",jp:"データ・数値",ex:"une donnée importante.",exjp:"重要なデータ。"},
+ {w:"une moyenne",ipa:"[yn mwajɛn]",pos:"名詞",jp:"平均",pri:1,ex:"au-dessus de la moyenne.",exjp:"平均以上。"},
+ {w:"représenter",ipa:"[ʁəpʁezɑ̃te]",pos:"動詞",jp:"表す・示す",ex:"Ce schéma représente le processus.",exjp:"この図は工程を表す。"},
+ {w:"comparer",ipa:"[kɔ̃paʁe]",pos:"動詞",jp:"比較する",pri:1,ex:"comparer deux courbes.",exjp:"2つの曲線を比較する。"}
+]};
+DECKS.theme.tabs["惑星・天体"]={label:"惑星・天体",items:[
+ {w:"une planète",ipa:"[yn planɛt]",pos:"名詞",jp:"惑星",pri:1,ex:"la planète Mars.",exjp:"火星という惑星。"},
+ {w:"une étoile",ipa:"[yn‿etwal]",pos:"名詞",jp:"星",pri:1,ex:"une étoile brillante.",exjp:"輝く星。"},
+ {w:"la Lune",ipa:"[la lyn]",pos:"名詞",jp:"月",pri:1,ex:"la pleine Lune.",exjp:"満月。"},
+ {w:"le Soleil",ipa:"[lə sɔlɛj]",pos:"名詞",jp:"太陽",pri:1,ex:"Le Soleil se couche.",exjp:"太陽が沈む。"},
+ {w:"la Terre",ipa:"[la tɛʁ]",pos:"名詞",jp:"地球",pri:1,ex:"la planète Terre.",exjp:"地球という惑星。"},
+ {w:"une galaxie",ipa:"[yn ɡalaksi]",pos:"名詞",jp:"銀河",ex:"une galaxie lointaine.",exjp:"遠い銀河。"},
+ {w:"une comète",ipa:"[yn kɔmɛt]",pos:"名詞",jp:"彗星",ex:"une comète rare.",exjp:"珍しい彗星。"},
+ {w:"une orbite",ipa:"[yn‿ɔʁbit]",pos:"名詞",jp:"軌道",ex:"l'orbite de la Lune.",exjp:"月の軌道。"},
+ {w:"un satellite",ipa:"[œ̃ satelit]",pos:"名詞",jp:"衛星",ex:"un satellite artificiel.",exjp:"人工衛星。"},
+ {w:"une éclipse",ipa:"[yn‿eklips]",pos:"名詞",jp:"食(日食・月食)",ex:"une éclipse solaire.",exjp:"日食。"},
+ {w:"une constellation",ipa:"[yn kɔ̃stelasjɔ̃]",pos:"名詞",jp:"星座",ex:"une belle constellation.",exjp:"美しい星座。"},
+ {w:"l'univers",ipa:"[lynivɛʁ]",pos:"名詞",jp:"宇宙",pri:1,ex:"l'immensité de l'univers.",exjp:"宇宙の広大さ。"},
+ {w:"une fusée",ipa:"[yn fyze]",pos:"名詞",jp:"ロケット",ex:"lancer une fusée.",exjp:"ロケットを打ち上げる。"},
+ {w:"un astronaute",ipa:"[œ̃n‿astʁɔnot]",pos:"名詞",jp:"宇宙飛行士",ex:"un astronaute célèbre.",exjp:"有名な宇宙飛行士。"},
+ {w:"graviter",ipa:"[ɡʁavite]",pos:"動詞",jp:"周回する",ex:"graviter autour du Soleil.",exjp:"太陽の周りを回る。"},
+ {w:"un trou noir",ipa:"[œ̃ tʁu nwaʁ]",pos:"名詞",jp:"ブラックホール",ex:"un trou noir massif.",exjp:"巨大なブラックホール。"}
+]};
 const VERBGROUPS={"irr":"不規則(最重要)","er":"-er規則","ir":"-ir規則","re":"-re規則"};
 const TENSES=[
  ["pres","現在"],["pc","複合過去"],["imp","半過去"],["fut","単純未来"],
