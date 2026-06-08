@@ -9985,14 +9985,30 @@ if(voiceGenderSel){
 const audioSet=new Set();      // 仏語 女性(Denise) → audio/<h>.mp3
 const audioSetM=new Set();     // 仏語 男性(Henri)  → audio/m/<h>.mp3
 const audioSetJa=new Set();    // 日本語(Nanami)    → audio/ja/<h>.mp3
-fetch('audio/index.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSet.add(h));}).catch(()=>{});
-fetch('audio/index_m.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSetM.add(h));}).catch(()=>{});
-fetch('audio/index_ja.json',{cache:'default'}).then(r=>r.ok?r.json():[]).then(a=>{(a||[]).forEach(h=>audioSetJa.add(h));}).catch(()=>{});
+// 事前生成音声インデックスを「確実に」読み込む。失敗/空ならリトライし、空のまま機械音声へ固定されるのを防ぐ。
+// cache:'no-cache' で必ずサーバへ再検証(304活用)し、古い小さなindexが居座らないようにする。
+function loadAudioIndex(url,set){
+  let attempt=0;
+  const tryOnce=()=>fetch(url,{cache:'no-cache'})
+    .then(r=>{if(!r.ok)throw new Error('http '+r.status);return r.json();})
+    .then(a=>{if(!Array.isArray(a)||!a.length)throw new Error('empty');a.forEach(h=>set.add(h));return set.size;})
+    .catch(()=>{attempt++;if(attempt<=6){return new Promise(res=>setTimeout(res,Math.min(8000,1200*attempt))).then(tryOnce);}});
+  return tryOnce();
+}
+// 各indexの読み込み完了を表すPromise（nativeUrl が参照して、読み込み前に機械音声へ落ちるのを防ぐ）
+const idxReady={
+  f:  loadAudioIndex('audio/index.json',    audioSet),
+  m:  loadAudioIndex('audio/index_m.json',  audioSetM),
+  ja: loadAudioIndex('audio/index_ja.json', audioSetJa)
+};
 // clean規則は Python generate_audio.py の clean() と完全一致させること
 function cleanTTS(t){return String(t).replace(/\//g,',').replace(/\([^)]*\)/g,'').replace(/／/g,'、').replace(/（[^）]*）/g,'').replace(/…/g,' ').replace(/\s+/g,' ').trim();}
 async function sha16(s){try{const b=new TextEncoder().encode(s);const d=await crypto.subtle.digest('SHA-256',b);return Array.from(new Uint8Array(d)).map(x=>x.toString(16).padStart(2,'0')).join('').slice(0,16);}catch(e){return '';}}
 // 言語と選択中の声で参照フォルダを切替。該当が無ければ null(→オンライン/端末へフォールバック)
 async function nativeUrl(text,lang){const h=await sha16(cleanTTS(text));if(!h)return null;
+  // 該当indexの読み込み完了を最大2.5秒待つ（初回タップ時に未ロードで機械音声へ固定されるのを防ぐ）
+  const ready=(lang==='ja')?idxReady.ja:((voiceGender==='m')?idxReady.m:idxReady.f);
+  try{await Promise.race([ready,new Promise(r=>setTimeout(r,2500))]);}catch(e){}
   if(lang==='ja')return audioSetJa.has(h)?('audio/ja/'+h+'.mp3'):null;
   if(voiceGender==='m')return audioSetM.has(h)?('audio/m/'+h+'.mp3'):null;
   return audioSet.has(h)?('audio/'+h+'.mp3'):null;}
@@ -11117,7 +11133,15 @@ function setupPWA(){
 setupPWA();
 
 /* ---------- offline: service worker ---------- */
-if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{});});}
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{
+  // 既に旧SWに制御されている端末で新SWが有効化されたら一度だけ再読込し、古いコード/古いindexを確実に流す。
+  const hadController=!!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register('sw.js').then(reg=>{try{reg.update();}catch(e){}}).catch(()=>{});
+  let _swReloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{
+    if(_swReloaded||!hadController)return; _swReloaded=true; location.reload();
+  });
+});}
 
 /* ---------- offline: download all native audio into cache ---------- */
 let _dling=false;
