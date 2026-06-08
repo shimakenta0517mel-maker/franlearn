@@ -7388,6 +7388,367 @@ DECKS.theme.tabs["天候・季節の言い回し"]={label:"天候・季節の言
  {w:"un temps lourd",ipa:"[œ̃ tɑ̃ luʁ]",pos:"名詞",jp:"蒸し暑い天気",ex:"Il fait un temps lourd avant l'orage.",exjp:"雷雨前の蒸し暑い天気。"},
  {w:"un climat agréable",ipa:"[œ̃ klima aɡʁeabl]",pos:"名詞",jp:"過ごしやすい気候",ex:"un climat agréable au printemps.",exjp:"春の過ごしやすい気候。"}
 ]};
+/*===DECKS14：2026-06-08 第10弾（場面12＋語彙12）===*/
+DECKS.scene.tabs["銀行ATMで"]={label:"銀行ATMで",items:[
+ {w:"Où est le distributeur ?",ipa:"[u ɛ lə distʁibytœʁ]",pos:"会話",jp:"ATMはどこ?",pri:1,ex:"Excusez-moi, où est le distributeur ?",exjp:"すみません、ATMはどこ?"},
+ {w:"Je voudrais retirer de l'argent.",ipa:"[ʒə vudʁɛ ʁətiʁe də laʁʒɑ̃]",pos:"会話",jp:"お金をおろしたい",pri:1,ex:"Je voudrais retirer de l'argent.",exjp:"お金をおろしたいです。"},
+ {w:"Insérez votre carte.",ipa:"[ɛ̃seʁe vɔtʁ kaʁt]",pos:"会話",jp:"カードを入れてください",ex:"Insérez votre carte dans la fente.",exjp:"カードを差込口に入れて。"},
+ {w:"Tapez votre code.",ipa:"[tape vɔtʁ kɔd]",pos:"会話",jp:"暗証番号を入力して",ex:"Tapez votre code secret.",exjp:"暗証番号を入力して。"},
+ {w:"Quel montant ?",ipa:"[kɛl mɔ̃tɑ̃]",pos:"会話",jp:"いくらにしますか?",ex:"Quel montant voulez-vous retirer ?",exjp:"いくら引き出しますか?"},
+ {w:"Vous voulez un reçu ?",ipa:"[vu vule œ̃ ʁəsy]",pos:"会話",jp:"明細は要りますか?",ex:"Vous voulez un reçu ?",exjp:"ご利用明細は要りますか?"},
+ {w:"Le distributeur est en panne.",ipa:"[lə distʁibytœʁ ɛt‿ɑ̃ pan]",pos:"会話",jp:"ATMが故障しています",ex:"Zut, le distributeur est en panne.",exjp:"しまった、ATMが故障してる。"},
+ {w:"Il n'y a plus de billets.",ipa:"[il ni a ply də bijɛ]",pos:"会話",jp:"現金切れです",ex:"Désolé, il n'y a plus de billets.",exjp:"すみません、現金切れです。"},
+ {w:"Je consulte mon solde.",ipa:"[ʒə kɔ̃sylt mɔ̃ sɔld]",pos:"会話",jp:"残高を確認します",ex:"D'abord, je consulte mon solde.",exjp:"まず残高を確認します。"},
+ {w:"N'oubliez pas votre carte.",ipa:"[nublije pa vɔtʁ kaʁt]",pos:"会話",jp:"カードを忘れずに",ex:"Surtout, n'oubliez pas votre carte.",exjp:"とにかくカードを忘れずに。"}
+]};
+DECKS.scene.tabs["市役所で証明書を取る"]={label:"市役所で証明書を取る",items:[
+ {w:"Je voudrais un acte de naissance.",ipa:"[ʒə vudʁɛ œ̃n‿akt də nɛsɑ̃s]",pos:"会話",jp:"出生証明書がほしい",pri:1,ex:"Bonjour, je voudrais un acte de naissance.",exjp:"出生証明書をお願いします。"},
+ {w:"C'est pour un dossier.",ipa:"[sɛ puʁ œ̃ dosje]",pos:"会話",jp:"書類(申請)のためです",ex:"C'est pour un dossier de mariage.",exjp:"結婚の書類のためです。"},
+ {w:"Il faut une pièce d'identité.",ipa:"[il fo yn pjɛs didɑ̃tite]",pos:"会話",jp:"身分証が必要です",ex:"Il faut une pièce d'identité valide.",exjp:"有効な身分証が必要です。"},
+ {w:"Vous remplissez ce formulaire.",ipa:"[vu ʁɑ̃plise sə fɔʁmylɛʁ]",pos:"会話",jp:"この用紙に記入を",ex:"Vous remplissez ce formulaire, s'il vous plaît.",exjp:"この用紙にご記入ください。"},
+ {w:"C'est gratuit ?",ipa:"[sɛ ɡʁatɥi]",pos:"会話",jp:"無料ですか?",ex:"Ce document, c'est gratuit ?",exjp:"この書類は無料ですか?"},
+ {w:"Je le retire quand ?",ipa:"[ʒə lə ʁətiʁ kɑ̃]",pos:"会話",jp:"いつ受け取れますか?",ex:"Je le retire quand, le certificat ?",exjp:"証明書はいつ受け取れる?"},
+ {w:"Quel est le guichet ?",ipa:"[kɛl ɛ lə ɡiʃɛ]",pos:"会話",jp:"どの窓口ですか?",ex:"Pour ça, quel est le guichet ?",exjp:"これはどの窓口?"},
+ {w:"Prenez un ticket.",ipa:"[pʁəne œ̃ tikɛ]",pos:"会話",jp:"番号札を取って",ex:"À l'entrée, prenez un ticket.",exjp:"入口で番号札を取って。"},
+ {w:"C'est à quel étage ?",ipa:"[sɛt‿a kɛl etaʒ]",pos:"会話",jp:"何階ですか?",ex:"Le service état civil, c'est à quel étage ?",exjp:"戸籍課は何階?"},
+ {w:"Au suivant !",ipa:"[o sɥivɑ̃]",pos:"会話",jp:"次の方どうぞ!",ex:"Au suivant, s'il vous plaît !",exjp:"次の方、どうぞ!"}
+]};
+DECKS.scene.tabs["国際郵便を送る"]={label:"国際郵便を送る",items:[
+ {w:"Je voudrais envoyer ce colis au Japon.",ipa:"[ʒə vudʁɛ ɑ̃vwaje sə kɔli o ʒapɔ̃]",pos:"会話",jp:"この荷物を日本へ送りたい",pri:1,ex:"Je voudrais envoyer ce colis au Japon.",exjp:"この荷物を日本へ送りたいです。"},
+ {w:"En combien de temps il arrive ?",ipa:"[ɑ̃ kɔ̃bjɛ̃ də tɑ̃ il aʁiv]",pos:"会話",jp:"どのくらいで届きますか?",ex:"En combien de temps il arrive ?",exjp:"どのくらいで着きますか?"},
+ {w:"C'est combien en recommandé ?",ipa:"[sɛ kɔ̃bjɛ̃ ɑ̃ ʁəkɔmɑ̃de]",pos:"会話",jp:"書留でいくら?",ex:"C'est combien en recommandé ?",exjp:"書留だといくらですか?"},
+ {w:"Qu'est-ce qu'il y a dedans ?",ipa:"[kɛs kil i a dədɑ̃]",pos:"会話",jp:"中身は何ですか?",ex:"Qu'est-ce qu'il y a dedans ?",exjp:"中身は何ですか?"},
+ {w:"C'est fragile.",ipa:"[sɛ fʁaʒil]",pos:"会話",jp:"壊れ物です",ex:"Attention, c'est fragile.",exjp:"注意、壊れ物です。"},
+ {w:"Remplissez la déclaration de douane.",ipa:"[ʁɑ̃plise la deklaʁasjɔ̃ də dwan]",pos:"会話",jp:"税関申告書に記入を",ex:"Pour l'étranger, remplissez la déclaration de douane.",exjp:"海外用に税関申告書を記入して。"},
+ {w:"Je voudrais des timbres.",ipa:"[ʒə vudʁɛ de tɛ̃bʁ]",pos:"会話",jp:"切手がほしいです",ex:"Je voudrais des timbres pour l'international.",exjp:"国際郵便用の切手がほしい。"},
+ {w:"Par avion ou par bateau ?",ipa:"[paʁ avjɔ̃ u paʁ bato]",pos:"会話",jp:"航空便ですか船便ですか?",ex:"Vous l'envoyez par avion ou par bateau ?",exjp:"航空便?それとも船便?"},
+ {w:"Vous pouvez le suivre en ligne.",ipa:"[vu puve lə sɥivʁ ɑ̃ liɲ]",pos:"会話",jp:"ネットで追跡できます",ex:"Vous pouvez le suivre en ligne.",exjp:"オンラインで追跡できます。"},
+ {w:"Pesez le paquet.",ipa:"[pəze lə pakɛ]",pos:"会話",jp:"小包を量ってください",ex:"On va peser le paquet.",exjp:"小包の重さを量ります。"}
+]};
+DECKS.scene.tabs["病院の受付で"]={label:"病院の受付で",items:[
+ {w:"J'ai rendez-vous à dix heures.",ipa:"[ʒe ʁɑ̃devu a diz‿œʁ]",pos:"会話",jp:"10時に予約があります",pri:1,ex:"Bonjour, j'ai rendez-vous à dix heures.",exjp:"10時に予約があります。"},
+ {w:"C'est ma première visite.",ipa:"[sɛ ma pʁəmjɛʁ vizit]",pos:"会話",jp:"初診です",ex:"C'est ma première visite ici.",exjp:"ここは初めての受診です。"},
+ {w:"Voici ma carte vitale.",ipa:"[vwasi ma kaʁt vital]",pos:"会話",jp:"健康保険証です",ex:"Voici ma carte vitale.",exjp:"こちらが健康保険証です。"},
+ {w:"Vous avez une mutuelle ?",ipa:"[vuz‿ave yn mytɥɛl]",pos:"会話",jp:"補完保険はお持ち?",ex:"Vous avez une mutuelle santé ?",exjp:"補完医療保険はお持ち?"},
+ {w:"Asseyez-vous en salle d'attente.",ipa:"[asɛje vuz‿ɑ̃ sal datɑ̃t]",pos:"会話",jp:"待合室でお座りください",ex:"Asseyez-vous en salle d'attente.",exjp:"待合室でお待ちください。"},
+ {w:"Le docteur va vous appeler.",ipa:"[lə dɔktœʁ va vuz‿aple]",pos:"会話",jp:"先生がお呼びします",ex:"Patientez, le docteur va vous appeler.",exjp:"少々お待ちを、先生が呼びます。"},
+ {w:"Remplissez ce questionnaire.",ipa:"[ʁɑ̃plise sə kɛstjɔnɛʁ]",pos:"会話",jp:"この問診票に記入を",ex:"Remplissez ce questionnaire médical.",exjp:"この問診票にご記入を。"},
+ {w:"C'est pour quel médecin ?",ipa:"[sɛ puʁ kɛl medsɛ̃]",pos:"会話",jp:"どの先生の診察?",ex:"C'est pour quel médecin ?",exjp:"どの先生にかかりますか?"},
+ {w:"Vous patientez un peu.",ipa:"[vu pasjɑ̃te œ̃ pø]",pos:"会話",jp:"少しお待ちください",ex:"Il y a du retard, vous patientez un peu.",exjp:"遅れています、少々お待ちを。"},
+ {w:"Prenez l'ascenseur, deuxième étage.",ipa:"[pʁəne lasɑ̃sœʁ døzjɛm‿etaʒ]",pos:"会話",jp:"エレベーターで3階へ",ex:"Le cabinet, prenez l'ascenseur, deuxième étage.",exjp:"診察室はエレベーターで3階。"}
+]};
+DECKS.scene.tabs["メガネ・コンタクトを作る"]={label:"メガネ・コンタクトを作る",items:[
+ {w:"Je voudrais des lunettes.",ipa:"[ʒə vudʁɛ de lynɛt]",pos:"会話",jp:"メガネを作りたい",pri:1,ex:"Bonjour, je voudrais des lunettes.",exjp:"メガネを作りたいのですが。"},
+ {w:"J'ai une ordonnance.",ipa:"[ʒe yn‿ɔʁdɔnɑ̃s]",pos:"会話",jp:"処方箋があります",ex:"J'ai une ordonnance de l'ophtalmo.",exjp:"眼科の処方箋があります。"},
+ {w:"Je vois flou de loin.",ipa:"[ʒə vwa flu də lwɛ̃]",pos:"会話",jp:"遠くがぼやけます",ex:"Je vois flou de loin.",exjp:"遠くがぼやけて見えます。"},
+ {w:"On peut faire un examen de vue ?",ipa:"[ɔ̃ pø fɛʁ œ̃n‿ɛɡzamɛ̃ də vy]",pos:"会話",jp:"視力検査できますか?",ex:"On peut faire un examen de vue ?",exjp:"視力検査をしてもらえますか?"},
+ {w:"Cette monture me va ?",ipa:"[sɛt mɔ̃tyʁ mə va]",pos:"会話",jp:"このフレーム似合う?",ex:"Cette monture me va bien ?",exjp:"このフレーム、似合いますか?"},
+ {w:"Vous avez des verres anti-reflets ?",ipa:"[vuz‿ave de vɛʁ ɑ̃ti ʁəflɛ]",pos:"会話",jp:"反射防止レンズはある?",ex:"Vous avez des verres anti-reflets ?",exjp:"反射防止レンズはありますか?"},
+ {w:"Je préfère des lentilles.",ipa:"[ʒə pʁefɛʁ de lɑ̃tij]",pos:"会話",jp:"コンタクトがいいです",ex:"Je préfère des lentilles de contact.",exjp:"コンタクトレンズがいいです。"},
+ {w:"Comment les entretenir ?",ipa:"[kɔmɑ̃ lez‿ɑ̃tʁətəniʁ]",pos:"会話",jp:"どう手入れすれば?",ex:"Les lentilles, comment les entretenir ?",exjp:"コンタクトはどう手入れする?"},
+ {w:"C'est prêt quand ?",ipa:"[sɛ pʁɛ kɑ̃]",pos:"会話",jp:"いつできますか?",ex:"Mes lunettes, c'est prêt quand ?",exjp:"メガネはいつできますか?"},
+ {w:"Mes lunettes sont cassées.",ipa:"[me lynɛt sɔ̃ kase]",pos:"会話",jp:"メガネが壊れました",ex:"Au secours, mes lunettes sont cassées.",exjp:"困った、メガネが壊れた。"}
+]};
+DECKS.scene.tabs["料理教室で"]={label:"料理教室で",items:[
+ {w:"On apprend à faire des crêpes.",ipa:"[ɔ̃n‿apʁɑ̃ a fɛʁ de kʁɛp]",pos:"会話",jp:"クレープの作り方を習う",pri:1,ex:"Aujourd'hui, on apprend à faire des crêpes.",exjp:"今日はクレープの作り方を習う。"},
+ {w:"Quels sont les ingrédients ?",ipa:"[kɛl sɔ̃ lez‿ɛ̃ɡʁedjɑ̃]",pos:"会話",jp:"材料は何ですか?",ex:"Quels sont les ingrédients de la recette ?",exjp:"このレシピの材料は?"},
+ {w:"Mélangez bien le tout.",ipa:"[melɑ̃ʒe bjɛ̃ lə tu]",pos:"会話",jp:"全部よく混ぜて",ex:"Mélangez bien le tout au fouet.",exjp:"泡立て器で全部よく混ぜて。"},
+ {w:"Mettez le four à 180 degrés.",ipa:"[mɛte lə fuʁ a sɑ̃ katʁəvɛ̃ dəɡʁe]",pos:"会話",jp:"オーブンを180度に",ex:"Mettez le four à 180 degrés.",exjp:"オーブンを180度に温めて。"},
+ {w:"Laissez reposer la pâte.",ipa:"[lɛse ʁəpoze la pat]",pos:"会話",jp:"生地を寝かせて",ex:"Laissez reposer la pâte une heure.",exjp:"生地を1時間寝かせて。"},
+ {w:"Goûtez et rectifiez.",ipa:"[ɡute e ʁɛktifje]",pos:"会話",jp:"味見して調整して",ex:"Goûtez et rectifiez l'assaisonnement.",exjp:"味見して味付けを調整して。"},
+ {w:"C'est plus dur que ça en a l'air.",ipa:"[sɛ ply dyʁ kə sa ɑ̃n‿a lɛʁ]",pos:"会話",jp:"見た目より難しい",ex:"C'est plus dur que ça en a l'air !",exjp:"見た目より難しいね!"},
+ {w:"On passe à la cuisson.",ipa:"[ɔ̃ pas a la kɥisɔ̃]",pos:"会話",jp:"焼く工程に入ろう",ex:"Maintenant, on passe à la cuisson.",exjp:"では焼く工程に入ろう。"},
+ {w:"Ça sent très bon.",ipa:"[sa sɑ̃ tʁɛ bɔ̃]",pos:"会話",jp:"とてもいい匂い",ex:"Mmm, ça sent très bon !",exjp:"うーん、とてもいい匂い!"},
+ {w:"À table, on déguste !",ipa:"[a tabl ɔ̃ deɡyst]",pos:"会話",jp:"さあ、味わおう!",ex:"C'est prêt, à table, on déguste !",exjp:"完成、さあ味わおう!"}
+]};
+DECKS.scene.tabs["言語交換・国際交流"]={label:"言語交換・国際交流",items:[
+ {w:"On fait un échange linguistique ?",ipa:"[ɔ̃ fɛ œ̃n‿eʃɑ̃ʒ lɛ̃ɡɥistik]",pos:"会話",jp:"言語交換しませんか?",pri:1,ex:"On fait un échange linguistique ?",exjp:"言語交換しませんか?"},
+ {w:"Tu parles quelles langues ?",ipa:"[ty paʁl kɛl lɑ̃ɡ]",pos:"会話",jp:"何語を話しますか?",ex:"Tu parles quelles langues ?",exjp:"何語を話せますか?"},
+ {w:"Je veux pratiquer le français.",ipa:"[ʒə vø pʁatike lə fʁɑ̃sɛ]",pos:"会話",jp:"フランス語を練習したい",ex:"Je veux pratiquer le français à l'oral.",exjp:"フランス語の会話を練習したい。"},
+ {w:"Corrige-moi si je me trompe.",ipa:"[kɔʁiʒ mwa si ʒə mə tʁɔ̃p]",pos:"会話",jp:"間違えたら直して",ex:"Corrige-moi si je me trompe.",exjp:"間違えたら直してね。"},
+ {w:"Comment on dit ça en français ?",ipa:"[kɔmɑ̃ ɔ̃ di sa ɑ̃ fʁɑ̃sɛ]",pos:"会話",jp:"これフランス語で何て言う?",ex:"Comment on dit ça en français ?",exjp:"これフランス語で何て言うの?"},
+ {w:"Tu peux répéter plus lentement ?",ipa:"[ty pø ʁepete ply lɑ̃tmɑ̃]",pos:"会話",jp:"もっとゆっくり言って?",ex:"Tu peux répéter plus lentement ?",exjp:"もっとゆっくり言ってくれる?"},
+ {w:"On se voit une fois par semaine ?",ipa:"[ɔ̃ sə vwa yn fwa paʁ səmɛn]",pos:"会話",jp:"週1回会いますか?",ex:"On se voit une fois par semaine ?",exjp:"週に1回会いましょうか?"},
+ {w:"Parle-moi de ton pays.",ipa:"[paʁl mwa də tɔ̃ pei]",pos:"会話",jp:"君の国の話をして",ex:"Parle-moi de ton pays et ta culture.",exjp:"君の国と文化の話をして。"},
+ {w:"C'est une belle culture.",ipa:"[sɛt‿yn bɛl kyltyʁ]",pos:"会話",jp:"素敵な文化だね",ex:"C'est une belle culture, vraiment.",exjp:"本当に素敵な文化だね。"},
+ {w:"On progresse ensemble.",ipa:"[ɔ̃ pʁɔɡʁɛs ɑ̃sɑ̃bl]",pos:"会話",jp:"一緒に上達しよう",ex:"Comme ça, on progresse ensemble.",exjp:"こうして一緒に上達しよう。"}
+]};
+DECKS.scene.tabs["ボードゲームで"]={label:"ボードゲームで",items:[
+ {w:"On fait une partie ?",ipa:"[ɔ̃ fɛ yn paʁti]",pos:"会話",jp:"一勝負する?",pri:1,ex:"On fait une partie de cartes ?",exjp:"トランプ一勝負する?"},
+ {w:"C'est à qui de jouer ?",ipa:"[sɛt‿a ki də ʒue]",pos:"会話",jp:"誰の番?",ex:"Alors, c'est à qui de jouer ?",exjp:"で、誰の番?"},
+ {w:"Lance le dé.",ipa:"[lɑ̃s lə de]",pos:"会話",jp:"サイコロを振って",ex:"À toi, lance le dé.",exjp:"君の番、サイコロを振って。"},
+ {w:"Tu triches !",ipa:"[ty tʁiʃ]",pos:"会話",jp:"ずるしてる!",ex:"Eh, tu triches !",exjp:"おい、ずるだぞ!"},
+ {w:"Avance de trois cases.",ipa:"[avɑ̃s də tʁwa kaz]",pos:"会話",jp:"3マス進んで",ex:"Tu fais trois, avance de trois cases.",exjp:"3が出た、3マス進んで。"},
+ {w:"Je passe mon tour.",ipa:"[ʒə pas mɔ̃ tuʁ]",pos:"会話",jp:"パスします",ex:"Je n'ai rien, je passe mon tour.",exjp:"何もない、パスする。"},
+ {w:"Pioche une carte.",ipa:"[pjɔʃ yn kaʁt]",pos:"会話",jp:"カードを引いて",ex:"À toi de piocher une carte.",exjp:"君がカードを引く番。"},
+ {w:"J'ai gagné !",ipa:"[ʒe ɡaɲe]",pos:"会話",jp:"勝った!",ex:"Et voilà, j'ai gagné !",exjp:"ほら、勝った!"},
+ {w:"On relit les règles.",ipa:"[ɔ̃ ʁəli le ʁɛɡl]",pos:"会話",jp:"ルールを読み直そう",ex:"On relit les règles du jeu.",exjp:"ゲームのルールを読み直そう。"},
+ {w:"La revanche ?",ipa:"[la ʁəvɑ̃ʃ]",pos:"会話",jp:"リベンジする?",ex:"Allez, la revanche ?",exjp:"さあ、リベンジ戦する?"}
+]};
+DECKS.scene.tabs["キャンプ場で"]={label:"キャンプ場で",items:[
+ {w:"On plante la tente ici ?",ipa:"[ɔ̃ plɑ̃t la tɑ̃t isi]",pos:"会話",jp:"ここにテントを張る?",pri:1,ex:"C'est plat, on plante la tente ici ?",exjp:"平らだし、ここにテント張る?"},
+ {w:"Où est le point d'eau ?",ipa:"[u ɛ lə pwɛ̃ do]",pos:"会話",jp:"水場はどこ?",ex:"Excusez-moi, où est le point d'eau ?",exjp:"すみません、水場はどこ?"},
+ {w:"Il faut allumer le feu.",ipa:"[il fo alyme lə fø]",pos:"会話",jp:"火をおこさなきゃ",ex:"Pour le dîner, il faut allumer le feu.",exjp:"夕食のため火をおこそう。"},
+ {w:"Tu as le sac de couchage ?",ipa:"[ty a lə sak də kuʃaʒ]",pos:"会話",jp:"寝袋ある?",ex:"Tu as pris le sac de couchage ?",exjp:"寝袋は持ってきた?"},
+ {w:"Les sanitaires sont par là.",ipa:"[le sanitɛʁ sɔ̃ paʁ la]",pos:"会話",jp:"トイレ・水回りはあちら",ex:"Les sanitaires sont par là, à droite.",exjp:"トイレは右のあちらです。"},
+ {w:"Attention aux moustiques.",ipa:"[atɑ̃sjɔ̃ o mustik]",pos:"会話",jp:"蚊に注意",ex:"Le soir, attention aux moustiques.",exjp:"夜は蚊に注意。"},
+ {w:"On fait griller des marshmallows.",ipa:"[ɔ̃ fɛ ɡʁije de maʁʃmalo]",pos:"会話",jp:"マシュマロを焼こう",ex:"Au feu de camp, on fait griller des marshmallows.",exjp:"焚き火でマシュマロを焼こう。"},
+ {w:"La nuit, il fait frais.",ipa:"[la nɥi il fɛ fʁɛ]",pos:"会話",jp:"夜は涼しい",ex:"En montagne, la nuit, il fait frais.",exjp:"山の夜は涼しい。"},
+ {w:"On range le campement.",ipa:"[ɔ̃ ʁɑ̃ʒ lə kɑ̃pmɑ̃]",pos:"会話",jp:"キャンプを撤収する",ex:"Demain, on range le campement.",exjp:"明日、キャンプを撤収する。"},
+ {w:"Quelle belle nuit étoilée !",ipa:"[kɛl bɛl nɥi etwale]",pos:"会話",jp:"なんて星空!",ex:"Regarde, quelle belle nuit étoilée !",exjp:"見て、なんてきれいな星空!"}
+]};
+DECKS.scene.tabs["釣り場で"]={label:"釣り場で",items:[
+ {w:"Ça mord ?",ipa:"[sa mɔʁ]",pos:"会話",jp:"釣れてる?(食いついてる?)",pri:1,ex:"Alors, ça mord aujourd'hui ?",exjp:"で、今日は釣れてる?"},
+ {w:"J'ai une touche !",ipa:"[ʒe yn tuʃ]",pos:"会話",jp:"アタリが来た!",ex:"Attends, j'ai une touche !",exjp:"待って、アタリが来た!"},
+ {w:"Quel appât tu utilises ?",ipa:"[kɛl apɑ ty ytiliz]",pos:"会話",jp:"どんな餌を使う?",ex:"Quel appât tu utilises ?",exjp:"どんな餌を使ってる?"},
+ {w:"C'est interdit de pêcher ici ?",ipa:"[sɛt‿ɛ̃tɛʁdi də peʃe isi]",pos:"会話",jp:"ここ釣り禁止?",ex:"C'est interdit de pêcher ici ?",exjp:"ここは釣り禁止ですか?"},
+ {w:"Il faut un permis de pêche.",ipa:"[il fo œ̃ pɛʁmi də pɛʃ]",pos:"会話",jp:"遊漁券が必要です",ex:"Pour pêcher, il faut un permis de pêche.",exjp:"釣りには遊漁券が要る。"},
+ {w:"J'en ai attrapé un gros !",ipa:"[ʒɑ̃n‿e atʁape œ̃ ɡʁo]",pos:"会話",jp:"大物が釣れた!",ex:"Regarde, j'en ai attrapé un gros !",exjp:"見て、大物が釣れた!"},
+ {w:"On le relâche ?",ipa:"[ɔ̃ lə ʁəlɑʃ]",pos:"会話",jp:"逃がす?",ex:"Il est petit, on le relâche ?",exjp:"小さいし、逃がす?"},
+ {w:"La rivière est poissonneuse.",ipa:"[la ʁivjɛʁ ɛ pwasɔnøz]",pos:"会話",jp:"この川は魚が多い",ex:"Ici, la rivière est poissonneuse.",exjp:"ここの川は魚が多い。"},
+ {w:"Sois patient, ça va venir.",ipa:"[swa pasjɑ̃ sa va vəniʁ]",pos:"会話",jp:"我慢して、そのうち来る",ex:"Sois patient, ça va venir.",exjp:"我慢して、そのうち釣れるよ。"},
+ {w:"Bredouille aujourd'hui.",ipa:"[bʁəduj oʒuʁdɥi]",pos:"会話",jp:"今日はボウズ(釣果ゼロ)だ",ex:"Tant pis, bredouille aujourd'hui.",exjp:"残念、今日はボウズだ。"}
+]};
+DECKS.scene.tabs["動物園・水族館で"]={label:"動物園・水族館で",items:[
+ {w:"Regarde les éléphants !",ipa:"[ʁəɡaʁd lez‿elefɑ̃]",pos:"会話",jp:"象を見て!",pri:1,ex:"Regarde les éléphants, ils sont énormes !",exjp:"象を見て、すごく大きい!"},
+ {w:"Où est l'aquarium ?",ipa:"[u ɛ lakwaʁjɔm]",pos:"会話",jp:"水族館はどこ?",ex:"Excusez-moi, où est l'aquarium ?",exjp:"すみません、水族館はどこ?"},
+ {w:"À quelle heure le repas des phoques ?",ipa:"[a kɛl œʁ lə ʁəpa de fɔk]",pos:"会話",jp:"アザラシの餌やりは何時?",ex:"À quelle heure le repas des phoques ?",exjp:"アザラシの餌やりは何時?"},
+ {w:"Ne nourrissez pas les animaux.",ipa:"[nə nuʁise pa lez‿animo]",pos:"会話",jp:"動物に餌を与えないで",ex:"S'il vous plaît, ne nourrissez pas les animaux.",exjp:"動物に餌を与えないでください。"},
+ {w:"Les requins font peur.",ipa:"[le ʁəkɛ̃ fɔ̃ pœʁ]",pos:"会話",jp:"サメは怖い",ex:"Les requins font peur, hein ?",exjp:"サメって怖いよね?"},
+ {w:"Le bébé panda est trop mignon.",ipa:"[lə bebe pɑ̃da ɛ tʁo miɲɔ̃]",pos:"会話",jp:"赤ちゃんパンダが可愛すぎ",ex:"Le bébé panda est trop mignon !",exjp:"赤ちゃんパンダ可愛すぎ!"},
+ {w:"On peut toucher les étoiles de mer ?",ipa:"[ɔ̃ pø tuʃe lez‿etwal də mɛʁ]",pos:"会話",jp:"ヒトデに触れる?",ex:"On peut toucher les étoiles de mer ?",exjp:"ヒトデに触ってもいい?"},
+ {w:"Il y a un spectacle de dauphins.",ipa:"[il i a œ̃ spɛktakl də dofɛ̃]",pos:"会話",jp:"イルカショーがある",ex:"À quinze heures, il y a un spectacle de dauphins.",exjp:"15時にイルカショーがある。"},
+ {w:"Reste près de moi.",ipa:"[ʁɛst pʁɛ də mwa]",pos:"会話",jp:"そばを離れないで",ex:"Il y a du monde, reste près de moi.",exjp:"人が多い、そばにいて。"},
+ {w:"C'était une super journée.",ipa:"[setɛt‿yn sypɛʁ ʒuʁne]",pos:"会話",jp:"最高の一日だった",ex:"C'était une super journée au zoo.",exjp:"動物園、最高の一日だった。"}
+]};
+DECKS.scene.tabs["遊園地で"]={label:"遊園地で",items:[
+ {w:"On fait quelle attraction ?",ipa:"[ɔ̃ fɛ kɛl atʁaksjɔ̃]",pos:"会話",jp:"どのアトラクションにする?",pri:1,ex:"On fait quelle attraction d'abord ?",exjp:"まずどのアトラクション?"},
+ {w:"J'ai peur des montagnes russes.",ipa:"[ʒe pœʁ de mɔ̃taɲ ʁys]",pos:"会話",jp:"ジェットコースターが怖い",ex:"Vas-y sans moi, j'ai peur des montagnes russes.",exjp:"先行って、コースター怖い。"},
+ {w:"Il faut combien de tickets ?",ipa:"[il fo kɔ̃bjɛ̃ də tikɛ]",pos:"会話",jp:"チケットは何枚要る?",ex:"Pour ce manège, il faut combien de tickets ?",exjp:"この乗り物、チケット何枚?"},
+ {w:"La file d'attente est longue.",ipa:"[la fil datɑ̃t ɛ lɔ̃ɡ]",pos:"会話",jp:"行列が長い",ex:"Oh non, la file d'attente est longue.",exjp:"うわ、行列が長い。"},
+ {w:"On se retrouve à la sortie.",ipa:"[ɔ̃ sə ʁətʁuv a la sɔʁti]",pos:"会話",jp:"出口で会おう",ex:"On se retrouve à la sortie du manège.",exjp:"乗り物の出口で会おう。"},
+ {w:"Tu veux une barbe à papa ?",ipa:"[ty vø yn baʁb a papa]",pos:"会話",jp:"綿あめ食べる?",ex:"Tu veux une barbe à papa ?",exjp:"綿あめ食べる?"},
+ {w:"C'était à couper le souffle !",ipa:"[setɛt‿a kupe lə sufl]",pos:"会話",jp:"息をのむほどだった!",ex:"Ce grand huit, c'était à couper le souffle !",exjp:"あのコースター、息をのんだ!"},
+ {w:"On a le vertige.",ipa:"[ɔ̃n‿a lə vɛʁtiʒ]",pos:"会話",jp:"目が回る・くらくらする",ex:"Là-haut, on a le vertige.",exjp:"あの高さ、くらくらする。"},
+ {w:"Encore un tour !",ipa:"[ɑ̃kɔʁ œ̃ tuʁ]",pos:"会話",jp:"もう一回乗ろう!",ex:"C'était génial, encore un tour !",exjp:"最高、もう一回!"},
+ {w:"Mes jambes tremblent.",ipa:"[me ʒɑ̃b tʁɑ̃bl]",pos:"会話",jp:"足がガクガクだ",ex:"Après ça, mes jambes tremblent.",exjp:"あの後、足がガクガクだ。"}
+]};
+DECKS.theme.tabs["野生動物・サバンナ"]={label:"野生動物・サバンナ",items:[
+ {w:"un lion",ipa:"[œ̃ ljɔ̃]",pos:"名詞",jp:"ライオン",pri:1,ex:"Le lion rugit.",exjp:"ライオンが吠える。"},
+ {w:"un tigre",ipa:"[œ̃ tiɡʁ]",pos:"名詞",jp:"トラ",pri:1,ex:"un tigre du Bengale.",exjp:"ベンガルトラ。"},
+ {w:"un éléphant",ipa:"[œ̃n‿elefɑ̃]",pos:"名詞",jp:"象",pri:1,ex:"un éléphant d'Afrique.",exjp:"アフリカ象。"},
+ {w:"une girafe",ipa:"[yn ʒiʁaf]",pos:"名詞",jp:"キリン",ex:"le long cou de la girafe.",exjp:"キリンの長い首。"},
+ {w:"un singe",ipa:"[œ̃ sɛ̃ʒ]",pos:"名詞",jp:"サル",pri:1,ex:"un singe agile.",exjp:"すばしこいサル。"},
+ {w:"un zèbre",ipa:"[œ̃ zɛbʁ]",pos:"名詞",jp:"シマウマ",ex:"les rayures d'un zèbre.",exjp:"シマウマの縞。"},
+ {w:"un rhinocéros",ipa:"[œ̃ ʁinɔseʁos]",pos:"名詞",jp:"サイ",ex:"la corne d'un rhinocéros.",exjp:"サイの角。"},
+ {w:"un crocodile",ipa:"[œ̃ kʁɔkɔdil]",pos:"名詞",jp:"ワニ",ex:"un crocodile dans le fleuve.",exjp:"川にいるワニ。"},
+ {w:"un serpent",ipa:"[œ̃ sɛʁpɑ̃]",pos:"名詞",jp:"ヘビ",pri:1,ex:"un serpent venimeux.",exjp:"毒ヘビ。"},
+ {w:"un léopard",ipa:"[œ̃ leɔpaʁ]",pos:"名詞",jp:"ヒョウ",ex:"un léopard tacheté.",exjp:"斑点のあるヒョウ。"},
+ {w:"un gorille",ipa:"[œ̃ ɡɔʁij]",pos:"名詞",jp:"ゴリラ",ex:"un gorille puissant.",exjp:"力強いゴリラ。"},
+ {w:"une hyène",ipa:"[yn jɛn]",pos:"名詞",jp:"ハイエナ",ex:"le rire d'une hyène.",exjp:"ハイエナの鳴き声。"},
+ {w:"un kangourou",ipa:"[œ̃ kɑ̃ɡuʁu]",pos:"名詞",jp:"カンガルー",ex:"un kangourou qui saute.",exjp:"跳ねるカンガルー。"},
+ {w:"un hippopotame",ipa:"[œ̃n‿ipɔpɔtam]",pos:"名詞",jp:"カバ",ex:"un hippopotame dans l'eau.",exjp:"水中のカバ。"},
+ {w:"sauvage",ipa:"[sovaʒ]",pos:"形容詞",jp:"野生の",pri:1,ex:"un animal sauvage.",exjp:"野生動物。"},
+ {w:"un troupeau",ipa:"[œ̃ tʁupo]",pos:"名詞",jp:"群れ",ex:"un troupeau de buffles.",exjp:"バッファローの群れ。"}
+]};
+DECKS.theme.tabs["鳥の種類"]={label:"鳥の種類",items:[
+ {w:"un moineau",ipa:"[œ̃ mwano]",pos:"名詞",jp:"スズメ",ex:"un moineau sur le toit.",exjp:"屋根のスズメ。"},
+ {w:"un pigeon",ipa:"[œ̃ piʒɔ̃]",pos:"名詞",jp:"ハト",pri:1,ex:"des pigeons sur la place.",exjp:"広場のハト。"},
+ {w:"un aigle",ipa:"[œ̃n‿ɛɡl]",pos:"名詞",jp:"ワシ",ex:"un aigle royal.",exjp:"イヌワシ。"},
+ {w:"un hibou",ipa:"[œ̃n‿ibu]",pos:"名詞",jp:"フクロウ",ex:"un hibou la nuit.",exjp:"夜のフクロウ。"},
+ {w:"un canard",ipa:"[œ̃ kanaʁ]",pos:"名詞",jp:"アヒル・カモ",pri:1,ex:"un canard sur l'étang.",exjp:"池のカモ。"},
+ {w:"une oie",ipa:"[yn wa]",pos:"名詞",jp:"ガチョウ",ex:"une oie blanche.",exjp:"白いガチョウ。"},
+ {w:"une poule",ipa:"[yn pul]",pos:"名詞",jp:"ニワトリ(雌鶏)",pri:1,ex:"une poule pondeuse.",exjp:"卵を産む雌鶏。"},
+ {w:"un coq",ipa:"[œ̃ kɔk]",pos:"名詞",jp:"おんどり",ex:"Le coq chante.",exjp:"おんどりが鳴く。"},
+ {w:"un perroquet",ipa:"[œ̃ peʁɔkɛ]",pos:"名詞",jp:"オウム",ex:"un perroquet qui parle.",exjp:"しゃべるオウム。"},
+ {w:"un cygne",ipa:"[œ̃ siɲ]",pos:"名詞",jp:"白鳥",ex:"un cygne gracieux.",exjp:"優雅な白鳥。"},
+ {w:"une mouette",ipa:"[yn mwɛt]",pos:"名詞",jp:"カモメ",ex:"des mouettes au port.",exjp:"港のカモメ。"},
+ {w:"un corbeau",ipa:"[œ̃ kɔʁbo]",pos:"名詞",jp:"カラス",ex:"un corbeau noir.",exjp:"黒いカラス。"},
+ {w:"une autruche",ipa:"[yn‿otʁyʃ]",pos:"名詞",jp:"ダチョウ",ex:"une autruche court vite.",exjp:"ダチョウは速く走る。"},
+ {w:"un pingouin",ipa:"[œ̃ pɛ̃ɡwɛ̃]",pos:"名詞",jp:"ペンギン",ex:"un pingouin sur la banquise.",exjp:"氷上のペンギン。"},
+ {w:"une plume",ipa:"[yn plym]",pos:"名詞",jp:"羽・羽毛",ex:"une plume légère.",exjp:"軽い羽。"},
+ {w:"voler",ipa:"[vɔle]",pos:"動詞",jp:"飛ぶ",pri:1,ex:"L'oiseau s'envole.",exjp:"鳥が飛び立つ。"}
+]};
+DECKS.theme.tabs["虫・小動物"]={label:"虫・小動物",items:[
+ {w:"une fourmi",ipa:"[yn fuʁmi]",pos:"名詞",jp:"アリ",pri:1,ex:"une file de fourmis.",exjp:"アリの行列。"},
+ {w:"une abeille",ipa:"[yn‿abɛj]",pos:"名詞",jp:"ミツバチ",ex:"une abeille butine.",exjp:"ミツバチが蜜を集める。"},
+ {w:"un papillon",ipa:"[œ̃ papijɔ̃]",pos:"名詞",jp:"チョウ",pri:1,ex:"un papillon coloré.",exjp:"色とりどりのチョウ。"},
+ {w:"une mouche",ipa:"[yn muʃ]",pos:"名詞",jp:"ハエ",ex:"chasser une mouche.",exjp:"ハエを追い払う。"},
+ {w:"un moustique",ipa:"[œ̃ mustik]",pos:"名詞",jp:"蚊",pri:1,ex:"une piqûre de moustique.",exjp:"蚊に刺された跡。"},
+ {w:"une araignée",ipa:"[yn‿aʁɛɲe]",pos:"名詞",jp:"クモ",ex:"une toile d'araignée.",exjp:"クモの巣。"},
+ {w:"une coccinelle",ipa:"[yn kɔksinɛl]",pos:"名詞",jp:"テントウムシ",ex:"une coccinelle à points.",exjp:"星のあるテントウムシ。"},
+ {w:"un escargot",ipa:"[œ̃n‿ɛskaʁɡo]",pos:"名詞",jp:"カタツムリ",ex:"un escargot après la pluie.",exjp:"雨上がりのカタツムリ。"},
+ {w:"une chenille",ipa:"[yn ʃənij]",pos:"名詞",jp:"毛虫・イモムシ",ex:"une chenille verte.",exjp:"緑のイモムシ。"},
+ {w:"une libellule",ipa:"[yn libelyl]",pos:"名詞",jp:"トンボ",ex:"une libellule au-dessus de l'eau.",exjp:"水面上のトンボ。"},
+ {w:"une grenouille",ipa:"[yn ɡʁənuj]",pos:"名詞",jp:"カエル",ex:"une grenouille verte.",exjp:"緑のカエル。"},
+ {w:"une souris",ipa:"[yn suʁi]",pos:"名詞",jp:"ネズミ",pri:1,ex:"une petite souris.",exjp:"小さなネズミ。"},
+ {w:"un lapin",ipa:"[œ̃ lapɛ̃]",pos:"名詞",jp:"ウサギ",pri:1,ex:"un lapin blanc.",exjp:"白いウサギ。"},
+ {w:"un hérisson",ipa:"[œ̃n‿eʁisɔ̃]",pos:"名詞",jp:"ハリネズミ",ex:"les piquants d'un hérisson.",exjp:"ハリネズミの針。"},
+ {w:"piquer",ipa:"[pike]",pos:"動詞",jp:"刺す",ex:"Le moustique pique.",exjp:"蚊が刺す。"},
+ {w:"bourdonner",ipa:"[buʁdɔne]",pos:"動詞",jp:"ブンブン音を立てる",ex:"Une abeille bourdonne.",exjp:"ミツバチがブンブン飛ぶ。"}
+]};
+DECKS.theme.tabs["魚介・甲殻類"]={label:"魚介・甲殻類",items:[
+ {w:"une crevette",ipa:"[yn kʁəvɛt]",pos:"名詞",jp:"エビ",pri:1,ex:"des crevettes grillées.",exjp:"焼きエビ。"},
+ {w:"un crabe",ipa:"[œ̃ kʁab]",pos:"名詞",jp:"カニ",ex:"un crabe sur la plage.",exjp:"砂浜のカニ。"},
+ {w:"un homard",ipa:"[œ̃n‿ɔmaʁ]",pos:"名詞",jp:"ロブスター",ex:"un homard grillé.",exjp:"焼きロブスター。"},
+ {w:"une huître",ipa:"[yn‿ɥitʁ]",pos:"名詞",jp:"牡蠣",ex:"une douzaine d'huîtres.",exjp:"牡蠣12個。"},
+ {w:"une moule",ipa:"[yn mul]",pos:"名詞",jp:"ムール貝",ex:"des moules marinières.",exjp:"ムール貝の白ワイン蒸し。"},
+ {w:"un calmar",ipa:"[œ̃ kalmaʁ]",pos:"名詞",jp:"イカ",ex:"des calmars frits.",exjp:"イカフライ。"},
+ {w:"une pieuvre",ipa:"[yn pjœvʁ]",pos:"名詞",jp:"タコ",ex:"les tentacules d'une pieuvre.",exjp:"タコの足。"},
+ {w:"un thon",ipa:"[œ̃ tɔ̃]",pos:"名詞",jp:"マグロ",pri:1,ex:"un steak de thon.",exjp:"マグロのステーキ。"},
+ {w:"une sardine",ipa:"[yn saʁdin]",pos:"名詞",jp:"イワシ",ex:"des sardines grillées.",exjp:"イワシの塩焼き。"},
+ {w:"un cabillaud",ipa:"[œ̃ kabijo]",pos:"名詞",jp:"タラ",ex:"un filet de cabillaud.",exjp:"タラの切り身。"},
+ {w:"une coquille Saint-Jacques",ipa:"[yn kɔkij sɛ̃ ʒak]",pos:"名詞",jp:"ホタテ",ex:"des coquilles Saint-Jacques poêlées.",exjp:"ホタテのソテー。"},
+ {w:"un poulpe",ipa:"[œ̃ pulp]",pos:"名詞",jp:"タコ",ex:"une salade de poulpe.",exjp:"タコのサラダ。"},
+ {w:"une sole",ipa:"[yn sɔl]",pos:"名詞",jp:"舌平目",ex:"une sole meunière.",exjp:"舌平目のムニエル。"},
+ {w:"une anguille",ipa:"[yn‿ɑ̃ɡij]",pos:"名詞",jp:"ウナギ",ex:"une anguille fumée.",exjp:"ウナギの燻製。"},
+ {w:"frais",ipa:"[fʁɛ]",pos:"形容詞",jp:"新鮮な",pri:1,ex:"du poisson frais.",exjp:"新鮮な魚。"},
+ {w:"les fruits de mer",ipa:"[le fʁɥi də mɛʁ]",pos:"名詞",jp:"シーフード・魚介",ex:"un plateau de fruits de mer.",exjp:"魚介の盛り合わせ。"}
+]};
+DECKS.theme.tabs["ハーブ・香草"]={label:"ハーブ・香草",items:[
+ {w:"le basilic",ipa:"[lə bazilik]",pos:"名詞",jp:"バジル",ex:"du basilic frais.",exjp:"生のバジル。"},
+ {w:"le thym",ipa:"[lə tɛ̃]",pos:"名詞",jp:"タイム",ex:"une branche de thym.",exjp:"タイム一枝。"},
+ {w:"le romarin",ipa:"[lə ʁɔmaʁɛ̃]",pos:"名詞",jp:"ローズマリー",ex:"de l'agneau au romarin.",exjp:"ローズマリー風味の子羊。"},
+ {w:"la menthe",ipa:"[la mɑ̃t]",pos:"名詞",jp:"ミント",pri:1,ex:"un thé à la menthe.",exjp:"ミントティー。"},
+ {w:"le persil",ipa:"[lə pɛʁsi]",pos:"名詞",jp:"パセリ",ex:"du persil haché.",exjp:"刻んだパセリ。"},
+ {w:"la coriandre",ipa:"[la kɔʁjɑ̃dʁ]",pos:"名詞",jp:"パクチー・コリアンダー",ex:"de la coriandre fraîche.",exjp:"生のパクチー。"},
+ {w:"la ciboulette",ipa:"[la sibulɛt]",pos:"名詞",jp:"あさつき・チャイブ",ex:"de la ciboulette ciselée.",exjp:"刻んだあさつき。"},
+ {w:"l'origan",ipa:"[lɔʁiɡɑ̃]",pos:"名詞",jp:"オレガノ",ex:"une pizza à l'origan.",exjp:"オレガノ入りピザ。"},
+ {w:"le laurier",ipa:"[lə lɔʁje]",pos:"名詞",jp:"ローリエ・月桂樹",ex:"une feuille de laurier.",exjp:"ローリエの葉。"},
+ {w:"l'estragon",ipa:"[lɛstʁaɡɔ̃]",pos:"名詞",jp:"タラゴン",ex:"une sauce à l'estragon.",exjp:"タラゴンソース。"},
+ {w:"l'aneth",ipa:"[lanɛt]",pos:"名詞",jp:"ディル",ex:"du saumon à l'aneth.",exjp:"ディル風味のサーモン。"},
+ {w:"la sauge",ipa:"[la soʒ]",pos:"名詞",jp:"セージ",ex:"des feuilles de sauge.",exjp:"セージの葉。"},
+ {w:"aromatique",ipa:"[aʁɔmatik]",pos:"形容詞",jp:"芳香のある",ex:"des plantes aromatiques.",exjp:"香りのある植物。"},
+ {w:"séché",ipa:"[seʃe]",pos:"形容詞",jp:"乾燥した",ex:"des herbes séchées.",exjp:"乾燥ハーブ。"},
+ {w:"ciseler",ipa:"[sizle]",pos:"動詞",jp:"(ハーブを)細かく刻む",ex:"ciseler du persil.",exjp:"パセリを刻む。"},
+ {w:"cultiver",ipa:"[kyltive]",pos:"動詞",jp:"栽培する",ex:"cultiver des herbes.",exjp:"ハーブを育てる。"}
+]};
+DECKS.theme.tabs["南国フルーツ・ベリー"]={label:"南国フルーツ・ベリー",items:[
+ {w:"une mangue",ipa:"[yn mɑ̃ɡ]",pos:"名詞",jp:"マンゴー",ex:"une mangue bien mûre.",exjp:"よく熟したマンゴー。"},
+ {w:"un ananas",ipa:"[œ̃n‿anana]",pos:"名詞",jp:"パイナップル",ex:"une tranche d'ananas.",exjp:"パイナップルの輪切り。"},
+ {w:"une banane",ipa:"[yn banan]",pos:"名詞",jp:"バナナ",pri:1,ex:"une banane bien mûre.",exjp:"よく熟したバナナ。"},
+ {w:"une noix de coco",ipa:"[yn nwa də kɔko]",pos:"名詞",jp:"ココナッツ",ex:"du lait de noix de coco.",exjp:"ココナッツミルク。"},
+ {w:"un fruit de la passion",ipa:"[œ̃ fʁɥi də la pasjɔ̃]",pos:"名詞",jp:"パッションフルーツ",ex:"un jus de fruit de la passion.",exjp:"パッションフルーツジュース。"},
+ {w:"une papaye",ipa:"[yn papaj]",pos:"名詞",jp:"パパイヤ",ex:"une papaye juteuse.",exjp:"ジューシーなパパイヤ。"},
+ {w:"une goyave",ipa:"[yn ɡɔjav]",pos:"名詞",jp:"グアバ",ex:"un jus de goyave.",exjp:"グアバジュース。"},
+ {w:"un litchi",ipa:"[œ̃ litʃi]",pos:"名詞",jp:"ライチ",ex:"des litchis frais.",exjp:"生のライチ。"},
+ {w:"une fraise",ipa:"[yn fʁɛz]",pos:"名詞",jp:"イチゴ",pri:1,ex:"une tarte aux fraises.",exjp:"イチゴのタルト。"},
+ {w:"une framboise",ipa:"[yn fʁɑ̃bwaz]",pos:"名詞",jp:"ラズベリー",ex:"un coulis de framboise.",exjp:"ラズベリーソース。"},
+ {w:"une myrtille",ipa:"[yn miʁtij]",pos:"名詞",jp:"ブルーベリー",ex:"un muffin aux myrtilles.",exjp:"ブルーベリーマフィン。"},
+ {w:"une mûre",ipa:"[yn myʁ]",pos:"名詞",jp:"ブラックベリー・クワの実",ex:"de la confiture de mûres.",exjp:"ブラックベリージャム。"},
+ {w:"une groseille",ipa:"[yn ɡʁozɛj]",pos:"名詞",jp:"スグリ",ex:"des groseilles acidulées.",exjp:"甘酸っぱいスグリ。"},
+ {w:"mûr",ipa:"[myʁ]",pos:"形容詞",jp:"熟した",ex:"un fruit bien mûr.",exjp:"よく熟した果物。"},
+ {w:"exotique",ipa:"[ɛɡzɔtik]",pos:"形容詞",jp:"エキゾチックな・南国の",ex:"des fruits exotiques.",exjp:"南国の果物。"},
+ {w:"acidulé",ipa:"[asidyle]",pos:"形容詞",jp:"甘酸っぱい",ex:"un goût acidulé.",exjp:"甘酸っぱい味。"}
+]};
+DECKS.theme.tabs["朝食・ブランチ"]={label:"朝食・ブランチ",items:[
+ {w:"un café",ipa:"[œ̃ kafe]",pos:"名詞",jp:"コーヒー",pri:1,ex:"un café noir.",exjp:"ブラックコーヒー。"},
+ {w:"une tartine",ipa:"[yn taʁtin]",pos:"名詞",jp:"バタートースト",ex:"une tartine de confiture.",exjp:"ジャムを塗ったトースト。"},
+ {w:"de la confiture",ipa:"[də la kɔ̃fityʁ]",pos:"名詞",jp:"ジャム",pri:1,ex:"de la confiture de fraises.",exjp:"イチゴジャム。"},
+ {w:"un œuf",ipa:"[œ̃n‿œf]",pos:"名詞",jp:"卵",pri:1,ex:"un œuf au plat.",exjp:"目玉焼き。"},
+ {w:"du jus d'orange",ipa:"[dy ʒy dɔʁɑ̃ʒ]",pos:"名詞",jp:"オレンジジュース",ex:"un verre de jus d'orange.",exjp:"オレンジジュース一杯。"},
+ {w:"des céréales",ipa:"[de seʁeal]",pos:"名詞",jp:"シリアル",ex:"un bol de céréales.",exjp:"シリアル一杯。"},
+ {w:"un yaourt",ipa:"[œ̃ jauʁt]",pos:"名詞",jp:"ヨーグルト",pri:1,ex:"un yaourt nature.",exjp:"プレーンヨーグルト。"},
+ {w:"du miel",ipa:"[dy mjɛl]",pos:"名詞",jp:"はちみつ",ex:"du pain au miel.",exjp:"はちみつを塗ったパン。"},
+ {w:"un pain au chocolat",ipa:"[œ̃ pɛ̃ o ʃɔkɔla]",pos:"名詞",jp:"パン・オ・ショコラ",ex:"un pain au chocolat chaud.",exjp:"温かいパン・オ・ショコラ。"},
+ {w:"un bol de lait",ipa:"[œ̃ bɔl də lɛ]",pos:"名詞",jp:"ミルク一杯",ex:"un bol de lait chaud.",exjp:"温かいミルク一杯。"},
+ {w:"un œuf à la coque",ipa:"[œ̃n‿œf a la kɔk]",pos:"名詞",jp:"半熟卵",ex:"un œuf à la coque et des mouillettes.",exjp:"半熟卵とパンのスティック。"},
+ {w:"des œufs brouillés",ipa:"[dez‿ø bʁuje]",pos:"名詞",jp:"スクランブルエッグ",ex:"des œufs brouillés au beurre.",exjp:"バター入りスクランブルエッグ。"},
+ {w:"du pain grillé",ipa:"[dy pɛ̃ ɡʁije]",pos:"名詞",jp:"トースト",ex:"du pain grillé croustillant.",exjp:"サクサクのトースト。"},
+ {w:"prendre son petit-déjeuner",ipa:"[pʁɑ̃dʁ sɔ̃ pti deʒœne]",pos:"表現",jp:"朝食をとる",pri:1,ex:"Je prends mon petit-déjeuner à sept heures.",exjp:"7時に朝食をとる。"},
+ {w:"copieux",ipa:"[kɔpjø]",pos:"形容詞",jp:"ボリュームのある",ex:"un petit-déjeuner copieux.",exjp:"ボリュームのある朝食。"},
+ {w:"un brunch",ipa:"[œ̃ bʁœntʃ]",pos:"名詞",jp:"ブランチ",ex:"un brunch le dimanche.",exjp:"日曜のブランチ。"}
+]};
+DECKS.theme.tabs["コーヒー・お茶"]={label:"コーヒー・お茶",items:[
+ {w:"un expresso",ipa:"[œ̃n‿ɛkspʁɛso]",pos:"名詞",jp:"エスプレッソ",ex:"un expresso bien chaud.",exjp:"熱々のエスプレッソ。"},
+ {w:"un café au lait",ipa:"[œ̃ kafe o lɛ]",pos:"名詞",jp:"カフェオレ",pri:1,ex:"un grand café au lait.",exjp:"大きめのカフェオレ。"},
+ {w:"un cappuccino",ipa:"[œ̃ kaputʃino]",pos:"名詞",jp:"カプチーノ",ex:"un cappuccino mousseux.",exjp:"泡立ったカプチーノ。"},
+ {w:"un déca",ipa:"[œ̃ deka]",pos:"名詞",jp:"カフェインレス",ex:"un déca, s'il vous plaît.",exjp:"カフェインレスをお願い。"},
+ {w:"un thé vert",ipa:"[œ̃ te vɛʁ]",pos:"名詞",jp:"緑茶",pri:1,ex:"un thé vert japonais.",exjp:"日本の緑茶。"},
+ {w:"un thé noir",ipa:"[œ̃ te nwaʁ]",pos:"名詞",jp:"紅茶",pri:1,ex:"un thé noir au citron.",exjp:"レモン紅茶。"},
+ {w:"une infusion",ipa:"[yn‿ɛ̃fyzjɔ̃]",pos:"名詞",jp:"ハーブティー",ex:"une infusion de verveine.",exjp:"バーベナのハーブティー。"},
+ {w:"une tisane",ipa:"[yn tizan]",pos:"名詞",jp:"薬草茶",ex:"une tisane avant de dormir.",exjp:"寝る前の薬草茶。"},
+ {w:"un chocolat chaud",ipa:"[œ̃ ʃɔkɔla ʃo]",pos:"名詞",jp:"ホットチョコレート",ex:"un chocolat chaud onctueux.",exjp:"濃厚なホットチョコ。"},
+ {w:"corsé",ipa:"[kɔʁse]",pos:"形容詞",jp:"濃い・コクのある",ex:"un café corsé.",exjp:"濃いコーヒー。"},
+ {w:"serré",ipa:"[seʁe]",pos:"形容詞",jp:"濃いめの(エスプレッソ)",ex:"un café serré.",exjp:"濃いめのエスプレッソ。"},
+ {w:"allongé",ipa:"[alɔ̃ʒe]",pos:"形容詞",jp:"薄めの(湯多め)",ex:"un café allongé.",exjp:"湯多めの薄いコーヒー。"},
+ {w:"une théière",ipa:"[yn tejɛʁ]",pos:"名詞",jp:"ティーポット・急須",ex:"une théière en fonte.",exjp:"鉄の急須。"},
+ {w:"une tasse",ipa:"[yn tas]",pos:"名詞",jp:"カップ",pri:1,ex:"une tasse de café.",exjp:"コーヒー一杯。"},
+ {w:"infuser",ipa:"[ɛ̃fyze]",pos:"動詞",jp:"(お茶を)淹れる・蒸らす",ex:"laisser infuser trois minutes.",exjp:"3分蒸らす。"},
+ {w:"un sucre",ipa:"[œ̃ sykʁ]",pos:"名詞",jp:"角砂糖",ex:"deux sucres dans le café.",exjp:"コーヒーに角砂糖2個。"}
+]};
+DECKS.theme.tabs["デザート・スイーツ"]={label:"デザート・スイーツ",items:[
+ {w:"un gâteau",ipa:"[œ̃ ɡato]",pos:"名詞",jp:"ケーキ",pri:1,ex:"un gâteau d'anniversaire.",exjp:"誕生日ケーキ。"},
+ {w:"une glace",ipa:"[yn ɡlas]",pos:"名詞",jp:"アイス",pri:1,ex:"une glace à la vanille.",exjp:"バニラアイス。"},
+ {w:"une tarte",ipa:"[yn taʁt]",pos:"名詞",jp:"タルト",ex:"une tarte aux pommes.",exjp:"りんごのタルト。"},
+ {w:"un éclair",ipa:"[œ̃n‿eklɛʁ]",pos:"名詞",jp:"エクレア",ex:"un éclair au café.",exjp:"コーヒーエクレア。"},
+ {w:"un macaron",ipa:"[œ̃ makaʁɔ̃]",pos:"名詞",jp:"マカロン",ex:"une boîte de macarons.",exjp:"マカロンの箱。"},
+ {w:"une crème brûlée",ipa:"[yn kʁɛm bʁyle]",pos:"名詞",jp:"クレームブリュレ",ex:"une crème brûlée à la vanille.",exjp:"バニラのクレームブリュレ。"},
+ {w:"un flan",ipa:"[œ̃ flɑ̃]",pos:"名詞",jp:"フラン・プリン",ex:"un flan pâtissier.",exjp:"カスタードフラン。"},
+ {w:"une gaufre",ipa:"[yn ɡofʁ]",pos:"名詞",jp:"ワッフル",ex:"une gaufre au sucre.",exjp:"砂糖がけのワッフル。"},
+ {w:"un sorbet",ipa:"[œ̃ sɔʁbɛ]",pos:"名詞",jp:"シャーベット",ex:"un sorbet au citron.",exjp:"レモンシャーベット。"},
+ {w:"un beignet",ipa:"[œ̃ bɛɲɛ]",pos:"名詞",jp:"揚げ菓子・ドーナツ",ex:"un beignet à la confiture.",exjp:"ジャム入りの揚げ菓子。"},
+ {w:"une madeleine",ipa:"[yn madlɛn]",pos:"名詞",jp:"マドレーヌ",ex:"des madeleines maison.",exjp:"自家製マドレーヌ。"},
+ {w:"du chocolat",ipa:"[dy ʃɔkɔla]",pos:"名詞",jp:"チョコレート",pri:1,ex:"du chocolat noir.",exjp:"ダークチョコ。"},
+ {w:"une part",ipa:"[yn paʁ]",pos:"名詞",jp:"一切れ・一人前",ex:"une part de gâteau.",exjp:"ケーキ一切れ。"},
+ {w:"gourmand",ipa:"[ɡuʁmɑ̃]",pos:"形容詞",jp:"甘党の・食いしん坊の",ex:"Je suis très gourmand.",exjp:"私はかなり甘党だ。"},
+ {w:"fondre",ipa:"[fɔ̃dʁ]",pos:"動詞",jp:"溶ける",ex:"La glace fond vite.",exjp:"アイスがすぐ溶ける。"},
+ {w:"délicieux",ipa:"[delisjø]",pos:"形容詞",jp:"とてもおいしい",pri:1,ex:"un dessert délicieux.",exjp:"とてもおいしいデザート。"}
+]};
+DECKS.theme.tabs["ソース・ドレッシング"]={label:"ソース・ドレッシング",items:[
+ {w:"la mayonnaise",ipa:"[la majɔnɛz]",pos:"名詞",jp:"マヨネーズ",ex:"des frites à la mayonnaise.",exjp:"マヨネーズ付きのフライドポテト。"},
+ {w:"la moutarde",ipa:"[la mutaʁd]",pos:"名詞",jp:"マスタード",ex:"de la moutarde de Dijon.",exjp:"ディジョンマスタード。"},
+ {w:"le ketchup",ipa:"[lə kɛtʃœp]",pos:"名詞",jp:"ケチャップ",ex:"un peu de ketchup.",exjp:"ケチャップ少し。"},
+ {w:"une vinaigrette",ipa:"[yn vinɛɡʁɛt]",pos:"名詞",jp:"ドレッシング",ex:"une salade avec vinaigrette.",exjp:"ドレッシング付きサラダ。"},
+ {w:"la sauce tomate",ipa:"[la sos tɔmat]",pos:"名詞",jp:"トマトソース",ex:"des pâtes à la sauce tomate.",exjp:"トマトソースのパスタ。"},
+ {w:"le vinaigre",ipa:"[lə vinɛɡʁ]",pos:"名詞",jp:"酢",ex:"du vinaigre balsamique.",exjp:"バルサミコ酢。"},
+ {w:"l'huile d'olive",ipa:"[lɥil dɔliv]",pos:"名詞",jp:"オリーブ油",ex:"un filet d'huile d'olive.",exjp:"オリーブ油を少し。"},
+ {w:"la crème fraîche",ipa:"[la kʁɛm fʁɛʃ]",pos:"名詞",jp:"サワークリーム・生クリーム",ex:"une cuillère de crème fraîche.",exjp:"クリームをひとさじ。"},
+ {w:"une sauce blanche",ipa:"[yn sos blɑ̃ʃ]",pos:"名詞",jp:"ホワイトソース",ex:"un gratin à la sauce blanche.",exjp:"ホワイトソースのグラタン。"},
+ {w:"le jus de citron",ipa:"[lə ʒy də sitʁɔ̃]",pos:"名詞",jp:"レモン汁",ex:"un peu de jus de citron.",exjp:"レモン汁を少し。"},
+ {w:"relevé",ipa:"[ʁəlve]",pos:"形容詞",jp:"ピリッとした・味の濃い",ex:"une sauce relevée.",exjp:"ピリ辛のソース。"},
+ {w:"onctueux",ipa:"[ɔ̃ktɥø]",pos:"形容詞",jp:"とろりとした・まろやかな",ex:"une sauce onctueuse.",exjp:"まろやかなソース。"},
+ {w:"napper",ipa:"[nape]",pos:"動詞",jp:"(ソースを)かける",ex:"napper de chocolat.",exjp:"チョコをかける。"},
+ {w:"tremper",ipa:"[tʁɑ̃pe]",pos:"動詞",jp:"浸す・つける",ex:"tremper le pain dans la sauce.",exjp:"パンをソースに浸す。"},
+ {w:"liquide",ipa:"[likid]",pos:"形容詞",jp:"さらさらの・液状の",ex:"une sauce trop liquide.",exjp:"さらさらすぎるソース。"},
+ {w:"la sauce soja",ipa:"[la sos sɔʒa]",pos:"名詞",jp:"醤油",ex:"un peu de sauce soja.",exjp:"醤油を少し。"}
+]};
+DECKS.theme.tabs["食卓・食器"]={label:"食卓・食器",items:[
+ {w:"une assiette",ipa:"[yn‿asjɛt]",pos:"名詞",jp:"皿",pri:1,ex:"une assiette creuse.",exjp:"深皿。"},
+ {w:"un bol",ipa:"[œ̃ bɔl]",pos:"名詞",jp:"茶碗・ボウル",ex:"un bol de soupe.",exjp:"スープ一杯。"},
+ {w:"une fourchette",ipa:"[yn fuʁʃɛt]",pos:"名詞",jp:"フォーク",pri:1,ex:"manger à la fourchette.",exjp:"フォークで食べる。"},
+ {w:"un couteau",ipa:"[œ̃ kuto]",pos:"名詞",jp:"ナイフ",pri:1,ex:"un couteau aiguisé.",exjp:"よく切れるナイフ。"},
+ {w:"une cuillère",ipa:"[yn kɥijɛʁ]",pos:"名詞",jp:"スプーン",pri:1,ex:"une cuillère à soupe.",exjp:"大さじ・スープスプーン。"},
+ {w:"une soucoupe",ipa:"[yn sukup]",pos:"名詞",jp:"受け皿",ex:"une tasse et sa soucoupe.",exjp:"カップと受け皿。"},
+ {w:"une serviette",ipa:"[yn sɛʁvjɛt]",pos:"名詞",jp:"ナプキン",ex:"une serviette en tissu.",exjp:"布のナプキン。"},
+ {w:"une nappe",ipa:"[yn nap]",pos:"名詞",jp:"テーブルクロス",ex:"une nappe blanche.",exjp:"白いテーブルクロス。"},
+ {w:"un plat",ipa:"[œ̃ pla]",pos:"名詞",jp:"大皿・料理",pri:1,ex:"un plat de service.",exjp:"取り分け用の大皿。"},
+ {w:"un saladier",ipa:"[œ̃ saladje]",pos:"名詞",jp:"サラダボウル",ex:"un grand saladier.",exjp:"大きなサラダボウル。"},
+ {w:"une carafe",ipa:"[yn kaʁaf]",pos:"名詞",jp:"水差し・カラフェ",ex:"une carafe d'eau.",exjp:"水のカラフェ。"},
+ {w:"des baguettes",ipa:"[de baɡɛt]",pos:"名詞",jp:"箸",ex:"manger avec des baguettes.",exjp:"箸で食べる。"},
+ {w:"mettre la table",ipa:"[mɛtʁ la tabl]",pos:"表現",jp:"食卓の準備をする",pri:1,ex:"aider à mettre la table.",exjp:"食卓の準備を手伝う。"},
+ {w:"débarrasser",ipa:"[debaʁase]",pos:"動詞",jp:"食器を下げる・片付ける",ex:"débarrasser la table.",exjp:"食卓を片付ける。"},
+ {w:"une casserole",ipa:"[yn kasʁɔl]",pos:"名詞",jp:"鍋",ex:"une casserole d'eau.",exjp:"水を入れた鍋。"},
+ {w:"une poêle",ipa:"[yn pwal]",pos:"名詞",jp:"フライパン",pri:1,ex:"faire cuire à la poêle.",exjp:"フライパンで焼く。"}
+]};
+DECKS.theme.tabs["パーティー料理・前菜"]={label:"パーティー料理・前菜",items:[
+ {w:"un apéritif",ipa:"[œ̃n‿apeʁitif]",pos:"名詞",jp:"食前酒・アペリティフ",ex:"prendre l'apéritif.",exjp:"食前酒を飲む。"},
+ {w:"un amuse-bouche",ipa:"[œ̃n‿amyz buʃ]",pos:"名詞",jp:"一口前菜",ex:"servir des amuse-bouches.",exjp:"一口前菜を出す。"},
+ {w:"une entrée",ipa:"[yn‿ɑ̃tʁe]",pos:"名詞",jp:"前菜",pri:1,ex:"une entrée froide.",exjp:"冷たい前菜。"},
+ {w:"un buffet",ipa:"[œ̃ byfɛ]",pos:"名詞",jp:"ビュッフェ",ex:"un buffet à volonté.",exjp:"食べ放題のビュッフェ。"},
+ {w:"des chips",ipa:"[de ʃips]",pos:"名詞",jp:"ポテトチップス",ex:"un paquet de chips.",exjp:"ポテチ一袋。"},
+ {w:"des cacahuètes",ipa:"[de kakaɥɛt]",pos:"名詞",jp:"ピーナッツ",ex:"un bol de cacahuètes.",exjp:"ピーナッツ一皿。"},
+ {w:"un canapé",ipa:"[œ̃ kanape]",pos:"名詞",jp:"カナッペ",ex:"des canapés au saumon.",exjp:"サーモンのカナッペ。"},
+ {w:"des olives",ipa:"[dez‿ɔliv]",pos:"名詞",jp:"オリーブ",ex:"des olives vertes.",exjp:"グリーンオリーブ。"},
+ {w:"de la charcuterie",ipa:"[də la ʃaʁkytʁi]",pos:"名詞",jp:"ハム・ソーセージ類",ex:"un plateau de charcuterie.",exjp:"ハム類の盛り合わせ。"},
+ {w:"un plateau de fromages",ipa:"[œ̃ plato də fʁɔmaʒ]",pos:"名詞",jp:"チーズの盛り合わせ",ex:"un plateau de fromages variés.",exjp:"色々なチーズの盛り合わせ。"},
+ {w:"trinquer",ipa:"[tʁɛ̃ke]",pos:"動詞",jp:"乾杯する(グラスを合わせる)",ex:"trinquer à la santé de tous.",exjp:"みんなの健康に乾杯する。"},
+ {w:"Santé !",ipa:"[sɑ̃te]",pos:"表現",jp:"乾杯!",pri:1,ex:"Levons nos verres, santé !",exjp:"グラスを上げて、乾杯!"},
+ {w:"un toast",ipa:"[œ̃ tost]",pos:"名詞",jp:"乾杯の音頭・祝辞",ex:"porter un toast.",exjp:"乾杯の音頭をとる。"},
+ {w:"grignoter",ipa:"[ɡʁiɲɔte]",pos:"動詞",jp:"つまむ・少しずつ食べる",ex:"grignoter des chips.",exjp:"ポテチをつまむ。"},
+ {w:"convivial",ipa:"[kɔ̃vivjal]",pos:"形容詞",jp:"和やかな・打ち解けた",ex:"une ambiance conviviale.",exjp:"和やかな雰囲気。"},
+ {w:"un cocktail",ipa:"[œ̃ kɔktɛl]",pos:"名詞",jp:"カクテル",ex:"un cocktail sans alcool.",exjp:"ノンアルコールカクテル。"}
+]};
 const VERBGROUPS={"irr":"不規則(最重要)","er":"-er規則","ir":"-ir規則","re":"-re規則"};
 const TENSES=[
  ["pres","現在"],["pc","複合過去"],["imp","半過去"],["fut","単純未来"],
