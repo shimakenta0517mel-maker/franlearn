@@ -48,7 +48,9 @@
   .tab .lv{font-size:9.5px;color:var(--muted);font-weight:600;display:block}
   .tab.active{background:var(--bleu);color:#fff;border-color:var(--bleu)}.tab.active .lv{color:#dce8ff}
   .barrow{max-width:980px;margin:9px auto 0;padding:0 14px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-  .barlabel{font-size:11px;color:var(--muted);font-weight:700;margin-right:2px}
+  .barlabel{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.05em;margin-right:1px;display:inline-flex;align-items:center;opacity:.9;text-transform:uppercase}
+  .barlabel.grp{margin-left:7px;padding-left:13px;border-left:1px solid var(--line)}
+  body.dark .barlabel.grp{border-left-color:#343f5d}
   .chip{padding:4px 11px;border-radius:20px;background:var(--card);border:1px solid var(--line);
     cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);user-select:none;transition:.15s}
   .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
@@ -12041,7 +12043,7 @@ function buildFilter(){
   fc.onclick=()=>{freqOnly=!freqOnly;buildFilter();renderAll();};
   filterbar.appendChild(fc);
   const counts2={};items.forEach(i=>{const c=posCat(i.pos);counts2[c]=(counts2[c]||0)+1;});
-  const plab=document.createElement('span');plab.className='barlabel';plab.textContent='品詞';filterbar.appendChild(plab);
+  const plab=document.createElement('span');plab.className='barlabel grp';plab.textContent='品詞';filterbar.appendChild(plab);
   filterbar.appendChild(mkChip('all','すべて',items.length));
   POS_ORDER.forEach(p=>{if(counts2[p])filterbar.appendChild(mkChip(p,p,counts2[p]));});
 }
