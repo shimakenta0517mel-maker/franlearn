@@ -11338,6 +11338,26 @@ window.addEventListener('beforeunload',()=>sv('fl_time',timeData));
 
 /* ---------- state ---------- */
 let mode='learn', cat='delf', current=null, posFilter='all', freqOnly=false, rangeSel='all', verbTense='pres', viewMode='visible', searchQ='';
+/* ---------- 品詞(POS)正規化：表記ゆれ・意味タグを正規の品詞カテゴリへ集約してフィルタに使う ---------- */
+const POS_ORDER=['名詞','動詞','形容詞','副詞','会話・表現','前置詞','接続詞','代名詞','数詞','その他'];
+const POS_CONV=new Set(['会話','表現','慣用句','ことわざ','フレーズ','口語','自分が言う','聞かれる','感嘆','返事','挨拶','相づち','疑問','雑談','つなぎ','結び','書き出し','促し','質問','招待','お祝い','緊急','議論','呼びかけ']);
+const POS_ADV=new Set(['頻度','程度']);
+const POS_NOUN=new Set(['場所','体','家','職業','乗り物','道具','植物','動物','色','服','単位','家事','通信','育児','芸術','食材','野菜','科目','料理','容器','小物','お金','交通','文化','季節','食事','電話','肉','魚介','調味','デザート','メディア','恋愛','環境','文具','医療','文学','飲','食','自然','社会','行政','仕事','IT','予定','感情','国','症状','趣味','性格','曜日','時','標識','学校','スポーツ','形','ネット','SNS','天気','旅行','空港','買い物','メール','案内','道案内語','メニュー語','買い物語','交通語','ホテル語','銀行語','健康語','郵便語','カフェ語','ビジネス','抽象','略語']);
+function posCat(p){
+  p=p||'';
+  if(p.indexOf('代名詞')>=0)return '代名詞';
+  if(p.indexOf('名詞')>=0)return '名詞';
+  if(p.indexOf('動詞')>=0)return '動詞';
+  if(p.indexOf('形容詞')>=0)return '形容詞';
+  if(p.indexOf('副詞')>=0)return '副詞';
+  if(p.indexOf('前置詞')>=0)return '前置詞';
+  if(p.indexOf('接続')>=0)return '接続詞';
+  if(p==='数'||p==='序数'||p.indexOf('数詞')>=0)return '数詞';
+  if(POS_ADV.has(p))return '副詞';
+  if(POS_CONV.has(p))return '会話・表現';
+  if(POS_NOUN.has(p))return '名詞';
+  return 'その他';
+}
 function resetSearch(){searchQ='';const sb=document.getElementById('searchBox');if(sb)sb.value='';}
 function curTabs(){return DECKS[cat].tabs;}
 function tabKeys(){return Object.keys(curTabs());}
@@ -11353,7 +11373,7 @@ function filtered(){
   let arr=baseList();
   if(rangeSel!=='all')arr=arr.filter(o=>o.n>=rangeSel[0]&&o.n<=rangeSel[1]);
   if(!isVerb()){
-    arr=arr.filter(o=>(posFilter==='all'||o.it.pos===posFilter)&&(!freqOnly||o.it.pri));
+    arr=arr.filter(o=>(posFilter==='all'||posCat(o.it.pos)===posFilter)&&(!freqOnly||o.it.pri));
     if(viewMode==='visible')arr=arr.filter(o=>markOf(keyOf(o.it))!=='done');
     else if(viewMode!=='all')arr=arr.filter(o=>markOf(keyOf(o.it))===viewMode);
   }
@@ -11590,9 +11610,10 @@ function buildFilter(){
   fc.innerHTML='★ 頻出のみ <span class="n">'+freqCount+'</span>';
   fc.onclick=()=>{freqOnly=!freqOnly;buildFilter();renderAll();};
   filterbar.appendChild(fc);
-  const counts2={};items.forEach(i=>counts2[i.pos]=(counts2[i.pos]||0)+1);
+  const counts2={};items.forEach(i=>{const c=posCat(i.pos);counts2[c]=(counts2[c]||0)+1;});
+  const plab=document.createElement('span');plab.className='barlabel';plab.textContent='品詞';filterbar.appendChild(plab);
   filterbar.appendChild(mkChip('all','すべて',items.length));
-  Object.keys(counts2).forEach(p=>filterbar.appendChild(mkChip(p,p,counts2[p])));
+  POS_ORDER.forEach(p=>{if(counts2[p])filterbar.appendChild(mkChip(p,p,counts2[p]));});
 }
 function mkChip(val,label,n){
   const c=document.createElement('div');c.className='chip'+(posFilter===val?' active':'');
