@@ -372,6 +372,15 @@
   .setadv summary{cursor:pointer;opacity:.92;font-weight:600;list-style:revert}
   .setadv .setrow{margin-top:7px}
   .setadv p{opacity:.78;font-size:11px;line-height:1.5;margin:8px 0 0}
+  .setchips{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .setchip{padding:3px 11px;border-radius:16px;font-size:11.5px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.34);background:rgba(255,255,255,.15);color:#fff;line-height:1.55;transition:transform .12s ease,background .15s}
+  .setchip:hover{background:rgba(255,255,255,.28)}
+  .setchip:active{transform:scale(.93)}
+  .setchip.on{background:#fff;color:#0a3a7a;border-color:#fff;box-shadow:0 1px 4px rgba(0,0,0,.18)}
+  .setrow.setfull{flex:1 1 100%;grid-column:1/-1}
+  .hfsetlink{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:16px;padding:4px 12px;font-size:11.5px;font-weight:600;cursor:pointer;transition:transform .12s ease,border-color .15s,color .15s}
+  .hfsetlink:hover{border-color:var(--bleu);color:var(--bleu)}
+  .hfsetlink:active{transform:scale(.95)}
   body.dark .settings{background:rgba(255,255,255,.06)}
   /* ===== premium visual upgrade (2026-06-07) ===== */
   header{
@@ -432,12 +441,27 @@
         <select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">🎭 声優音声（高品質）</option><option value="online">🌐 オンライン音声</option><option value="auto">端末の音声</option></select></div>
       <div class="setrow" id="genderRow"><span class="setlabel">🗣 声（仏語）</span>
         <select id="voiceGender" title="声優音声の声（女性=Denise / 男性=Henri）"><option value="f">👩 女性（Denise）</option><option value="m">👨 男性（Henri）</option></select></div>
-      <div class="setrow"><span class="setlabel">⏩ 速さ</span>
-        <input type="range" id="rate" min="0.5" max="1.5" step="0.05" value="0.9"><span class="setval" id="rateval">0.90×</span></div>
+      <div class="setrow setfull"><span class="setlabel">⏩ 速さ</span>
+        <input type="range" id="rate" min="0.5" max="1.6" step="0.05" value="0.9"><span class="setval" id="rateval">0.90×</span></div>
+      <div class="setrow setfull" style="margin-top:-3px"><span class="setlabel" style="opacity:.72;font-weight:500">↳ ワンタップ</span>
+        <div class="setchips" id="rateChips">
+          <button type="button" class="setchip" data-rate="0.7">🐢 ゆっくり</button>
+          <button type="button" class="setchip" data-rate="0.85">やや遅い</button>
+          <button type="button" class="setchip" data-rate="1.0">標準</button>
+          <button type="button" class="setchip" data-rate="1.2">やや速い</button>
+          <button type="button" class="setchip" data-rate="1.4">⚡ 速い</button>
+        </div></div>
       <div class="setrow"><span class="setlabel">⏸ 音の間隔<br>（語の中）</span>
         <input type="range" id="gapInner" min="0" max="2" step="0.1" value="0.3"><span class="setval" id="gapival">0.3秒</span></div>
       <div class="setrow"><span class="setlabel">⏭ 単語の間隔<br>（語と語）</span>
         <input type="range" id="gapCtl" min="0.2" max="3" step="0.1" value="0.7"><span class="setval" id="gapval">0.7秒</span></div>
+      <div class="setrow setfull" style="margin-top:-3px"><span class="setlabel" style="opacity:.72;font-weight:500">↳ 間隔まとめて</span>
+        <div class="setchips" id="gapChips">
+          <button type="button" class="setchip" data-gi="0" data-gw="0.3">続けて</button>
+          <button type="button" class="setchip" data-gi="0.3" data-gw="0.7">標準</button>
+          <button type="button" class="setchip" data-gi="0.6" data-gw="1.2">ゆったり</button>
+          <button type="button" class="setchip" data-gi="1" data-gw="2">じっくり</button>
+        </div></div>
     </div>
     <details class="setadv">
       <summary>詳細設定（端末の音声・通常は変更不要）</summary>
@@ -468,6 +492,7 @@
       <button id="lpBtn" class="bigplay" style="margin-top:0">▶ 連続再生</button>
       <label><input type="checkbox" id="lpLoop" checked> リピート</label>
       <label><input type="checkbox" id="lpEx" checked> 例文も読む</label>
+      <button type="button" class="hfsetlink" id="lpSetLink" title="速さ・音の間隔・語の間隔を調整">⚙️ 速さ・間隔</button>
     </div>
     <div class="levelhead" id="levelhead"></div>
     <div class="grid" id="grid"></div>
@@ -506,7 +531,7 @@
         <label title="区間の最後まで行ったら最初へ戻り、止めるまで止まらず連続再生します"><input type="checkbox" id="hfloop" checked> 連続ループ</label>
         <label><input type="checkbox" id="hfex_chk" checked> 例文も読む</label>
         <label title="1つの単語を何回くり返して読むか（1〜10回）">くり返し:<select id="hfRepeat" style="margin-left:4px"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>回</label>
-        <span style="opacity:.8">※速さ・音間・語間は上部スライダー、再生する範囲は「区間」で調整</span>
+        <button type="button" class="hfsetlink" id="hfSetLink" title="速さ・音の間隔・語の間隔を調整">⚙️ 速さ・間隔を調整</button>
       </div>
       <div class="hfpreset">
         <span class="barlabel">対象:</span>
@@ -11391,9 +11416,21 @@ let itemRepeat=Math.max(1,Math.min(10,Number(ls('fl_itemrep','1'))||1)); // ハ�
 rate.value=ls('fl_rate','"0.9"')||'0.9';rateval.textContent=Number(rate.value).toFixed(2)+'×';
 gapCtl.value=ls('fl_gap','"0.7"')||'0.7';gapval.textContent=Number(gapCtl.value).toFixed(1)+'秒';
 gapInner.value=ls('fl_gapinner','"0.3"')||'0.3';gapival.textContent=Number(gapInner.value).toFixed(1)+'秒';
-rate.addEventListener('input',()=>{rateval.textContent=Number(rate.value).toFixed(2)+'×';sv('fl_rate',rate.value);});
-gapCtl.addEventListener('input',()=>{gapval.textContent=Number(gapCtl.value).toFixed(1)+'秒';sv('fl_gap',gapCtl.value);});
-gapInner.addEventListener('input',()=>{gapival.textContent=Number(gapInner.value).toFixed(1)+'秒';sv('fl_gapinner',gapInner.value);});
+// 再生中の声優音声(mp3)にも速度変更を即反映（playbackRate＋preservesPitchで音程を保ったまま）
+function applyLiveRate(){if(curAudio){try{curAudio.playbackRate=rateFor('fr');}catch(e){}}}
+function syncRateChips(){const v=Number(rate.value);document.querySelectorAll('#rateChips .setchip').forEach(b=>b.classList.toggle('on',Math.abs(Number(b.dataset.rate)-v)<0.001));}
+function syncGapChips(){const gi=Number(gapInner.value),gw=Number(gapCtl.value);document.querySelectorAll('#gapChips .setchip').forEach(b=>b.classList.toggle('on',Math.abs(Number(b.dataset.gi)-gi)<0.001&&Math.abs(Number(b.dataset.gw)-gw)<0.001));}
+rate.addEventListener('input',()=>{rateval.textContent=Number(rate.value).toFixed(2)+'×';sv('fl_rate',rate.value);applyLiveRate();syncRateChips();});
+gapCtl.addEventListener('input',()=>{gapval.textContent=Number(gapCtl.value).toFixed(1)+'秒';sv('fl_gap',gapCtl.value);syncGapChips();});
+gapInner.addEventListener('input',()=>{gapival.textContent=Number(gapInner.value).toFixed(1)+'秒';sv('fl_gapinner',gapInner.value);syncGapChips();});
+// ワンタップ プリセット
+document.querySelectorAll('#rateChips .setchip').forEach(b=>b.addEventListener('click',()=>{rate.value=b.dataset.rate;rate.dispatchEvent(new Event('input'));}));
+document.querySelectorAll('#gapChips .setchip').forEach(b=>b.addEventListener('click',()=>{gapInner.value=b.dataset.gi;gapCtl.value=b.dataset.gw;gapInner.dispatchEvent(new Event('input'));gapCtl.dispatchEvent(new Event('input'));}));
+syncRateChips();syncGapChips();
+// 再生画面から設定パネルへワンタップで（速さ・間隔をその場で開いて調整）
+function openSpeedSettings(){setSettingsOpen(true);try{settingsPanel.scrollIntoView({behavior:'smooth',block:'center'});}catch(e){}}
+document.getElementById('hfSetLink')&&document.getElementById('hfSetLink').addEventListener('click',openSpeedSettings);
+document.getElementById('lpSetLink')&&document.getElementById('lpSetLink').addEventListener('click',openSpeedSettings);
 
 /* ---------- settings panel (collapsible) ---------- */
 const setBtn=document.getElementById('setBtn'), settingsPanel=document.getElementById('settingsPanel');
@@ -11473,7 +11510,7 @@ function audioStop(){var f=_curFin;_curFin=null;if(curAudio){try{curAudio.pause(
 function playUrl(url,lang,btn){
   return new Promise(res=>{
     audioStop();
-    const a=new Audio();curAudio=a;a.playbackRate=rateFor(lang);a.preload='auto';
+    const a=new Audio();curAudio=a;a.preservesPitch=a.mozPreservesPitch=a.webkitPreservesPitch=true;a.playbackRate=rateFor(lang);a.preload='auto';
     let done=false;
     const fin=ok=>{if(done)return;done=true;if(_curFin===fin)_curFin=null;if(btn)btn.classList.remove('on');if(curAudio===a)curAudio=null;a.onended=a.onerror=null;res(ok);};
     _curFin=fin;
