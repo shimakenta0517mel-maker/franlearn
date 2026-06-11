@@ -195,11 +195,11 @@
   body.dark .empty-btn:hover{background:#7db4ff;color:#11151f}
   /* hands-free */
   .hfwrap{max-width:560px;margin:0 auto;text-align:center}
-  .hfcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 20px;box-shadow:0 4px 16px rgba(20,30,60,.08);min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  .hfidx{font-size:11.5px;color:var(--muted);margin-bottom:9px}
-  .hffr{font-size:24px;font-weight:800;color:var(--bleu)}
-  .hffripa{font-size:13px;color:var(--muted);margin-top:5px}
-  .hfjp{font-size:16px;color:var(--ink);margin-top:7px}
+  .hfcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:34px 22px;box-shadow:0 4px 16px rgba(20,30,60,.08);min-height:218px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .hfidx{font-size:11.5px;color:var(--muted);margin-bottom:11px}
+  .hffr{font-size:29px;font-weight:800;color:var(--bleu);line-height:1.22}
+  .hffripa{font-size:14px;color:var(--muted);margin-top:7px}
+  .hfjp{font-size:17px;color:var(--ink);margin-top:9px}
   .hfex{font-size:13px;color:var(--muted);margin-top:9px}
   .hfexjp{font-size:11.5px;color:var(--muted);margin-top:4px;opacity:.85}
   #numIn{width:100%;margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:18px;text-align:center;background:#fff;color:var(--ink)}
@@ -214,7 +214,8 @@
   .hfstage{margin-top:13px;font-size:11.5px;font-weight:700;letter-spacing:.5px;color:var(--green);min-height:15px}
   .hfctrl{display:flex;gap:10px;justify-content:center;margin-top:15px;align-items:center}
   .hfctrl button{border:none;border-radius:50%;width:46px;height:46px;background:var(--card);border:1px solid var(--line);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;color:var(--ink)}
-  .hfctrl .main{width:60px;height:60px;background:var(--bleu);color:#fff;font-size:23px}
+  .hfctrl .main{width:64px;height:64px;background:linear-gradient(135deg,#063e86,#2f7ad0);color:#fff;font-size:24px;box-shadow:0 8px 22px rgba(0,55,130,.4)}
+  .hfctrl .main:hover{filter:brightness(1.07)}
   .hfmark{display:flex;gap:8px;justify-content:center;margin-top:13px;max-width:380px;margin-left:auto;margin-right:auto}
   .hfmark button{flex:1;border:1px solid var(--line);background:#fafbfe;color:var(--muted);border-radius:9px;padding:9px 4px;font-size:12px;font-weight:700;cursor:pointer}
   .hfmark button.on[data-hm="done"]{background:var(--green);border-color:var(--green);color:#fff}
@@ -247,6 +248,7 @@
     .play{width:36px;height:36px}.play svg{width:17px;height:17px}
     .conj{padding:9px 10px}.conj .form{font-size:14px}
     .hfctrl button{width:52px;height:52px;font-size:19px}.hfctrl .main{width:66px;height:66px;font-size:25px}
+    .hffr{font-size:24px}
     .grade button{padding:15px}.flipbtn{padding:15px}
     .word{font-size:18px}.front{font-size:24px}
     main{padding:12px 12px}
@@ -312,7 +314,7 @@
   body.dark ::selection{background:#2f4a7a}
   body.dark .tenseName{color:#43c97e}
   body.dark .hfctrl button{background:#1a2030;color:#e8ecf5;border-color:#2a3147}
-  body.dark .hfctrl .main{background:var(--bleu);color:#fff}
+  body.dark .hfctrl .main{background:linear-gradient(135deg,#0a4f9e,#2f7ad0);color:#fff;box-shadow:0 8px 22px rgba(0,40,100,.5)}
   body.dark .exjp,body.dark .jp{color:#98a3bb}
   /* ===== typing test + accent bar ===== */
   .typein{width:100%;max-width:420px;margin:14px auto 0;display:block;border:2px solid var(--line);border-radius:12px;
