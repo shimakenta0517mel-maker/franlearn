@@ -406,7 +406,9 @@
   .gbtn:active{transform:scale(.94);box-shadow:0 1px 4px rgba(0,0,0,.25)}
   @media(max-width:420px){.gbtn{font-size:12.5px;padding:8px 2px}.gbtn .iv{font-size:10px}.gbtn .kc{display:none}}
   /* ---- header control buttons + collapsible settings panel ---- */
-  .ctrlbtn{border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:9px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:.15s}
+  .ctrlbtn{border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:9px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+  .ctrlbtn svg{width:15px;height:15px;flex:0 0 auto;display:block}
+  .ctrlbtn.icon svg{width:16.5px;height:16.5px}
   .ctrlbtn:hover{background:rgba(255,255,255,.30)}
   .ctrlbtn.icon{padding:6px 10px}
   .ctrlbtn.on{background:#fff;color:var(--bleu)}
@@ -516,12 +518,12 @@
     <div class="timer" id="timer">⏱ 今日 <b>0</b>分<br>累計 0分</div>
   </div>
   <div class="controls">
-    <button id="setBtn" class="ctrlbtn" title="音声・速さ・間隔などの設定">⚙️ 設定</button>
-    <button id="statsBtn" class="ctrlbtn" title="学習の記録・統計を見る">📊 記録</button>
-    <button id="tocBtn" class="ctrlbtn" title="全デッキの目次から探す">☰ 目次</button>
-    <button id="sfxBtn" class="ctrlbtn icon" title="効果音 オン/オフ">🔊</button>
-    <button id="themeBtn" class="ctrlbtn icon" title="ダーク/ライト切替">🌙</button>
-    <button id="offlineBtn" class="ctrlbtn" title="選択中の声(仏語)＋日本語の音声をまとめて端末に保存。オフライン/バックグラウンドで再生">📥 オフライン保存</button>
+    <button id="setBtn" class="ctrlbtn" title="音声・速さ・間隔などの設定"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.49.49 0 0 0 14 1h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg> 設定</button>
+    <button id="statsBtn" class="ctrlbtn" title="学習の記録・統計を見る"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3.5" y="10" width="4" height="9.5" rx="1.2"/><rect x="10" y="4.5" width="4" height="15" rx="1.2"/><rect x="16.5" y="13" width="4" height="6.5" rx="1.2"/></svg> 記録</button>
+    <button id="tocBtn" class="ctrlbtn" title="全デッキの目次から探す"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="4.5" cy="6.3" r="1.5"/><circle cx="4.5" cy="12" r="1.5"/><circle cx="4.5" cy="17.7" r="1.5"/><rect x="8" y="5.4" width="12" height="1.9" rx=".95"/><rect x="8" y="11.05" width="12" height="1.9" rx=".95"/><rect x="8" y="16.7" width="12" height="1.9" rx=".95"/></svg> 目次</button>
+    <button id="sfxBtn" class="ctrlbtn icon" title="効果音 オン/オフ"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
+    <button id="themeBtn" class="ctrlbtn icon" title="ダーク/ライト切替"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3a8 8 0 1 0 8.46 11.46A6.5 6.5 0 0 1 12.5 3z"/></svg></button>
+    <button id="offlineBtn" class="ctrlbtn" title="選択中の声(仏語)＋日本語の音声をまとめて端末に保存。オフライン/バックグラウンドで再生"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1.1 1.1 0 0 1 1.1 1.1v7.07l1.84-1.84a1.1 1.1 0 1 1 1.56 1.56l-3.72 3.72a1.1 1.1 0 0 1-1.56 0l-3.72-3.72a1.1 1.1 0 1 1 1.56-1.56l1.84 1.84V4.1A1.1 1.1 0 0 1 12 3z"/><path d="M4.6 15.5a1.1 1.1 0 0 1 1.1 1.1v2.2h12.6v-2.2a1.1 1.1 0 0 1 2.2 0v3.3a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-3.3a1.1 1.1 0 0 1 1.1-1.1z"/></svg> オフライン保存</button>
   </div>
   <div class="settings" id="settingsPanel">
     <div class="setgrid">
@@ -11660,6 +11662,11 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const SPK='<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
 const SPKSM='<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
 const MIC='<svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
+// ヘッダーのトグル用アイコン（絵文字→SVGで統一・洗練）
+const IC_SNDON='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+const IC_SNDOFF='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M22 9.41 20.59 8l-2.09 2.09L16.41 8 15 9.41l2.09 2.09L15 13.59 16.41 15l2.09-2.09L20.59 15 22 13.59l-2.09-2.09z"/></svg>';
+const IC_MOON='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3a8 8 0 1 0 8.46 11.46A6.5 6.5 0 0 1 12.5 3z"/></svg>';
+const IC_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><path d="M12 2.6v2.1M12 19.3v2.1M21.4 12h-2.1M4.7 12H2.6M18.65 5.35 17.2 6.8M6.8 17.2l-1.45 1.45M18.65 18.65 17.2 17.2M6.8 6.8 5.35 5.35"/></svg>';
 
 /* ---------- sound effects (Web Audio, no assets) ---------- */
 let _ac=null;
@@ -11679,7 +11686,7 @@ function beep(seq){
 function sfxOk(){beep([[660,0.10],[990,0.13]]);}
 function sfxNg(){beep([[207,0.13],[155,0.18]]);}
 function sfxWin(){beep([[523,0.12],[659,0.12],[784,0.12],[1047,0.2]]);}
-(function(){const sb=document.getElementById('sfxBtn');if(sb){const upd=()=>{sb.textContent=sfxOn?'🔊':'🔇';sb.setAttribute('aria-pressed',sfxOn?'true':'false');sb.setAttribute('aria-label',sfxOn?'効果音 オン（タップでオフ）':'効果音 オフ（タップでオン）');};upd();sb.onclick=()=>{sfxOn=!sfxOn;localStorage.setItem('fl_sfx',sfxOn?'on':'off');upd();if(sfxOn)sfxOk();};}})();
+(function(){const sb=document.getElementById('sfxBtn');if(sb){const upd=()=>{sb.innerHTML=sfxOn?IC_SNDON:IC_SNDOFF;sb.setAttribute('aria-pressed',sfxOn?'true':'false');sb.setAttribute('aria-label',sfxOn?'効果音 オン（タップでオフ）':'効果音 オフ（タップでオン）');};upd();sb.onclick=()=>{sfxOn=!sfxOn;localStorage.setItem('fl_sfx',sfxOn?'on':'off');upd();if(sfxOn)sfxOk();};}})();
 
 /* ---------- confetti celebration (canvas, no assets) ---------- */
 function confetti(){
@@ -12019,7 +12026,7 @@ function buildStats(){
 }
 /* theme */
 const themeBtn=document.getElementById('themeBtn');
-function applyTheme(t){const dark=t==='dark';document.body.classList.toggle('dark',dark);themeBtn.textContent=dark?'☀️':'🌙';themeBtn.setAttribute('aria-pressed',dark?'true':'false');themeBtn.setAttribute('aria-label',dark?'ダークモード（タップでライト）':'ライトモード（タップでダーク）');sv('fl_theme',t);}
+function applyTheme(t){const dark=t==='dark';document.body.classList.toggle('dark',dark);themeBtn.innerHTML=dark?IC_SUN:IC_MOON;themeBtn.setAttribute('aria-pressed',dark?'true':'false');themeBtn.setAttribute('aria-label',dark?'ダークモード（タップでライト）':'ライトモード（タップでダーク）');sv('fl_theme',t);}
 let curTheme=ls('fl_theme','""')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
 applyTheme(curTheme);
 themeBtn.onclick=()=>{curTheme=curTheme==='dark'?'light':'dark';applyTheme(curTheme);};
