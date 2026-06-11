@@ -177,7 +177,15 @@
   .done{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 18px}
   .done h2{font-size:20px;margin-bottom:8px}.done p{color:var(--muted);font-size:13px;margin-bottom:15px}
   .restart{border:none;background:var(--bleu);color:#fff;padding:11px 19px;border-radius:22px;font-size:13px;font-weight:700;cursor:pointer}
-  .empty{text-align:center;color:var(--muted);padding:36px 18px;font-size:13px}
+  .empty{text-align:center;color:var(--muted);padding:42px 18px 38px;font-size:13px}
+  .empty-ic{font-size:44px;line-height:1;margin-bottom:13px;opacity:.55;filter:grayscale(.15)}
+  .empty-t{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:6px}
+  .empty-s{font-size:12.5px;color:var(--muted);line-height:1.65;max-width:340px;margin:0 auto}
+  .empty-btn{margin-top:15px;border:1px solid var(--bleu);background:transparent;color:var(--bleu);border-radius:20px;padding:7px 18px;font-size:12.5px;font-weight:700;cursor:pointer;transition:background .15s,color .15s,transform .12s}
+  .empty-btn:hover{background:var(--bleu);color:#fff}
+  .empty-btn:active{transform:scale(.95)}
+  body.dark .empty-btn{border-color:#7db4ff;color:#8fc0ff}
+  body.dark .empty-btn:hover{background:#7db4ff;color:#11151f}
   /* hands-free */
   .hfwrap{max-width:560px;margin:0 auto;text-align:center}
   .hfcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px 20px;box-shadow:0 4px 16px rgba(20,30,60,.08);min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -12144,7 +12152,7 @@ function renderLearn(){
   const arr=filtered();
   levelhead.textContent=DECKS[cat].label+' ｜ '+current+' '+curTabs()[current].label+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeSel[0]+'-'+rangeSel[1]+']':'')+(posFilter!=='all'?'（'+posFilter+'）':'')+(freqOnly?' ★':'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
-  if(!arr.length){grid.innerHTML='<div class="empty">該当する項目がありません。</div>';return;}
+  if(!arr.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🗂️</div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や「表示／品詞」の絞り込みを広げてみてください。</div></div>';return;}
   arr.forEach(o=>{
     const it=o.it,k=keyOf(it),mk=markOf(k);
     const c=document.createElement('div');c.className='card'+(mk==='done'?' ismarked':'');
@@ -12246,7 +12254,7 @@ function renderGlobalSearch(){
   });
   levelhead.textContent='🔍 「'+searchQ+'」 検索結果 '+res.length+' 件'+(res.length>100?'（先頭100件を表示）':'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
-  if(!res.length){grid.innerHTML='<div class="empty">見つかりませんでした。スペルや別の言い方で試してください。</div>';return;}
+  if(!res.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🔍</div><div class="empty-t">見つかりませんでした</div><div class="empty-s">スペルや別の言い方で試してみてください。アクセント記号は無くても検索できます。</div><button type="button" class="empty-btn" id="emptyClear">検索をクリア</button></div>';const ec=document.getElementById('emptyClear');if(ec)ec.onclick=()=>clearSearch(true);return;}
   res.slice(0,100).forEach(r=>{
     const it=r.it,k=r.cid+'|'+r.tk+'|'+it.w,mk=markOf(k);
     const c=document.createElement('div');c.className='card'+(mk==='done'?' ismarked':'');
@@ -12336,7 +12344,7 @@ function renderTest(){
   const total=todayMode?todayTotal:testItems().length, learned=total-deck.length;
   barfill.style.width=total?Math.round(learned/total*100)+'%':'0%';
   pgtext.textContent=total?('覚えた '+learned+' / '+total+' ｜ 残り '+deck.length):'';
-  if(!total){cardArea.innerHTML='<div class="empty">該当する項目がありません。</div>';return;}
+  if(!total){cardArea.innerHTML='<div class="empty"><div class="empty-ic">🗂️</div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や絞り込みを広げると出題できます。</div></div>';return;}
   if(!deck.length){
     if(!_wonBeep){_wonBeep=true;celebrate();}
     if(todayMode){
@@ -12627,7 +12635,7 @@ function matchBuild(){
   matchStopTimer();matchDoneEl.innerHTML='';
   const pool=matchShuffle(matchPool());
   const n=Math.min(6,pool.length);
-  if(n<2){matchBoard.innerHTML='<div class="empty" style="grid-column:1/-1">マッチには2語以上必要です。区間／表示を広げてください。</div>';matchTimeEl.textContent='⏱ 0.0秒';matchMissEl.textContent='❌ 0';return;}
+  if(n<2){matchBoard.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-ic">🃏</div><div class="empty-t">マッチには2語以上必要です</div><div class="empty-s">「区間」や「表示」を広げてください。</div></div>';matchTimeEl.textContent='⏱ 0.0秒';matchMissEl.textContent='❌ 0';return;}
   let cards=[];
   pool.slice(0,n).forEach((it,i)=>{cards.push({id:i,type:'fr',text:it.w});cards.push({id:i,type:'jp',text:it.jp});});
   matchCards=matchShuffle(cards);matchSel=null;matchMiss=0;matchDoneN=0;matchLock=false;
