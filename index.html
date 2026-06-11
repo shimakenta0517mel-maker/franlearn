@@ -104,7 +104,12 @@
   .searchrow{margin-bottom:11px}
   .deckjump{border:none;background:#eef2fb;color:var(--bleu);border-radius:7px;padding:2px 8px;font-size:10.5px;font-weight:700;cursor:pointer}
   .deckjump:hover{background:#dde6f8}
-  .tocpanel{max-width:980px;margin:10px auto 0;padding:8px 14px 12px;background:var(--card);border:1px solid var(--line);border-radius:12px}
+  .tocpanel{max-width:980px;margin:10px auto 0;padding:8px 14px 12px;background:var(--card);border:1px solid var(--line);border-radius:12px;max-height:72vh;overflow-y:auto}
+  .tocfilter{position:sticky;top:0;background:var(--card);padding:3px 0 8px;margin-bottom:1px;z-index:2}
+  .tocfilter input{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:13px;background:#fff;color:var(--ink)}
+  .tocfilter input:focus{outline:none;border-color:var(--bleu);box-shadow:0 0 0 3px rgba(0,85,164,.12)}
+  body.dark .tocfilter input{background:#11151f;color:#e8ecf5;border-color:#2a3147}
+  .tocempty{color:var(--muted);font-size:12.5px;padding:14px 2px;text-align:center}
   .tocsec{margin-top:9px}
   .toch{font-size:12px;font-weight:800;color:var(--bleu);margin-bottom:5px}
   .tocchips{display:flex;gap:6px;flex-wrap:wrap}
@@ -11877,7 +11882,7 @@ document.body.insertBefore(tocPanel,document.getElementById('tabs'));
 if(tocBtn)tocBtn.onclick=function(){toggleToc();};
 function toggleToc(){statsPanel.classList.add('hide');if(tocPanel.classList.contains('hide')){buildToc();tocPanel.classList.remove('hide');}else tocPanel.classList.add('hide');}
 function buildToc(){
-  let h='';
+  let h='<div class="tocfilter"><input type="search" id="tocFilter" placeholder="🔍 デッキ名でしぼり込み" autocomplete="off"></div><div class="tocempty" id="tocEmpty" style="display:none">該当するデッキがありません</div>';
   CATS.forEach(([id,label])=>{
     h+='<div class="tocsec"><div class="toch">'+label+'</div><div class="tocchips">';
     if(id==='verb'){h+='<button class="chip" data-t="verb|">'+VERBS.length+'動詞・全時制</button>';}
@@ -11890,6 +11895,17 @@ function buildToc(){
   });
   tocPanel.innerHTML=h;
   tocPanel.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{const p=b.dataset.t.split('|');tocPanel.classList.add('hide');jumpTo(p[0],p[1]);});
+  // 目次内の絞り込み（デッキ名・カテゴリ名で一致を残す）
+  const tf=document.getElementById('tocFilter'), te=document.getElementById('tocEmpty');
+  if(tf)tf.addEventListener('input',()=>{
+    const q=tf.value.trim().toLowerCase();let total=0;
+    tocPanel.querySelectorAll('.tocsec').forEach(sec=>{
+      const catHit=sec.querySelector('.toch').textContent.toLowerCase().includes(q);let any=false;
+      sec.querySelectorAll('.chip').forEach(c=>{const m=!q||catHit||c.textContent.toLowerCase().includes(q);c.style.display=m?'':'none';if(m)any=true;});
+      sec.style.display=any?'':'none';if(any)total++;
+    });
+    if(te)te.style.display=total?'none':'';
+  });
 }
 /* 📊 記録 panel (opened from the header utility button) */
 const statsBtn=document.getElementById('statsBtn');
