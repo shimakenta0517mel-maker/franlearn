@@ -277,9 +277,15 @@
   #themeBtn{border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:4px 9px;font-size:14px;cursor:pointer}
   .statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:4px}
   @media(min-width:640px){.statgrid{grid-template-columns:repeat(6,1fr)}}
-  .stat{background:#f7f9fd;border:1px solid var(--line);border-radius:10px;padding:9px 6px;text-align:center}
-  .stat b{display:block;font-size:18px;color:var(--bleu)}
+  .stat{background:#f7f9fd;border:1px solid var(--line);border-radius:12px;padding:11px 6px 9px;text-align:center;position:relative;overflow:hidden}
+  .stat::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--bleu);opacity:.85}
+  .stat b{display:block;font-size:20px;color:var(--bleu);font-variant-numeric:tabular-nums;line-height:1.15}
   .stat span{font-size:10.5px;color:var(--muted);font-weight:600}
+  .stat.s-done::before{background:var(--green)}.stat.s-done b{color:var(--green)}
+  .stat.s-review::before{background:var(--rouge)}.stat.s-review b{color:var(--rouge)}
+  .stat.s-fav::before{background:var(--gold)}.stat.s-fav b{color:var(--gold)}
+  .stat.s-streak::before{background:#e0670a}.stat.s-streak b{color:#e0670a}
+  body.dark .stat.s-done b{color:#43c97e}body.dark .stat.s-review b{color:#ff7a6e}body.dark .stat.s-fav b{color:#ecc04a}body.dark .stat.s-streak b{color:#ff9a4d}
   .schart{display:flex;gap:8px;align-items:flex-end;justify-content:space-between;margin-top:12px;padding:0 4px}
   .sbar{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
   .sbar i{display:block;width:70%;max-width:34px;background:linear-gradient(180deg,#3b7ddd,#0055A4);border-radius:6px 6px 2px 2px}
@@ -11937,12 +11943,12 @@ function buildStats(){
   statsPanel.innerHTML=
     '<div class="statgrid">'+
     '<div class="stat"><b>'+total+'</b><span>収録語彙</span></div>'+
-    '<div class="stat"><b>'+d+'</b><span>✅ 完璧</span></div>'+
-    '<div class="stat"><b>'+r+'</b><span>🔁 復習</span></div>'+
-    '<div class="stat"><b>'+f+'</b><span>⭐ 保存</span></div>'+
+    '<div class="stat s-done"><b>'+d+'</b><span>✅ 完璧</span></div>'+
+    '<div class="stat s-review"><b>'+r+'</b><span>🔁 復習</span></div>'+
+    '<div class="stat s-fav"><b>'+f+'</b><span>⭐ 保存</span></div>'+
     '<div class="stat"><b>'+exp+'</b><span>👁 総接触</span></div>'+
     '<div class="stat"><b>'+Math.floor(totalSec()/60)+'分</b><span>⏱ 累計学習</span></div>'+
-    '<div class="stat"><b>🔥'+streak()+'</b><span>連続学習日数</span></div>'+
+    '<div class="stat s-streak"><b>🔥'+streak()+'</b><span>連続学習日数</span></div>'+
     '</div>'+
     '<div class="schart">'+bars+'</div>'+
     (wl?'<div class="toch" style="margin-top:13px">😱 苦手ランキング（タップで発音）</div><div class="weaklist">'+wl+'</div>':'')+
