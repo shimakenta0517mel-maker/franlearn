@@ -12520,12 +12520,16 @@ async function hfPlay(){
 }
 function hfStop(){hfToken++;hfPlaying=false;audioStop();if(synth)synth.cancel();hfplayBtn.textContent='▶';hfstage.textContent='';}
 hfplayBtn.onclick=()=>{if(hfPlaying)hfStop();else hfPlay();};
-document.getElementById('hfprev').onclick=()=>{hfStop();hfIdx=Math.max(0,hfIdx-1);hfShow();};
-document.getElementById('hfnext').onclick=()=>{hfStop();hfIdx=Math.min(hfList.length-1,hfIdx+1);hfShow();};
+document.getElementById('hfprev').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.max(0,hfIdx-1);if(wp)hfPlay();else hfShow();};
+document.getElementById('hfnext').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.min(hfList.length-1,hfIdx+1);if(wp)hfPlay();else hfShow();};
 document.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{
   if(!hfList.length)return;const it=hfList[hfIdx];if(!it||!it.k)return;
+  const wp=hfPlaying;
   setMark(it.k,b.dataset.hm);
-  if(markOf(it.k)==='done'){hfStop();hfList.splice(hfIdx,1);if(hfIdx>=hfList.length)hfIdx=Math.max(0,hfList.length-1);}
+  if(markOf(it.k)==='done'){
+    hfStop();hfList.splice(hfIdx,1);if(hfIdx>=hfList.length)hfIdx=Math.max(0,hfList.length-1);
+    if(hfList.length&&wp){hfPlay();return;}   // 再生中なら次の語へ自動継続
+  }
   hfShow();
 });
 document.querySelectorAll('[data-hp]').forEach(b=>b.onclick=()=>{viewMode=b.dataset.hp;buildFilter();hfStop();hfBuild();});
