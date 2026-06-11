@@ -47,10 +47,16 @@
   .modebtn.active{background:#fff;color:var(--bleu);box-shadow:0 1px 4px rgba(0,0,0,.18)}
   .voicewarn{background:#fff3cd;color:#7a5b00;max-width:980px;margin:8px auto 0;padding:8px 12px;border-radius:8px;font-size:12px;display:none}
   .tabs{max-width:980px;margin:11px auto 0;display:flex;gap:6px;padding:0 14px;flex-wrap:wrap}
-  .tab{flex:0 1 auto;text-align:center;padding:6px 11px;border-radius:10px;background:var(--card);
+  .tab{flex:0 1 auto;text-align:center;padding:6px 11px 9px;border-radius:10px;background:var(--card);position:relative;overflow:hidden;
     border:1px solid var(--line);cursor:pointer;font-weight:700;font-size:13px;transition:.15s;user-select:none}
   .tab .lv{font-size:9.5px;color:var(--muted);font-weight:600;display:block}
   .tab.active{background:var(--bleu);color:#fff;border-color:var(--bleu)}.tab.active .lv{color:#dce8ff}
+  .tabprog{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(20,30,60,.07)}
+  .tabprog i{display:block;height:100%;width:0;background:var(--green);transition:width .45s ease}
+  .tab.active .tabprog{background:rgba(255,255,255,.28)}.tab.active .tabprog i{background:#fff}
+  .tab.tabdone{border-color:var(--green)}
+  body.dark .tabprog{background:rgba(255,255,255,.08)}
+  body.dark .tab.tabdone{border-color:#2bb56a}
   .barrow{max-width:980px;margin:9px auto 0;padding:0 14px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
   .barlabel{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.05em;margin-right:1px;display:inline-flex;align-items:center;opacity:.9;text-transform:uppercase}
   .barlabel.grp{margin-left:7px;padding-left:13px;border-left:1px solid var(--line)}
@@ -12086,8 +12092,11 @@ function buildTabs(){
     wrap.appendChild(sel);tabsEl.appendChild(wrap);
   }else{
     keys.forEach(k=>{
-      const t=document.createElement('div');t.className='tab'+(k===current?' active':'');
-      t.innerHTML=k+'<span class="lv">'+curTabs()[k].label+'</span>';
+      const its=curTabs()[k].items;let dn=0;its.forEach(it=>{if(marks[cat+'|'+k+'|'+it.w]==='done')dn++;});
+      const pct=its.length?Math.round(dn/its.length*100):0;
+      const t=document.createElement('div');t.className='tab'+(k===current?' active':'')+(pct>=100?' tabdone':'');
+      t.title=curTabs()[k].label+'（完璧 '+pct+'%・'+dn+'/'+its.length+'）';
+      t.innerHTML=k+'<span class="lv">'+curTabs()[k].label+'</span><div class="tabprog"><i style="width:'+pct+'%"></i></div>';
       t.onclick=()=>{current=k;posFilter='all';rangeSel='all';resetSearch();document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');buildRange();buildFilter();renderAll();saveNav();};
       tabsEl.appendChild(t);
     });
