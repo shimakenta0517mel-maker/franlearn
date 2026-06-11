@@ -241,6 +241,10 @@
   .barrow{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
   .barrow::-webkit-scrollbar{display:none}
   .barrow .chip,.barrow .barlabel{flex:0 0 auto}
+  /* horizontal-scroll edge fade cue (shows only when more content is off-edge) */
+  .xsf-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent)}
+  .xsf-l{-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px);mask-image:linear-gradient(90deg,transparent,#000 24px)}
+  .xsf-l.xsf-r{-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}
   .deckSel{flex:1;min-width:0;max-width:100%;border-radius:10px;border:1px solid var(--line);background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%230055A4' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right 12px center;
     padding:10px 34px 10px 12px;font-size:14px;font-weight:700;color:var(--bleu);appearance:none;-webkit-appearance:none;max-width:none}
   .tabsrow{max-width:980px;margin:11px auto 0;padding:0 14px;display:flex;gap:8px;align-items:center}
@@ -12783,6 +12787,19 @@ if('mediaSession' in navigator){
 
 current=tabKeys()[0];
 buildTabs();buildRange();buildFilter();renderAll();
+// 横スクロールするナビバーに「まだ右/左に続く」フェード手がかりを付ける（操作導線・視認性）
+(function(){
+  function sf(el){
+    if(!el)return null;
+    const upd=()=>{const max=el.scrollWidth-el.clientWidth;el.classList.toggle('xsf-l',el.scrollLeft>2);el.classList.toggle('xsf-r',el.scrollLeft<max-2);};
+    el.addEventListener('scroll',upd,{passive:true});
+    try{new MutationObserver(upd).observe(el,{childList:true});}catch(e){}
+    return upd;
+  }
+  const upds=['tabs','deckbar','teststyle','rangebar','filterbar'].map(id=>sf(document.getElementById(id))).filter(Boolean);
+  const all=()=>upds.forEach(u=>u());
+  window.addEventListener('resize',all);all();setTimeout(all,300);
+})();
 </script>
 </body>
 </html>
