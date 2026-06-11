@@ -479,6 +479,8 @@
   .flipbtn{background:linear-gradient(135deg,#063e86,#2f7ad0);box-shadow:0 7px 18px rgba(0,55,130,.30)}
   .flipbtn:hover{filter:brightness(1.06)}
   .flash{border-radius:22px;box-shadow:0 14px 40px rgba(22,32,58,.12)}
+  @keyframes cardflip{0%{transform:perspective(800px) rotateY(-90deg);opacity:0}45%{opacity:1}100%{transform:perspective(800px) rotateY(0);opacity:1}}
+  .flash.revealed{animation:cardflip .34s ease-out;transform-origin:center;backface-visibility:hidden}
   #topBtn{background:linear-gradient(135deg,#063e86,#2f7ad0);box-shadow:0 6px 18px rgba(0,40,100,.42)}
   /* universal stop button — appears while any audio is playing */
   .stopfab{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%) translateY(150%);z-index:60;
@@ -12522,7 +12524,7 @@ function renderTest(){
   }else{
     const GR=[['0','もう一度','1'],['1','難しい','2'],['2','できた','3'],['3','簡単','4']];
     const gradeBtns=GR.map(([g,lbl,kc])=>'<button class="gbtn" data-g="'+g+'">'+lbl+'<span class="iv">'+srsLabel(it.k,Number(g))+'</span><span class="kc">'+kc+'</span></button>').join('');
-    cardArea.innerHTML='<div class="flash"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex">'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
+    cardArea.innerHTML='<div class="flash revealed"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex">'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
     document.getElementById('bp').onclick=()=>speak(it.w);
     cardArea.querySelectorAll('.gbtn').forEach(b=>b.onclick=()=>gradeCard(Number(b.dataset.g)));
   }
