@@ -381,14 +381,15 @@
   /* ===== Anki-style 4-grade buttons ===== */
   .grade4{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:540px;margin:0 auto}
   .gbtn{border:none;border-radius:11px;padding:9px 3px 8px;font-size:13.5px;font-weight:700;cursor:pointer;color:#fff;
-    display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1;transition:transform .1s,filter .12s}
+    display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.1;box-shadow:0 3px 9px rgba(0,0,0,.16);transition:transform .1s,filter .12s,box-shadow .12s}
   .gbtn .iv{font-size:10.5px;font-weight:600;opacity:.92}
   .gbtn .kc{font-size:9px;opacity:.6;font-weight:700}
-  .gbtn[data-g="0"]{background:var(--rouge)}
-  .gbtn[data-g="1"]{background:#e0820a}
-  .gbtn[data-g="2"]{background:var(--green)}
-  .gbtn[data-g="3"]{background:#2f6fd0}
-  .gbtn:hover{filter:brightness(1.07)}.gbtn:active{transform:scale(.94)}
+  .gbtn[data-g="0"]{background:linear-gradient(135deg,#f4584c,#d62b1e)}
+  .gbtn[data-g="1"]{background:linear-gradient(135deg,#f0972a,#d4730a)}
+  .gbtn[data-g="2"]{background:linear-gradient(135deg,#2bb56a,#178a4a)}
+  .gbtn[data-g="3"]{background:linear-gradient(135deg,#4a8be8,#2560c4)}
+  .gbtn:hover{filter:brightness(1.07);box-shadow:0 6px 15px rgba(0,0,0,.22)}
+  .gbtn:active{transform:scale(.94);box-shadow:0 1px 4px rgba(0,0,0,.25)}
   @media(max-width:420px){.gbtn{font-size:12.5px;padding:8px 2px}.gbtn .iv{font-size:10px}.gbtn .kc{display:none}}
   /* ---- header control buttons + collapsible settings panel ---- */
   .ctrlbtn{border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:9px;padding:6px 12px;font-size:12.5px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:.15s}
