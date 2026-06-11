@@ -32,6 +32,10 @@
   .catbtn{flex:0 0 auto;padding:6px 12px;border-radius:20px;background:rgba(255,255,255,.16);color:#eaf1ff;
     cursor:pointer;font-weight:700;font-size:12.5px;user-select:none;white-space:nowrap;transition:.15s;border:none}
   .catbtn.active{background:#fff;color:var(--bleu)}
+  .catbtn,.tsbtn{display:inline-flex;align-items:center;gap:5px}
+  .catbtn svg,.tsbtn svg{width:14px;height:14px;flex:0 0 auto}
+  .modebtn{display:flex;align-items:center;justify-content:center;gap:6px}
+  .modebtn svg{width:16px;height:16px;flex:0 0 auto}
   .deckbar{margin-top:8px}
   .deckbar .barlbl,.teststyle .barlbl{flex:0 0 auto;align-self:center;font-size:11px;font-weight:700;opacity:.78;margin-right:3px}
   .teststyle{margin-top:7px;align-items:center}
@@ -111,7 +115,8 @@
   body.dark .tocfilter input{background:#11151f;color:#e8ecf5;border-color:#2a3147}
   .tocempty{color:var(--muted);font-size:12.5px;padding:14px 2px;text-align:center}
   .tocsec{margin-top:9px}
-  .toch{font-size:12px;font-weight:800;color:var(--bleu);margin-bottom:5px}
+  .toch{font-size:12px;font-weight:800;color:var(--bleu);margin-bottom:5px;display:flex;align-items:center;gap:5px}
+  .toch svg{width:13px;height:13px;flex:0 0 auto}
   .tocchips{display:flex;gap:6px;flex-wrap:wrap}
   .pct{font-size:10px;color:var(--green);font-weight:800}
   .chip.fullchip{border-color:var(--green);color:var(--green)}
@@ -566,9 +571,9 @@
     </details>
   </div>
   <div class="modebar" id="modebar">
-    <div class="modebtn active" data-mode="learn">📖 学習</div>
-    <div class="modebtn" data-mode="test">✍️ テスト</div>
-    <div class="modebtn" data-mode="hf">🎧 ハンズフリー</div>
+    <div class="modebtn active" data-mode="learn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 6.3C10.5 5.2 8.4 4.6 6 4.6c-1.05 0-2.05.12-3 .35v13.2c.95-.23 1.95-.35 3-.35 2.4 0 4.5.6 6 1.7 1.5-1.1 3.6-1.7 6-1.7 1.05 0 2.05.12 3 .35V4.95c-.95-.23-1.95-.35-3-.35-2.4 0-4.5.6-6 1.7z"/></svg> 学習</div>
+    <div class="modebtn" data-mode="test"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg> テスト</div>
+    <div class="modebtn" data-mode="hf"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-9 9v5a3 3 0 0 0 3 3 2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2H5a7 7 0 0 1 14 0h-1a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2 3 3 0 0 0 3-3v-5a9 9 0 0 0-9-9z"/></svg> ハンズフリー</div>
   </div>
   <div class="catbar deckbar" id="deckbar"></div>
   <div class="catbar teststyle hide" id="teststyle"></div>
@@ -11667,6 +11672,21 @@ const IC_SNDON='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5
 const IC_SNDOFF='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M22 9.41 20.59 8l-2.09 2.09L16.41 8 15 9.41l2.09 2.09L15 13.59 16.41 15l2.09-2.09L20.59 15 22 13.59l-2.09-2.09z"/></svg>';
 const IC_MOON='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.5 3a8 8 0 1 0 8.46 11.46A6.5 6.5 0 0 1 12.5 3z"/></svg>';
 const IC_SUN='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4" fill="currentColor" stroke="none"/><path d="M12 2.6v2.1M12 19.3v2.1M21.4 12h-2.1M4.7 12H2.6M18.65 5.35 17.2 6.8M6.8 17.2l-1.45 1.45M18.65 18.65 17.2 17.2M6.8 6.8 5.35 5.35"/></svg>';
+// デッキ／今日／テスト形式のアイコン（絵文字→単色SVGで統一）
+const IC_TODAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zM5 9v10h14V9H5z"/></svg>';
+const CAT_ICON={
+  delf:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h11a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2zm0 15.5a.5.5 0 0 0 .5.5H17v-2H6.5a.5.5 0 0 0-.5.5z"/></svg>',
+  freq:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 4v2h10V8H7zm0 4v2h7v-2H7z"/></svg>',
+  scene:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M2 5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H7l-3 3v-3a2 2 0 0 1-2-2V5z"/><path d="M17 8h3a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2v3l-3-3h-4a2 2 0 0 1-1.73-1H13a4 4 0 0 0 4-4V8z"/></svg>',
+  theme:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h7v7H4zm9 0h7v7h-7zM4 13h7v7H4zm9 0h7v7h-7z"/></svg>',
+  verb:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.7 5.3a.6.6 0 0 0-1-.28l-2.6 2.6-2.12-.7-.7-2.12 2.6-2.6a.6.6 0 0 0-.28-1 5 5 0 0 0-6.1 6.2l-7.06 7.06a2.12 2.12 0 1 0 3 3l7.06-7.06a5 5 0 0 0 6.2-6.1z"/></svg>'
+};
+const TS_ICON={
+  test:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm3 3v2h10V8zm0 4v2h10v-2zm0 4v2h6v-2z"/></svg>',
+  match:'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="6" width="9" height="12" rx="2"/><rect x="12.5" y="6" width="9" height="12" rx="2" opacity=".55"/></svg>',
+  pron:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>',
+  num:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3 7 21M17 3l-2 18M4 8.5h16M4 15.5h16"/></svg>'
+};
 
 /* ---------- sound effects (Web Audio, no assets) ---------- */
 let _ac=null;
@@ -11881,7 +11901,7 @@ function keyOf(it){return cat+'|'+current+'|'+it.w;}
 
 /* ---------- category bar ---------- */
 const deckbar=document.getElementById('deckbar'), teststyle=document.getElementById('teststyle');
-const CATS=[["delf","📘 DELF単語"],["freq","🗣 よく使うフレーズ"],["scene","💬 場面別"],["theme","📚 テーマ別"],["verb","🔧 動詞活用"]];
+const CATS=[["delf","DELF単語"],["freq","よく使うフレーズ"],["scene","場面別"],["theme","テーマ別"],["verb","動詞活用"]];
 /* ☰ 目次 panel (opened from the header utility button) */
 const tocBtn=document.getElementById('tocBtn');
 const tocPanel=document.createElement('div');tocPanel.id='tocPanel';tocPanel.className='tocpanel hide';
@@ -11891,7 +11911,7 @@ function toggleToc(){statsPanel.classList.add('hide');if(tocPanel.classList.cont
 function buildToc(){
   let h='<div class="tocfilter"><input type="search" id="tocFilter" placeholder="🔍 デッキ名でしぼり込み" autocomplete="off"></div><div class="tocempty" id="tocEmpty" style="display:none">該当するデッキがありません</div>';
   CATS.forEach(([id,label])=>{
-    h+='<div class="tocsec"><div class="toch">'+label+'</div><div class="tocchips">';
+    h+='<div class="tocsec"><div class="toch">'+(CAT_ICON[id]||'')+'<span>'+label+'</span></div><div class="tocchips">';
     if(id==='verb'){h+='<button class="chip" data-t="verb|">'+VERBS.length+'動詞・全時制</button>';}
     else{const tabs=DECKS[id].tabs;for(const tk in tabs){
       const its=tabs[tk].items;let dn=0;its.forEach(it=>{if(marks[id+'|'+tk+'|'+it.w]==='done')dn++;});
@@ -11923,12 +11943,12 @@ let todayBtn=null;
 function buildDeckbar(){
   deckbar.innerHTML='';
   const lbl=document.createElement('span');lbl.className='barlbl';lbl.textContent='中身';deckbar.appendChild(lbl);
-  todayBtn=document.createElement('button');todayBtn.className='catbtn';todayBtn.textContent='📅 今日';
+  todayBtn=document.createElement('button');todayBtn.className='catbtn';todayBtn.innerHTML=IC_TODAY+'<span>今日</span>';
   todayBtn.title='今日やるべき復習＋新規（SRS）をまとめてテスト';
   todayBtn.onclick=function(){todayMode=true;setMode('test');};
   deckbar.appendChild(todayBtn);
   CATS.forEach(([id,label])=>{
-    const b=document.createElement('button');b.className='catbtn';b.textContent=label;b.dataset.cat=id;
+    const b=document.createElement('button');b.className='catbtn';b.innerHTML=(CAT_ICON[id]||'')+'<span>'+label+'</span>';b.dataset.cat=id;
     b.onclick=()=>{todayMode=false;cat=id;posFilter='all';freqOnly=false;rangeSel='all';resetSearch();
       if(id!=='verb')current=tabKeys()[0];
       highlightDeckbar();buildTabs();buildRange();buildFilter();renderAll();};
@@ -11943,16 +11963,16 @@ function highlightDeckbar(){
     x.classList.toggle('active',!!on);
   });
 }
-function updateTodayBadge(){try{const t=buildTodayDeck();if(todayBtn)todayBtn.textContent='📅 今日 '+(t.due.length+t.news.length);}catch(e){}}
+function updateTodayBadge(){try{const t=buildTodayDeck();if(todayBtn)todayBtn.innerHTML=IC_TODAY+'<span>今日 '+(t.due.length+t.news.length)+'</span>';}catch(e){}}
 setTimeout(updateTodayBadge,300);
 
 /* ===== test styles (inside テスト): カード / マッチ / 発音 / 数字 ===== */
-const TEST_STYLES=[['test','📝 カード'],['match','🃏 マッチ'],['pron','🎤 発音'],['num','🔢 数字']];
+const TEST_STYLES=[['test','カード'],['match','マッチ'],['pron','発音'],['num','数字']];
 function buildTeststyle(){
   teststyle.innerHTML='';
   const lbl=document.createElement('span');lbl.className='barlbl';lbl.textContent='形式';teststyle.appendChild(lbl);
   TEST_STYLES.forEach(([m,label])=>{
-    const b=document.createElement('button');b.className='tsbtn';b.textContent=label;b.dataset.ts=m;
+    const b=document.createElement('button');b.className='tsbtn';b.innerHTML=(TS_ICON[m]||'')+'<span>'+label+'</span>';b.dataset.ts=m;
     b.title=({test:'カード式テスト（仏→日／日→仏／4択／穴埋め／入力。カード上のボタンで切替）',match:'仏語と日本語をペアで合わせるゲーム',pron:'マイクに発音して判定（Chrome/Edge推奨）',num:'フランス語の数字を聞き取って入力'})[m]||'';
     b.onclick=()=>{todayMode=false;setMode(m);};
     teststyle.appendChild(b);
