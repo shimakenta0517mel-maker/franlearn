@@ -123,8 +123,18 @@
   #topBtn{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;border:none;background:var(--bleu);color:#fff;font-size:19px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,40,100,.3);z-index:40}
   #topBtn.show{display:flex}
   body.dark #topBtn{background:#2f5fae}
-  #searchBox{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 13px;font-size:14px;background:#fff;color:var(--ink)}
+  #searchBox{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 40px 10px 13px;font-size:14px;background:#fff;color:var(--ink)}
   #searchBox:focus{outline:none;border-color:var(--bleu)}
+  #searchBox::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+  .searchwrap{position:relative;display:flex;align-items:center}
+  .searchclear{position:absolute;right:9px;top:50%;transform:translateY(-50%);border:none;background:var(--line);color:var(--muted);
+    width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:11px;line-height:1;display:flex;align-items:center;justify-content:center;
+    transition:background .15s,color .15s,transform .12s}
+  .searchclear:hover{background:var(--rouge);color:#fff}
+  .searchclear:active{transform:translateY(-50%) scale(.88)}
+  .searchclear[hidden]{display:none}
+  body.dark .searchclear{background:#2c3656;color:#aebdde}
+  body.dark .searchclear:hover{background:var(--rouge);color:#fff}
   /* verbs */
   .verbcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:13px 15px;box-shadow:0 1px 2px rgba(20,30,60,.04)}
   .verbtop{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
@@ -528,7 +538,7 @@
 
 <main>
   <section id="learnView">
-    <div class="searchrow"><input id="searchBox" type="search" placeholder="🔍 単語・意味・IPAで検索（全デッキ横断）" autocomplete="off"></div>
+    <div class="searchrow"><div class="searchwrap"><input id="searchBox" type="search" placeholder="🔍 単語・意味・IPAで検索（全デッキ横断）" autocomplete="off"><button type="button" id="searchClear" class="searchclear" aria-label="検索をクリア" hidden>✕</button></div></div>
     <div class="hint" id="hint"></div>
     <div class="learnplay" id="learnplay">
       <button id="lpBtn" class="bigplay" style="margin-top:0">▶ 連続再生</button>
@@ -11798,7 +11808,7 @@ function posCat(p){
   if(POS_NOUN.has(p))return '名詞';
   return 'その他';
 }
-function resetSearch(){searchQ='';const sb=document.getElementById('searchBox');if(sb)sb.value='';}
+function resetSearch(){searchQ='';const sb=document.getElementById('searchBox');if(sb)sb.value='';const sc=document.getElementById('searchClear');if(sc)sc.hidden=true;}
 function curTabs(){return DECKS[cat].tabs;}
 function tabKeys(){return Object.keys(curTabs());}
 function isVerb(){return cat==='verb';}
@@ -12099,6 +12109,14 @@ function setMode(m){
 document.querySelectorAll('.modebtn').forEach(b=>{b.onclick=()=>{todayMode=false;setMode(b.dataset.mode);};});
 const searchBox=document.getElementById('searchBox');
 searchBox.addEventListener('input',()=>{searchQ=searchBox.value.trim();renderLearn();});
+// 検索クリアボタン（入力中だけ表示）＋ Esc でクリア（操作性向上）
+const searchClear=document.getElementById('searchClear');
+function updSearchClear(){if(searchClear)searchClear.hidden=!searchBox.value;}
+searchBox.addEventListener('input',updSearchClear);
+function clearSearch(focus){searchBox.value='';searchQ='';updSearchClear();renderLearn();if(focus)searchBox.focus();else searchBox.blur();}
+if(searchClear)searchClear.addEventListener('click',()=>clearSearch(true));
+searchBox.addEventListener('keydown',e=>{if(e.key==='Escape'&&searchBox.value){e.preventDefault();clearSearch(false);}});
+updSearchClear();
 // keyboard shortcuts (desktop) for test: Space=めくる, ←=もう一度, →=覚えた
 document.addEventListener('keydown',e=>{
   if(mode!=='test')return;const tn=(e.target&&e.target.tagName)||'';if(tn==='INPUT'||tn==='SELECT'||tn==='TEXTAREA')return;
