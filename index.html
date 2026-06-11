@@ -11856,6 +11856,8 @@ window.addEventListener('beforeunload',()=>sv('fl_time',timeData));
 
 /* ---------- state ---------- */
 let mode='learn', cat='delf', current=null, posFilter='all', freqOnly=false, rangeSel='all', verbTense='pres', viewMode='visible', searchQ='';
+// 前回の位置（デッキ/タブ/モード）を保存し、次回起動時に続きから開けるように
+function saveNav(){try{if(!todayMode&&!searchQ)sv('fl_nav',{m:mode,c:cat,t:current});}catch(e){}}
 /* ---------- 品詞(POS)正規化：表記ゆれ・意味タグを正規の品詞カテゴリへ集約してフィルタに使う ---------- */
 const POS_ORDER=['名詞','動詞','形容詞','副詞','会話・表現','前置詞','接続詞','代名詞','数詞','その他'];
 const POS_CONV=new Set(['会話','表現','慣用句','ことわざ','フレーズ','口語','自分が言う','聞かれる','感嘆','返事','挨拶','相づち','疑問','雑談','つなぎ','結び','書き出し','促し','質問','招待','お祝い','緊急','議論','呼びかけ']);
@@ -11951,7 +11953,7 @@ function buildDeckbar(){
     const b=document.createElement('button');b.className='catbtn';b.innerHTML=(CAT_ICON[id]||'')+'<span>'+label+'</span>';b.dataset.cat=id;
     b.onclick=()=>{todayMode=false;cat=id;posFilter='all';freqOnly=false;rangeSel='all';resetSearch();
       if(id!=='verb')current=tabKeys()[0];
-      highlightDeckbar();buildTabs();buildRange();buildFilter();renderAll();};
+      highlightDeckbar();buildTabs();buildRange();buildFilter();renderAll();saveNav();};
     deckbar.appendChild(b);
   });
   highlightDeckbar();updateTodayBadge();
@@ -12064,13 +12066,13 @@ function buildTabs(){
     const wrap=document.createElement('div');wrap.className='tabsrow';
     const sel=document.createElement('select');sel.className='deckSel';
     keys.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k+' — '+curTabs()[k].label+'（'+curTabs()[k].items.length+'）';if(k===current)o.selected=true;sel.appendChild(o);});
-    sel.onchange=()=>{current=sel.value;posFilter='all';rangeSel='all';resetSearch();buildRange();buildFilter();renderAll();};
+    sel.onchange=()=>{current=sel.value;posFilter='all';rangeSel='all';resetSearch();buildRange();buildFilter();renderAll();saveNav();};
     wrap.appendChild(sel);tabsEl.appendChild(wrap);
   }else{
     keys.forEach(k=>{
       const t=document.createElement('div');t.className='tab'+(k===current?' active':'');
       t.innerHTML=k+'<span class="lv">'+curTabs()[k].label+'</span>';
-      t.onclick=()=>{current=k;posFilter='all';rangeSel='all';resetSearch();document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');buildRange();buildFilter();renderAll();};
+      t.onclick=()=>{current=k;posFilter='all';rangeSel='all';resetSearch();document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');buildRange();buildFilter();renderAll();saveNav();};
       tabsEl.appendChild(t);
     });
   }
@@ -12184,6 +12186,7 @@ function setMode(m){
   if(m!=='match')matchStopTimer();
   highlightDeckbar();
   renderAll();
+  saveNav();
 }
 document.querySelectorAll('.modebtn').forEach(b=>{b.onclick=()=>{todayMode=false;setMode(b.dataset.mode);};});
 const searchBox=document.getElementById('searchBox');
@@ -12360,7 +12363,7 @@ function jumpTo(cid,tk){
   cat=cid;posFilter='all';rangeSel='all';freqOnly=false;resetSearch();
   if(cid!=='verb')current=tk;
   document.querySelectorAll('.catbtn[data-cat]').forEach(x=>x.classList.toggle('active',x.dataset.cat===cid));
-  buildTabs();buildRange();buildFilter();renderAll();
+  buildTabs();buildRange();buildFilter();renderAll();saveNav();
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
@@ -12832,8 +12835,17 @@ if('mediaSession' in navigator){
   }catch(e){}
 }
 
-current=tabKeys()[0];
-buildTabs();buildRange();buildFilter();renderAll();
+// 前回の位置を復元（デッキ・タブ。モードは安全な learn / hf のみ復元し、テスト等は自動起動しない）
+(function(){try{
+  const nv=ls('fl_nav','null');
+  if(nv){
+    if(nv.c&&DECKS[nv.c])cat=nv.c;
+    if(nv.m==='learn'||nv.m==='hf')mode=nv.m;
+    if(cat!=='verb'){const keys=Object.keys(DECKS[cat].tabs);current=(nv.t&&keys.indexOf(nv.t)>=0)?nv.t:keys[0];}else current=null;
+  }else current=tabKeys()[0];
+}catch(e){cat='delf';mode='learn';current=tabKeys()[0];}})();
+buildRange();
+setMode(mode);
 // 横スクロールするナビバーに「まだ右/左に続く」フェード手がかりを付ける（操作導線・視認性）
 (function(){
   function sf(el){
