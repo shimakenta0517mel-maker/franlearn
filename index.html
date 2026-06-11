@@ -11665,7 +11665,7 @@ function beep(seq){
 function sfxOk(){beep([[660,0.10],[990,0.13]]);}
 function sfxNg(){beep([[207,0.13],[155,0.18]]);}
 function sfxWin(){beep([[523,0.12],[659,0.12],[784,0.12],[1047,0.2]]);}
-(function(){const sb=document.getElementById('sfxBtn');if(sb){sb.textContent=sfxOn?'🔊':'🔇';sb.onclick=()=>{sfxOn=!sfxOn;localStorage.setItem('fl_sfx',sfxOn?'on':'off');sb.textContent=sfxOn?'🔊':'🔇';if(sfxOn)sfxOk();};}})();
+(function(){const sb=document.getElementById('sfxBtn');if(sb){const upd=()=>{sb.textContent=sfxOn?'🔊':'🔇';sb.setAttribute('aria-pressed',sfxOn?'true':'false');sb.setAttribute('aria-label',sfxOn?'効果音 オン（タップでオフ）':'効果音 オフ（タップでオン）');};upd();sb.onclick=()=>{sfxOn=!sfxOn;localStorage.setItem('fl_sfx',sfxOn?'on':'off');upd();if(sfxOn)sfxOk();};}})();
 
 /* ---------- confetti celebration (canvas, no assets) ---------- */
 function confetti(){
@@ -11686,7 +11686,7 @@ function confetti(){
   requestAnimationFrame(frame);
 }
 function celebrate(){sfxWin();confetti();}
-function toast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t);}t.textContent=msg;t.className='show';clearTimeout(t._t);t._t=setTimeout(()=>{t.className='';},2800);}
+function toast(msg){let t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';t.setAttribute('role','status');t.setAttribute('aria-live','polite');document.body.appendChild(t);}t.textContent=msg;t.className='show';clearTimeout(t._t);t._t=setTimeout(()=>{t.className='';},2800);}
 
 /* ---------- French text helpers (accent-insensitive matching + accent input) ---------- */
 function deaccent(s){return String(s).normalize('NFD').replace(/[̀-ͯ]/g,'');}
@@ -11994,7 +11994,7 @@ function buildStats(){
 }
 /* theme */
 const themeBtn=document.getElementById('themeBtn');
-function applyTheme(t){document.body.classList.toggle('dark',t==='dark');themeBtn.textContent=t==='dark'?'☀️':'🌙';sv('fl_theme',t);}
+function applyTheme(t){const dark=t==='dark';document.body.classList.toggle('dark',dark);themeBtn.textContent=dark?'☀️':'🌙';themeBtn.setAttribute('aria-pressed',dark?'true':'false');themeBtn.setAttribute('aria-label',dark?'ダークモード（タップでライト）':'ライトモード（タップでダーク）');sv('fl_theme',t);}
 let curTheme=ls('fl_theme','""')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
 applyTheme(curTheme);
 themeBtn.onclick=()=>{curTheme=curTheme==='dark'?'light':'dark';applyTheme(curTheme);};
