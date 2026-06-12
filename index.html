@@ -748,7 +748,7 @@
 </footer>
 <script>
 const DECKS={};
-DECKS.delf={label:"📘 DELF単語",tabs:{
+DECKS.delf={label:"DELF単語",tabs:{
  "A1":{label:"初級・基礎",items:[
   {w:"Bonjour",ipa:"[bɔ̃ʒuʁ]",pos:"挨拶",jp:"こんにちは",pri:1,ex:"Bonjour, je m'appelle Marie.",exjp:"こんにちは、マリーです。"},
   {w:"Bonsoir",ipa:"[bɔ̃swaʁ]",pos:"挨拶",jp:"こんばんは",pri:1,ex:"Bonsoir, vous allez bien ?",exjp:"こんばんは、お元気ですか?"},
@@ -862,7 +862,7 @@ DECKS.delf={label:"📘 DELF単語",tabs:{
   {w:"palinodie",ipa:"[palinɔdi]",pos:"名詞",jp:"前言撤回",ex:"Ses palinodies lassent.",exjp:"彼の変節にはうんざりです。"}
  ]}
 }};
-DECKS.freq={label:"🗣 よく使うフレーズ",tabs:{
+DECKS.freq={label:"よく使うフレーズ",tabs:{
  "A1":{label:"まず覚える",items:[
   {w:"Comment ça va ?",ipa:"[kɔmɑ̃ sa va]",pos:"会話",jp:"元気?",pri:1,ex:"Salut ! Comment ça va ?",exjp:"やあ!元気?"},
   {w:"Je m'appelle…",ipa:"[ʒə mapɛl]",pos:"会話",jp:"私の名前は…",pri:1,ex:"Je m'appelle Léa.",exjp:"レアです。"},
@@ -931,7 +931,7 @@ DECKS.freq={label:"🗣 よく使うフレーズ",tabs:{
   {w:"Aussi… que soit",ipa:"[osi kə swa]",pos:"会話",jp:"どんなに〜でも",ex:"Aussi difficile que soit la tâche…",exjp:"どんなに困難な仕事でも…"}
  ]}
 }};
-DECKS.scene={label:"💬 場面別",tabs:{
+DECKS.scene={label:"場面別",tabs:{
  "レストラン":{label:"レストラン",items:[
   {w:"Une table pour deux",ipa:"[yn tabl puʁ dø]",pos:"自分が言う",jp:"2名で",pri:1,ex:"Bonsoir, une table pour deux, s'il vous plaît.",exjp:"こんばんは、2名お願いします。"},
   {w:"La carte, s'il vous plaît",ipa:"[la kaʁt sil vu plɛ]",pos:"自分が言う",jp:"メニューください",pri:1,ex:"Pouvez-vous m'apporter la carte ?",exjp:"メニューをもらえますか?"},
@@ -1026,7 +1026,7 @@ DECKS.scene={label:"💬 場面別",tabs:{
   {w:"À plus !",ipa:"[a plys]",pos:"雑談",jp:"またね",pri:1,ex:"Allez, à plus !",exjp:"じゃ、またね!"}
  ]}
 }};
-DECKS.theme={label:"📚 テーマ別",tabs:{
+DECKS.theme={label:"テーマ別",tabs:{
  "数字":{label:"数字",items:[
   {w:"un / une",ipa:"[œ̃ / yn]",pos:"数",jp:"1",pri:1,ex:"J'ai un frère.",exjp:"兄が一人います。"},
   {w:"deux",ipa:"[dø]",pos:"数",jp:"2",pri:1,ex:"deux cafés",exjp:"コーヒー2つ"},
@@ -12316,7 +12316,7 @@ function renderLearn(){
   learnplayEl.classList.remove('hide');
   hintEl.innerHTML=I_BULB+' 青い<b>単語</b>やIPA、'+I_SPK+'例文をタップで発音。覚えた語はカード下の<b>'+I_CHECK+'完璧</b>で一覧から隠せます（「表示」の '+I_CHECK+'完璧 でいつでも確認・復帰）。'+I_STAR+'は頻出、「区間」で1-25等に絞れます。';
   const arr=filtered();
-  levelhead.textContent=DECKS[cat].label+' ｜ '+current+' '+curTabs()[current].label+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeSel[0]+'-'+rangeSel[1]+']':'')+(posFilter!=='all'?'（'+posFilter+'）':'')+(freqOnly?' ★':'');
+  levelhead.innerHTML=(CAT_ICON[cat]||'')+' '+DECKS[cat].label+' ｜ '+current+' '+curTabs()[current].label+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeSel[0]+'-'+rangeSel[1]+']':'')+(posFilter!=='all'?'（'+posFilter+'）':'')+(freqOnly?' '+I_STAR:'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
   if(!arr.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🗂️</div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や「表示／品詞」の絞り込みを広げてみてください。</div></div>';return;}
   arr.forEach(o=>{
@@ -12346,7 +12346,7 @@ function renderVerbs(){
   hintEl.innerHTML=I_BULB+' 不定詞・活用形をタップで発音。上の「時制」で表示する時制を切替（「全部表示」で全時制）。命令法は je/nous/vous の3形。';
   const arr=filtered();
   const tlist=verbTense==='all'?TENSES.map(t=>t[0]):[verbTense];
-  levelhead.textContent='🔧 動詞活用 ｜ '+arr.length+'語 ｜ '+(verbTense==='all'?'全時制':tenseName(verbTense));
+  levelhead.innerHTML=(CAT_ICON.verb||'')+' 動詞活用 ｜ '+arr.length+'語 ｜ '+(verbTense==='all'?'全時制':tenseName(verbTense));
   grid.innerHTML='';grid.style.gridTemplateColumns='1fr';
   arr.forEach(o=>{
     const v=o.it;
@@ -12416,9 +12416,9 @@ function renderGlobalSearch(){
     }
   }
   VERBS.forEach((v,i)=>{
-    if((v.inf+' '+v.jp+' '+v.ipa).toLowerCase().includes(q))res.push({cid:'verb',clabel:'🔧 動詞活用',tk:'活用',it:{w:v.inf,ipa:v.ipa,pos:VERBGROUPS[v.grp],jp:v.jp,ex:v.pres[0]+', '+v.pres[4],exjp:'(現在形 je / vous)'},n:i+1,verb:true});
+    if((v.inf+' '+v.jp+' '+v.ipa).toLowerCase().includes(q))res.push({cid:'verb',clabel:'動詞活用',tk:'活用',it:{w:v.inf,ipa:v.ipa,pos:VERBGROUPS[v.grp],jp:v.jp,ex:v.pres[0]+', '+v.pres[4],exjp:'(現在形 je / vous)'},n:i+1,verb:true});
   });
-  levelhead.textContent='🔍 「'+searchQ+'」 検索結果 '+res.length+' 件'+(res.length>100?'（先頭100件を表示）':'');
+  levelhead.textContent='「'+searchQ+'」 検索結果 '+res.length+' 件'+(res.length>100?'（先頭100件を表示）':'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
   if(!res.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🔍</div><div class="empty-t">見つかりませんでした</div><div class="empty-s">スペルや別の言い方で試してみてください。アクセント記号は無くても検索できます。</div><button type="button" class="empty-btn" id="emptyClear">検索をクリア</button></div>';const ec=document.getElementById('emptyClear');if(ec)ec.onclick=()=>clearSearch(true);return;}
   res.slice(0,100).forEach(r=>{
@@ -12431,7 +12431,7 @@ function renderGlobalSearch(){
       foot+='</div>';
     }
     c.innerHTML=
-      '<div class="cardtop"><button class="deckjump" data-j>'+r.clabel+' › '+r.tk+'</button><span class="num">#'+r.n+'</span>'+(it.pri?'<span class="star">★</span>':'')+'</div>'+
+      '<div class="cardtop"><button class="deckjump" data-j>'+(CAT_ICON[r.cid]||'')+' '+r.clabel+' › '+r.tk+'</button><span class="num">#'+r.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'</div>'+
       '<div class="wordrow"><span class="word">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos">'+it.pos+'</span><button class="play">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+foot;
