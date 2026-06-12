@@ -145,6 +145,8 @@
   .chip.fullchip{border-color:var(--green);color:var(--green)}
   .hfpreset{display:flex;gap:7px;justify-content:center;align-items:center;margin-top:13px;flex-wrap:wrap}
   .swipehint{text-align:center;font-size:10.5px;color:var(--muted);margin-top:8px}
+  .flash.swipe-right{box-shadow:0 0 0 3px var(--green),0 14px 40px rgba(22,32,58,.12)}
+  .flash.swipe-left{box-shadow:0 0 0 3px var(--rouge),0 14px 40px rgba(22,32,58,.12)}
   .clozeq{font-size:19px;font-weight:600;line-height:1.7;font-family:Georgia,'Times New Roman',serif;color:var(--ink);padding:0 6px}
   .goalrow{margin-top:12px}
   .goalbar{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
@@ -12702,13 +12704,24 @@ function stopAllAudio(){
 stopFab.onclick=stopAllAudio;
 function _audioActive(){return !!curAudio||!!(synth&&synth.speaking)||(typeof lpPlaying!=='undefined'&&lpPlaying)||(typeof hfPlaying!=='undefined'&&hfPlaying);}
 setInterval(()=>{try{stopFab.classList.toggle('show',_audioActive());}catch(e){}},250);
-/* swipe grading on test card */
-let _tsX=0,_tsY=0;
-cardArea.addEventListener('touchstart',e=>{const t=e.touches[0];_tsX=t.clientX;_tsY=t.clientY;},{passive:true});
+/* swipe grading on test card — with live drag feedback */
+let _tsX=0,_tsY=0,_swDrag=false;
+const _swFlash=()=>cardArea.querySelector('.flash');
+cardArea.addEventListener('touchstart',e=>{const t=e.touches[0];_tsX=t.clientX;_tsY=t.clientY;_swDrag=(mode==='test'&&flipped);},{passive:true});
+cardArea.addEventListener('touchmove',e=>{
+  if(!_swDrag)return;
+  const t=e.touches[0],dx=t.clientX-_tsX,dy=t.clientY-_tsY,f=_swFlash();
+  if(!f)return;
+  if(Math.abs(dy)>50){f.style.transform='';f.style.transition='';f.classList.remove('swipe-left','swipe-right');return;}
+  f.style.transition='none';f.style.transform='translateX('+(dx*0.4)+'px) rotate('+(dx*0.02)+'deg)';
+  f.classList.toggle('swipe-right',dx>50);f.classList.toggle('swipe-left',dx<-50);
+},{passive:true});
 cardArea.addEventListener('touchend',e=>{
-  if(mode!=='test'||!flipped)return;
-  const t=e.changedTouches[0];const dx=t.clientX-_tsX,dy=t.clientY-_tsY;
-  if(Math.abs(dx)>60&&Math.abs(dy)<60){gradeCard(dx>0?2:0);}
+  const f=_swFlash();if(f){f.style.transition='';f.style.transform='';f.classList.remove('swipe-left','swipe-right');}
+  if(!_swDrag||mode!=='test'||!flipped){_swDrag=false;return;}
+  _swDrag=false;
+  const t=e.changedTouches[0],dx=t.clientX-_tsX,dy=t.clientY-_tsY;
+  if(Math.abs(dx)>60&&Math.abs(dy)<60)gradeCard(dx>0?2:0);
 },{passive:true});
 
 /* ---------- NUMBER TRAINER ---------- */
