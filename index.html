@@ -150,7 +150,9 @@
   body.dark .choicebtn::before{background:#2c3656;color:#b0bfe0}
   body.dark .choicebtn:hover{background:#27314c;border-color:#3a4566}
   #topBtn{position:fixed;right:max(16px,env(safe-area-inset-right));bottom:max(18px,env(safe-area-inset-bottom));width:44px;height:44px;border-radius:50%;border:none;background:var(--bleu);color:#fff;font-size:19px;cursor:pointer;display:none;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,40,100,.3);z-index:40}
-  #topBtn.show{display:flex}
+  #topBtn.show{display:flex;animation:topbtnin .2s ease}
+  #topBtn svg{width:21px;height:21px;fill:currentColor}
+  @keyframes topbtnin{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
   body.dark #topBtn{background:#2f5fae}
   #searchBox{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 40px 10px 40px;font-size:14px;background:#fff;color:var(--ink)}
   #searchBox:focus{outline:none;border-color:var(--bleu)}
@@ -12656,7 +12658,7 @@ document.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{
 });
 document.querySelectorAll('[data-hp]').forEach(b=>b.onclick=()=>{viewMode=b.dataset.hp;buildFilter();hfStop();hfBuild();});
 /* floating top button */
-const topBtn=document.createElement('button');topBtn.id='topBtn';topBtn.textContent='↑';document.body.appendChild(topBtn);
+const topBtn=document.createElement('button');topBtn.id='topBtn';topBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 7.4 4.6 14.8 6 16.2l6-6 6 6 1.4-1.4z"/></svg>';topBtn.setAttribute('aria-label','上に戻る');topBtn.title='上に戻る';document.body.appendChild(topBtn);
 topBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
 window.addEventListener('scroll',()=>{topBtn.classList.toggle('show',window.scrollY>400);},{passive:true});
 /* ---------- universal STOP button (shows while any audio is playing) ---------- */
