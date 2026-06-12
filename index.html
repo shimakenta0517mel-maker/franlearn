@@ -440,6 +440,14 @@
     transition:opacity .3s,transform .3s;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,.34);max-width:90vw;text-align:center}
   #toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
   body.dark #toast{background:#26304a}
+  .dlprogress{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom));transform:translateX(-50%) translateY(160%);z-index:70;
+    background:#1a2233;color:#fff;border-radius:14px;padding:11px 16px;min-width:248px;max-width:90vw;box-shadow:0 8px 24px rgba(0,0,0,.34);opacity:0;transition:transform .3s,opacity .25s}
+  .dlprogress.show{transform:translateX(-50%) translateY(0);opacity:1}
+  .dlp-txt{font-size:12px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+  .dlp-txt b{font-variant-numeric:tabular-nums}
+  .dlp-bar{height:6px;background:rgba(255,255,255,.2);border-radius:4px;overflow:hidden}
+  .dlp-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#2bb56a,#43c97e);transition:width .25s}
+  body.dark .dlprogress{background:#26304a}
   /* ===== Anki-style 4-grade buttons ===== */
   .grade4{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;max-width:540px;margin:0 auto}
   .gbtn{border:none;border-radius:11px;padding:9px 3px 8px;font-size:13.5px;font-weight:700;cursor:pointer;color:#fff;
@@ -12901,13 +12909,22 @@ async function downloadAllAudio(){
   }
   if(!jobs.length){toast('音声リストを取得できませんでした');return;}
   _dling=true;let done=0;
-  if(typeof toast==='function')toast('📥 オフライン保存を開始（'+(useM?'男性':'女性')+'仏語＋日本語・'+jobs.length+'件）…');
+  dlShow(jobs.length);
   let i=0;const conc=8;
-  async function worker(){while(i<jobs.length){const u=jobs[i++];try{await fetch(u,{cache:'force-cache'});}catch(e){}done++;if(done%300===0&&typeof toast==='function')toast('保存中… '+done+'/'+jobs.length);}}
+  async function worker(){while(i<jobs.length){const u=jobs[i++];try{await fetch(u,{cache:'force-cache'});}catch(e){}done++;if(done%40===0||done===jobs.length)dlUpdate(done,jobs.length);}}
   try{await Promise.all(Array.from({length:conc},worker));}catch(e){}
   _dling=false;
-  if(typeof toast==='function')toast('✅ オフライン保存完了（'+done+'件）。電波がなくても再生できます');
+  dlUpdate(jobs.length,jobs.length);setTimeout(dlHide,1000);
+  if(typeof toast==='function')toast('オフライン保存完了（'+done+'件）。電波がなくても再生できます');
 }
+/* オフライン保存の進捗バー（永続表示） */
+const dlProg=document.createElement('div');dlProg.id='dlProgress';dlProg.className='dlprogress';
+dlProg.innerHTML='<div class="dlp-txt"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1.1 1.1 0 0 1 1.1 1.1v7.07l1.84-1.84a1.1 1.1 0 1 1 1.56 1.56l-3.72 3.72a1.1 1.1 0 0 1-1.56 0l-3.72-3.72a1.1 1.1 0 1 1 1.56-1.56l1.84 1.84V4.1A1.1 1.1 0 0 1 12 3z"/></svg><span>オフライン保存中</span> <b class="dlpN">0</b> / <span class="dlpT">0</span></div><div class="dlp-bar"><i class="dlpBar"></i></div>';
+document.body.appendChild(dlProg);
+const _dlpN=dlProg.querySelector('.dlpN'),_dlpT=dlProg.querySelector('.dlpT'),_dlpBar=dlProg.querySelector('.dlpBar');
+function dlShow(total){_dlpT.textContent=total;_dlpN.textContent='0';_dlpBar.style.width='0%';dlProg.classList.add('show');}
+function dlUpdate(done,total){_dlpN.textContent=done;_dlpBar.style.width=(total?Math.round(done/total*100):0)+'%';}
+function dlHide(){dlProg.classList.remove('show');}
 (function(){const b=document.getElementById('offlineBtn');if(b)b.onclick=downloadAllAudio;})();
 
 /* ---------- background playback: lock-screen / MediaSession controls ---------- */
