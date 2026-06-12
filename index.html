@@ -243,8 +243,12 @@
   .weakrow{display:flex;align-items:center;gap:9px;background:#f7f9fd;border:1px solid var(--line);border-radius:9px;padding:7px 11px;cursor:pointer;font-size:13px}
   .weakrow b{color:var(--bleu);font-family:Georgia,'Times New Roman',serif}
   .weakrow span{color:var(--muted);font-size:11.5px;flex:1}
-  .weakrow i{font-style:normal;font-size:11px;color:#a3372f;font-weight:700}
+  .weakrow i{font-style:normal;font-size:11px;color:#a3372f;font-weight:700;display:inline-flex;align-items:center;gap:2px}
+  .weakrow .wrank{flex:0 0 auto;width:21px;height:21px;border-radius:6px;background:var(--line);color:var(--muted);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .weaklist .weakrow:nth-child(-n+3) .wrank{background:#fde8e6;color:#a3372f}
   body.dark .weakrow{background:#202739;border-color:#2a3147}
+  body.dark .weakrow .wrank{background:#2c3656;color:#aebdde}
+  body.dark .weaklist .weakrow:nth-child(-n+3) .wrank{background:#3a2326;color:#ff9c92}
   .hfstage{margin-top:13px;font-size:11.5px;font-weight:700;letter-spacing:.5px;color:var(--green);min-height:15px}
   .hfctrl{display:flex;gap:10px;justify-content:center;margin-top:15px;align-items:center}
   .hfctrl button{border:none;border-radius:50%;width:46px;height:46px;background:var(--card);border:1px solid var(--line);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;color:var(--ink)}
@@ -12063,7 +12067,7 @@ function buildStats(){
   const mx=Math.max(60,...days.map(x=>x.sec));
   let bars='';days.forEach(x=>{const h=Math.round(x.sec/mx*70)+4;bars+='<div class="sbar"><i style="height:'+h+'px"></i><span>'+x.label+'</span><b>'+Math.floor(x.sec/60)+'分</b></div>';});
   const weak=allCards().filter(c=>eOf(c.k)>0).sort((a,b)=>eOf(b.k)-eOf(a.k)).slice(0,15);
-  let wl='';weak.forEach(c=>{wl+='<div class="weakrow" data-w="'+String(c.w).replace(/"/g,'&quot;')+'"><b>'+c.w+'</b><span>'+c.jp+'</span><i>'+I_LOOP+eOf(c.k)+'</i></div>';});
+  let wl='';weak.forEach((c,i)=>{wl+='<div class="weakrow" data-w="'+String(c.w).replace(/"/g,'&quot;')+'"><span class="wrank">'+(i+1)+'</span><b>'+c.w+'</b><span>'+c.jp+'</span><i>'+I_LOOP+eOf(c.k)+'</i></div>';});
   statsPanel.innerHTML=
     '<div class="statgrid">'+
     '<div class="stat"><b>'+total+'</b><span>収録語彙</span></div>'+
