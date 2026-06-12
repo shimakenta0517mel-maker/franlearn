@@ -86,7 +86,11 @@
   .markbtn[data-m="done"].on{background:var(--green);border-color:var(--green)}
   .markbtn[data-m="review"].on{background:var(--rouge);border-color:var(--rouge)}
   .markbtn[data-m="fav"].on{background:var(--gold);border-color:var(--gold)}
-  .card.ismarked{opacity:.6}
+  .card.ismarked{opacity:.62}
+  .card.marked-done::before,.card.marked-review::before,.card.marked-fav::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3.5px;border-radius:16px 0 0 16px}
+  .card.marked-done::before{background:var(--green)}
+  .card.marked-review::before{background:var(--rouge)}
+  .card.marked-fav::before{background:var(--gold)}
   .wordrow{display:flex;align-items:center;gap:8px}
   .word{font-size:18px;font-weight:700;color:var(--bleu);cursor:pointer;border-bottom:2px dotted transparent;transition:.15s}
   .word:hover{border-bottom-color:var(--bleu)}
@@ -12317,7 +12321,7 @@ function renderLearn(){
   if(!arr.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🗂️</div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や「表示／品詞」の絞り込みを広げてみてください。</div></div>';return;}
   arr.forEach(o=>{
     const it=o.it,k=keyOf(it),mk=markOf(k);
-    const c=document.createElement('div');c.className='card'+(mk==='done'?' ismarked':'');
+    const c=document.createElement('div');c.className='card'+(mk?' marked-'+mk:'')+(mk==='done'?' ismarked':'');
     let foot='<div class="cardfoot">';
     ['done','review','fav'].forEach(m=>{foot+='<button class="markbtn'+(mk===m?' on':'')+'" data-m="'+m+'">'+MARKS[m].label+'</button>';});
     foot+='</div>';
@@ -12419,7 +12423,7 @@ function renderGlobalSearch(){
   if(!res.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🔍</div><div class="empty-t">見つかりませんでした</div><div class="empty-s">スペルや別の言い方で試してみてください。アクセント記号は無くても検索できます。</div><button type="button" class="empty-btn" id="emptyClear">検索をクリア</button></div>';const ec=document.getElementById('emptyClear');if(ec)ec.onclick=()=>clearSearch(true);return;}
   res.slice(0,100).forEach(r=>{
     const it=r.it,k=r.cid+'|'+r.tk+'|'+it.w,mk=markOf(k);
-    const c=document.createElement('div');c.className='card'+(mk==='done'?' ismarked':'');
+    const c=document.createElement('div');c.className='card'+(mk?' marked-'+mk:'')+(mk==='done'?' ismarked':'');
     let foot='';
     if(!r.verb){
       foot='<div class="cardfoot">';
