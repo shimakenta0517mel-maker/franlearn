@@ -65,6 +65,10 @@
     cursor:pointer;font-size:12px;font-weight:600;color:var(--muted);user-select:none;transition:.15s}
   .chip.active{background:var(--ink);color:#fff;border-color:var(--ink)}
   .chip .n{opacity:.6;font-size:10.5px}
+  .rngnum{width:44px;border:1px solid var(--line);border-radius:7px;padding:3px 4px;font:inherit;font-size:12px;text-align:center;background:#fff;color:var(--ink);-moz-appearance:textfield}
+  .rngnum:focus{outline:none;border-color:var(--bleu)}
+  .rngnum::-webkit-inner-spin-button,.rngnum::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+  body.dark .rngnum{background:#1a2030;color:#e8ecf5;border-color:#2a3147}
   .chip.freq.active{background:var(--gold);border-color:var(--gold);color:#fff}
   .chip.rng.active{background:var(--bleu);border-color:var(--bleu);color:#fff}
   .chip.tense.active{background:var(--green);border-color:var(--green);color:#fff}
@@ -12199,7 +12203,7 @@ function mkCustomRange(total){
   const box=document.createElement('span');box.className='chip rngcustom'+(isCustom?' active':'');
   box.style.cssText='display:inline-flex;align-items:center;gap:3px;padding:2px 8px';
   const a=document.createElement('input'),b=document.createElement('input');
-  for(const el of [a,b]){el.type='number';el.min='1';el.max=String(total);el.style.cssText='width:46px;border:none;border-radius:6px;padding:3px 4px;font:inherit;text-align:center';}
+  for(const el of [a,b]){el.type='number';el.min='1';el.max=String(total);el.className='rngnum';}
   a.placeholder='1';b.placeholder=String(total);a.title='開始';b.title='終了';
   if(isCustom){a.value=rangeSel[0];b.value=rangeSel[1];}
   const apply=()=>{let s=Math.max(1,Math.min(total,parseInt(a.value)||1)),e=Math.max(1,Math.min(total,parseInt(b.value)||total));if(s>e){const t=s;s=e;e=t;}rangeSel=[s,e];buildRange();renderAll();};
