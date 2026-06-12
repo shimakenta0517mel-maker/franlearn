@@ -240,7 +240,9 @@
   .hfstage{margin-top:13px;font-size:11.5px;font-weight:700;letter-spacing:.5px;color:var(--green);min-height:15px}
   .hfctrl{display:flex;gap:10px;justify-content:center;margin-top:15px;align-items:center}
   .hfctrl button{border:none;border-radius:50%;width:46px;height:46px;background:var(--card);border:1px solid var(--line);cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center;color:var(--ink)}
+  .hfctrl button svg{width:19px;height:19px;fill:currentColor;display:block}
   .hfctrl .main{width:64px;height:64px;background:linear-gradient(135deg,#063e86,#2f7ad0);color:#fff;font-size:24px;box-shadow:0 8px 22px rgba(0,55,130,.4)}
+  .hfctrl .main svg{width:25px;height:25px}
   .hfctrl .main:hover{filter:brightness(1.07)}
   .hfmark{display:flex;gap:8px;justify-content:center;margin-top:13px;max-width:380px;margin-left:auto;margin-right:auto}
   .hfmark button{flex:1;border:1px solid var(--line);background:#fafbfe;color:var(--muted);border-radius:9px;padding:9px 4px;font-size:12px;font-weight:700;cursor:pointer}
@@ -641,9 +643,9 @@
         <div class="hfstage" id="hfstage"></div>
       </div>
       <div class="hfctrl">
-        <button id="hfprev" title="前へ">⏮</button>
-        <button class="main" id="hfplay" title="再生/停止">▶</button>
-        <button id="hfnext" title="次へ">⏭</button>
+        <button id="hfprev" title="前へ"><svg viewBox="0 0 24 24"><path d="M6 6h2.4v12H6z"/><path d="M20 6v12l-9-6z"/></svg></button>
+        <button class="main" id="hfplay" title="再生/停止"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></button>
+        <button id="hfnext" title="次へ"><svg viewBox="0 0 24 24"><path d="M15.6 6H18v12h-2.4z"/><path d="M4 6v12l9-6z"/></svg></button>
       </div>
       <div class="hfmark">
         <button data-hm="done"><svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm-1.1 14.3-3.6-3.6 1.4-1.4 2.2 2.2 4.8-4.8 1.4 1.4z"/></svg> 完璧</button>
@@ -684,17 +686,17 @@
   <section id="pronView" class="hide">
     <div class="hfwrap">
       <div class="hfcard">
-        <div class="hfidx"><span id="pronIdx"></span> ｜ <span class="pronscore" id="pronScore">✓ 0 / 0</span></div>
-        <div class="pronword" id="pronWord">🎤</div>
+        <div class="hfidx"><span id="pronIdx"></span> ｜ <span class="pronscore" id="pronScore"></span></div>
+        <div class="pronword" id="pronWord"></div>
         <div class="pronipa" id="pronIpa"></div>
         <div class="pronjp" id="pronJp">マイクを押してフランス語を発音してみましょう</div>
         <button class="micbtn" id="micBtn" title="話す（録音開始）"></button>
         <div class="pronfb" id="pronFb"></div>
       </div>
       <div class="hfctrl">
-        <button id="pronPrev" title="前へ">⏮</button>
-        <button id="pronReplay" title="お手本を聞く">🔊</button>
-        <button id="pronNext" title="次へ">⏭</button>
+        <button id="pronPrev" title="前へ"><svg viewBox="0 0 24 24"><path d="M6 6h2.4v12H6z"/><path d="M20 6v12l-9-6z"/></svg></button>
+        <button id="pronReplay" title="お手本を聞く"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
+        <button id="pronNext" title="次へ"><svg viewBox="0 0 24 24"><path d="M15.6 6H18v12h-2.4z"/><path d="M4 6v12l9-6z"/></svg></button>
       </div>
       <div style="font-size:11px;color:var(--muted);margin-top:11px;text-align:center">対象は上の「区間／表示」で絞れます。判定はAIの目安です。<br>※音声認識は Chrome・Edge 推奨（Safari一部対応）。</div>
     </div>
@@ -11709,6 +11711,13 @@ const I_SPK='<svg class="ic" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm
 const I_CLOCK='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const I_FLAME='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 2.5-1 4.2-2.4 5.6C8.1 9 7 10.6 7 13a5 5 0 0 0 10 0c0-1.9-.9-3.6-2.2-5-.5.9-1.3 1.4-2 1.5C13.6 7 12.3 3 12 2z"/></svg>';
 const I_CROSS='<svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 12.1L14.1 15.5 12 13.4l-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>';
+// メディア操作（ハンズフリー/発音の丸ボタン用。.hfctrl button svg でサイズ指定）
+const SVG_PREV='<svg viewBox="0 0 24 24"><path d="M6 6h2.4v12H6z"/><path d="M20 6v12l-9-6z"/></svg>';
+const SVG_NEXT='<svg viewBox="0 0 24 24"><path d="M15.6 6H18v12h-2.4z"/><path d="M4 6v12l9-6z"/></svg>';
+const SVG_PLAY='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
+const SVG_PAUSE='<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
+const SVG_SPK='<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
+const I_MICSM='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
 // デッキ／今日／テスト形式のアイコン（絵文字→単色SVGで統一）
 const IC_TODAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zM5 9v10h14V9H5z"/></svg>';
 const CAT_ICON={
@@ -12580,7 +12589,7 @@ function hfShow(){
 function hfMarkUI(){const it=hfList[hfIdx];const m=it?markOf(it.k):'';document.querySelectorAll('[data-hm]').forEach(b=>b.classList.toggle('on',b.dataset.hm===m));}
 async function hfPlay(){
   if(!hfList.length)return;
-  const token=++hfToken;hfPlaying=true;hfplayBtn.textContent='⏸';
+  const token=++hfToken;hfPlaying=true;hfplayBtn.innerHTML=SVG_PAUSE;
   while(hfIdx<hfList.length){
     if(token!==hfToken)return;
     const it=hfList[hfIdx];hfShow();bump(it.k);
@@ -12601,10 +12610,10 @@ async function hfPlay(){
     hfIdx++;
     if(hfIdx>=hfList.length&&hfloop.checked)hfIdx=0;
   }
-  hfPlaying=false;hfplayBtn.textContent='▶';hfstage.textContent='✓ 完了';
+  hfPlaying=false;hfplayBtn.innerHTML=SVG_PLAY;hfstage.textContent='✓ 完了';
   if(hfIdx>=hfList.length)hfIdx=hfList.length-1;
 }
-function hfStop(){hfToken++;hfPlaying=false;audioStop();if(synth)synth.cancel();hfplayBtn.textContent='▶';hfstage.textContent='';}
+function hfStop(){hfToken++;hfPlaying=false;audioStop();if(synth)synth.cancel();hfplayBtn.innerHTML=SVG_PLAY;hfstage.textContent='';}
 hfplayBtn.onclick=()=>{if(hfPlaying)hfStop();else hfPlay();};
 document.getElementById('hfprev').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.max(0,hfIdx-1);if(wp)hfPlay();else hfShow();};
 document.getElementById('hfnext').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.min(hfList.length-1,hfIdx+1);if(wp)hfPlay();else hfShow();};
@@ -12715,7 +12724,7 @@ function pronShow(){
   const it=pronList[pronI];
   pronWord.textContent=it.w;pronIpa.textContent=it.ipa||'';pronJp.textContent=it.jp;
   pronIdxEl.textContent=(pronI+1)+' / '+pronList.length+(rangeSel!=='all'?'　[区間 '+rangeSel[0]+'-'+rangeSel[1]+']':'');
-  pronScoreEl.textContent='✓ '+pronOk+' / '+pronTotal;
+  pronScoreEl.innerHTML=I_CHECK+' '+pronOk+' / '+pronTotal;
 }
 function pronStop(){if(pronRec){try{pronRec.abort();}catch(e){}pronRec=null;}pronRecActive=false;if(micBtn)micBtn.classList.remove('rec');}
 function pronStart(){
@@ -12724,9 +12733,9 @@ function pronStart(){
   audioStop();if(synth)synth.cancel();
   const it=pronList[pronI];
   const rec=new SpeechRec();pronRec=rec;rec.lang='fr-FR';rec.interimResults=false;rec.maxAlternatives=6;
-  pronRecActive=true;micBtn.classList.add('rec');pronFb.className='pronfb';pronFb.textContent='🎙 聞いています…';
+  pronRecActive=true;micBtn.classList.add('rec');pronFb.className='pronfb';pronFb.innerHTML=I_MICSM+' 聞いています…';
   rec.onresult=(e)=>{const alts=[];for(let i=0;i<e.results[0].length;i++)alts.push(e.results[0][i].transcript);pronJudge(alts,it);};
-  rec.onerror=(e)=>{pronStop();pronFb.className='pronfb';pronFb.innerHTML=(e.error==='not-allowed'||e.error==='service-not-allowed')?'🔇 マイクの使用を許可してください':'うまく聞き取れませんでした。もう一度どうぞ';};
+  rec.onerror=(e)=>{pronStop();pronFb.className='pronfb';pronFb.innerHTML=(e.error==='not-allowed'||e.error==='service-not-allowed')?'マイクの使用を許可してください':'うまく聞き取れませんでした。もう一度どうぞ';};
   rec.onend=()=>{pronRecActive=false;if(micBtn)micBtn.classList.remove('rec');};
   try{rec.start();}catch(e){pronStop();}
 }
@@ -12737,7 +12746,7 @@ function pronJudge(alts,it){
   pronTotal++;
   if(hit){pronOk++;pronFb.className='pronfb ok';pronFb.innerHTML=I_CHECK+' いいね！<span class="heard">認識: '+heard+'</span>';sfxOk();bump(it.k);}
   else{pronFb.className='pronfb ng';pronFb.innerHTML=I_LOOP+' もう一度<span class="heard">認識: '+(heard||'(聞き取れず)')+'</span>';sfxNg();}
-  pronScoreEl.textContent='✓ '+pronOk+' / '+pronTotal;
+  pronScoreEl.innerHTML=I_CHECK+' '+pronOk+' / '+pronTotal;
   setTimeout(()=>speak(it.w),300);
   if(hit)setTimeout(()=>{if(mode==='pron'&&pronI<pronList.length-1){pronI++;pronShow();}},1400);
 }
