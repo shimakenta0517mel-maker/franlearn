@@ -11830,7 +11830,7 @@ function isHidden(key){return markOf(key)==='done';}
 /* Anki式 間隔反復（SM-2: ease factor + 4段階評価） */
 let srs=ls('fl_srs','{}');
 const SRS_INT=[1,3,7,14,30,60]; // 旧データ移行用
-let todayMode=false, todayTotal=0;
+let todayMode=false, todayTotal=0, todayDueN=0, todayNewN=0;
 // 旧 {s,d} 形式からも引ける読み取り
 function _srsRead(k){const e=srs[k]||{};const ef=e.ef||2.5;
   const reps=(e.reps!=null)?e.reps:((e.s!=null&&e.s>=0)?e.s+1:0);
@@ -12468,7 +12468,7 @@ function buildTodaySession(){
   const t=buildTodayDeck();
   deck=t.due.concat(t.news);
   if(dir==='cloze')deck=deck.filter(it=>clozeOf(it));
-  todayTotal=deck.length;
+  todayTotal=deck.length;todayDueN=t.due.length;todayNewN=t.news.length;
   idx=0;flipped=false;renderTest();
 }
 function buildDeck(){
@@ -12485,7 +12485,7 @@ function buildDeck(){
 function renderTest(){
   const total=todayMode?todayTotal:testItems().length, learned=total-deck.length;
   barfill.style.width=total?Math.round(learned/total*100)+'%':'0%';
-  pgtext.textContent=total?('覚えた '+learned+' / '+total+' ｜ 残り '+deck.length):'';
+  pgtext.textContent=total?('覚えた '+learned+' / '+total+' ｜ 残り '+deck.length+(todayMode?'　（復習 '+todayDueN+'・新規 '+todayNewN+'）':'')):'';
   if(!total){cardArea.innerHTML='<div class="empty"><div class="empty-ic">🗂️</div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や絞り込みを広げると出題できます。</div></div>';return;}
   if(!deck.length){
     if(!_wonBeep){_wonBeep=true;celebrate();}
