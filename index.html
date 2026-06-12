@@ -96,6 +96,14 @@
   .word:hover{border-bottom-color:var(--bleu)}
   .ipa{font-size:12px;color:var(--muted);font-style:normal}
   .pos{font-size:10px;color:var(--muted);background:#eef2fb;padding:2px 7px;border-radius:20px;font-weight:600;white-space:nowrap}
+  .pos[data-pos="名詞"]{background:#e7f0fb;color:#2c5a96}
+  .pos[data-pos="動詞"]{background:#e3f5ea;color:#1f7a47}
+  .pos[data-pos="形容詞"]{background:#fdf0e0;color:#9a6212}
+  .pos[data-pos="副詞"]{background:#efe9f8;color:#6b4ea8}
+  body.dark .pos[data-pos="名詞"]{background:#1e2c44;color:#8fb8e8}
+  body.dark .pos[data-pos="動詞"]{background:#173026;color:#4fc185}
+  body.dark .pos[data-pos="形容詞"]{background:#33270f;color:#e0a44e}
+  body.dark .pos[data-pos="副詞"]{background:#251f38;color:#b69ae0}
   .play{margin-left:auto;border:none;background:var(--bleu);color:#fff;width:31px;height:31px;border-radius:50%;
     cursor:pointer;display:flex;align-items:center;justify-content:center;flex:0 0 auto;transition:.15s}
   .play:hover{background:#004282}.play.on{transform:scale(.9);background:var(--rouge)}
@@ -12335,7 +12343,7 @@ function renderLearn(){
     foot+='</div>';
     c.innerHTML=
       '<div class="cardtop"><span class="num">#'+o.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="cnt" data-c>'+I_EYE+cOf(k)+'</span>'+(eOf(k)?'<span class="cnt err">'+I_LOOP+eOf(k)+'</span>':'')+(mk?'<span class="cnt">'+MARKS[mk].short+'</span>':'')+'</div>'+
-      '<div class="wordrow"><span class="word">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos">'+it.pos+'</span><button class="play" title="再生">'+SPK+'</button></div>'+
+      '<div class="wordrow"><span class="word">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+
       (it.note?'<div class="note"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg> '+it.note+'</div>':'')+
@@ -12440,7 +12448,7 @@ function renderGlobalSearch(){
     }
     c.innerHTML=
       '<div class="cardtop"><button class="deckjump" data-j>'+(CAT_ICON[r.cid]||'')+' '+r.clabel+' › '+r.tk+'</button><span class="num">#'+r.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'</div>'+
-      '<div class="wordrow"><span class="word">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos">'+it.pos+'</span><button class="play">'+SPK+'</button></div>'+
+      '<div class="wordrow"><span class="word">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+foot;
     const pb=c.querySelector('.play');
