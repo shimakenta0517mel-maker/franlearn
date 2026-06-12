@@ -226,6 +226,11 @@
   #numIn{width:100%;margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:18px;text-align:center;background:#fff;color:var(--ink)}
   #numIn:focus{outline:none;border-color:var(--bleu)}
   body.dark #numIn{background:#1a2030;color:#e8ecf5;border-color:#2a3147}
+  .numlisten{display:inline-flex;align-items:center;cursor:pointer;color:var(--bleu);transition:transform .12s ease;border-radius:50%}
+  .numlisten:active{transform:scale(.9)}
+  .numlisten svg{width:48px;height:48px;fill:currentColor}
+  body.dark .numlisten{color:#7db4ff}
+  .numlisten .hint{font-size:11px;font-weight:600;color:var(--muted);margin-left:8px}
   .weaklist{margin-top:6px;display:flex;flex-direction:column;gap:5px}
   .weakrow{display:flex;align-items:center;gap:9px;background:#f7f9fd;border:1px solid var(--line);border-radius:9px;padding:7px 11px;cursor:pointer;font-size:13px}
   .weakrow b{color:var(--bleu);font-family:Georgia,'Times New Roman',serif}
@@ -663,13 +668,13 @@
   <section id="numView" class="hide">
     <div class="hfwrap">
       <div class="hfcard">
-        <div class="hfidx" id="numScoreEl">正解 0 ｜ 🔥連続 0</div>
-        <div class="hffr" id="numQ">🔢</div>
-        <div class="hfjp" id="numFb">「▶ 出題」を押すと数字が読み上げられます</div>
+        <div class="hfidx" id="numScoreEl"></div>
+        <div class="hffr" id="numQ"></div>
+        <div class="hfjp" id="numFb">下の「出題」を押すと数字が読み上げられます</div>
         <input id="numIn" inputmode="decimal" autocomplete="off" placeholder="聞こえた数字（例: 95 / 1250 / 14:30）">
       </div>
       <div class="grade" style="max-width:380px;margin:14px auto 0">
-        <button class="again" id="numRep">▶ 出題・もう一度</button>
+        <button class="again" id="numRep"><svg class="ic" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 出題・もう一度</button>
         <button class="known" id="numChk">答え合わせ</button>
       </div>
       <div class="hfopt" id="numTypes"></div>
@@ -11703,6 +11708,7 @@ const I_SEARCH='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 const I_SPK='<svg class="ic" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12z"/></svg>';
 const I_CLOCK='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const I_FLAME='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 2.5-1 4.2-2.4 5.6C8.1 9 7 10.6 7 13a5 5 0 0 0 10 0c0-1.9-.9-3.6-2.2-5-.5.9-1.3 1.4-2 1.5C13.6 7 12.3 3 12 2z"/></svg>';
+const I_CROSS='<svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 12.1L14.1 15.5 12 13.4l-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>';
 // デッキ／今日／テスト形式のアイコン（絵文字→単色SVGで統一）
 const IC_TODAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zM5 9v10h14V9H5z"/></svg>';
 const CAT_ICON={
@@ -12668,19 +12674,23 @@ function genNum(){
   const h=Math.floor(Math.random()*24);const mA=[0,5,10,15,20,30,40,45,50];const mn=mA[Math.floor(Math.random()*mA.length)];
   return{speak:h+' heures'+(mn?' '+mn:''),digits:String(h)+String(mn).padStart(2,'0'),alt:mn===0?String(h):null,disp:h+':'+String(mn).padStart(2,'0'),words:frNum(h)+' heures'+(mn?' '+frNum(mn):'')};
 }
-function updNumScore(){numScoreEl.textContent='正解 '+numScoreN+' ｜ 🔥連続 '+numStreak;}
-function numNew(){numTarget=genNum();numIn.value='';numQ.textContent='🔊 ?';numFb.textContent='聞こえた数字を入力 →「答え合わせ」';speakLang(numTarget.speak,'fr');numIn.focus();}
+function updNumScore(){numScoreEl.innerHTML=I_CHECK+' 正解 <b>'+numScoreN+'</b>　｜　'+I_FLAME+' 連続 <b>'+numStreak+'</b>';}
+function numNew(){numTarget=genNum();numIn.value='';
+  numQ.innerHTML='<span class="numlisten" title="もう一度聞く"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>';
+  const ml=numQ.querySelector('.numlisten');if(ml)ml.onclick=()=>{if(numTarget)speakLang(numTarget.speak,'fr');};
+  numFb.textContent='聞こえた数字を入力 →「答え合わせ」';speakLang(numTarget.speak,'fr');numIn.focus();}
+updNumScore();
 document.getElementById('numRep').onclick=()=>{if(numTarget)speakLang(numTarget.speak,'fr');else numNew();};
 document.getElementById('numChk').onclick=()=>{
   if(!numTarget){numNew();return;}
   const u=(numIn.value||'').replace(/\D/g,'');
   if(u&&(u===numTarget.digits||(numTarget.alt&&u===numTarget.alt))){
     numScoreN++;numStreak++;updNumScore();sfxOk();
-    numQ.innerHTML=I_CHECK+' '+numTarget.disp;numFb.textContent=numTarget.words;
+    numQ.innerHTML='<span style="color:var(--green)">'+I_CHECK+' '+numTarget.disp+'</span>';numFb.textContent=numTarget.words;
     setTimeout(numNew,1500);
   }else{
     numStreak=0;updNumScore();sfxNg();
-    numQ.textContent='❌ 正解: '+numTarget.disp;numFb.textContent=numTarget.words;
+    numQ.innerHTML='<span style="color:var(--rouge)">'+I_CROSS+' 正解: '+numTarget.disp+'</span>';numFb.textContent=numTarget.words;
     setTimeout(numNew,2600);
   }
 };
