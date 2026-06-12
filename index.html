@@ -385,6 +385,12 @@
   .matchhud{display:flex;align-items:center;gap:12px;justify-content:center;font-size:14px;font-weight:700;color:var(--ink);margin-bottom:13px}
   .matchhud span{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:5px 13px}
   body.dark .matchhud span{background:#202739;border-color:#2a3147;color:#e8ecf5}
+  .matchstat{display:inline-flex;align-items:center;gap:5px}.matchstat .ic{opacity:.85}
+  .matchresult{text-align:center;padding:8px 0 2px}
+  .mr-ic{color:var(--green);font-size:42px;line-height:1}
+  .mr-t{font-size:20px;font-weight:800;color:var(--ink);margin:5px 0 7px}
+  .mr-s{display:flex;gap:16px;justify-content:center;color:var(--muted);font-size:13px;margin-bottom:13px;flex-wrap:wrap}
+  .mr-s span{display:inline-flex;align-items:center;gap:4px}
   .matchboard{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
   @media(max-width:520px){.matchboard{grid-template-columns:repeat(2,1fr);gap:7px}}
   .matchcard{min-height:76px;border:1.5px solid var(--line);background:var(--card);border-radius:13px;padding:9px 8px;
@@ -706,9 +712,9 @@
   <section id="matchView" class="hide">
     <div class="matchwrap">
       <div class="matchhud">
-        <span id="matchTime">⏱ 0.0秒</span>
-        <span id="matchMiss">❌ 0</span>
-        <button class="dirbtn" id="matchNew">🔄 新しい問題</button>
+        <span class="matchstat"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg><b id="matchTime">0.0秒</b></span>
+        <span class="matchstat"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 12.1L14.1 15.5 12 13.4l-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1z"/></svg><b id="matchMiss">0</b></span>
+        <button class="dirbtn" id="matchNew"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 5V2L7 7l5 5V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-7z"/></svg> 新しい問題</button>
       </div>
       <div class="matchboard" id="matchBoard"></div>
       <div class="matchdone" id="matchDoneMsg"></div>
@@ -12766,7 +12772,7 @@ let matchCards=[], matchSel=null, matchMiss=0, matchDoneN=0, matchSec=0, matchTi
 const matchBoard=document.getElementById('matchBoard'),matchTimeEl=document.getElementById('matchTime'),matchMissEl=document.getElementById('matchMiss'),matchDoneEl=document.getElementById('matchDoneMsg');
 function matchShuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=a[i];a[i]=a[j];a[j]=t;}return a;}
 function matchStopTimer(){if(matchTimer){clearInterval(matchTimer);matchTimer=null;}}
-function matchStartTimer(){matchStopTimer();matchSec=0;matchTimeEl.textContent='⏱ 0.0秒';const t0=Date.now();matchTimer=setInterval(()=>{matchSec=(Date.now()-t0)/1000;matchTimeEl.textContent='⏱ '+matchSec.toFixed(1)+'秒';},100);}
+function matchStartTimer(){matchStopTimer();matchSec=0;matchTimeEl.textContent='0.0秒';const t0=Date.now();matchTimer=setInterval(()=>{matchSec=(Date.now()-t0)/1000;matchTimeEl.textContent=matchSec.toFixed(1)+'秒';},100);}
 function matchPool(){
   let pool=filtered().map(o=>isVerb()?{w:o.it.inf,jp:o.it.jp}:{w:o.it.w,jp:o.it.jp}).filter(x=>x.w&&x.jp);
   const seen=new Set(),out=[];pool.forEach(x=>{if(!seen.has(x.jp)&&!seen.has(x.w)){seen.add(x.jp);seen.add(x.w);out.push(x);}});
@@ -12776,11 +12782,11 @@ function matchBuild(){
   matchStopTimer();matchDoneEl.innerHTML='';
   const pool=matchShuffle(matchPool());
   const n=Math.min(6,pool.length);
-  if(n<2){matchBoard.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-ic">🃏</div><div class="empty-t">マッチには2語以上必要です</div><div class="empty-s">「区間」や「表示」を広げてください。</div></div>';matchTimeEl.textContent='⏱ 0.0秒';matchMissEl.textContent='❌ 0';return;}
+  if(n<2){matchBoard.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-ic">🃏</div><div class="empty-t">マッチには2語以上必要です</div><div class="empty-s">「区間」や「表示」を広げてください。</div></div>';matchTimeEl.textContent='0.0秒';matchMissEl.textContent='0';return;}
   let cards=[];
   pool.slice(0,n).forEach((it,i)=>{cards.push({id:i,type:'fr',text:it.w});cards.push({id:i,type:'jp',text:it.jp});});
   matchCards=matchShuffle(cards);matchSel=null;matchMiss=0;matchDoneN=0;matchLock=false;
-  matchMissEl.textContent='❌ 0';
+  matchMissEl.textContent='0';
   renderMatchBoard();matchStartTimer();
 }
 function renderMatchBoard(){
@@ -12802,14 +12808,14 @@ function matchTap(i,el){
     sfxOk();matchDoneN++;matchSel=null;
     if(matchDoneN>=matchCards.length/2)matchClear();
   }else{
-    matchMiss++;matchMissEl.textContent='❌ '+matchMiss;sfxNg();matchLock=true;
+    matchMiss++;matchMissEl.textContent=String(matchMiss);sfxNg();matchLock=true;
     el.classList.add('wrong');aEl.classList.add('wrong');
     const s=matchSel;setTimeout(()=>{el.classList.remove('wrong','sel');const se=matchBoard.children[s];if(se)se.classList.remove('wrong','sel');matchSel=null;matchLock=false;},520);
   }
 }
 function matchClear(){
   matchStopTimer();
-  matchDoneEl.innerHTML='🎉 クリア！　'+matchSec.toFixed(1)+'秒 ｜ ミス '+matchMiss+'<br><button class="restart" id="matchAgain">もう一度</button>';
+  matchDoneEl.innerHTML='<div class="matchresult"><div class="mr-ic">'+I_CHECK+'</div><div class="mr-t">クリア！</div><div class="mr-s"><span><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>'+matchSec.toFixed(1)+'秒</span><span>'+I_CROSS+'ミス '+matchMiss+'</span></div><button class="restart" id="matchAgain">'+I_LOOP+' もう一度</button></div>';
   const b=document.getElementById('matchAgain');if(b)b.onclick=matchBuild;
   celebrate();
 }
