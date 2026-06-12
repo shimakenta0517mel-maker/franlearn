@@ -207,7 +207,10 @@
   .again{background:var(--rouge)}.known{background:var(--green)}
   .flipbtn{margin-top:14px;width:100%;padding:13px;border:none;border-radius:12px;background:var(--bleu);color:#fff;font-size:14px;font-weight:700;cursor:pointer}
   .done{text-align:center;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 18px}
-  .done h2{font-size:20px;margin-bottom:8px}.done p{color:var(--muted);font-size:13px;margin-bottom:15px}
+  .done h2{font-size:21px;margin-bottom:8px}.done p{color:var(--muted);font-size:13px;margin-bottom:15px}
+  .done-ic{font-size:52px;line-height:1;color:var(--gold);margin-bottom:7px;display:inline-block}
+  @keyframes donepop{0%{transform:scale(.85);opacity:0}60%{transform:scale(1.03)}100%{transform:scale(1);opacity:1}}
+  .done{animation:donepop .42s cubic-bezier(.2,.9,.3,1.2)}
   .restart{border:none;background:var(--bleu);color:#fff;padding:11px 19px;border-radius:22px;font-size:13px;font-weight:700;cursor:pointer}
   .empty{text-align:center;color:var(--muted);padding:42px 18px 38px;font-size:13px}
   .empty-ic{font-size:44px;line-height:1;margin-bottom:13px;opacity:.55;filter:grayscale(.15)}
@@ -11723,6 +11726,7 @@ const I_SPK='<svg class="ic" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm
 const I_CLOCK='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const I_FLAME='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 2.5-1 4.2-2.4 5.6C8.1 9 7 10.6 7 13a5 5 0 0 0 10 0c0-1.9-.9-3.6-2.2-5-.5.9-1.3 1.4-2 1.5C13.6 7 12.3 3 12 2z"/></svg>';
 const I_CROSS='<svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 12.1L14.1 15.5 12 13.4l-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>';
+const I_TROPHY='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5a2 2 0 0 0-2 2v1a4 4 0 0 0 4 4 5 5 0 0 0 4 3.9V18H8v2h8v-2h-3v-2.1A5 5 0 0 0 17 12a4 4 0 0 0 4-4V7a2 2 0 0 0-2-2zM5 8V7h2v2.8A2 2 0 0 1 5 8zm14 0a2 2 0 0 1-2 1.8V7h2v1z"/></svg>';
 // メディア操作（ハンズフリー/発音の丸ボタン用。.hfctrl button svg でサイズ指定）
 const SVG_PREV='<svg viewBox="0 0 24 24"><path d="M6 6h2.4v12H6z"/><path d="M20 6v12l-9-6z"/></svg>';
 const SVG_NEXT='<svg viewBox="0 0 24 24"><path d="M15.6 6H18v12h-2.4z"/><path d="M4 6v12l9-6z"/></svg>';
@@ -12491,12 +12495,12 @@ function renderTest(){
   if(!deck.length){
     if(!_wonBeep){_wonBeep=true;celebrate();}
     if(todayMode){
-      cardArea.innerHTML='<div class="done"><h2>🎉 今日のノルマ完了！</h2><p>期日が来た復習と新規語を消化しました。続きはまた明日。<br>毎日続ければ3〜6か月でレベルアップが見えてきます。</p><button class="restart" id="rs2">追加でもう1セット</button></div>';
+      cardArea.innerHTML='<div class="done"><div class="done-ic">'+I_TROPHY+'</div><h2>今日のノルマ完了！</h2><p>期日が来た復習と新規語を消化しました。続きはまた明日。<br>毎日続ければ3〜6か月でレベルアップが見えてきます。</p><button class="restart" id="rs2">'+I_LOOP+' 追加でもう1セット</button></div>';
       document.getElementById('rs2').onclick=()=>buildTodaySession();
       if(typeof updateTodayBadge==='function')updateTodayBadge();
       return;
     }
-    cardArea.innerHTML='<div class="done"><h2>🎉 完了！</h2><p>この範囲をすべて覚えました。</p><button class="restart" id="rs">もう一度（この範囲の進捗をリセット）</button></div>';
+    cardArea.innerHTML='<div class="done"><div class="done-ic">'+I_TROPHY+'</div><h2>完了！</h2><p>この範囲をすべて覚えました。</p><button class="restart" id="rs">'+I_LOOP+' もう一度（この範囲の進捗をリセット）</button></div>';
     document.getElementById('rs').onclick=()=>{testItems().forEach(it=>{delete known[it.k];});sv('fl_known',known);buildDeck();};return;
   }
   const it=deck[idx];
