@@ -12127,6 +12127,7 @@ function buildTabs(){
       const its=curTabs()[k].items;let dn=0;its.forEach(it=>{if(marks[cat+'|'+k+'|'+it.w]==='done')dn++;});
       const pct=its.length?Math.round(dn/its.length*100):0;
       const t=document.createElement('div');t.className='tab'+(k===current?' active':'')+(pct>=100?' tabdone':'');
+      t.tabIndex=0;t.setAttribute('role','button');t.setAttribute('aria-label',k+' '+curTabs()[k].label);
       t.title=curTabs()[k].label+'（完璧 '+pct+'%・'+dn+'/'+its.length+'）';
       t.innerHTML=k+'<span class="lv">'+curTabs()[k].label+'</span><div class="tabprog"><i style="width:'+pct+'%"></i></div>';
       t.onclick=()=>{current=k;posFilter='all';rangeSel='all';resetSearch();document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');buildRange();buildFilter();renderAll();saveNav();flashGrid();};
@@ -12245,7 +12246,9 @@ function setMode(m){
   renderAll();
   saveNav();
 }
-document.querySelectorAll('.modebtn').forEach(b=>{b.onclick=()=>{todayMode=false;setMode(b.dataset.mode);};});
+document.querySelectorAll('.modebtn').forEach(b=>{b.tabIndex=0;b.setAttribute('role','button');b.onclick=()=>{todayMode=false;setMode(b.dataset.mode);};});
+// クリック可能なdiv（モード/レベルタブ）をキーボードでも操作可能に（Enter/Space）。captureで先取りしテストのSpace採点と衝突させない
+document.addEventListener('keydown',e=>{const t=e.target;if((e.key==='Enter'||e.key===' ')&&t&&t.classList&&(t.classList.contains('modebtn')||t.classList.contains('tab'))){e.preventDefault();e.stopPropagation();t.click();}},true);
 const searchBox=document.getElementById('searchBox');
 searchBox.addEventListener('input',()=>{searchQ=searchBox.value.trim();renderLearn();});
 // 検索クリアボタン（入力中だけ表示）＋ Esc でクリア（操作性向上）
