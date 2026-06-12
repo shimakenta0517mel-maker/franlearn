@@ -11728,6 +11728,10 @@ const I_CLOCK='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentCo
 const I_FLAME='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.5 2.5-1 4.2-2.4 5.6C8.1 9 7 10.6 7 13a5 5 0 0 0 10 0c0-1.9-.9-3.6-2.2-5-.5.9-1.3 1.4-2 1.5C13.6 7 12.3 3 12 2z"/></svg>';
 const I_CROSS='<svg class="ic" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm3.5 12.1L14.1 15.5 12 13.4l-2.1 2.1-1.4-1.4 2.1-2.1-2.1-2.1 1.4-1.4 2.1 2.1 2.1-2.1 1.4 1.4-2.1 2.1z"/></svg>';
 const I_TROPHY='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M19 5h-2V3H7v2H5a2 2 0 0 0-2 2v1a4 4 0 0 0 4 4 5 5 0 0 0 4 3.9V18H8v2h8v-2h-3v-2.1A5 5 0 0 0 17 12a4 4 0 0 0 4-4V7a2 2 0 0 0-2-2zM5 8V7h2v2.8A2 2 0 0 1 5 8zm14 0a2 2 0 0 1-2 1.8V7h2v1z"/></svg>';
+const I_TARGET='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6z"/></svg>';
+const I_ALERT='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 5.5 7.5 13h-15L12 7.5zM11 11v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg>';
+const I_UP='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 6.5 8.5 7.9 9.9 11 6.8V16h2V6.8l3.1 3.1 1.4-1.4zM5 18h14v2H5z"/></svg>';
+const I_DOWN='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16 6.5 10.5 7.9 9.1 11 12.2V3h2v9.2l3.1-3.1 1.4 1.4zM5 18h14v2H5z"/></svg>';
 // メディア操作（ハンズフリー/発音の丸ボタン用。.hfctrl button svg でサイズ指定）
 const SVG_PREV='<svg viewBox="0 0 24 24"><path d="M6 6h2.4v12H6z"/><path d="M20 6v12l-9-6z"/></svg>';
 const SVG_NEXT='<svg viewBox="0 0 24 24"><path d="M15.6 6H18v12h-2.4z"/><path d="M4 6v12l9-6z"/></svg>';
@@ -12068,18 +12072,18 @@ function buildStats(){
     '<div class="stat s-fav"><b>'+f+'</b><span>'+I_STAR+' 保存</span></div>'+
     '<div class="stat"><b>'+exp+'</b><span>'+I_EYE+' 総接触</span></div>'+
     '<div class="stat"><b>'+Math.floor(totalSec()/60)+'分</b><span>⏱ 累計学習</span></div>'+
-    '<div class="stat s-streak"><b>🔥'+streak()+'</b><span>連続学習日数</span></div>'+
+    '<div class="stat s-streak"><b>'+I_FLAME+streak()+'</b><span>連続学習日数</span></div>'+
     '</div>'+
     '<div class="schart">'+bars+'</div>'+
-    (wl?'<div class="toch" style="margin-top:13px">😱 苦手ランキング（タップで発音）</div><div class="weaklist">'+wl+'</div>':'')+
+    (wl?'<div class="toch" style="margin-top:13px">'+I_ALERT+' 苦手ランキング（タップで発音）</div><div class="weaklist">'+wl+'</div>':'')+
     (function(){
       const goal=Number(ls('fl_goal','150'))||150;
       const week=days.reduce((a,x)=>a+x.sec,0);
       const pg=Math.min(100,Math.round(week/60/goal*100));
-      return '<div class="goalrow"><div class="goalbar"><i style="width:'+pg+'%"></i></div><div class="goaltxt">🎯 週間目標 '+Math.floor(week/60)+' / '+goal+'分（'+pg+'%'+(pg>=100?' 達成！🎉':'')+'）<button class="dirbtn" id="goalBtn">変更</button></div></div>';
+      return '<div class="goalrow"><div class="goalbar"><i style="width:'+pg+'%"></i></div><div class="goaltxt">'+I_TARGET+' 週間目標 '+Math.floor(week/60)+' / '+goal+'分（'+pg+'%'+(pg>=100?' 達成！'+I_CHECK:'')+'）<button class="dirbtn" id="goalBtn">変更</button></div></div>';
     })()+
     '<div class="goaltxt" style="margin-top:10px"><span>目標レベル</span><select class="dirsel" id="tgtSel" title="今日の新規語が出るレベル">'+['A1','A2','B1','B2','C1','C2'].map(l=>'<option'+(l===ls('fl_target','"A2"')?' selected':'')+'>'+l+'</option>').join('')+'</select><button class="dirbtn" id="paceBtn">新規 '+(Number(ls('fl_newperday','12'))||12)+'語/日</button></div>'+
-    '<div class="goaltxt" style="margin-top:8px"><button class="dirbtn" id="expBtn">📤 進捗をコピー</button><button class="dirbtn" id="impBtn">📥 進捗を読み込み</button></div>'+
+    '<div class="goaltxt" style="margin-top:8px"><button class="dirbtn" id="expBtn">'+I_UP+' 進捗をコピー</button><button class="dirbtn" id="impBtn">'+I_DOWN+' 進捗を読み込み</button></div>'+
     '<div class="statnote">'+I_CHECK+'完璧率 '+(total?Math.round(d/total*100):0)+'% ｜ 過去7日間の学習時間。毎日少しずつが最強です</div>';
   const gb=document.getElementById('goalBtn');
   if(gb)gb.onclick=()=>{const cur=Number(ls('fl_goal','150'))||150;const v=prompt('週間目標を分で入力（例: 150）',cur);const n=Number(v);if(n>0){sv('fl_goal',n);buildStats();}};
