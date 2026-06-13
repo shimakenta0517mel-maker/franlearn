@@ -12608,7 +12608,7 @@ function renderTest(){
       while(opts.length<4&&pool.length){const r=pool.splice(Math.floor(Math.random()*pool.length),1)[0];if(!opts.includes(r.jp))opts.push(r.jp);}
       for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));const t=opts[i];opts[i]=opts[j];opts[j]=t;}
       let btns='';opts.forEach(o2=>{btns+='<button class="choicebtn">'+o2+'</button>';});
-      cardArea.innerHTML='<div class="flash" style="cursor:default"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><span class="tag cnt2">'+I_EYE+cOf(it.k)+(eOf(it.k)?' '+I_LOOP+eOf(it.k):'')+'</span><div class="front">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="choices">'+btns+'</div></div>';
+      cardArea.innerHTML='<div class="flash" style="cursor:default"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><span class="tag cnt2">'+I_EYE+cOf(it.k)+(eOf(it.k)?' '+I_LOOP+eOf(it.k):'')+'</span><div class="front" lang="fr">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="choices">'+btns+'</div></div>';
       let answered=false;
       cardArea.querySelectorAll('.choicebtn').forEach(b=>{
         b.onclick=()=>{
@@ -12627,15 +12627,15 @@ function renderTest(){
       return;
     }
     let inner;
-    if(dir==='cloze'){const cz=clozeOf(it)||it.jp;inner='<div class="clozeq">'+cz+'</div><div class="frontipa">'+(it.exjp||it.jp)+'</div>';}
-    else{const front=dir==='fr2jp'?it.w:it.jp, cls=dir==='fr2jp'?'front':'front jp';inner='<div class="'+cls+'">'+front+'</div>'+(dir==='fr2jp'&&it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'');}
+    if(dir==='cloze'){const cz=clozeOf(it)||it.jp;inner='<div class="clozeq" lang="fr">'+cz+'</div><div class="frontipa">'+(it.exjp||it.jp)+'</div>';}
+    else{const front=dir==='fr2jp'?it.w:it.jp, cls=dir==='fr2jp'?'front':'front jp';inner='<div class="'+cls+'"'+(dir==='fr2jp'?' lang="fr"':'')+'>'+front+'</div>'+(dir==='fr2jp'&&it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'');}
     cardArea.innerHTML='<div class="flash" id="flash"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><span class="tag cnt2">'+I_EYE+cOf(it.k)+(eOf(it.k)?' '+I_LOOP+eOf(it.k):'')+'</span>'+inner+'<div class="flipnote">タップで答え</div></div><button class="flipbtn" id="flipbtn">答えを見る</button>';
     document.getElementById('flash').onclick=doFlip;document.getElementById('flipbtn').onclick=doFlip;
     if(dir==='fr2jp')setTimeout(()=>speak(it.w),250);
   }else{
     const GR=[['0','もう一度','1'],['1','難しい','2'],['2','できた','3'],['3','簡単','4']];
     const gradeBtns=GR.map(([g,lbl,kc])=>'<button class="gbtn" data-g="'+g+'">'+lbl+'<span class="iv">'+srsLabel(it.k,Number(g))+'</span><span class="kc">'+kc+'</span></button>').join('');
-    cardArea.innerHTML='<div class="flash revealed"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex">'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
+    cardArea.innerHTML='<div class="flash revealed"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front" lang="fr">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex" lang="fr">'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
     document.getElementById('bp').onclick=()=>speak(it.w);
     cardArea.querySelectorAll('.gbtn').forEach(b=>b.onclick=()=>gradeCard(Number(b.dataset.g)));
   }
