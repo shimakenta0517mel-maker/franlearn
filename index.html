@@ -237,7 +237,7 @@
   .frontipa{font-size:13px;color:var(--muted);margin-top:6px}
   .flipnote{position:absolute;bottom:12px;right:14px;font-size:10.5px;color:var(--muted)}
   .answer{border-top:1px dashed var(--line);margin-top:14px;padding-top:13px;width:100%}
-  .ansmain{font-size:20px;font-weight:700}.ansex{margin-top:10px;font-size:14px}.ansexjp{margin-top:4px;font-size:11.5px;color:var(--muted)}
+  .ansmain{font-size:20px;font-weight:700}.ansex{margin-top:10px;font-size:14px;cursor:pointer}.ansex .ico{color:var(--bleu);margin-right:5px;vertical-align:-.12em}.ansex:hover{color:var(--bleu)}.ansexjp{margin-top:4px;font-size:11.5px;color:var(--muted)}
   .bigplay{margin-top:13px;display:inline-flex;align-items:center;gap:7px;border:none;background:var(--bleu);color:#fff;padding:8px 15px;border-radius:22px;font-size:12px;font-weight:600;cursor:pointer}
   .bigplay svg{width:13px;height:13px;fill:#fff}
   .grade{display:flex;gap:10px;margin-top:14px}
@@ -12649,8 +12649,9 @@ function renderTest(){
   }else{
     const GR=[['0','もう一度','1'],['1','難しい','2'],['2','できた','3'],['3','簡単','4']];
     const gradeBtns=GR.map(([g,lbl,kc])=>'<button class="gbtn" data-g="'+g+'">'+lbl+'<span class="iv">'+srsLabel(it.k,Number(g))+'</span><span class="kc">'+kc+'</span></button>').join('');
-    cardArea.innerHTML='<div class="flash revealed"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front" lang="fr">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex" lang="fr">'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
+    cardArea.innerHTML='<div class="flash revealed"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front" lang="fr">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex" lang="fr" title="例文を再生"><span class="ico">'+SPKSM+'</span>'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
     document.getElementById('bp').onclick=()=>speak(it.w);
+    const _aex=cardArea.querySelector('.ansex');if(_aex)_aex.onclick=()=>speak(it.ex);
     cardArea.querySelectorAll('.gbtn').forEach(b=>b.onclick=()=>gradeCard(Number(b.dataset.g)));
   }
 }
