@@ -12091,6 +12091,13 @@ function toggleStats(){
   if(statsPanel.classList.contains('hide')){buildStats();statsPanel.classList.remove('hide');}
   else statsPanel.classList.add('hide');
 }
+// Escape closes any open overlay panel (settings/toc/stats) for quick dismissal
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape')return;
+  if(settingsPanel&&settingsPanel.classList.contains('open'))setSettingsOpen(false);
+  if(tocPanel&&!tocPanel.classList.contains('hide'))tocPanel.classList.add('hide');
+  if(statsPanel&&!statsPanel.classList.contains('hide'))statsPanel.classList.add('hide');
+});
 function buildStats(){
   let total=0;for(const cid in DECKS){const t=DECKS[cid].tabs;for(const k in t)total+=t[k].items.length;}
   let d=0,r=0,f=0;for(const k in marks){if(marks[k]==='done')d++;else if(marks[k]==='review')r++;else if(marks[k]==='fav')f++;}
