@@ -12359,7 +12359,7 @@ function renderLearn(){
     foot+='</div>';
     c.innerHTML=
       '<div class="cardtop"><span class="num">#'+o.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="cnt" data-c>'+I_EYE+cOf(k)+'</span>'+(eOf(k)?'<span class="cnt err">'+I_LOOP+eOf(k)+'</span>':'')+(mk?'<span class="cnt">'+MARKS[mk].short+'</span>':'')+'</div>'+
-      '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生">'+SPK+'</button></div>'+
+      '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生" aria-label="発音を再生">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr" lang="fr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+
       (it.note?'<div class="note"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg> '+it.note+'</div>':'')+
@@ -12384,7 +12384,7 @@ function renderVerbs(){
     const v=o.it;
     const c=document.createElement('div');c.className='verbcard';
     let html='<span class="num">#'+o.n+'</span>'+
-      '<div class="verbtop">'+(v.pri?'<span class="star">★</span>':'')+'<span class="verbinf">'+v.inf+'</span><span class="verbipa">'+v.ipa+'</span><span class="verbjp">'+v.jp+'</span><span class="verbgrp">'+VERBGROUPS[v.grp]+'</span><button class="play" title="不定詞">'+SPK+'</button></div>';
+      '<div class="verbtop">'+(v.pri?'<span class="star">★</span>':'')+'<span class="verbinf">'+v.inf+'</span><span class="verbipa">'+v.ipa+'</span><span class="verbjp">'+v.jp+'</span><span class="verbgrp">'+VERBGROUPS[v.grp]+'</span><button class="play" title="不定詞" aria-label="不定詞を再生">'+SPK+'</button></div>';
     tlist.forEach(t=>{
       const forms=v[t];
       html+='<div class="tenseName">'+tenseName(t)+'</div><div class="conjtbl">';
@@ -12464,7 +12464,7 @@ function renderGlobalSearch(){
     }
     c.innerHTML=
       '<div class="cardtop"><button class="deckjump" data-j>'+(CAT_ICON[r.cid]||'')+' '+r.clabel+' › '+r.tk+'</button><span class="num">#'+r.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'</div>'+
-      '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play">'+SPK+'</button></div>'+
+      '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生" aria-label="発音を再生">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr" lang="fr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+foot;
     const pb=c.querySelector('.play');
