@@ -28,7 +28,7 @@
   .controls label{display:flex;align-items:center;gap:5px;opacity:.95}
   select{border-radius:6px;border:none;padding:3px 6px;font-size:12px;max-width:140px}
   input[type=range]{accent-color:#fff;width:84px}
-  .catbar{max-width:980px;margin:10px auto 0;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+  .catbar{max-width:980px;margin:10px auto 0;display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;overscroll-behavior-x:contain}
   .catbtn{flex:0 0 auto;padding:6px 12px;border-radius:20px;background:rgba(255,255,255,.16);color:#eaf1ff;
     cursor:pointer;font-weight:700;font-size:12.5px;user-select:none;white-space:nowrap;transition:.15s;border:none}
   .catbtn.active{background:#fff;color:var(--bleu)}
@@ -131,7 +131,7 @@
   .searchrow{margin-bottom:11px}
   .deckjump{border:none;background:#eef2fb;color:var(--bleu);border-radius:7px;padding:2px 8px;font-size:10.5px;font-weight:700;cursor:pointer}
   .deckjump:hover{background:#dde6f8}
-  .tocpanel{max-width:980px;margin:10px auto 0;padding:8px 14px 12px;background:var(--card);border:1px solid var(--line);border-radius:12px;max-height:72vh;overflow-y:auto}
+  .tocpanel{max-width:980px;margin:10px auto 0;padding:8px 14px 12px;background:var(--card);border:1px solid var(--line);border-radius:12px;max-height:72vh;overflow-y:auto;overscroll-behavior:contain}
   .tocfilter{position:sticky;top:0;background:var(--card);padding:3px 0 8px;margin-bottom:1px;z-index:2}
   .tocfilter input{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:13px;background:#fff;color:var(--ink)}
   .tocfilter input:focus{outline:none;border-color:var(--bleu);box-shadow:0 0 0 3px rgba(0,85,164,.12)}
@@ -293,10 +293,10 @@
   body{-webkit-tap-highlight-color:transparent}
   header{padding-top:max(14px,env(safe-area-inset-top));padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}
   main{padding-bottom:calc(20px + env(safe-area-inset-bottom))}
-  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+  .tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px;overscroll-behavior-x:contain}
   .tabs::-webkit-scrollbar{display:none}
   .tab{flex:0 0 auto}
-  .barrow{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none}
+  .barrow{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;scrollbar-width:none;overscroll-behavior-x:contain}
   .barrow::-webkit-scrollbar{display:none}
   .barrow .chip,.barrow .barlabel{flex:0 0 auto}
   /* horizontal-scroll edge fade cue (shows only when more content is off-edge) */
