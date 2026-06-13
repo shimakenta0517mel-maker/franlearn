@@ -12065,7 +12065,7 @@ function highlightDeckbar(){
   if(!deckbar)return;
   deckbar.querySelectorAll('.catbtn').forEach(x=>{
     const on = x===todayBtn ? todayMode : (!todayMode && x.dataset.cat===cat);
-    x.classList.toggle('active',!!on);
+    x.classList.toggle('active',!!on);x.setAttribute('aria-current',on?'true':'false');
   });
 }
 function updateTodayBadge(){try{const t=buildTodayDeck();if(todayBtn)todayBtn.innerHTML=IC_TODAY+'<span>今日 '+(t.due.length+t.news.length)+'</span>';}catch(e){}}
@@ -12083,7 +12083,7 @@ function buildTeststyle(){
     teststyle.appendChild(b);
   });
 }
-function highlightTeststyle(){if(teststyle)teststyle.querySelectorAll('.tsbtn').forEach(x=>x.classList.toggle('active',x.dataset.ts===mode));}
+function highlightTeststyle(){if(teststyle)teststyle.querySelectorAll('.tsbtn').forEach(x=>{const a=x.dataset.ts===mode;x.classList.toggle('active',a);x.setAttribute('aria-current',a?'true':'false');});}
 const statsPanel=document.createElement('div');statsPanel.id='statsPanel';statsPanel.className='tocpanel hide';
 document.body.insertBefore(statsPanel,document.getElementById('tabs'));
 function toggleStats(){
@@ -12176,7 +12176,7 @@ function buildTabs(){
       const its=curTabs()[k].items;let dn=0;its.forEach(it=>{if(marks[cat+'|'+k+'|'+it.w]==='done')dn++;});
       const pct=its.length?Math.round(dn/its.length*100):0;
       const t=document.createElement('div');t.className='tab'+(k===current?' active':'')+(pct>=100?' tabdone':'');
-      t.tabIndex=0;t.setAttribute('role','button');t.setAttribute('aria-label',k+' '+curTabs()[k].label);
+      t.tabIndex=0;t.setAttribute('role','button');t.setAttribute('aria-label',k+' '+curTabs()[k].label);if(k===current)t.setAttribute('aria-current','true');
       t.title=curTabs()[k].label+'（完璧 '+pct+'%・'+dn+'/'+its.length+'）';
       t.innerHTML=k+'<span class="lv">'+curTabs()[k].label+'</span><div class="tabprog"><i style="width:'+pct+'%"></i></div>';
       t.onclick=()=>{current=k;posFilter='all';rangeSel='all';resetSearch();document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');buildRange();buildFilter();renderAll();saveNav();flashGrid();};
@@ -12276,7 +12276,7 @@ function setMode(m){
   mode=m;
   // カード/マッチ/発音/数字 はすべて「テスト」系。上段モードバーは3つだけ光らせる
   const pm=(m==='learn')?'learn':(m==='hf')?'hf':'test';
-  document.querySelectorAll('.modebtn').forEach(x=>x.classList.toggle('active',x.dataset.mode===pm));
+  document.querySelectorAll('.modebtn').forEach(x=>{const a=x.dataset.mode===pm;x.classList.toggle('active',a);x.setAttribute('aria-current',a?'true':'false');});
   teststyle.classList.toggle('hide',pm!=='test'); highlightTeststyle();
   document.getElementById('learnView').classList.toggle('hide',m!=='learn');
   document.getElementById('testView').classList.toggle('hide',m!=='test');
