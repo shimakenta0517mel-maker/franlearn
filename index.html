@@ -148,6 +148,8 @@
   .flash.swipe-right{box-shadow:0 0 0 3px var(--green),0 14px 40px rgba(22,32,58,.12)}
   .flash.swipe-left{box-shadow:0 0 0 3px var(--rouge),0 14px 40px rgba(22,32,58,.12)}
   .clozeq{font-size:19px;font-weight:600;line-height:1.7;font-family:Georgia,'Times New Roman',serif;color:var(--ink);padding:0 6px}
+  .cloze-blank{display:inline-block;min-width:64px;border-bottom:2.5px solid var(--bleu);color:transparent;margin:0 3px;vertical-align:baseline}
+  body.dark .cloze-blank{border-bottom-color:#7db4ff}
   .goalrow{margin-top:12px}
   .goalbar{height:10px;background:var(--line);border-radius:6px;overflow:hidden}
   .goalbar i{display:block;height:100%;background:linear-gradient(90deg,#dba400,#1f9d57);transition:width .3s}
@@ -12489,7 +12491,7 @@ function clozeOf(it){
   cands.sort((a,b)=>b.length-a.length);
   for(const c of cands){
     const i=ex.toLowerCase().indexOf(c.toLowerCase());
-    if(i>=0)return ex.slice(0,i)+' ____ '+ex.slice(i+c.length);
+    if(i>=0)return ex.slice(0,i)+' <span class="cloze-blank">____</span> '+ex.slice(i+c.length);
   }
   return null;
 }
