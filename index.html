@@ -416,6 +416,7 @@
   body.dark .accbtn{background:#202739;color:#9fc2ff;border-color:#2a3147}
   .typefb{text-align:center;font-size:15px;margin-top:12px;min-height:22px;color:var(--ink)}
   .typefb .ipa{color:var(--muted);font-size:13px}
+  .typefb-ex{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.5}
   body.dark .typefb{color:#e8ecf5}
   /* ===== pronunciation (speech) mode ===== */
   .pronword{font-size:40px;font-weight:700;color:var(--bleu);font-family:Georgia,'Times New Roman',serif;margin:6px 0 2px}
@@ -12602,8 +12603,8 @@ function renderTest(){
         if(!checked){
           if(!inp.value.trim())return;
           checked=true;wasOk=answerMatches(inp.value,it.w);inp.readOnly=true;
-          if(wasOk){inp.classList.add('ok');fb.innerHTML='<span style="color:var(--green);font-weight:700">'+I_CHECK+' 正解！</span>　'+it.w+(it.ipa?' <span class="ipa">'+it.ipa+'</span>':'');sfxOk();srsPass(it.k);}
-          else{inp.classList.add('ng');fb.innerHTML='正解：<b>'+it.w+'</b>'+(it.ipa?' <span class="ipa">'+it.ipa+'</span>':'');sfxNg();addErr(it.k);srsFail(it.k);}
+          if(wasOk){inp.classList.add('ok');fb.innerHTML='<span style="color:var(--green);font-weight:700">'+I_CHECK+' 正解！</span>　'+it.w+(it.ipa?' <span class="ipa">'+it.ipa+'</span>':'')+(it.ex?'<div class="typefb-ex" lang="fr">'+it.ex+'</div>':'');sfxOk();srsPass(it.k);}
+          else{inp.classList.add('ng');fb.innerHTML='正解：<b>'+it.w+'</b>'+(it.ipa?' <span class="ipa">'+it.ipa+'</span>':'')+(it.ex?'<div class="typefb-ex" lang="fr">'+it.ex+'</div>':'');sfxNg();addErr(it.k);srsFail(it.k);}
           speak(it.w);btn.innerHTML='次へ '+I_PLAY;btn.classList.toggle('ok',wasOk);
         }else{
           if(wasOk){if(!todayMode){known[it.k]=1;sv('fl_known',known);}deck.splice(idx,1);}
