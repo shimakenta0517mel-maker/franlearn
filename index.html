@@ -12321,7 +12321,7 @@ document.querySelectorAll('.modebtn').forEach(b=>{b.tabIndex=0;b.setAttribute('r
 // クリック可能なdiv（モード/レベルタブ）をキーボードでも操作可能に（Enter/Space）。captureで先取りしテストのSpace採点と衝突させない
 document.addEventListener('keydown',e=>{const t=e.target;if((e.key==='Enter'||e.key===' ')&&t&&t.classList&&(t.classList.contains('modebtn')||t.classList.contains('tab'))){e.preventDefault();e.stopPropagation();t.click();}},true);
 const searchBox=document.getElementById('searchBox');
-searchBox.addEventListener('input',()=>{searchQ=searchBox.value.trim();renderLearn();});
+let _searchT;searchBox.addEventListener('input',()=>{searchQ=searchBox.value.trim();clearTimeout(_searchT);_searchT=setTimeout(renderLearn,130);});
 // 検索クリアボタン（入力中だけ表示）＋ Esc でクリア（操作性向上）
 const searchClear=document.getElementById('searchClear');
 function updSearchClear(){if(searchClear)searchClear.hidden=!searchBox.value;}
