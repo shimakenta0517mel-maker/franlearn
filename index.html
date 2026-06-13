@@ -12503,6 +12503,7 @@ function jumpTo(cid,tk,word){
   cat=cid;posFilter='all';rangeSel='all';freqOnly=false;resetSearch();
   if(cid!=='verb')current=tk;
   document.querySelectorAll('.catbtn[data-cat]').forEach(x=>x.classList.toggle('active',x.dataset.cat===cid));
+  if(typeof deckbar!=='undefined'&&deckbar)navScrollIntoView(deckbar.querySelector('.catbtn.active'));
   buildTabs();buildRange();buildFilter();renderAll();saveNav();flashGrid();
   if(word){
     let target=null;
