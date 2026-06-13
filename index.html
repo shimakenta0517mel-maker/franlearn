@@ -12382,7 +12382,8 @@ if(hintToggle)hintToggle.addEventListener('change',()=>{sv('fl_hidehint',!hintTo
 applyHints();
 function renderLearn(){
   lpStop();
-  if(searchQ){learnplayEl.classList.add('hide');renderGlobalSearch();return;}
+  if(searchQ){document.title='検索: '+searchQ+' ｜ FranLearn — フランス語 単語・フレーズ・活用';learnplayEl.classList.add('hide');renderGlobalSearch();return;}
+  if(typeof updateTitle==='function')updateTitle();
   if(isVerb()){learnplayEl.classList.add('hide');renderVerbs();return;}
   learnplayEl.classList.remove('hide');
   hintEl.innerHTML=I_BULB+' 青い<b>単語</b>やIPA、'+I_SPK+'例文をタップで発音。覚えた語はカード下の<b>'+I_CHECK+'完璧</b>で一覧から隠せます（「表示」の '+I_CHECK+'完璧 でいつでも確認・復帰）。'+I_STAR+'は頻出、「区間」で1-25等に絞れます。';
