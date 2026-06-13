@@ -11978,7 +11978,7 @@ window.addEventListener('beforeunload',()=>sv('fl_time',timeData));
 /* ---------- state ---------- */
 let mode='learn', cat='delf', current=null, posFilter='all', freqOnly=false, rangeSel='all', verbTense='pres', viewMode='visible', searchQ='';
 // 前回の位置（デッキ/タブ/モード）を保存し、次回起動時に続きから開けるように
-function saveNav(){try{if(!todayMode&&!searchQ)sv('fl_nav',{m:mode,c:cat,t:current});}catch(e){}}
+function saveNav(){try{if(!todayMode&&!searchQ)sv('fl_nav',{m:mode,c:cat,t:current});if(typeof updateTitle==='function')updateTitle();}catch(e){}}
 /* ---------- 品詞(POS)正規化：表記ゆれ・意味タグを正規の品詞カテゴリへ集約してフィルタに使う ---------- */
 const POS_ORDER=['名詞','動詞','形容詞','副詞','会話・表現','前置詞','接続詞','代名詞','数詞','その他'];
 const POS_CONV=new Set(['会話','表現','慣用句','ことわざ','フレーズ','口語','自分が言う','聞かれる','感嘆','返事','挨拶','相づち','疑問','雑談','つなぎ','結び','書き出し','促し','質問','招待','お祝い','緊急','議論','呼びかけ']);
