@@ -663,8 +663,8 @@
     </div>
     <details class="setadv">
       <summary>詳細設定（端末の音声・通常は変更不要）</summary>
-      <div class="setrow"><span class="setlabel">端末の仏語音声</span><select id="voiceSel"></select></div>
-      <div class="setrow"><span class="setlabel">端末の日本語音声</span><select id="voiceSelJa"></select></div>
+      <div class="setrow"><span class="setlabel">端末の仏語音声</span><select id="voiceSel" aria-label="端末の仏語音声"></select></div>
+      <div class="setrow"><span class="setlabel">端末の日本語音声</span><select id="voiceSelJa" aria-label="端末の日本語音声"></select></div>
       <p>「音声タイプ＝端末の音声」を選んだとき、またはネット不通で声優音声が使えないときに使う、お使いの端末内蔵の声です。声優音声を使う場合は変更不要です。</p>
     </details>
   </div>
@@ -12215,7 +12215,7 @@ function buildTabs(){
   const keys=tabKeys();
   if(keys.length>8){
     const wrap=document.createElement('div');wrap.className='tabsrow';
-    const sel=document.createElement('select');sel.className='deckSel';
+    const sel=document.createElement('select');sel.className='deckSel';sel.setAttribute('aria-label','デッキを選択');
     keys.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k+' — '+curTabs()[k].label+'（'+curTabs()[k].items.length+'）';if(k===current)o.selected=true;sel.appendChild(o);});
     sel.onchange=()=>{current=sel.value;posFilter='all';rangeSel='all';resetSearch();buildRange();buildFilter();renderAll();saveNav();flashGrid();};
     wrap.appendChild(sel);tabsEl.appendChild(wrap);
