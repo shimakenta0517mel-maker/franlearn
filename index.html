@@ -12455,7 +12455,7 @@ lpBtn.onclick=()=>{if(lpPlaying)lpStop();else lpPlay();};
 /* ---------- GLOBAL SEARCH ---------- */
 function renderGlobalSearch(){
   const q=searchQ.toLowerCase();
-  hintEl.innerHTML='🔍 <b>全デッキ横断検索</b>の結果です。カード左上のデッキ名をタップするとそのデッキに移動します。';
+  hintEl.innerHTML='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4" stroke-linecap="round"/></svg> <b>全デッキ横断検索</b>の結果です。カード左上のデッキ名をタップするとそのデッキに移動します。';
   const res=[];
   for(const cid in DECKS){
     const tabs=DECKS[cid].tabs;
