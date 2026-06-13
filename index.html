@@ -12366,7 +12366,7 @@ function renderLearn(){
   const arr=filtered();
   levelhead.innerHTML=(CAT_ICON[cat]||'')+' '+DECKS[cat].label+' ｜ '+current+' '+curTabs()[current].label+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeSel[0]+'-'+rangeSel[1]+']':'')+(posFilter!=='all'?'（'+posFilter+'）':'')+(freqOnly?' '+I_STAR:'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
-  if(!arr.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🗂️</div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や「表示／品詞」の絞り込みを広げてみてください。</div></div>';return;}
+  if(!arr.length){grid.innerHTML='<div class="empty"><div class="empty-ic"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や「表示／品詞」の絞り込みを広げてみてください。</div></div>';return;}
   arr.forEach(o=>{
     const it=o.it,k=keyOf(it),mk=markOf(k);
     const c=document.createElement('div');c.className='card'+(mk?' marked-'+mk:'')+(mk==='done'?' ismarked':'');
@@ -12468,7 +12468,7 @@ function renderGlobalSearch(){
   });
   levelhead.textContent='「'+searchQ+'」 検索結果 '+res.length+' 件'+(res.length>100?'（先頭100件を表示）':'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
-  if(!res.length){grid.innerHTML='<div class="empty"><div class="empty-ic">🔍</div><div class="empty-t">見つかりませんでした</div><div class="empty-s">スペルや別の言い方で試してみてください。アクセント記号は無くても検索できます。</div><button type="button" class="empty-btn" id="emptyClear">検索をクリア</button></div>';const ec=document.getElementById('emptyClear');if(ec)ec.onclick=()=>clearSearch(true);return;}
+  if(!res.length){grid.innerHTML='<div class="empty"><div class="empty-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4" stroke-linecap="round"/></svg></div><div class="empty-t">見つかりませんでした</div><div class="empty-s">スペルや別の言い方で試してみてください。アクセント記号は無くても検索できます。</div><button type="button" class="empty-btn" id="emptyClear">検索をクリア</button></div>';const ec=document.getElementById('emptyClear');if(ec)ec.onclick=()=>clearSearch(true);return;}
   res.slice(0,100).forEach(r=>{
     const it=r.it,k=r.cid+'|'+r.tk+'|'+it.w,mk=markOf(k);
     const c=document.createElement('div');c.className='card'+(mk?' marked-'+mk:'')+(mk==='done'?' ismarked':'');
@@ -12560,7 +12560,7 @@ function renderTest(){
   const total=todayMode?todayTotal:testItems().length, learned=total-deck.length;
   barfill.style.width=total?Math.round(learned/total*100)+'%':'0%';
   pgtext.textContent=total?('覚えた '+learned+' / '+total+' ｜ 残り '+deck.length+(todayMode?'　（復習 '+todayDueN+'・新規 '+todayNewN+'）':'')):'';
-  if(!total){cardArea.innerHTML='<div class="empty"><div class="empty-ic">🗂️</div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や絞り込みを広げると出題できます。</div></div>';return;}
+  if(!total){cardArea.innerHTML='<div class="empty"><div class="empty-ic"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や絞り込みを広げると出題できます。</div></div>';return;}
   if(!deck.length){
     if(!_wonBeep){_wonBeep=true;celebrate();}
     if(todayMode){
@@ -12870,7 +12870,7 @@ function matchBuild(){
   matchStopTimer();matchDoneEl.innerHTML='';
   const pool=matchShuffle(matchPool());
   const n=Math.min(6,pool.length);
-  if(n<2){matchBoard.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-ic">🃏</div><div class="empty-t">マッチには2語以上必要です</div><div class="empty-s">「区間」や「表示」を広げてください。</div></div>';matchTimeEl.textContent='0.0秒';matchMissEl.textContent='0';return;}
+  if(n<2){matchBoard.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="empty-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="7" width="11" height="14" rx="2"/><rect x="9" y="3" width="11" height="14" rx="2"/></svg></div><div class="empty-t">マッチには2語以上必要です</div><div class="empty-s">「区間」や「表示」を広げてください。</div></div>';matchTimeEl.textContent='0.0秒';matchMissEl.textContent='0';return;}
   let cards=[];
   pool.slice(0,n).forEach((it,i)=>{cards.push({id:i,type:'fr',text:it.w});cards.push({id:i,type:'jp',text:it.jp});});
   matchCards=matchShuffle(cards);matchSel=null;matchMiss=0;matchDoneN=0;matchLock=false;
