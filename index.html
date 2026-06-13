@@ -98,7 +98,8 @@
   .wordrow{display:flex;align-items:center;gap:8px}
   .word{font-size:18px;font-weight:700;color:var(--bleu);cursor:pointer;border-bottom:2px dotted transparent;transition:.15s}
   .word:hover{border-bottom-color:var(--bleu)}
-  .ipa{font-size:12px;color:var(--muted);font-style:normal}
+  .ipa{font-size:12px;color:var(--muted);font-style:normal;cursor:pointer;transition:color .15s}
+  .ipa:hover{color:var(--bleu)}
   .pos{font-size:10px;color:var(--muted);background:#eef2fb;padding:2px 7px;border-radius:20px;font-weight:600;white-space:nowrap}
   .pos[data-pos="名詞"]{background:#e7f0fb;color:#2c5a96}
   .pos[data-pos="動詞"]{background:#e3f5ea;color:#1f7a47}
@@ -366,6 +367,7 @@
   body.dark{--bg:#11151f;--card:#1a2030;--ink:#e8ecf5;--muted:#98a3bb;--line:#2a3147;background:linear-gradient(180deg,#10141e,#161b29) fixed}
   body.dark .word,body.dark .verbinf,body.dark .front,body.dark .hffr,body.dark .exfr .ico,body.dark .stat b{color:#7db4ff}
   body.dark .word:hover{border-bottom-color:#7db4ff}
+  body.dark .ipa:hover{color:#7db4ff}
   body.dark .pos,body.dark .cnt,body.dark .deckjump{background:#252d42;color:#9fb3d9}
   body.dark .cnt.err{background:#3a2326;color:#ff9c92}
   body.dark .conj{background:#202739;border-color:#2a3147}
