@@ -12799,7 +12799,8 @@ document.getElementById('numChk').onclick=()=>{
     setTimeout(numNew,1500);
   }else{
     numStreak=0;updNumScore();sfxNg();
-    numQ.innerHTML='<span style="color:var(--rouge)">'+I_CROSS+' 正解: '+numTarget.disp+'</span>';numFb.textContent=numTarget.words;
+    var yours=(numIn.value||'').replace(/[<>&]/g,'').trim();
+    numQ.innerHTML='<span style="color:var(--rouge)">'+I_CROSS+' 正解: '+numTarget.disp+'</span>'+(yours?' <span style="opacity:.6;font-size:13px">あなた: '+yours+'</span>':'');numFb.textContent=numTarget.words;
     setTimeout(numNew,2600);
   }
 };
