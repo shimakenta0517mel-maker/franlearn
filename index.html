@@ -12089,7 +12089,15 @@ function highlightDeckbar(){
     if(on)act=x;
   });
   navScrollIntoView(act);
+  updateTitle();
 }
+function updateTitle(){try{
+  var d;
+  if(todayMode)d='今日';
+  else if(cat==='verb')d='動詞活用';
+  else if(typeof DECKS!=='undefined'&&DECKS[cat]){d=DECKS[cat].label;if(current&&DECKS[cat].tabs[current])d+=' '+current;}
+  document.title=(d?d+' ｜ ':'')+'FranLearn — フランス語 単語・フレーズ・活用';
+}catch(e){}}
 function updateTodayBadge(){try{const t=buildTodayDeck();if(todayBtn)todayBtn.innerHTML=IC_TODAY+'<span>今日 '+(t.due.length+t.news.length)+'</span>';}catch(e){}}
 setTimeout(updateTodayBadge,300);
 
@@ -12504,6 +12512,7 @@ function jumpTo(cid,tk,word){
   if(cid!=='verb')current=tk;
   document.querySelectorAll('.catbtn[data-cat]').forEach(x=>x.classList.toggle('active',x.dataset.cat===cid));
   if(typeof deckbar!=='undefined'&&deckbar)navScrollIntoView(deckbar.querySelector('.catbtn.active'));
+  if(typeof updateTitle==='function')updateTitle();
   buildTabs();buildRange();buildFilter();renderAll();saveNav();flashGrid();
   if(word){
     let target=null;
