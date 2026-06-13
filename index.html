@@ -12129,6 +12129,14 @@ document.addEventListener('keydown',function(e){
   if(tocPanel&&!tocPanel.classList.contains('hide'))tocPanel.classList.add('hide');
   if(statsPanel&&!statsPanel.classList.contains('hide'))statsPanel.classList.add('hide');
 });
+// "/" focuses the global search box (desktop power-user shortcut; never hijacks while typing)
+document.addEventListener('keydown',function(e){
+  if(e.key!=='/'||e.ctrlKey||e.metaKey||e.altKey)return;
+  var t=e.target,tag=t&&t.tagName;
+  if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable))return;
+  var sb=document.getElementById('searchBox');
+  if(sb&&sb.offsetParent!==null){e.preventDefault();sb.focus();}
+});
 function buildStats(){
   let total=0;for(const cid in DECKS){const t=DECKS[cid].tabs;for(const k in t)total+=t[k].items.length;}
   let d=0,r=0,f=0;for(const k in marks){if(marks[k]==='done')d++;else if(marks[k]==='review')r++;else if(marks[k]==='fav')f++;}
