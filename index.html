@@ -12402,7 +12402,7 @@ function renderVerbs(){
     const v=o.it;
     const c=document.createElement('div');c.className='verbcard';
     let html='<span class="num">#'+o.n+'</span>'+
-      '<div class="verbtop">'+(v.pri?'<span class="star">★</span>':'')+'<span class="verbinf" lang="fr">'+v.inf+'</span><span class="verbipa">'+v.ipa+'</span><span class="verbjp">'+v.jp+'</span><span class="verbgrp">'+VERBGROUPS[v.grp]+'</span><button class="play" title="不定詞" aria-label="不定詞を再生">'+SPK+'</button></div>';
+      '<div class="verbtop">'+(v.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="verbinf" lang="fr">'+v.inf+'</span><span class="verbipa">'+v.ipa+'</span><span class="verbjp">'+v.jp+'</span><span class="verbgrp">'+VERBGROUPS[v.grp]+'</span><button class="play" title="不定詞" aria-label="不定詞を再生">'+SPK+'</button></div>';
     tlist.forEach(t=>{
       const forms=v[t];
       html+='<div class="tenseName">'+tenseName(t)+'</div><div class="conjtbl">';
