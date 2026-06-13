@@ -676,7 +676,7 @@
 
 <main>
   <section id="learnView">
-    <div class="searchrow"><div class="searchwrap"><span class="searchicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4" stroke-linecap="round"/></svg></span><input id="searchBox" type="search" placeholder="単語・意味・IPAで検索（全デッキ横断）" autocomplete="off"><button type="button" id="searchClear" class="searchclear" aria-label="検索をクリア" hidden>✕</button></div></div>
+    <div class="searchrow"><div class="searchwrap"><span class="searchicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4" stroke-linecap="round"/></svg></span><input id="searchBox" type="search" placeholder="単語・意味・IPAで検索（全デッキ横断）" aria-label="単語・意味・IPAで検索（全デッキ横断）" autocomplete="off"><button type="button" id="searchClear" class="searchclear" aria-label="検索をクリア" hidden>✕</button></div></div>
     <div class="hintbox" id="hintbox"><div class="hint" id="hint"></div><button type="button" class="hintclose" id="hintClose" aria-label="ヒントを閉じる" title="今後この操作ヒントを表示しない（設定の「表示」で再表示できます）">✕</button></div>
     <div class="learnplay" id="learnplay">
       <button id="lpBtn" class="bigplay" style="margin-top:0"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 連続再生</button>
@@ -738,7 +738,7 @@
         <div class="hfidx" id="numScoreEl"></div>
         <div class="hffr" id="numQ"></div>
         <div class="hfjp" id="numFb">下の「出題」を押すと数字が読み上げられます</div>
-        <input id="numIn" inputmode="decimal" autocomplete="off" placeholder="聞こえた数字（例: 95 / 1250 / 14:30）">
+        <input id="numIn" inputmode="decimal" autocomplete="off" aria-label="聞こえた数字を入力" placeholder="聞こえた数字（例: 95 / 1250 / 14:30）">
       </div>
       <div class="grade" style="max-width:380px;margin:14px auto 0">
         <button class="again" id="numRep"><svg class="ic" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 出題・もう一度</button>
@@ -12027,7 +12027,7 @@ document.body.insertBefore(tocPanel,document.getElementById('tabs'));
 if(tocBtn)tocBtn.onclick=function(){toggleToc();};
 function toggleToc(){statsPanel.classList.add('hide');if(tocPanel.classList.contains('hide')){buildToc();tocPanel.classList.remove('hide');}else tocPanel.classList.add('hide');}
 function buildToc(){
-  let h='<div class="tocfilter"><input type="search" id="tocFilter" placeholder="🔍 デッキ名でしぼり込み" autocomplete="off"></div><div class="tocempty" id="tocEmpty" style="display:none">該当するデッキがありません</div>';
+  let h='<div class="tocfilter"><input type="search" id="tocFilter" placeholder="🔍 デッキ名でしぼり込み" aria-label="デッキ名でしぼり込み" autocomplete="off"></div><div class="tocempty" id="tocEmpty" style="display:none">該当するデッキがありません</div>';
   CATS.forEach(([id,label])=>{
     h+='<div class="tocsec"><div class="toch">'+(CAT_ICON[id]||'')+'<span>'+label+'</span></div><div class="tocchips">';
     if(id==='verb'){h+='<button class="chip" data-t="verb|">'+VERBS.length+'動詞・全時制</button>';}
@@ -12570,7 +12570,7 @@ function renderTest(){
     bump(it.k); // exposure once when card first shown
     if(dir==='type'){
       const tags='<span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><span class="tag cnt2">'+I_EYE+cOf(it.k)+(eOf(it.k)?' '+I_LOOP+eOf(it.k):'')+'</span>';
-      cardArea.innerHTML='<div class="flash" style="cursor:default">'+tags+'<div class="front jp">'+it.jp+'</div><input id="typeIn" class="typein" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="フランス語をつづりで入力">'+accentBar('typeIn')+'<div class="typefb" id="typefb"></div><div class="grade" style="max-width:340px;margin:6px auto 0"><button class="known" id="typeChk">答え合わせ</button></div></div>';
+      cardArea.innerHTML='<div class="flash" style="cursor:default">'+tags+'<div class="front jp">'+it.jp+'</div><input id="typeIn" class="typein" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="フランス語のつづりを入力" placeholder="フランス語をつづりで入力">'+accentBar('typeIn')+'<div class="typefb" id="typefb"></div><div class="grade" style="max-width:340px;margin:6px auto 0"><button class="known" id="typeChk">答え合わせ</button></div></div>';
       const inp=cardArea.querySelector('#typeIn');wireAccentBar(cardArea,inp);
       const fb=cardArea.querySelector('#typefb'),btn=cardArea.querySelector('#typeChk');
       let checked=false,wasOk=false;
