@@ -12079,12 +12079,16 @@ function buildDeckbar(){
   });
   highlightDeckbar();updateTodayBadge();
 }
+function navScrollIntoView(el){if(el&&el.scrollIntoView){try{el.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'});}catch(e){try{el.scrollIntoView(false);}catch(_){}}}}
 function highlightDeckbar(){
   if(!deckbar)return;
+  let act=null;
   deckbar.querySelectorAll('.catbtn').forEach(x=>{
     const on = x===todayBtn ? todayMode : (!todayMode && x.dataset.cat===cat);
     x.classList.toggle('active',!!on);x.setAttribute('aria-current',on?'true':'false');
+    if(on)act=x;
   });
+  navScrollIntoView(act);
 }
 function updateTodayBadge(){try{const t=buildTodayDeck();if(todayBtn)todayBtn.innerHTML=IC_TODAY+'<span>今日 '+(t.due.length+t.news.length)+'</span>';}catch(e){}}
 setTimeout(updateTodayBadge,300);
@@ -12101,7 +12105,7 @@ function buildTeststyle(){
     teststyle.appendChild(b);
   });
 }
-function highlightTeststyle(){if(teststyle)teststyle.querySelectorAll('.tsbtn').forEach(x=>{const a=x.dataset.ts===mode;x.classList.toggle('active',a);x.setAttribute('aria-current',a?'true':'false');});}
+function highlightTeststyle(){if(teststyle){let act=null;teststyle.querySelectorAll('.tsbtn').forEach(x=>{const a=x.dataset.ts===mode;x.classList.toggle('active',a);x.setAttribute('aria-current',a?'true':'false');if(a)act=x;});navScrollIntoView(act);}}
 const statsPanel=document.createElement('div');statsPanel.id='statsPanel';statsPanel.className='tocpanel hide';
 document.body.insertBefore(statsPanel,document.getElementById('tabs'));
 function toggleStats(){
