@@ -687,7 +687,7 @@
     <div class="hfwrap">
       <div class="hfcard">
         <div class="hfidx" id="hfidx"></div>
-        <div class="hffr" id="hffr">🎧</div>
+        <div class="hffr" id="hffr" lang="fr">🎧</div>
         <div class="hffripa" id="hffripa"></div>
         <div class="hfjp" id="hfjp">ハンズフリー再生</div>
         <div class="hfex" id="hfex"></div>
@@ -12352,9 +12352,9 @@ function renderLearn(){
     foot+='</div>';
     c.innerHTML=
       '<div class="cardtop"><span class="num">#'+o.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="cnt" data-c>'+I_EYE+cOf(k)+'</span>'+(eOf(k)?'<span class="cnt err">'+I_LOOP+eOf(k)+'</span>':'')+(mk?'<span class="cnt">'+MARKS[mk].short+'</span>':'')+'</div>'+
-      '<div class="wordrow"><span class="word">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生">'+SPK+'</button></div>'+
+      '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
-      '<div class="ex"><div class="exfr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+
+      '<div class="ex"><div class="exfr" lang="fr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+
       (it.note?'<div class="note"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75z"/></svg> '+it.note+'</div>':'')+
       foot;
     const pb=c.querySelector('.play'), cntEl=c.querySelector('[data-c]');
@@ -12457,9 +12457,9 @@ function renderGlobalSearch(){
     }
     c.innerHTML=
       '<div class="cardtop"><button class="deckjump" data-j>'+(CAT_ICON[r.cid]||'')+' '+r.clabel+' › '+r.tk+'</button><span class="num">#'+r.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'</div>'+
-      '<div class="wordrow"><span class="word">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play">'+SPK+'</button></div>'+
+      '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
-      '<div class="ex"><div class="exfr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+foot;
+      '<div class="ex"><div class="exfr" lang="fr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+foot;
     const pb=c.querySelector('.play');
     c.querySelector('.word').onclick=()=>speak(it.w,pb);
     pb.onclick=()=>speak(it.w,pb);
