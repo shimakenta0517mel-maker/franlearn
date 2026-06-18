@@ -11635,6 +11635,20 @@ const setBtn=document.getElementById('setBtn'), settingsPanel=document.getElemen
 function setSettingsOpen(open){if(!settingsPanel)return;settingsPanel.classList.toggle('open',open);if(setBtn)setBtn.classList.toggle('on',open);sv('fl_setopen',open?1:0);}
 if(setBtn)setBtn.onclick=()=>setSettingsOpen(!settingsPanel.classList.contains('open'));
 setSettingsOpen(!!Number(ls('fl_setopen','0')));
+// 開いている設定パネルを上スワイプで閉じる（ボタンでの開閉に加えて）。上方向40px超かつ縦優位のときだけ＝横ドラッグ(スライダー)や下スワイプでは閉じない
+if(settingsPanel){
+  let _ssY=null,_ssX=null;
+  settingsPanel.addEventListener('touchstart',function(e){
+    if(!settingsPanel.classList.contains('open')||!e.touches||!e.touches[0]){_ssY=null;return;}
+    _ssY=e.touches[0].clientY;_ssX=e.touches[0].clientX;
+  },{passive:true});
+  settingsPanel.addEventListener('touchend',function(e){
+    if(_ssY==null||!e.changedTouches||!e.changedTouches[0])return;
+    const dy=_ssY-e.changedTouches[0].clientY, dx=Math.abs(e.changedTouches[0].clientX-_ssX);
+    _ssY=null;_ssX=null;
+    if(dy>40&&dy>dx)setSettingsOpen(false);
+  },{passive:true});
+}
 // 性別(声)は声優音声(native)のときだけ意味があるので、それ以外は隠す
 function updGenderRow(){const gr=document.getElementById('genderRow');if(gr)gr.style.display=(ttsMode==='native')?'':'none';}
 updGenderRow();
