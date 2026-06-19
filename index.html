@@ -728,6 +728,7 @@
       <div class="hfopt">
         <label title="区間の最後まで行ったら最初へ戻り、止めるまで止まらず連続再生します"><input type="checkbox" id="hfloop" checked> 連続ループ</label>
         <label><input type="checkbox" id="hfex_chk" checked> 例文も読む</label>
+        <button type="button" class="hfsetlink" id="hfDirBtn" title="読み上げる言語の順序を切り替えます（仏→日 ⇄ 日→仏）" aria-label="読み上げ方向を切り替え"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l3 3-3 3"/><path d="M4 11V9a4 4 0 0 1 4-4h12"/><path d="M7 22l-3-3 3-3"/><path d="M20 13v2a4 4 0 0 1-4 4H4"/></svg> <span id="hfDirLbl">仏→日</span></button>
         <label title="1つの単語を何回くり返して読むか（1〜10回）">くり返し:<select id="hfRepeat" style="margin-left:4px"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option></select>回</label>
         <button type="button" class="hfsetlink" id="hfSetLink" title="速さ・音の間隔・語の間隔を調整"><svg class="ic" viewBox="0 0 24 24"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.3-.61-.22l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65A.49.49 0 0 0 14 1h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.23-.09-.49 0-.61.22l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.3.61.22l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.23.09.49 0 .61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5A3.5 3.5 0 1 1 12 8.5a3.5 3.5 0 0 1 0 7z"/></svg> 速さ・間隔を調整</button>
       </div>
@@ -737,7 +738,7 @@
         <button class="chip" data-hp="review"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5V2L7 7l5 5V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-7z"/></svg> 復習だけ</button>
         <button class="chip" data-hp="fav"><svg class="ic" viewBox="0 0 24 24"><path d="m12 2 2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.8 6.1 20.6l1.3-6.6L2.5 8.9l6.6-.8z"/></svg> 保存だけ</button>
       </div>
-      <div style="font-size:11px;color:var(--muted);margin-top:11px">再生順：仏語 → 日本語 → 仏語 → 仏語例文 → 日本語例文 → 仏語例文。上の「区間」で 1-10・1-25 など好きな範囲に絞ってひたすら流せます（区間バーの「カスタム」で自由に範囲指定）。</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:11px"><span id="hfOrderHint">再生順：仏語 → 日本語 → 仏語 → 仏語例文 → 日本語例文 → 仏語例文。</span>「仏→日／日→仏」ボタンで読み上げる言語の順序を切り替えられます。上の「区間」で 1-10・1-25 など好きな範囲に絞ってひたすら流せます（区間バーの「カスタム」で自由に範囲指定）。</div>
     </div>
   </section>
   <section id="numView" class="hide">
@@ -12914,6 +12915,7 @@ function doFlip(){flipped=true;renderTest();const it=deck[idx];setTimeout(()=>sp
 
 /* ---------- HANDS-FREE ---------- */
 let hfList=[], hfIdx=0, hfToken=0, hfPlaying=false;
+let hfDir=ls('fl_hfdir','"fr2jp"'); // 'fr2jp'=仏→日 / 'jp2fr'=日→仏
 const hfloop=document.getElementById('hfloop'), hfexchk=document.getElementById('hfex_chk');
 const hfRepeat=document.getElementById('hfRepeat');
 if(hfRepeat){hfRepeat.value=String(itemRepeat);hfRepeat.addEventListener('change',()=>{itemRepeat=Math.max(1,Math.min(10,Number(hfRepeat.value)||1));sv('fl_itemrep',itemRepeat);});}
@@ -12945,9 +12947,16 @@ async function hfPlay(){
   while(hfIdx<hfList.length){
     if(token!==hfToken)return;
     const it=hfList[hfIdx];hfShow();bump(it.k);
-    // 再生順：仏語 → 日本語 → 仏語 →（例文）仏語例文 → 日本語例文 → 仏語例文
-    const steps=[['仏語',it.w,'fr'],['日本語',it.jp,'ja'],['仏語',it.w,'fr']];
-    if(hfexchk.checked&&it.ex){steps.push(['例文(仏)',it.ex,'fr']);if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}
+    let steps;
+    if(hfDir==='jp2fr'){
+      // 日→仏：日本語1回 → 仏語1回（例文も 日→仏）
+      steps=[['日本語',it.jp,'ja'],['仏語',it.w,'fr']];
+      if(hfexchk.checked&&it.ex){if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}
+    }else{
+      // 仏→日：仏語 → 日本語 → 仏語 →（例文）仏語例文 → 日本語例文 → 仏語例文
+      steps=[['仏語',it.w,'fr'],['日本語',it.jp,'ja'],['仏語',it.w,'fr']];
+      if(hfexchk.checked&&it.ex){steps.push(['例文(仏)',it.ex,'fr']);if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}
+    }
     for(let rep=0;rep<itemRepeat;rep++){
       for(let si=0;si<steps.length;si++){
         if(token!==hfToken)return;
@@ -12967,6 +12976,12 @@ async function hfPlay(){
 }
 function hfStop(){hfToken++;hfPlaying=false;audioStop();if(synth)synth.cancel();hfplayBtn.innerHTML=SVG_PLAY;hfstage.textContent='';}
 hfplayBtn.onclick=()=>{if(hfPlaying)hfStop();else hfPlay();};
+function hfDirUI(){
+  const lbl=document.getElementById('hfDirLbl');if(lbl)lbl.textContent=(hfDir==='jp2fr'?'日→仏':'仏→日');
+  const btn=document.getElementById('hfDirBtn');if(btn)btn.setAttribute('aria-label','読み上げ方向: '+(hfDir==='jp2fr'?'日本語→仏語':'仏語→日本語')+'（タップで切替）');
+  const h=document.getElementById('hfOrderHint');if(h)h.textContent=(hfDir==='jp2fr'?'再生順：日本語 → 仏語 →（例文）日本語例文 → 仏語例文。':'再生順：仏語 → 日本語 → 仏語 → 仏語例文 → 日本語例文 → 仏語例文。');
+}
+(function(){const b=document.getElementById('hfDirBtn');if(b)b.onclick=()=>{hfDir=(hfDir==='jp2fr'?'fr2jp':'jp2fr');sv('fl_hfdir',hfDir);hfDirUI();const wp=hfPlaying;if(wp){hfStop();hfPlay();}};hfDirUI();})();
 document.getElementById('hfprev').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.max(0,hfIdx-1);if(wp)hfPlay();else hfShow();};
 document.getElementById('hfnext').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.min(hfList.length-1,hfIdx+1);if(wp)hfPlay();else hfShow();};
 document.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{
