@@ -519,7 +519,8 @@
   .ctrlbtn.icon{padding:6px 10px}
   .ctrlbtn.on{background:#fff;color:var(--bleu)}
   .settings{max-width:980px;margin:9px auto 0;background:rgba(255,255,255,.13);border-radius:12px;padding:11px 13px;display:none}
-  .settings.open{display:block}
+  .settings.open{display:block;animation:setFade .2s ease}
+  @keyframes setFade{from{opacity:0}to{opacity:1}}
   .setgrab{touch-action:none;-webkit-user-select:none;user-select:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:1px 0 9px;margin-top:-2px}
   .setgrabpill{width:42px;height:5px;border-radius:3px;background:rgba(255,255,255,.55)}
   .setgrabtxt{font-size:10.5px;color:rgba(255,255,255,.82);letter-spacing:.02em}
