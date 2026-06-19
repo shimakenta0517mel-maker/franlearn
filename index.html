@@ -12007,7 +12007,9 @@ function speak(text,btn){
   setMedia(text,'');
   resolveUrl(text,'fr').then(url=>{
     if(!url){webSpeak(text,'fr',btn);return;}
-    playUrl(url,'fr',btn).then(ok=>{if(ok===true){_onlineFails=0;}else if(ok===false){if(_isGoogle(url))_onlineFails++;webSpeak(text,'fr',btn);}});
+    playUrl(url,'fr',btn).then(ok=>{if(ok===true){_onlineFails=0;return;}if(ok!==false)return;
+      if(!_isGoogle(url)){playUrl(url,'fr',btn).then(ok2=>{if(ok2===true){_onlineFails=0;}else if(ok2===false){webSpeak(text,'fr',btn);}});} // ニューラル音声が一過性で失敗→もう一度だけ同じmp3を試し、それでも駄目なら機械音声
+      else{_onlineFails++;webSpeak(text,'fr',btn);}});
   });
 }
 function webSpeak(text,lang,btn){
@@ -12027,7 +12029,9 @@ function speakLang(text,lang){
     if(lang==='fr')setMedia(text,'');
     resolveUrl(text,lang).then(url=>{
       if(!url){webSpeakLang(text,lang).then(res);return;}
-      playUrl(url,lang,null).then(ok=>{if(ok===true){_onlineFails=0;res();}else if(ok===false){if(_isGoogle(url))_onlineFails++;webSpeakLang(text,lang).then(res);}else res();});
+      playUrl(url,lang,null).then(ok=>{if(ok===true){_onlineFails=0;res();return;}if(ok!==false){res();return;}
+        if(!_isGoogle(url)){playUrl(url,lang,null).then(ok2=>{if(ok2===true){_onlineFails=0;res();}else if(ok2===false){webSpeakLang(text,lang).then(res);}else res();});} // ニューラル音声を一度だけ再試行してから機械音声へ
+        else{_onlineFails++;webSpeakLang(text,lang).then(res);}});
     });
   });
 }
