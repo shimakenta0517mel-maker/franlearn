@@ -11870,14 +11870,21 @@ if(setBtn)setBtn.onclick=()=>setSettingsOpen(!settingsPanel.classList.contains('
 setSettingsOpen(!!Number(ls('fl_setopen','0')));
 // パネル下部の「設定を閉じる」ボタン（スクロールで上部の⚙️が画面外でも確実に閉じられる）
 const setCloseBtn=document.getElementById('setCloseBtn');if(setCloseBtn)setCloseBtn.onclick=()=>setSettingsOpen(false);
-// パネル上部のつかみハンドル＝touch-action:noneでスクロールに奪われないので上スワイプを確実に検知できる（本文スワイプの実機取りこぼし対策）。タップでも閉じる。
+// パネル上部のつかみハンドル＝touch-action:noneでスクロールに奪われない。ドラッグするとパネルが指に追従して動き(スワイプの手応え/残像)、50px超で離すと閉じる、足りなければ元に戻る。タップ/Enter/Spaceでも閉じる。
 const setGrab=document.getElementById('setGrab');
-if(setGrab){
-  let _gY=null,_gMoved=false;
-  setGrab.addEventListener('touchstart',function(e){_gY=(e.touches&&e.touches[0])?e.touches[0].clientY:null;_gMoved=false;},{passive:true});
-  setGrab.addEventListener('touchmove',function(e){if(_gY!=null&&e.touches&&e.touches[0]){if(Math.abs(_gY-e.touches[0].clientY)>14)_gMoved=true;if(_gY-e.touches[0].clientY>20){_gY=null;setSettingsOpen(false);}}},{passive:true});
-  setGrab.addEventListener('touchend',function(){_gY=null;},{passive:true});
-  setGrab.addEventListener('click',function(){setSettingsOpen(false);}); // タップで閉じる
+if(setGrab&&settingsPanel){
+  let _gY=null,_gd=0,_gOn=false,_gIgnoreClick=false;
+  function _gShow(px){settingsPanel.style.transform='translateY(-'+px+'px)';settingsPanel.style.opacity=String(Math.max(0.3,1-px/240));} // 指に追従＋徐々にフェード
+  function _gClear(anim){settingsPanel.style.transition=anim?'transform .2s ease,opacity .2s ease':'none';settingsPanel.style.transform='';settingsPanel.style.opacity='';}
+  setGrab.addEventListener('touchstart',function(e){e.stopPropagation();if(!e.touches||!e.touches[0])return;_gY=e.touches[0].clientY;_gd=0;_gOn=true;_gIgnoreClick=false;settingsPanel.style.transition='none';},{passive:true});
+  setGrab.addEventListener('touchmove',function(e){e.stopPropagation();if(!_gOn||_gY==null||!e.touches||!e.touches[0])return;_gd=_gY-e.touches[0].clientY;if(Math.abs(_gd)>8)_gIgnoreClick=true;_gShow(_gd>0?_gd:0);},{passive:true});
+  function _gEnd(e){if(e&&e.stopPropagation)e.stopPropagation();if(!_gOn)return;_gOn=false;_gY=null;const d=_gd;_gd=0;
+    if(d>50){settingsPanel.style.transition='transform .18s ease,opacity .18s ease';settingsPanel.style.transform='translateY(-70px)';settingsPanel.style.opacity='0';setTimeout(function(){setSettingsOpen(false);_gClear(false);},170);} // しきい値超→閉じる
+    else{_gClear(true);} // 足りない→元に戻る
+  }
+  setGrab.addEventListener('touchend',_gEnd,{passive:true});
+  setGrab.addEventListener('touchcancel',_gEnd,{passive:true});
+  setGrab.addEventListener('click',function(){if(_gIgnoreClick){_gIgnoreClick=false;return;}setSettingsOpen(false);}); // タップで閉じる(ドラッグ後の合成clickは無視)
   setGrab.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setSettingsOpen(false);}});
 }
 // 開いている設定パネルを上スワイプで閉じる。touchmove中に上方向の移動を検知した時点で即閉じる＝ページスクロールにジェスチャを奪われる前に判定する（touchend/cancel待ちだと長尺パネルで取りこぼし、実機で閉じなかった）。横ドラッグ(スライダー)や下スワイプでは閉じない。
