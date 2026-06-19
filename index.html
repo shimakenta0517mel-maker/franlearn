@@ -153,6 +153,8 @@
   .tocfilter{position:sticky;top:0;background:var(--card);padding:3px 0 8px;margin-bottom:1px;z-index:2}
   .tocfilter input{width:100%;border:1px solid var(--line);border-radius:9px;padding:8px 12px;font-size:13px;background:#fff;color:var(--ink)}
   .tocfilter input:focus{outline:none;border-color:var(--bleu);box-shadow:0 0 0 3px rgba(0,85,164,.12)}
+  #searchBox:focus,.typein:focus,#numIn:focus{outline:none;border-color:var(--bleu);box-shadow:0 0 0 3px rgba(0,85,164,.12)}
+  body.dark #searchBox:focus,body.dark .typein:focus,body.dark #numIn:focus,body.dark .tocfilter input:focus{border-color:#7db4ff;box-shadow:0 0 0 3px rgba(125,180,255,.18)}
   body.dark .tocfilter input{background:#11151f;color:#e8ecf5;border-color:#2a3147}
   .tocempty{color:var(--muted);font-size:12.5px;padding:14px 2px;text-align:center}
   .tocsec{margin-top:9px}
