@@ -513,6 +513,10 @@
   .ctrlbtn.on{background:#fff;color:var(--bleu)}
   .settings{max-width:980px;margin:9px auto 0;background:rgba(255,255,255,.13);border-radius:12px;padding:11px 13px;display:none}
   .settings.open{display:block}
+  .setgrab{touch-action:none;-webkit-user-select:none;user-select:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;padding:1px 0 9px;margin-top:-2px}
+  .setgrabpill{width:42px;height:5px;border-radius:3px;background:rgba(255,255,255,.55)}
+  .setgrabtxt{font-size:10.5px;color:rgba(255,255,255,.82);letter-spacing:.02em}
+  .setgrab:active .setgrabpill{background:rgba(255,255,255,.85)}
   .setclosebtn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:12px;padding:11px;border:none;border-radius:9px;background:rgba(255,255,255,.20);color:#fff;font-size:14px;font-weight:700;cursor:pointer;transition:background .15s}
   .setclosebtn:hover{background:rgba(255,255,255,.30)}
   .setclosebtn .ic{width:18px;height:18px}
@@ -633,6 +637,7 @@
     <button id="offlineBtn" class="ctrlbtn" title="選択中の声(仏語)＋日本語の音声をまとめて端末に保存。オフライン/バックグラウンドで再生"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a1.1 1.1 0 0 1 1.1 1.1v7.07l1.84-1.84a1.1 1.1 0 1 1 1.56 1.56l-3.72 3.72a1.1 1.1 0 0 1-1.56 0l-3.72-3.72a1.1 1.1 0 1 1 1.56-1.56l1.84 1.84V4.1A1.1 1.1 0 0 1 12 3z"/><path d="M4.6 15.5a1.1 1.1 0 0 1 1.1 1.1v2.2h12.6v-2.2a1.1 1.1 0 0 1 2.2 0v3.3a1.1 1.1 0 0 1-1.1 1.1H4.6a1.1 1.1 0 0 1-1.1-1.1v-3.3a1.1 1.1 0 0 1 1.1-1.1z"/></svg> オフライン保存</button>
   </div>
   <div class="settings" id="settingsPanel">
+    <div class="setgrab" id="setGrab" role="button" tabindex="0" title="上にスワイプ、またはタップで設定を閉じる" aria-label="設定を閉じる"><span class="setgrabpill"></span><span class="setgrabtxt">▲ スワイプ／タップで閉じる</span></div>
     <div class="setgrid">
       <div class="setsec">🔊 音声</div>
       <div class="setrow"><span class="setlabel">🔊 音声タイプ</span>
@@ -11865,6 +11870,16 @@ if(setBtn)setBtn.onclick=()=>setSettingsOpen(!settingsPanel.classList.contains('
 setSettingsOpen(!!Number(ls('fl_setopen','0')));
 // パネル下部の「設定を閉じる」ボタン（スクロールで上部の⚙️が画面外でも確実に閉じられる）
 const setCloseBtn=document.getElementById('setCloseBtn');if(setCloseBtn)setCloseBtn.onclick=()=>setSettingsOpen(false);
+// パネル上部のつかみハンドル＝touch-action:noneでスクロールに奪われないので上スワイプを確実に検知できる（本文スワイプの実機取りこぼし対策）。タップでも閉じる。
+const setGrab=document.getElementById('setGrab');
+if(setGrab){
+  let _gY=null,_gMoved=false;
+  setGrab.addEventListener('touchstart',function(e){_gY=(e.touches&&e.touches[0])?e.touches[0].clientY:null;_gMoved=false;},{passive:true});
+  setGrab.addEventListener('touchmove',function(e){if(_gY!=null&&e.touches&&e.touches[0]){if(Math.abs(_gY-e.touches[0].clientY)>14)_gMoved=true;if(_gY-e.touches[0].clientY>20){_gY=null;setSettingsOpen(false);}}},{passive:true});
+  setGrab.addEventListener('touchend',function(){_gY=null;},{passive:true});
+  setGrab.addEventListener('click',function(){setSettingsOpen(false);}); // タップで閉じる
+  setGrab.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();setSettingsOpen(false);}});
+}
 // 開いている設定パネルを上スワイプで閉じる。touchmove中に上方向の移動を検知した時点で即閉じる＝ページスクロールにジェスチャを奪われる前に判定する（touchend/cancel待ちだと長尺パネルで取りこぼし、実機で閉じなかった）。横ドラッグ(スライダー)や下スワイプでは閉じない。
 if(settingsPanel){
   let _ssY=null,_ssX=null;
@@ -11875,7 +11890,7 @@ if(settingsPanel){
   settingsPanel.addEventListener('touchmove',function(e){
     if(_ssY==null||!e.touches||!e.touches[0])return;
     const dy=_ssY-e.touches[0].clientY, dx=Math.abs(e.touches[0].clientX-_ssX);
-    if(dy>45&&dy>dx){_ssY=null;setSettingsOpen(false);}   // 上スワイプを検知→即閉じる
+    if(dy>35&&dy>dx){_ssY=null;setSettingsOpen(false);}   // 上スワイプを検知→即閉じる
   },{passive:true});
   function _ssEnd(e){   // touchmoveが間に合わなかった端末向けの保険
     if(_ssY==null)return;
