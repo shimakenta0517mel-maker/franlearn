@@ -32,8 +32,11 @@ self.addEventListener('fetch', (e) => {
     || /\/audio\/index[^/]*\.json$/.test(url.pathname);
 
   if (netFirst) {
+    // cache:'no-cache' => always revalidate with the server (bypasses the browser HTTP cache /
+    // GitHub Pages' max-age=600), so a new index.html/sw.js reaches the user on the next reload
+    // instead of being stuck on a stale copy for up to 10 minutes. Falls back to cache offline.
     e.respondWith(
-      fetch(req).then((resp) => {
+      fetch(new Request(req.url, { cache: 'no-cache' })).then((resp) => {
         if (resp && resp.ok) { const cp = resp.clone(); caches.open(CACHE).then((c) => c.put(req, cp)); }
         return resp;
       }).catch(() => caches.match(req).then((hit) => hit || caches.match('./index.html')))
