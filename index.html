@@ -696,7 +696,7 @@
 
 <main>
   <section id="learnView">
-    <div class="searchrow"><div class="searchwrap"><span class="searchicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4" stroke-linecap="round"/></svg></span><input id="searchBox" type="search" placeholder="単語・意味・IPAで検索（全デッキ横断）" aria-label="単語・意味・IPAで検索（全デッキ横断）" autocomplete="off"><button type="button" id="searchClear" class="searchclear" aria-label="検索をクリア" hidden>✕</button></div></div>
+    <div class="searchrow"><div class="searchwrap"><span class="searchicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4" stroke-linecap="round"/></svg></span><input id="searchBox" type="search" placeholder="単語・意味・IPAで検索（全デッキ横断）" aria-label="単語・意味・IPAで検索（全デッキ横断）" autocomplete="off" autocapitalize="off" spellcheck="false"><button type="button" id="searchClear" class="searchclear" aria-label="検索をクリア" hidden>✕</button></div></div>
     <div class="hintbox" id="hintbox"><div class="hint" id="hint"></div><button type="button" class="hintclose" id="hintClose" aria-label="ヒントを閉じる" title="今後この操作ヒントを表示しない（設定の「表示」で再表示できます）">✕</button></div>
     <div class="learnplay" id="learnplay">
       <button id="lpBtn" class="bigplay" style="margin-top:0"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 連続再生</button>
@@ -12309,7 +12309,7 @@ document.body.insertBefore(tocPanel,document.getElementById('tabs'));
 if(tocBtn)tocBtn.onclick=function(){toggleToc();};
 function toggleToc(){statsPanel.classList.add('hide');if(tocPanel.classList.contains('hide')){buildToc();tocPanel.classList.remove('hide');}else tocPanel.classList.add('hide');}
 function buildToc(){
-  let h='<div class="tocfilter"><input type="search" id="tocFilter" placeholder="🔍 デッキ名でしぼり込み" aria-label="デッキ名でしぼり込み" autocomplete="off"></div><div class="tocempty" id="tocEmpty" style="display:none">該当するデッキがありません</div>';
+  let h='<div class="tocfilter"><input type="search" id="tocFilter" placeholder="🔍 デッキ名でしぼり込み" aria-label="デッキ名でしぼり込み" autocomplete="off" autocapitalize="off" spellcheck="false"></div><div class="tocempty" id="tocEmpty" style="display:none">該当するデッキがありません</div>';
   CATS.forEach(([id,label])=>{
     h+='<div class="tocsec"><div class="toch">'+(CAT_ICON[id]||'')+'<span>'+label+'</span></div><div class="tocchips">';
     if(id==='verb'){h+='<button class="chip" data-t="verb|">'+VERBS.length+'動詞・全時制</button>';}
