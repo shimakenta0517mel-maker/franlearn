@@ -72,6 +72,10 @@
   .tab.tabdone{border-color:var(--green-text)}
   body.dark .tabprog{background:rgba(255,255,255,.08)}
   body.dark .tab.tabdone{border-color:#2bb56a}
+  .tabcrown{display:inline-block;width:12px;height:12px;vertical-align:-1px;margin:0 1px 0 3px}
+  .tabcrown svg{width:100%;height:100%;display:block}
+  .tabcrown.gold{color:#e0a400}.tabcrown.silver{color:#9aa7b8}.tabcrown.bronze{color:#cd7f32}
+  .tab.active .tabcrown.gold{color:#ffd24d}.tab.active .tabcrown.silver{color:#eef3fb}.tab.active .tabcrown.bronze{color:#f0c49a}
   .barrow{max-width:980px;margin:9px auto 0;padding:0 14px;display:flex;gap:7px;flex-wrap:wrap;align-items:center}
   .barlabel{font-size:10px;color:var(--muted);font-weight:800;letter-spacing:.05em;margin-right:1px;display:inline-flex;align-items:center;opacity:.9;text-transform:uppercase}
   .barlabel.grp{margin-left:7px;padding-left:13px;border-left:1px solid var(--line)}
@@ -380,6 +384,19 @@
   .stat.s-streak::before{background:#e0670a}.stat.s-streak b{color:#e0670a}
   body.dark .stat.s-done b{color:#43c97e}body.dark .stat.s-review b{color:#ff7a6e}body.dark .stat.s-fav b{color:#ecc04a}body.dark .stat.s-streak b{color:#ff9a4d}
   .schart{display:flex;gap:8px;align-items:flex-end;justify-content:space-between;margin-top:12px;padding:0 4px}
+  .crownbox{margin-top:13px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .crownhd{font-weight:800;font-size:13px;display:flex;align-items:center;gap:6px;margin-bottom:9px}
+  .crownhd svg{width:18px;height:18px;color:#e0a400;flex:0 0 auto}
+  .crownrow{display:flex;gap:8px}
+  .crowntier{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 6px;border-radius:9px;font-size:12px;font-weight:700;background:rgba(20,30,60,.04)}
+  .crowntier svg{width:18px;height:18px;flex:0 0 auto}
+  .crowntier b{font-size:16px;font-variant-numeric:tabular-nums}
+  .crowntier.gold{color:#9a6b00}.crowntier.gold svg{color:#e0a400}
+  .crowntier.silver{color:#5f6b7d}.crowntier.silver svg{color:#9aa7b8}
+  .crowntier.bronze{color:#955424}.crowntier.bronze svg{color:#cd7f32}
+  .crownnote{font-size:10.5px;color:var(--muted);margin-top:8px;line-height:1.5}
+  body.dark .crowntier{background:rgba(255,255,255,.05)}
+  body.dark .crowntier.gold{color:#e7b53e}body.dark .crowntier.silver{color:#aab6c8}body.dark .crowntier.bronze{color:#d59561}
   .sbar{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
   .sbar i{display:block;width:70%;max-width:34px;background:linear-gradient(180deg,#3b7ddd,#0055A4);border-radius:6px 6px 2px 2px}
   .sbar span{font-size:9.5px;color:var(--muted)}
@@ -12181,6 +12198,10 @@ const MARKS={done:{label:I_CHECK+' 完璧',short:I_CHECK},review:{label:I_LOOP+'
 (function(){const oh=ls('fl_hidden','{}');let ch=false;for(const k in oh){if(!marks[k]){marks[k]='done';ch=true;}}if(ch)sv('fl_marks',marks);})();
 function markOf(key){return marks[key]||'';}
 function setMark(key,m){if(marks[key]===m)delete marks[key];else marks[key]=m;sv('fl_marks',marks);}
+/* ---- 習熟クラウン: 各デッキ(タブ)の「完璧」達成度を 銅(着手)→銀(半分)→金(全完璧) で可視化 ---- */
+const I_CROWN='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M5 16 3 5l5.5 4L12 4l3.5 5L21 5l-2 11zM5 19h14v2H5z"/></svg>';
+function crownTierPct(p){return p>=100?'gold':(p>=50?'silver':(p>0?'bronze':''));}
+function allCrowns(){const out={gold:0,silver:0,bronze:0};for(const cid in DECKS){if(cid==='verb')continue;const tabs=DECKS[cid].tabs;for(const k in tabs){const its=tabs[k].items;if(!its.length)continue;let dn=0;for(const it of its){if(marks[cid+'|'+k+'|'+it.w]==='done')dn++;}const t=crownTierPct(Math.round(dn/its.length*100));if(t)out[t]++;}}return out;}
 function isHidden(key){return markOf(key)==='done';}
 /* Anki式 間隔反復（SM-2: ease factor + 4段階評価） */
 let srs=ls('fl_srs','{}');
@@ -12427,6 +12448,7 @@ document.addEventListener('keydown',function(e){
 function buildStats(){
   let total=0;for(const cid in DECKS){const t=DECKS[cid].tabs;for(const k in t)total+=t[k].items.length;}
   let d=0,r=0,f=0;for(const k in marks){if(marks[k]==='done')d++;else if(marks[k]==='review')r++;else if(marks[k]==='fav')f++;}
+  const cr=allCrowns();
   let exp=0;for(const k in counts)exp+=counts[k];
   const days=[];for(let i=6;i>=0;i--){const dt=new Date();dt.setDate(dt.getDate()-i);const key=dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();days.push({label:(dt.getMonth()+1)+'/'+dt.getDate(),sec:timeData[key]||0});}
   const mx=Math.max(60,...days.map(x=>x.sec));
@@ -12443,6 +12465,13 @@ function buildStats(){
     '<div class="stat"><b>'+Math.floor(totalSec()/60)+'分</b><span>'+I_CLOCK+' 累計学習</span></div>'+
     '<div class="stat s-streak"><b>'+I_FLAME+streak()+'</b><span>連続学習日数</span></div>'+
     '</div>'+
+    '<div class="crownbox"><div class="crownhd">'+I_CROWN+' 習熟クラウン</div>'+
+    '<div class="crownrow">'+
+    '<span class="crowntier gold">'+I_CROWN+' 金 <b>'+cr.gold+'</b></span>'+
+    '<span class="crowntier silver">'+I_CROWN+' 銀 <b>'+cr.silver+'</b></span>'+
+    '<span class="crowntier bronze">'+I_CROWN+' 銅 <b>'+cr.bronze+'</b></span>'+
+    '</div>'+
+    '<div class="crownnote">デッキ（レベル/タブ）の完璧達成度：銅＝着手・銀＝半分・金＝全完璧。上のレベルタブにも段位が出ます。</div></div>'+
     '<div class="schart">'+bars+'</div>'+
     (wl?'<div class="toch" style="margin-top:13px">'+I_ALERT+' 苦手ランキング（タップで発音）</div><div class="weaklist">'+wl+'</div>':'')+
     (function(){
@@ -12508,10 +12537,11 @@ function buildTabs(){
     keys.forEach(k=>{
       const its=curTabs()[k].items;let dn=0;its.forEach(it=>{if(marks[cat+'|'+k+'|'+it.w]==='done')dn++;});
       const pct=its.length?Math.round(dn/its.length*100):0;
+      const _ct=crownTierPct(pct);const _cr=_ct?'<span class="tabcrown '+_ct+'" aria-hidden="true">'+I_CROWN+'</span>':'';
       const t=document.createElement('div');t.className='tab'+(k===current?' active':'')+(pct>=100?' tabdone':'');
       t.tabIndex=0;t.setAttribute('role','button');t.setAttribute('aria-label',k+' '+curTabs()[k].label);if(k===current)t.setAttribute('aria-current','true');
       t.title=curTabs()[k].label+'（完璧 '+pct+'%・'+dn+'/'+its.length+'）';
-      t.innerHTML=k+'<span class="lv">'+curTabs()[k].label+'</span><div class="tabprog"><i style="width:'+pct+'%"></i></div>';
+      t.innerHTML=k+_cr+'<span class="lv">'+curTabs()[k].label+'</span><div class="tabprog"><i style="width:'+pct+'%"></i></div>';
       t.onclick=()=>{current=k;posFilter='all';rangeSel='all';resetSearch();document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');buildRange();buildFilter();renderAll();saveNav();flashGrid();};
       tabsEl.appendChild(t);
     });
