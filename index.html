@@ -696,9 +696,9 @@
     <div class="setgrid">
       <div class="setsec">🔊 音声</div>
       <div class="setrow"><span class="setlabel">🔊 音声タイプ</span>
-        <select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">🎭 声優音声（高品質）</option><option value="online">🌐 オンライン音声</option><option value="auto">端末の音声</option></select></div>
+        <select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">声優音声（高品質）</option><option value="online">オンライン音声</option><option value="auto">端末の音声</option></select></div>
       <div class="setrow" id="genderRow"><span class="setlabel">🗣 声（仏語）</span>
-        <select id="voiceGender" title="声優音声の声（女性=Denise / 男性=Henri）"><option value="f">👩 女性（Denise）</option><option value="m">👨 男性（Henri）</option></select></div>
+        <select id="voiceGender" title="声優音声の声（女性=Denise / 男性=Henri）"><option value="f">女性（Denise）</option><option value="m">男性（Henri）</option></select></div>
       <div class="setsec">▶ 再生スピードと間隔</div>
       <div class="setrow setfull"><span class="setlabel">⏩ 速さ</span>
         <input type="range" id="rate" min="0.5" max="1.6" step="0.05" value="0.9"><span class="setval" id="rateval">0.90×</span></div>
@@ -13706,7 +13706,7 @@ function loadVoices(){
   if(fr.length===0){
     // 声優音声/オンライン音声なら端末の仏語音声は不要なので警告を出さない（端末の音声を選んだ時だけ）
     warn.style.display=(ttsMode==='auto')?'block':'none';
-    warn.innerHTML='⚠️ 端末にフランス語音声がありません。⚙️設定の「音声タイプ」を <b>🎭 声優音声（高品質）</b> にすると自然な発音で再生できます（推奨）。iPhoneは 設定→アクセシビリティ→読み上げコンテンツ→声→フランス語 で高品質版も追加できます。';
+    warn.innerHTML='⚠️ 端末にフランス語音声がありません。⚙️設定の「音声タイプ」を <b>声優音声（高品質）</b> にすると自然な発音で再生できます（推奨）。iPhoneは 設定→アクセシビリティ→読み上げコンテンツ→声→フランス語 で高品質版も追加できます。';
     voices.forEach(v=>addOpt(voiceSel,v)); frVoice=voices[0]||null;
   }else{
     warn.style.display='none';
