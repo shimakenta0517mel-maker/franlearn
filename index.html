@@ -15423,9 +15423,12 @@ async function nativeUrl(text,lang){const h=await sha16(cleanTTS(text));if(!h)re
   // 該当indexの読み込み完了を最大2.5秒待つ（初回タップ時に未ロードで機械音声へ固定されるのを防ぐ）
   const ready=(lang==='ja')?idxReady.ja:((voiceGender==='m')?idxReady.m:idxReady.f);
   try{await Promise.race([ready,new Promise(r=>setTimeout(r,2500))]);}catch(e){}
-  if(lang==='ja')return audioSetJa.has(h)?('audio/ja/'+h+'.mp3'):null;
-  if(voiceGender==='m')return audioSetM.has(h)?('audio/m/'+h+'.mp3'):null;
-  return audioSet.has(h)?('audio/'+h+'.mp3'):null;}
+  // indexが未ロード(size 0=取得失敗)なら「無い」と決めつけず楽観的にmp3を試す。
+  // 事前生成音声はカバー率100%なので、index取得の失敗だけで機械音声(=リエゾンが崩れる)へ
+  // 落ちるのを防ぐ。実際に404等で鳴らなければ playUrl 側で従来どおりフォールバックする。
+  if(lang==='ja')return (audioSetJa.size===0||audioSetJa.has(h))?('audio/ja/'+h+'.mp3'):null;
+  if(voiceGender==='m')return (audioSetM.size===0||audioSetM.has(h))?('audio/m/'+h+'.mp3'):null;
+  return (audioSet.size===0||audioSet.has(h))?('audio/'+h+'.mp3'):null;}
 function ttsURL(text,lang){const tl=(lang==='ja')?'ja':'fr-FR';return 'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&total=1&idx=0&textlen='+text.length+'&tl='+tl+'&q='+encodeURIComponent(text);}
 // 速さスライダーは仏語・日本語の両方に適用（高音質mp3はplaybackRateで反映）
 function rateFor(lang){return Math.max(0.5,Math.min(1.6,Number(rate.value)));}
@@ -15440,6 +15443,22 @@ function setMedia(title,sub){if(!('mediaSession' in navigator))return;try{naviga
 let curAudio=null,_curFin=null,_audioEl=null;
 // fin(ok): true=played ok, false=failed (caller may fall back), 'cancel'=interrupted (no fallback)
 function audioStop(){var f=_curFin;_curFin=null;if(curAudio){try{curAudio.pause();curAudio.src='';}catch(e){}curAudio.onended=curAudio.onerror=null;curAudio=null;}if(f)f('cancel');}
+// ===== iOS バックグラウンド再生のキープアライブ =====
+// クリップの合間も「無音を鳴らし続ける」ことでオーディオセッションを維持する。
+// これが無いと iOS は画面ロック時にページを停止し、setTimeout の間隔待ちが止まって
+// 「最初の1語で止まる」。無音はJSで生成するのでファイル追加もネットワークも不要
+// （＝オフライン保存をしなくてもストリーミングのままロック中に再生が続く）。
+let _ka=null;
+function _silentWav(sec){
+  const sr=8000,n=Math.round(sr*sec),b=new Uint8Array(44+n),dv=new DataView(b.buffer);
+  const w=(o,s)=>{for(let i=0;i<s.length;i++)b[o+i]=s.charCodeAt(i);};
+  w(0,'RIFF');dv.setUint32(4,36+n,true);w(8,'WAVE');w(12,'fmt ');dv.setUint32(16,16,true);
+  dv.setUint16(20,1,true);dv.setUint16(22,1,true);dv.setUint32(24,sr,true);dv.setUint32(28,sr,true);
+  dv.setUint16(32,1,true);dv.setUint16(34,8,true);w(36,'data');dv.setUint32(40,n,true);b.fill(128,44);
+  return URL.createObjectURL(new Blob([b],{type:'audio/wav'}));
+}
+function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
+function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 function playUrl(url,lang,btn){
   return new Promise(res=>{
     audioStop();
@@ -16207,7 +16226,7 @@ let lpToken=0, lpPlaying=false;
 async function lpPlay(){
   if(searchQ||isVerb())return;
   const arr=filtered();if(!arr.length)return;
-  const token=++lpToken;lpPlaying=true;lpBtn.innerHTML='<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg> 停止';
+  const token=++lpToken;lpPlaying=true;kaStart();lpBtn.innerHTML='<svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg> 停止';
   let i=0;
   while(true){
     if(token!==lpToken)return;
@@ -16232,7 +16251,7 @@ async function lpPlay(){
   }
   lpStop();
 }
-function lpStop(){lpToken++;lpPlaying=false;audioStop();if(synth)synth.cancel();if(lpBtn)lpBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 連続再生';document.querySelectorAll('.card.playing').forEach(x=>x.classList.remove('playing'));}
+function lpStop(){lpToken++;lpPlaying=false;audioStop();kaStop();if(synth)synth.cancel();if(lpBtn)lpBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 連続再生';document.querySelectorAll('.card.playing').forEach(x=>x.classList.remove('playing'));}
 lpBtn.onclick=()=>{if(lpPlaying)lpStop();else lpPlay();};
 
 /* ---------- GLOBAL SEARCH ---------- */
@@ -16465,7 +16484,7 @@ function hfShow(){
 function hfMarkUI(){const it=hfList[hfIdx];const m=it?markOf(it.k):'';document.querySelectorAll('[data-hm]').forEach(b=>b.classList.toggle('on',b.dataset.hm===m));}
 async function hfPlay(){
   if(!hfList.length)return;
-  const token=++hfToken;hfPlaying=true;hfplayBtn.innerHTML=SVG_PAUSE;
+  const token=++hfToken;hfPlaying=true;hfplayBtn.innerHTML=SVG_PAUSE;kaStart(); // 無音キープアライブ開始（ロック中も継続再生）
   while(hfIdx<hfList.length){
     if(token!==hfToken)return;
     const it=hfList[hfIdx];hfShow();bump(it.k);
@@ -16493,10 +16512,10 @@ async function hfPlay(){
     hfIdx++;
     if(hfIdx>=hfList.length&&hfloop.checked)hfIdx=0;
   }
-  hfPlaying=false;hfplayBtn.innerHTML=SVG_PLAY;hfstage.textContent='✓ 完了';
+  hfPlaying=false;kaStop();hfplayBtn.innerHTML=SVG_PLAY;hfstage.textContent='✓ 完了';
   if(hfIdx>=hfList.length)hfIdx=hfList.length-1;
 }
-function hfStop(){hfToken++;hfPlaying=false;audioStop();if(synth)synth.cancel();hfplayBtn.innerHTML=SVG_PLAY;hfstage.textContent='';}
+function hfStop(){hfToken++;hfPlaying=false;audioStop();kaStop();if(synth)synth.cancel();hfplayBtn.innerHTML=SVG_PLAY;hfstage.textContent='';}
 hfplayBtn.onclick=()=>{if(hfPlaying)hfStop();else hfPlay();};
 function hfDirUI(){
   const lbl=document.getElementById('hfDirLbl');if(lbl)lbl.textContent=(hfDir==='jp2fr'?'日→仏':'仏→日');
