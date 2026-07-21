@@ -730,6 +730,7 @@
       <div class="setrow"><span class="setlabel">端末の仏語音声</span><select id="voiceSel" aria-label="端末の仏語音声"></select></div>
       <div class="setrow"><span class="setlabel">端末の日本語音声</span><select id="voiceSelJa" aria-label="端末の日本語音声"></select></div>
       <p>「音声タイプ＝端末の音声」を選んだとき、またはネット不通で声優音声が使えないときに使う、お使いの端末内蔵の声です。声優音声を使う場合は変更不要です。</p>
+      <p id="setDiag" style="opacity:.75;font-variant-numeric:tabular-nums">診断: 読み込み中…</p>
     </details>
     <button type="button" id="setCloseBtn" class="setclosebtn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg> 設定を閉じる</button>
   </div>
@@ -15459,16 +15460,30 @@ function _silentWav(sec){
 }
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
-function playUrl(url,lang,btn){
+// 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
+const BUILD_ID='0621d';
+let _lastSrc='—';
+function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
+  e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
+setTimeout(setDiag,3000);
+// ギャップレス再生の要： 直前の待ち受けだけ解除し、pause()も src='' もしない。
+// 要素を止めるとiOSはロック中の再生再開を拒否するため、src の差し替えだけで繋ぐ。
+function _softSwitch(){var f=_curFin;_curFin=null;if(curAudio){curAudio.onended=curAudio.onerror=null;curAudio=null;}if(f)f('cancel');}
+// 間隔は「無音クリップを鳴らす」ことで埋める（setTimeoutを使わない＝ロック中も進む）
+const _silCache={};
+function _silUrl(sec){const k=Math.max(0.1,Math.min(3,Math.round(sec*10)/10));return _silCache[k]||(_silCache[k]=_silentWav(k));}
+function playGap(ms){return playUrl(_silUrl((ms||0)/1000),'fr',null,1);}
+function playUrl(url,lang,btn,rateOv){
   return new Promise(res=>{
-    audioStop();
-    const a=_audioEl||(_audioEl=new Audio());curAudio=a;a.preservesPitch=a.mozPreservesPitch=a.webkitPreservesPitch=true;a.playbackRate=rateFor(lang);a.preload='auto';
+    _softSwitch();
+    const a=_audioEl||(_audioEl=new Audio());curAudio=a;a.preservesPitch=a.mozPreservesPitch=a.webkitPreservesPitch=true;a.playbackRate=(rateOv||rateFor(lang));a.preload='auto';
     let done=false;
     const fin=ok=>{if(done)return;done=true;if(_curFin===fin)_curFin=null;if(btn)btn.classList.remove('on');if(curAudio===a)curAudio=null;a.onended=a.onerror=null;res(ok);};
     _curFin=fin;
     a.onended=()=>fin(true);
     a.onerror=()=>fin(false);
     if(btn){if(lastBtn)lastBtn.classList.remove('on');btn.classList.add('on');lastBtn=btn;}
+    if(url.indexOf('blob:')!==0){_lastSrc=(url.indexOf('audio/')===0)?'AI音声':(_isGoogle(url)?'Google音声':'その他');setDiag();}
     try{a.src=url;const p=a.play();if(p&&p.catch)p.catch(()=>fin(false));}catch(e){fin(false);}
     setTimeout(()=>{if(!done&&(a.paused||!a.currentTime))fin(false);},8000);
   });
@@ -15488,7 +15503,7 @@ function speak(text,btn){
   });
 }
 function webSpeak(text,lang,btn){
-  if(!synth)return;synth.cancel();
+  if(!synth)return;synth.cancel();_lastSrc='端末音声(機械)';setDiag();
   const u=new SpeechSynthesisUtterance(text);
   if(lang==='ja'){if(jaVoice){u.voice=jaVoice;u.lang=jaVoice.lang;}else u.lang='ja-JP';u.rate=1;}
   else{if(frVoice){u.voice=frVoice;u.lang=frVoice.lang;}else u.lang='fr-FR';u.rate=Number(rate.value);}
@@ -15499,7 +15514,7 @@ function webSpeak(text,lang,btn){
 // awaitable (used by hands-free / continuous play / numbers)
 function speakLang(text,lang){
   return new Promise(res=>{
-    audioStop();if(synth)synth.cancel();
+    _softSwitch();if(synth)synth.cancel();
     if(ttsMode==='auto'){webSpeakLang(text,lang).then(res);return;}
     if(lang==='fr')setMedia(text,'');
     resolveUrl(text,lang).then(url=>{
@@ -15513,6 +15528,7 @@ function speakLang(text,lang){
 function webSpeakLang(text,lang){
   return new Promise(res=>{
     if(!synth){res();return;}
+    _lastSrc='端末音声(機械)';setDiag();
     const u=new SpeechSynthesisUtterance(text);
     if(lang==='fr'){if(frVoice){u.voice=frVoice;u.lang=frVoice.lang;}else u.lang='fr-FR';u.rate=Number(rate.value);}
     else{if(jaVoice){u.voice=jaVoice;u.lang=jaVoice.lang;}else u.lang='ja-JP';u.rate=1;}
@@ -16244,7 +16260,7 @@ async function lpPlay(){
         await speakLang(steps[si][0],steps[si][1]);
         if(token!==lpToken)return;
         const last=(rep===itemRepeat-1&&si===steps.length-1);
-        await sleep(last?gapMs():gapInnerMs());
+        await playGap(last?gapMs():gapInnerMs()); // 無音再生で間隔を埋める（ロック中も進む）
       }
     }
     i++;
@@ -16505,7 +16521,7 @@ async function hfPlay(){
         await speakLang(steps[si][1],steps[si][2]);
         if(token!==hfToken)return;
         const last=(rep===itemRepeat-1&&si===steps.length-1);
-        await sleep(last?gapMs():gapInnerMs()); // 語内=音間スライダー / 次の単語へ=語間スライダー
+        await playGap(last?gapMs():gapInnerMs()); // 語内=音間スライダー / 次の単語へ=語間スライダー（無音再生で埋める＝ロック中も進む）
       }
     }
     if(token!==hfToken)return;
