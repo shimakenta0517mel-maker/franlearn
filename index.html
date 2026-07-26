@@ -178,6 +178,8 @@
   .dpgrp.open .dphd .chev{transform:rotate(90deg)}
   .dpbody{display:none;padding:2px 10px 11px;gap:6px;flex-wrap:wrap}
   .dpgrp.open .dpbody{display:flex}
+  .dpno{display:inline-block;min-width:30px;text-align:center;font-size:10px;font-weight:700;color:var(--bleu);background:rgba(0,85,164,.08);border-radius:6px;padding:1px 4px;font-variant-numeric:tabular-nums}
+  body.dark .dpno{color:#7db4ff;background:rgba(125,180,255,.12)}
   .pct{font-size:10px;color:var(--green-text);font-weight:800}
   .chip.fullchip{border-color:var(--green-text);color:var(--green-text)}
   .hfpreset{display:flex;gap:7px;justify-content:center;align-items:center;margin-top:13px;flex-wrap:wrap}
@@ -925,7 +927,7 @@ DECKS.delf={label:"DELF単語",tabs:{
   {w:"par rapport à",ipa:"[paʁ ʁapɔʁ a]",pos:"表現",jp:"〜に比べて",pri:1,ex:"Par rapport à hier, il fait froid.",exjp:"昨日に比べて寒いです。"},
   {w:"convaincre",ipa:"[kɔ̃vɛ̃kʁ]",pos:"動詞",jp:"説得する",ex:"Elle m'a convaincu.",exjp:"彼女に説得されました。"},
   {w:"avoir l'impression",ipa:"[avwaʁ lɛ̃pʁesjɔ̃]",pos:"表現",jp:"〜な気がする",pri:1,ex:"J'ai l'impression qu'il ment.",exjp:"彼は嘘をついている気がします。"},
-  {w:"de plus en plus",ipa:"[də ply zɑ̃ ply]",pos:"表現",jp:"ますます",pri:1,ex:"Il fait de plus en plus chaud.",exjp:"ますます暑くなります。"},
+  {w:"de plus en plus",ipa:"[də ply z‿ɑ̃ ply]",pos:"表現",jp:"ますます",pri:1,ex:"Il fait de plus en plus chaud.",exjp:"ますます暑くなります。"},
   {w:"quand même",ipa:"[kɑ̃ mɛm]",pos:"表現",jp:"それでも",pri:1,ex:"C'est cher, mais je le prends quand même.",exjp:"高いけど買います。"},
   {w:"un défi",ipa:"[œ̃ defi]",pos:"名詞",jp:"挑戦",ex:"C'est un vrai défi.",exjp:"本当の挑戦です。"},
   {w:"s'habituer à",ipa:"[sabitɥe a]",pos:"表現",jp:"〜に慣れる",ex:"Je m'habitue à la vie ici.",exjp:"ここの生活に慣れます。"},
@@ -1000,7 +1002,7 @@ DECKS.freq={label:"よく使うフレーズ",tabs:{
   {w:"Au revoir",ipa:"[o ʁəvwaʁ]",pos:"会話",jp:"さようなら",pri:1,ex:"Au revoir, à bientôt !",exjp:"さようなら、またね!"}
  ]},
  "A2":{label:"日常をまわす",items:[
-  {w:"Est-ce que vous avez… ?",ipa:"[ɛs kə vu zave]",pos:"会話",jp:"〜はありますか?",pri:1,ex:"Est-ce que vous avez ce modèle en bleu ?",exjp:"これの青はありますか?"},
+  {w:"Est-ce que vous avez… ?",ipa:"[ɛs kə vu z‿ave]",pos:"会話",jp:"〜はありますか?",pri:1,ex:"Est-ce que vous avez ce modèle en bleu ?",exjp:"これの青はありますか?"},
   {w:"Je voudrais…",ipa:"[ʒə vudʁɛ]",pos:"会話",jp:"〜が欲しいのですが",pri:1,ex:"Je voudrais un billet pour Lyon.",exjp:"リヨン行きを一枚。"},
   {w:"Ça me va",ipa:"[sa mə va]",pos:"会話",jp:"それでいいです",pri:1,ex:"Demain à midi ? Ça me va.",exjp:"明日昼? いいですよ。"},
   {w:"Qu'est-ce que ça veut dire ?",ipa:"[kɛs kə sa vø diʁ]",pos:"会話",jp:"どういう意味?",pri:1,ex:"Ce mot, qu'est-ce que ça veut dire ?",exjp:"この語、どういう意味?"},
@@ -1025,7 +1027,7 @@ DECKS.freq={label:"よく使うフレーズ",tabs:{
  ]},
  "B2":{label:"自然に話す",items:[
   {w:"Pour être honnête…",ipa:"[puʁ ɛtʁ ɔnɛt]",pos:"会話",jp:"正直に言うと…",pri:1,ex:"Pour être honnête, ça ne me plaît pas.",exjp:"正直、好きじゃない。"},
-  {w:"Ça n'a rien à voir",ipa:"[sa na ʁjɛ̃ a vwaʁ]",pos:"会話",jp:"全く関係ない",pri:1,ex:"Ça n'a rien à voir avec toi.",exjp:"君とは無関係だよ。"},
+  {w:"Ça n'a rien à voir",ipa:"[sa n‿a ʁjɛ̃ a vwaʁ]",pos:"会話",jp:"全く関係ない",pri:1,ex:"Ça n'a rien à voir avec toi.",exjp:"君とは無関係だよ。"},
   {w:"Il vaut mieux…",ipa:"[il vo mjø]",pos:"会話",jp:"〜した方がいい",pri:1,ex:"Il vaut mieux partir tôt.",exjp:"早く出た方がいい。"},
   {w:"Du coup",ipa:"[dy ku]",pos:"会話",jp:"だから(口語)",pri:1,ex:"Il pleuvait, du coup on est restés.",exjp:"雨だったから残った。"},
   {w:"Ça me dit quelque chose",ipa:"[sa mə di kɛlkə ʃoz]",pos:"会話",jp:"聞き覚えがある",ex:"Ce nom me dit quelque chose.",exjp:"その名前、聞き覚えが。"},
@@ -2381,7 +2383,7 @@ Object.assign(DECKS.theme.tabs,{
 });
 Object.assign(DECKS.theme.tabs,{
  "ことわざ":{label:"ことわざ",items:[
-  {w:"Petit à petit, l'oiseau fait son nid.",ipa:"[pəti a pəti lwazo fɛ sɔ̃ ni]",pos:"ことわざ",jp:"塵も積もれば山となる(少しずつ鳥は巣を作る)",pri:1,ex:"Continue à réviser chaque jour : petit à petit, l'oiseau fait son nid.",exjp:"毎日復習を続けて。塵も積もれば山となるよ。"},
+  {w:"Petit à petit, l'oiseau fait son nid.",ipa:"[pəti t‿a pəti lwazo fɛ sɔ̃ ni]",pos:"ことわざ",jp:"塵も積もれば山となる(少しずつ鳥は巣を作る)",pri:1,ex:"Continue à réviser chaque jour : petit à petit, l'oiseau fait son nid.",exjp:"毎日復習を続けて。塵も積もれば山となるよ。"},
   {w:"Mieux vaut tard que jamais.",ipa:"[mjø vo taʁ kə ʒamɛ]",pos:"ことわざ",jp:"遅くてもしないよりまし",pri:1,ex:"Il a enfin répondu à mon message. Mieux vaut tard que jamais !",exjp:"彼はやっとメッセージに返事をくれた。遅くてもしないよりましだね!"},
   {w:"Vouloir, c'est pouvoir.",ipa:"[vulwaʁ sɛ puvwaʁ]",pos:"ことわざ",jp:"為せば成る(意志あるところに道あり)",pri:1,ex:"Tu peux réussir ce concours. Vouloir, c'est pouvoir.",exjp:"君ならこの試験に受かるよ。為せば成るだ。"},
   {w:"C'est en forgeant qu'on devient forgeron.",ipa:"[sɛt‿ɑ̃ fɔʁʒɑ̃ kɔ̃ dəvjɛ̃ fɔʁʒəʁɔ̃]",pos:"ことわざ",jp:"習うより慣れろ(鍛冶をして鍛冶屋になる)",ex:"Ne crains pas les erreurs : c'est en forgeant qu'on devient forgeron.",exjp:"間違いを恐れないで。習うより慣れろだよ。"},
@@ -2475,10 +2477,10 @@ Object.assign(DECKS.theme.tabs,{
   {w:"Je vous le passe.",ipa:"[ʒə vu lə pas]",pos:"フレーズ",jp:"(電話を)おつなぎします",ex:"Monsieur Martin ? Un instant, je vous le passe.",exjp:"マルタンさんですか?少々お待ちを、おつなぎします。"},
   {w:"Pourrais-je parler à... ?",ipa:"[puʁɛʒ paʁle a]",pos:"フレーズ",jp:"〜とお話しできますか",pri:1,ex:"Bonjour, pourrais-je parler à Madame Dubois ?",exjp:"こんにちは、デュボワさんとお話しできますか?"},
   {w:"C'est à quel sujet ?",ipa:"[sɛ ta kɛl syʒɛ]",pos:"フレーズ",jp:"どのようなご用件ですか",ex:"Je vous écoute, c'est à quel sujet ?",exjp:"お伺いします、どのようなご用件でしょうか?"},
-  {w:"La ligne est occupée.",ipa:"[la liɲ ɛ tɔkype]",pos:"フレーズ",jp:"話し中です",ex:"Désolé, la ligne est occupée. Vous patientez ?",exjp:"申し訳ありません、話し中です。お待ちになりますか?"},
+  {w:"La ligne est occupée.",ipa:"[la liɲ ɛ t‿ɔkype]",pos:"フレーズ",jp:"話し中です",ex:"Désolé, la ligne est occupée. Vous patientez ?",exjp:"申し訳ありません、話し中です。お待ちになりますか?"},
   {w:"rappeler",ipa:"[ʁaple]",pos:"動詞",jp:"電話をかけ直す",pri:1,ex:"Je te rappelle dans cinq minutes.",exjp:"5分後にかけ直すね。"},
   {w:"laisser un message",ipa:"[lese œ̃ mesaʒ]",pos:"フレーズ",jp:"伝言を残す",pri:1,ex:"Vous voulez laisser un message ?",exjp:"伝言を残されますか?"},
-  {w:"Vous vous êtes trompé de numéro.",ipa:"[vu vu zɛt tʁɔ̃pe də nymeʁo]",pos:"フレーズ",jp:"番号をお間違えです",ex:"Je crois que vous vous êtes trompé de numéro.",exjp:"番号をお間違えだと思います。"},
+  {w:"Vous vous êtes trompé de numéro.",ipa:"[vu vu z‿ɛt tʁɔ̃pe də nymeʁo]",pos:"フレーズ",jp:"番号をお間違えです",ex:"Je crois que vous vous êtes trompé de numéro.",exjp:"番号をお間違えだと思います。"},
   {w:"Ça coupe.",ipa:"[sa kup]",pos:"フレーズ",jp:"(電波が悪くて)途切れる",ex:"Je t'entends mal, ça coupe ici.",exjp:"よく聞こえない、ここは電波が途切れるんだ。"},
   {w:"raccrocher",ipa:"[ʁakʁɔʃe]",pos:"動詞",jp:"電話を切る",ex:"Il m'a raccroché au nez !",exjp:"彼は一方的に電話を切ったんだ!"}
  ]},
@@ -2488,7 +2490,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"le permis de conduire",ipa:"[lə pɛʁmi də kɔ̃dɥiʁ]",pos:"名詞",jp:"運転免許証",pri:1,ex:"Il a eu son permis de conduire du premier coup.",exjp:"彼は一発で運転免許を取った。"},
   {w:"démarrer",ipa:"[demaʁe]",pos:"動詞",jp:"発進する、エンジンがかかる",pri:1,ex:"La voiture ne démarre pas ce matin.",exjp:"今朝は車のエンジンがかからない。"},
   {w:"freiner",ipa:"[fʁene]",pos:"動詞",jp:"ブレーキをかける",pri:1,ex:"Freine, le feu est rouge !",exjp:"ブレーキ踏んで、信号が赤だよ!"},
-  {w:"un embouteillage",ipa:"[œ̃ nɑ̃butɛjaʒ]",pos:"名詞",jp:"渋滞",pri:1,ex:"On est coincés dans un embouteillage.",exjp:"渋滞にはまってしまった。"},
+  {w:"un embouteillage",ipa:"[œ̃ n‿ɑ̃butɛjaʒ]",pos:"名詞",jp:"渋滞",pri:1,ex:"On est coincés dans un embouteillage.",exjp:"渋滞にはまってしまった。"},
   {w:"l'essence",ipa:"[lesɑ̃s]",pos:"名詞(女)",jp:"ガソリン",pri:1,ex:"Il faut prendre de l'essence avant l'autoroute.",exjp:"高速に乗る前にガソリンを入れないと。"},
   {w:"une station-service",ipa:"[yn stasjɔ̃ sɛʁvis]",pos:"名詞",jp:"ガソリンスタンド",ex:"La prochaine station-service est à dix kilomètres.",exjp:"次のガソリンスタンドは10キロ先です。"},
   {w:"un pneu",ipa:"[œ̃ pnø]",pos:"名詞",jp:"タイヤ",pri:1,ex:"On a un pneu crevé.",exjp:"タイヤがパンクした。"},
@@ -2502,7 +2504,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"la pollution",ipa:"[la pɔlysjɔ̃]",pos:"名詞",jp:"汚染、公害",pri:1,ex:"La pollution de l'air s'aggrave en ville.",exjp:"都市では大気汚染が悪化している。"},
   {w:"recycler",ipa:"[ʁəsikle]",pos:"動詞",jp:"リサイクルする",pri:1,ex:"Ici, on recycle le verre et le papier.",exjp:"ここではガラスと紙をリサイクルしています。"},
   {w:"le tri des déchets",ipa:"[lə tʁi de deʃɛ]",pos:"名詞",jp:"ゴミの分別",ex:"Le tri des déchets est obligatoire dans cet immeuble.",exjp:"このマンションではゴミの分別が義務です。"},
-  {w:"les énergies renouvelables",ipa:"[le zenɛʁʒi ʁənuvlabl]",pos:"名詞",jp:"再生可能エネルギー",pri:1,ex:"La France investit dans les énergies renouvelables.",exjp:"フランスは再生可能エネルギーに投資している。"},
+  {w:"les énergies renouvelables",ipa:"[le z‿enɛʁʒi ʁənuvlabl]",pos:"名詞",jp:"再生可能エネルギー",pri:1,ex:"La France investit dans les énergies renouvelables.",exjp:"フランスは再生可能エネルギーに投資している。"},
   {w:"une centrale nucléaire",ipa:"[yn sɑ̃tʁal nykleɛʁ]",pos:"名詞",jp:"原子力発電所",ex:"Une grande partie de l'électricité vient des centrales nucléaires.",exjp:"電力の大部分は原子力発電所から来ている。"},
   {w:"gaspiller",ipa:"[ɡaspije]",pos:"動詞",jp:"無駄遣いする、浪費する",pri:1,ex:"Il ne faut pas gaspiller l'eau.",exjp:"水を無駄にしてはいけません。"},
   {w:"l'empreinte carbone",ipa:"[lɑ̃pʁɛ̃t kaʁbɔn]",pos:"名詞(女)",jp:"カーボンフットプリント",ex:"Je voudrais réduire mon empreinte carbone.",exjp:"自分のカーボンフットプリントを減らしたい。"},
@@ -2520,7 +2522,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"Auriez-vous... ?",ipa:"[oʁje vu]",pos:"フレーズ",jp:"〜はございますか",ex:"Auriez-vous ce modèle en bleu ?",exjp:"このモデルの青はございますか?"},
   {w:"Serait-il possible de... ?",ipa:"[səʁɛ til pɔsibl də]",pos:"フレーズ",jp:"〜することは可能でしょうか",pri:1,ex:"Serait-il possible de changer ma réservation ?",exjp:"予約を変更することは可能でしょうか?"},
   {w:"Est-ce que ça vous dérangerait de... ?",ipa:"[ɛs kə sa vu deʁɑ̃ʒʁɛ də]",pos:"フレーズ",jp:"〜していただくのはご迷惑でしょうか",ex:"Est-ce que ça vous dérangerait de baisser un peu la musique ?",exjp:"音楽を少し小さくしていただくのはご迷惑でしょうか?"},
-  {w:"Ça ne vous ennuie pas si... ?",ipa:"[sa nə vu zɑ̃nɥi pa si]",pos:"フレーズ",jp:"〜してもかまいませんか",ex:"Ça ne vous ennuie pas si j'ouvre la fenêtre ?",exjp:"窓を開けてもかまいませんか?"},
+  {w:"Ça ne vous ennuie pas si... ?",ipa:"[sa nə vu z‿ɑ̃nɥi pa si]",pos:"フレーズ",jp:"〜してもかまいませんか",ex:"Ça ne vous ennuie pas si j'ouvre la fenêtre ?",exjp:"窓を開けてもかまいませんか?"},
   {w:"Je me demandais si...",ipa:"[ʒə mə dəmɑ̃dɛ si]",pos:"フレーズ",jp:"〜かなと思いまして(遠回しな依頼の前置き)",ex:"Je me demandais si vous auriez un peu de temps cette semaine.",exjp:"今週少しお時間があるかなと思いまして。"},
   {w:"Pourriez-vous me rendre un service ?",ipa:"[puʁje vu mə ʁɑ̃dʁ œ̃ sɛʁvis]",pos:"フレーズ",jp:"お願いしたいことがあるのですが",ex:"Pourriez-vous me rendre un service ? J'aurais besoin d'un coup de main.",exjp:"お願いしたいことがあるのですが。手を貸していただきたくて。"},
   {w:"Je vous serais reconnaissant de...",ipa:"[ʒə vu səʁɛ ʁəkɔnɛsɑ̃ də]",pos:"フレーズ",jp:"〜していただければ幸いです(書き言葉)",ex:"Je vous serais reconnaissant de me répondre avant vendredi.",exjp:"金曜日までにお返事いただければ幸いです。"},
@@ -2567,14 +2569,14 @@ Object.assign(DECKS.theme.tabs,{
   {w:"un matelas gonflable",ipa:"[œ̃ matla ɡɔ̃flabl]",pos:"名詞",jp:"エアマット",ex:"Le matelas gonflable s'est dégonflé pendant la nuit.",exjp:"夜の間にエアマットの空気が抜けた。"},
   {w:"une caravane",ipa:"[yn kaʁavan]",pos:"名詞",jp:"キャンピングトレーラー",ex:"Ils voyagent avec leur caravane tout l'été.",exjp:"彼らは夏の間ずっとトレーラーで旅をする。"},
   {w:"un camping-car",ipa:"[œ̃ kɑ̃piŋkaʁ]",pos:"名詞",jp:"キャンピングカー",ex:"On a loué un camping-car pour les vacances.",exjp:"休暇のためにキャンピングカーを借りた。"},
-  {w:"un emplacement",ipa:"[œ̃n ɑ̃plasmɑ̃]",pos:"名詞",jp:"(キャンプ場の)区画、サイト",ex:"On a réservé un emplacement ombragé.",exjp:"日陰のサイトを予約した。"},
+  {w:"un emplacement",ipa:"[œ̃n‿ɑ̃plasmɑ̃]",pos:"名詞",jp:"(キャンプ場の)区画、サイト",ex:"On a réservé un emplacement ombragé.",exjp:"日陰のサイトを予約した。"},
   {w:"en plein air",ipa:"[ɑ̃ plɛn ɛʁ]",pos:"表現",jp:"野外で、屋外で",pri:1,ex:"J'adore dormir en plein air.",exjp:"野外で寝るのが大好きだ。"}
  ]},
  "歴史":{label:"歴史",items:[
   {w:"l'histoire",ipa:"[listwaʁ]",pos:"名詞(女)",jp:"歴史",pri:1,ex:"L'histoire de France est passionnante.",exjp:"フランスの歴史はとても面白い。"},
   {w:"un roi",ipa:"[œ̃ ʁwa]",pos:"名詞",jp:"王",pri:1,ex:"Louis XIV était un roi très puissant.",exjp:"ルイ14世はとても強大な王だった。"},
   {w:"une reine",ipa:"[yn ʁɛn]",pos:"名詞",jp:"女王、王妃",pri:1,ex:"Marie-Antoinette était reine de France.",exjp:"マリー・アントワネットはフランスの王妃だった。"},
-  {w:"un empereur",ipa:"[œ̃n ɑ̃pʁœʁ]",pos:"名詞",jp:"皇帝",ex:"Napoléon est devenu empereur en 1804.",exjp:"ナポレオンは1804年に皇帝になった。"},
+  {w:"un empereur",ipa:"[œ̃n‿ɑ̃pʁœʁ]",pos:"名詞",jp:"皇帝",ex:"Napoléon est devenu empereur en 1804.",exjp:"ナポレオンは1804年に皇帝になった。"},
   {w:"la Révolution",ipa:"[la ʁevɔlysjɔ̃]",pos:"名詞",jp:"革命(特にフランス革命)",pri:1,ex:"La Révolution française a commencé en 1789.",exjp:"フランス革命は1789年に始まった。"},
   {w:"une guerre",ipa:"[yn ɡɛʁ]",pos:"名詞",jp:"戦争",pri:1,ex:"La Seconde Guerre mondiale a duré six ans.",exjp:"第二次世界大戦は6年続いた。"},
   {w:"la paix",ipa:"[la pɛ]",pos:"名詞",jp:"平和",pri:1,ex:"Le traité a ramené la paix en Europe.",exjp:"その条約はヨーロッパに平和を取り戻した。"},
@@ -2594,7 +2596,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"Je vous prie de m'excuser.",ipa:"[ʒə vu pʁi də mɛkskyze]",pos:"表現",jp:"お詫び申し上げます(フォーマル)",ex:"Je vous prie de m'excuser pour ce retard.",exjp:"遅れましたことをお詫び申し上げます。"},
   {w:"Je n'ai pas fait exprès.",ipa:"[ʒə ne pa fɛ ɛkspʁɛ]",pos:"表現",jp:"わざとではありません",pri:1,ex:"Pardon ! Je n'ai pas fait exprès de te bousculer.",exjp:"ごめん!わざとぶつかったんじゃないんだ。"},
   {w:"Ça ne se reproduira plus.",ipa:"[sa nə sə ʁəpʁɔdɥiʁa ply]",pos:"表現",jp:"二度としません",ex:"Je suis désolé, ça ne se reproduira plus.",exjp:"すみません、二度と起こしません。"},
-  {w:"Toutes mes excuses.",ipa:"[tut me zɛkskyz]",pos:"表現",jp:"心からお詫びします",ex:"Toutes mes excuses pour cette erreur.",exjp:"この間違いについて深くお詫びします。"},
+  {w:"Toutes mes excuses.",ipa:"[tut me z‿ɛkskyz]",pos:"表現",jp:"心からお詫びします",ex:"Toutes mes excuses pour cette erreur.",exjp:"この間違いについて深くお詫びします。"},
   {w:"Ne m'en veux pas.",ipa:"[nə mɑ̃ vø pa]",pos:"表現",jp:"怒らないで、悪く思わないで",ex:"Ne m'en veux pas, je ne pouvais vraiment pas venir.",exjp:"怒らないで、本当に来られなかったんだ。"},
   {w:"Ce n'est pas grave.",ipa:"[sə nɛ pa ɡʁav]",pos:"表現",jp:"大丈夫、気にしないで(謝罪への返答)",pri:1,ex:"Ne t'inquiète pas, ce n'est pas grave.",exjp:"心配しないで、大したことないよ。"}
  ]}
@@ -2610,15 +2612,15 @@ Object.assign(DECKS.theme.tabs,{
   {w:"Je ne sais pas comment te remercier.",ipa:"[ʒə nə sɛ pa kɔmɑ̃ tə ʁəmɛʁsje]",pos:"表現",jp:"何とお礼を言えばいいか",ex:"Tu m'as tellement aidé, je ne sais pas comment te remercier.",exjp:"すごく助けてもらって、何とお礼を言えばいいか分からないよ。"},
   {w:"Je te revaudrai ça.",ipa:"[ʒə tə ʁəvodʁe sa]",pos:"表現",jp:"この借りは必ず返すよ",ex:"Merci de m'avoir dépanné, je te revaudrai ça.",exjp:"助けてくれてありがとう、この借りは必ず返すよ。"},
   {w:"De rien.",ipa:"[də ʁjɛ̃]",pos:"表現",jp:"どういたしまして",pri:1,ex:"Merci ! — De rien, c'est normal.",exjp:"ありがとう!―どういたしまして、当然のことだよ。"},
-  {w:"Je vous en prie.",ipa:"[ʒə vu zɑ̃ pʁi]",pos:"表現",jp:"どういたしまして(丁寧)",pri:1,ex:"Merci beaucoup, madame. — Je vous en prie.",exjp:"どうもありがとうございます。―どういたしまして。"},
+  {w:"Je vous en prie.",ipa:"[ʒə vu z‿ɑ̃ pʁi]",pos:"表現",jp:"どういたしまして(丁寧)",pri:1,ex:"Merci beaucoup, madame. — Je vous en prie.",exjp:"どうもありがとうございます。―どういたしまして。"},
   {w:"Avec plaisir.",ipa:"[avɛk pleziʁ]",pos:"表現",jp:"喜んで、どういたしまして",ex:"Merci pour le café ! — Avec plaisir.",exjp:"コーヒーをありがとう!―どういたしまして。"},
   {w:"C'est moi qui vous remercie.",ipa:"[sɛ mwa ki vu ʁəmɛʁsi]",pos:"表現",jp:"こちらこそありがとうございます",ex:"Merci pour votre visite. — C'est moi qui vous remercie.",exjp:"ご来店ありがとうございます。―こちらこそありがとうございます。"}
  ]},
  "写真":{label:"写真",items:[
   {w:"une photo",ipa:"[yn fɔto]",pos:"名詞",jp:"写真",pri:1,ex:"J'ai pris beaucoup de photos pendant le voyage.",exjp:"旅行中にたくさん写真を撮った。"},
-  {w:"un appareil photo",ipa:"[œ̃n apaʁɛj fɔto]",pos:"名詞",jp:"カメラ",pri:1,ex:"J'ai acheté un nouvel appareil photo.",exjp:"新しいカメラを買った。"},
+  {w:"un appareil photo",ipa:"[œ̃n‿apaʁɛj fɔto]",pos:"名詞",jp:"カメラ",pri:1,ex:"J'ai acheté un nouvel appareil photo.",exjp:"新しいカメラを買った。"},
   {w:"prendre en photo",ipa:"[pʁɑ̃dʁ ɑ̃ fɔto]",pos:"表現",jp:"~の写真を撮る",pri:1,ex:"Vous pouvez nous prendre en photo, s'il vous plaît ?",exjp:"私たちの写真を撮っていただけますか?"},
-  {w:"un objectif",ipa:"[œ̃n ɔbʒɛktif]",pos:"名詞",jp:"レンズ",ex:"Cet objectif est parfait pour les portraits.",exjp:"このレンズはポートレートに最適だ。"},
+  {w:"un objectif",ipa:"[œ̃n‿ɔbʒɛktif]",pos:"名詞",jp:"レンズ",ex:"Cet objectif est parfait pour les portraits.",exjp:"このレンズはポートレートに最適だ。"},
   {w:"flou",ipa:"[flu]",pos:"形容詞",jp:"ぼやけた、ピンぼけの(男性形)",ex:"Ce souvenir est un peu flou.",exjp:"この記憶は少しぼんやりしている。"},{w:"floue",ipa:"[flu]",pos:"形容詞",jp:"ぼやけた、ピンぼけの(女性形)",ex:"La frontière entre les deux est floue.",exjp:"両者の境界は曖昧だ。"},
   {w:"net",ipa:"[nɛt]",pos:"形容詞",jp:"鮮明な、ピントの合った(男性形)",ex:"Le contour du dessin est bien net.",exjp:"絵の輪郭はくっきりしている。"},{w:"nette",ipa:"[nɛt]",pos:"形容詞",jp:"鮮明な、ピントの合った(女性形)",ex:"L'écriture est nette et lisible.",exjp:"字は鮮明で読みやすい。"},
   {w:"le flash",ipa:"[lə flaʃ]",pos:"名詞",jp:"フラッシュ",ex:"Le flash est interdit dans le musée.",exjp:"美術館内ではフラッシュは禁止です。"},
@@ -2626,7 +2628,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"la lumière",ipa:"[la lymjɛʁ]",pos:"名詞",jp:"光",pri:1,ex:"La lumière du matin est idéale pour photographier.",exjp:"朝の光は写真撮影に理想的だ。"},
   {w:"agrandir",ipa:"[aɡʁɑ̃diʁ]",pos:"動詞",jp:"拡大する、引き伸ばす",ex:"Je voudrais faire agrandir cette photo.",exjp:"この写真を引き伸ばしたいのですが。"},
   {w:"développer",ipa:"[devlɔpe]",pos:"動詞",jp:"現像する",ex:"Je fais développer mes pellicules dans cette boutique.",exjp:"この店でフィルムを現像してもらっている。"},
-  {w:"un album photo",ipa:"[œ̃n albɔm fɔto]",pos:"名詞",jp:"フォトアルバム",ex:"Ma grand-mère garde tous ses albums photos.",exjp:"祖母はアルバムを全部とってある。"}
+  {w:"un album photo",ipa:"[œ̃n‿albɔm fɔto]",pos:"名詞",jp:"フォトアルバム",ex:"Ma grand-mère garde tous ses albums photos.",exjp:"祖母はアルバムを全部とってある。"}
  ]},
  "家電":{label:"家電",items:[
   {w:"un réfrigérateur",ipa:"[œ̃ ʁefʁiʒeʁatœʁ]",pos:"名詞",jp:"冷蔵庫(口語: un frigo)",pri:1,ex:"Mets le lait au frigo, s'il te plaît.",exjp:"牛乳を冷蔵庫に入れておいて。"},
@@ -2634,7 +2636,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"un lave-vaisselle",ipa:"[œ̃ lavvɛsɛl]",pos:"名詞",jp:"食器洗い機",ex:"Tu peux vider le lave-vaisselle ?",exjp:"食洗機の食器を出してくれる?"},
   {w:"un four",ipa:"[œ̃ fuʁ]",pos:"名詞",jp:"オーブン",pri:1,ex:"Préchauffez le four à 180 degrés.",exjp:"オーブンを180度に予熱してください。"},
   {w:"un micro-ondes",ipa:"[œ̃ mikʁoɔ̃d]",pos:"名詞",jp:"電子レンジ",pri:1,ex:"Réchauffe la soupe au micro-ondes.",exjp:"スープを電子レンジで温めて。"},
-  {w:"un aspirateur",ipa:"[œ̃n aspiʁatœʁ]",pos:"名詞",jp:"掃除機",pri:1,ex:"Je passe l'aspirateur tous les samedis.",exjp:"毎週土曜日に掃除機をかける。"},
+  {w:"un aspirateur",ipa:"[œ̃n‿aspiʁatœʁ]",pos:"名詞",jp:"掃除機",pri:1,ex:"Je passe l'aspirateur tous les samedis.",exjp:"毎週土曜日に掃除機をかける。"},
   {w:"un sèche-cheveux",ipa:"[œ̃ sɛʃ ʃəvø]",pos:"名詞",jp:"ドライヤー",ex:"Il y a un sèche-cheveux dans la salle de bain ?",exjp:"浴室にドライヤーはありますか?"},
   {w:"un grille-pain",ipa:"[œ̃ ɡʁij pɛ̃]",pos:"名詞",jp:"トースター",ex:"Le pain est resté coincé dans le grille-pain.",exjp:"パンがトースターに詰まってしまった。"},
   {w:"une bouilloire",ipa:"[yn bujwaʁ]",pos:"名詞",jp:"電気ケトル、やかん",ex:"Je mets la bouilloire en marche pour le thé.",exjp:"お茶のためにケトルのスイッチを入れる。"},
@@ -3572,7 +3574,7 @@ DECKS.scene.tabs["レッスン・習い事"]={label:"レッスン・習い事",i
  {w:"Je n'ai pas compris cet exercice.",ipa:"[ʒə ne pa kɔ̃pʁi sɛt‿ɛɡzɛʁsis]",pos:"会話",jp:"この問題が分かりませんでした",pri:1,ex:"Désolé, je n'ai pas compris cet exercice.",exjp:"ごめんなさい、この問題が分かりません。"},
  {w:"J'ai fait mes devoirs.",ipa:"[ʒe fɛ me dəvwaʁ]",pos:"会話",jp:"宿題をやってきました",pri:1,ex:"Cette fois, j'ai fait mes devoirs.",exjp:"今回は宿題をやってきました。"},
  {w:"Est-ce qu'il y a un examen ?",ipa:"[ɛs kil i a œ̃n‿ɛɡzamɛ̃]",pos:"会話",jp:"試験はありますか?",ex:"À la fin du cours, est-ce qu'il y a un examen ?",exjp:"コースの最後に試験はありますか?"},
- {w:"Je progresse petit à petit.",ipa:"[ʒə pʁɔɡʁɛs pti a pti]",pos:"会話",jp:"少しずつ上達しています",pri:1,ex:"C'est dur mais je progresse petit à petit.",exjp:"難しいけど少しずつ上達してる。"},
+ {w:"Je progresse petit à petit.",ipa:"[ʒə pʁɔɡʁɛs pəti t‿a pəti]",pos:"会話",jp:"少しずつ上達しています",pri:1,ex:"C'est dur mais je progresse petit à petit.",exjp:"難しいけど少しずつ上達してる。"},
  {w:"On fait quoi la semaine prochaine ?",ipa:"[ɔ̃ fɛ kwa la səmɛn pʁɔʃɛn]",pos:"会話",jp:"来週は何をしますか?",ex:"On fait quoi la semaine prochaine ?",exjp:"来週は何をやる?"},
  {w:"Merci pour votre patience.",ipa:"[mɛʁsi puʁ vɔtʁ pasjɑ̃s]",pos:"会話",jp:"根気強く教えてくれてありがとう",ex:"Merci pour votre patience, j'apprends beaucoup.",exjp:"根気強く教えてくれて感謝、よく学べます。"},
  {w:"Vous avez un exemple ?",ipa:"[vuz‿ave œ̃n‿ɛɡzɑ̃pl]",pos:"会話",jp:"例を挙げてもらえますか?",pri:1,ex:"Pour mieux comprendre, vous avez un exemple ?",exjp:"理解のために例を挙げてもらえますか?"}
@@ -5387,7 +5389,7 @@ DECKS.theme.tabs["とっさのひとこと"]={label:"とっさのひとこと",i
 DECKS.theme.tabs["便利なひとこと2"]={label:"便利なひとこと2",items:[
  {w:"Ça dépend.",ipa:"[sa depɑ̃]",pos:"表現",jp:"場合による",pri:1,ex:"Ça dépend du jour.",exjp:"日によるね。"},
  {w:"Pas du tout.",ipa:"[pa dy tu]",pos:"表現",jp:"全然(違う)",pri:1,ex:"Tu es fâché ? Pas du tout.",exjp:"怒ってる?全然。"},
- {w:"Plus ou moins.",ipa:"[ply zu mwɛ̃]",pos:"表現",jp:"まあまあ・多少は",ex:"Tu as fini ? Plus ou moins.",exjp:"終わった?まあまあね。"},
+ {w:"Plus ou moins.",ipa:"[ply z‿u mwɛ̃]",pos:"表現",jp:"まあまあ・多少は",ex:"Tu as fini ? Plus ou moins.",exjp:"終わった?まあまあね。"},
  {w:"À peu près.",ipa:"[a pø pʁɛ]",pos:"表現",jp:"だいたい",pri:1,ex:"C'est à peu près ça.",exjp:"だいたいそんな感じ。"},
  {w:"En gros.",ipa:"[ɑ̃ ɡʁo]",pos:"表現",jp:"ざっくり言うと",ex:"En gros, c'est ça.",exjp:"ざっくり言えばそう。"},
  {w:"Justement.",ipa:"[ʒystəmɑ̃]",pos:"表現",jp:"ちょうど・まさに",ex:"Justement, j'allais t'appeler.",exjp:"ちょうど電話しようとしてた。"},
@@ -5417,7 +5419,7 @@ DECKS.theme.tabs["驚き・感心の表現"]={label:"驚き・感心の表現",i
  {w:"Quelle chance !",ipa:"[kɛl ʃɑ̃s]",pos:"表現",jp:"運がいい!",pri:1,ex:"Tu as gagné ? Quelle chance !",exjp:"当たったの?運がいいね!"},
  {w:"Pas mal !",ipa:"[pa mal]",pos:"表現",jp:"なかなかいい!",pri:1,ex:"Pas mal, ton dessin !",exjp:"なかなかいいね、その絵!"},
  {w:"Trop bien !",ipa:"[tʁo bjɛ̃]",pos:"表現",jp:"すごくいい!",pri:1,ex:"Trop bien, ces vacances !",exjp:"最高だね、この休暇!"},
- {w:"Je n'en crois pas mes yeux.",ipa:"[ʒə nɑ̃ kʁwa pa me zjø]",pos:"表現",jp:"目を疑うよ",ex:"Je n'en crois pas mes yeux !",exjp:"目を疑うよ!"},
+ {w:"Je n'en crois pas mes yeux.",ipa:"[ʒə nɑ̃ kʁwa pa me z‿jø]",pos:"表現",jp:"目を疑うよ",ex:"Je n'en crois pas mes yeux !",exjp:"目を疑うよ!"},
  {w:"Bravo !",ipa:"[bʁavo]",pos:"表現",jp:"よくやった!",pri:1,ex:"Bravo, c'est mérité !",exjp:"よくやった、当然の結果!"}
 ]};
 DECKS.theme.tabs["怒り・不満の表現"]={label:"怒り・不満の表現",items:[
@@ -5634,7 +5636,7 @@ DECKS.scene.tabs["スポーツ観戦・応援"]={label:"スポーツ観戦・応
 DECKS.scene.tabs["チケット売り場"]={label:"チケット売り場",items:[
  {w:"Deux billets, s'il vous plaît.",ipa:"[dø bijɛ sil vu plɛ]",pos:"会話",jp:"チケット2枚お願いします",pri:1,ex:"Deux billets pour l'expo, s'il vous plaît.",exjp:"展覧会のチケット2枚お願いします。"},
  {w:"Il y a un tarif réduit ?",ipa:"[il i a œ̃ taʁif ʁedɥi]",pos:"会話",jp:"割引料金はありますか?",ex:"Pour les étudiants, il y a un tarif réduit ?",exjp:"学生割引はありますか?"},
- {w:"C'est gratuit pour les enfants ?",ipa:"[sɛ ɡʁatɥi puʁ le zɑ̃fɑ̃]",pos:"会話",jp:"子供は無料ですか?",ex:"C'est gratuit pour les enfants ?",exjp:"子供は無料ですか?"},
+ {w:"C'est gratuit pour les enfants ?",ipa:"[sɛ ɡʁatɥi puʁ le z‿ɑ̃fɑ̃]",pos:"会話",jp:"子供は無料ですか?",ex:"C'est gratuit pour les enfants ?",exjp:"子供は無料ですか?"},
  {w:"À quelle heure ça ferme ?",ipa:"[a kɛl œʁ sa fɛʁm]",pos:"会話",jp:"何時に閉まりますか?",pri:1,ex:"Le musée, à quelle heure ça ferme ?",exjp:"美術館は何時に閉まりますか?"},
  {w:"Il reste des places ?",ipa:"[il ʁɛst de plas]",pos:"会話",jp:"席はまだありますか?",ex:"Pour ce soir, il reste des places ?",exjp:"今夜の分、席はまだありますか?"},
  {w:"Je peux réserver en ligne ?",ipa:"[ʒə pø ʁezɛʁve ɑ̃ liɲ]",pos:"会話",jp:"ネットで予約できますか?",ex:"Je peux réserver en ligne ?",exjp:"オンラインで予約できますか?"},
@@ -5953,7 +5955,7 @@ DECKS.theme.tabs["メールの定型表現"]={label:"メールの定型表現",i
  {w:"Je reste à votre disposition.",ipa:"[ʒə ʁɛst a vɔtʁ dispozisjɔ̃]",pos:"表現",jp:"何なりとお申し付けを",pri:1,ex:"Je reste à votre disposition.",exjp:"何なりとお申し付けください。"},
  {w:"Dans l'attente de votre réponse…",ipa:"[dɑ̃ latɑ̃t də vɔtʁ ʁepɔ̃s]",pos:"表現",jp:"お返事をお待ちしております",ex:"Dans l'attente de votre réponse.",exjp:"お返事をお待ちしております。"},
  {w:"Cordialement,",ipa:"[kɔʁdjalmɑ̃]",pos:"表現",jp:"よろしくお願いします(結び)",pri:1,ex:"Cordialement, Yuki Tanaka.",exjp:"よろしくお願いします。田中ユキ"},
- {w:"Bien à vous,",ipa:"[bjɛ̃ a vu]",pos:"表現",jp:"敬具(やや親しめ)",ex:"Bien à vous, à bientôt.",exjp:"それでは、また。"},
+ {w:"Bien à vous,",ipa:"[bjɛ̃ n‿a vu]",pos:"表現",jp:"敬具(やや親しめ)",ex:"Bien à vous, à bientôt.",exjp:"それでは、また。"},
  {w:"Je vous prie d'agréer mes salutations.",ipa:"[ʒə vu pʁi daɡʁee me salytasjɔ̃]",pos:"表現",jp:"敬具(最も丁寧)",ex:"Je vous prie d'agréer mes salutations distinguées.",exjp:"敬具(最も丁寧な結び)。"},
  {w:"Merci d'avance.",ipa:"[mɛʁsi davɑ̃s]",pos:"表現",jp:"よろしくお願いします(先に)",pri:1,ex:"Merci d'avance pour votre aide.",exjp:"ご協力よろしくお願いします。"},
  {w:"N'hésitez pas à me contacter.",ipa:"[nezite pa a mə kɔ̃takte]",pos:"表現",jp:"ご遠慮なくご連絡を",ex:"N'hésitez pas à me contacter.",exjp:"ご遠慮なくご連絡ください。"},
@@ -6002,14 +6004,14 @@ DECKS.theme.tabs["ことわざ・名言2"]={label:"ことわざ・名言2",items
  {w:"Mieux vaut tard que jamais.",ipa:"[mjø vo taʁ kə ʒamɛ]",pos:"ことわざ",jp:"遅くてもやらないよりまし",pri:1,ex:"Mieux vaut tard que jamais, te voilà !",exjp:"遅くても来ないよりまし、来たね!"},
  {w:"L'habit ne fait pas le moine.",ipa:"[labi nə fɛ pa lə mwan]",pos:"ことわざ",jp:"人は見かけによらぬもの",ex:"Ne juge pas : l'habit ne fait pas le moine.",exjp:"見かけで判断するな。"},
  {w:"Qui ne risque rien n'a rien.",ipa:"[ki nə ʁisk ʁjɛ̃ na ʁjɛ̃]",pos:"ことわざ",jp:"虎穴に入らずんば虎子を得ず",ex:"Tente ta chance : qui ne risque rien n'a rien.",exjp:"挑戦しろ、リスクなくして得るものなし。"},
- {w:"Petit à petit, l'oiseau fait son nid.",ipa:"[pti a pti lwazo fɛ sɔ̃ ni]",pos:"ことわざ",jp:"少しずつ事は成る",ex:"Petit à petit, l'oiseau fait son nid.",exjp:"少しずつ積み重ねれば成る。"},
+ {w:"Petit à petit, l'oiseau fait son nid.",ipa:"[pəti t‿a pəti lwazo fɛ sɔ̃ ni]",pos:"ことわざ",jp:"少しずつ事は成る",ex:"Petit à petit, l'oiseau fait son nid.",exjp:"少しずつ積み重ねれば成る。"},
  {w:"C'est en forgeant qu'on devient forgeron.",ipa:"[sɛt‿ɑ̃ fɔʁʒɑ̃ kɔ̃ dəvjɛ̃ fɔʁʒəʁɔ̃]",pos:"ことわざ",jp:"習うより慣れろ",ex:"Continue : c'est en forgeant qu'on devient forgeron.",exjp:"続けて、習うより慣れろだ。"},
  {w:"Tel père, tel fils.",ipa:"[tɛl pɛʁ tɛl fis]",pos:"ことわざ",jp:"蛙の子は蛙",ex:"Comme son père : tel père, tel fils.",exjp:"父親そっくり、蛙の子は蛙。"},
  {w:"Après la pluie, le beau temps.",ipa:"[apʁɛ la plɥi lə bo tɑ̃]",pos:"ことわざ",jp:"雨降って地固まる",pri:1,ex:"Courage, après la pluie le beau temps.",exjp:"元気出して、苦あれば楽あり。"},
  {w:"Il ne faut pas vendre la peau de l'ours.",ipa:"[il nə fo pa vɑ̃dʁ la po də luʁs]",pos:"ことわざ",jp:"取らぬ狸の皮算用",ex:"Attends : ne vends pas la peau de l'ours.",exjp:"待って、捕らぬ狸の皮算用だよ。"},
- {w:"Les murs ont des oreilles.",ipa:"[le myʁ ɔ̃ de zɔʁɛj]",pos:"ことわざ",jp:"壁に耳あり",ex:"Chut, les murs ont des oreilles.",exjp:"しっ、壁に耳ありだよ。"},
+ {w:"Les murs ont des oreilles.",ipa:"[le myʁ ɔ̃ de z‿ɔʁɛj]",pos:"ことわざ",jp:"壁に耳あり",ex:"Chut, les murs ont des oreilles.",exjp:"しっ、壁に耳ありだよ。"},
  {w:"La nuit porte conseil.",ipa:"[la nɥi pɔʁt kɔ̃sɛj]",pos:"ことわざ",jp:"一晩寝て考えよ",ex:"Attends demain, la nuit porte conseil.",exjp:"明日まで待って、一晩寝て考えよう。"},
- {w:"Loin des yeux, loin du cœur.",ipa:"[lwɛ̃ de zjø lwɛ̃ dy kœʁ]",pos:"ことわざ",jp:"去る者は日々に疎し",ex:"Loin des yeux, loin du cœur, dit-on.",exjp:"会わなければ心も離れる、と言うね。"},
+ {w:"Loin des yeux, loin du cœur.",ipa:"[lwɛ̃ de z‿jø lwɛ̃ dy kœʁ]",pos:"ことわざ",jp:"去る者は日々に疎し",ex:"Loin des yeux, loin du cœur, dit-on.",exjp:"会わなければ心も離れる、と言うね。"},
  {w:"Qui vivra verra.",ipa:"[ki vivʁa veʁa]",pos:"ことわざ",jp:"今に分かる・なるようになる",ex:"Qui vivra verra, patience.",exjp:"今に分かるさ、待とう。"},
  {w:"Vouloir, c'est pouvoir.",ipa:"[vulwaʁ sɛ puvwaʁ]",pos:"ことわざ",jp:"為せば成る",pri:1,ex:"Crois en toi : vouloir, c'est pouvoir.",exjp:"自分を信じて、為せば成る。"},
  {w:"Mieux vaut prévenir que guérir.",ipa:"[mjø vo pʁevniʁ kə ɡeʁiʁ]",pos:"ことわざ",jp:"転ばぬ先の杖",ex:"Mieux vaut prévenir que guérir.",exjp:"治すより防ぐ方がよい。"},
@@ -9214,7 +9216,7 @@ DECKS.theme.tabs["法律・裁判"]={label:"法律・裁判",items:[
 DECKS.theme.tabs["恋愛・カップル"]={label:"恋愛・カップル",items:[
  {w:"l'amour",ipa:"[lamuʁ]",pos:"名詞",jp:"愛",pri:1,ex:"tomber amoureux par amour.",exjp:"愛によって恋に落ちる。"},
  {w:"tomber amoureux",ipa:"[tɔ̃be amuʁø]",pos:"表現",jp:"恋に落ちる",pri:1,ex:"tomber amoureux au premier regard.",exjp:"一目で恋に落ちる。"},
- {w:"un petit ami",ipa:"[œ̃ pəti ami]",pos:"名詞",jp:"彼氏",pri:1,ex:"présenter son petit ami.",exjp:"彼氏を紹介する。"},
+ {w:"un petit ami",ipa:"[œ̃ pəti t‿ami]",pos:"名詞",jp:"彼氏",pri:1,ex:"présenter son petit ami.",exjp:"彼氏を紹介する。"},
  {w:"une petite amie",ipa:"[yn pətit‿ami]",pos:"名詞",jp:"彼女",pri:1,ex:"sortir avec sa petite amie.",exjp:"彼女とデートする。"},
  {w:"un couple",ipa:"[œ̃ kupl]",pos:"名詞",jp:"カップル・夫婦",pri:1,ex:"un couple heureux.",exjp:"幸せなカップル。"},
  {w:"un rendez-vous",ipa:"[œ̃ ʁɑ̃devu]",pos:"名詞",jp:"デート・約束",pri:1,ex:"un premier rendez-vous.",exjp:"初デート。"},
@@ -9829,7 +9831,7 @@ DECKS.scene.tabs["職業相談・ハローワークで"]={label:"職業相談・
  {w:"Je cherche du travail.",ipa:"[ʒə ʃɛʁʃ dy tʁavaj]",pos:"会話",jp:"仕事を探しています",pri:1,ex:"Bonjour, je cherche du travail.",exjp:"こんにちは、仕事を探しています。"},
  {w:"Je suis au chômage.",ipa:"[ʒə sɥiz‿o ʃomaʒ]",pos:"会話",jp:"失業中です",ex:"Depuis trois mois, je suis au chômage.",exjp:"3か月前から失業中です。"},
  {w:"Voici mon CV.",ipa:"[vwasi mɔ̃ se ve]",pos:"会話",jp:"履歴書です",ex:"Voici mon CV et ma lettre de motivation.",exjp:"履歴書と志望動機書です。"},
- {w:"Quelles offres avez-vous ?",ipa:"[kɛl ɔfʁ ave vu]",pos:"会話",jp:"求人はありますか?",ex:"Dans ce secteur, quelles offres avez-vous ?",exjp:"この分野で求人はある?"},
+ {w:"Quelles offres avez-vous ?",ipa:"[kɛl z‿ɔfʁ ave vu]",pos:"会話",jp:"求人はありますか?",ex:"Dans ce secteur, quelles offres avez-vous ?",exjp:"この分野で求人はある?"},
  {w:"J'ai de l'expérience dans la vente.",ipa:"[ʒe də lɛkspeʁjɑ̃s dɑ̃ la vɑ̃t]",pos:"会話",jp:"販売の経験があります",ex:"J'ai cinq ans d'expérience dans la vente.",exjp:"販売の経験が5年あります。"},
  {w:"Il y a des formations ?",ipa:"[il i a de fɔʁmasjɔ̃]",pos:"会話",jp:"職業訓練はありますか?",ex:"Pour me reconvertir, il y a des formations ?",exjp:"転職用の職業訓練はある?"},
  {w:"Je voudrais me reconvertir.",ipa:"[ʒə vudʁɛ mə ʁəkɔ̃vɛʁtiʁ]",pos:"会話",jp:"転職(職種変更)したいです",ex:"Je voudrais me reconvertir dans l'informatique.",exjp:"IT分野に転職したい。"},
@@ -10465,7 +10467,7 @@ DECKS.scene.tabs["入国審査で"]={label:"入国審査で",items:[
 ]};
 DECKS.scene.tabs["税関で"]={label:"税関で",items:[
  {w:"Avez-vous quelque chose à déclarer ?",ipa:"[ave vu kɛlk ʃoz a deklaʁe]",pos:"会話",jp:"申告するものはありますか?",pri:1,ex:"Avez-vous quelque chose à déclarer ?",exjp:"申告するものはありますか?"},
- {w:"Je n'ai rien à déclarer.",ipa:"[ʒə ne ʁjɛ̃ a deklaʁe]",pos:"会話",jp:"申告するものはありません",ex:"Non, je n'ai rien à déclarer.",exjp:"いいえ、何もありません。"},
+ {w:"Je n'ai rien à déclarer.",ipa:"[ʒə n‿e ʁjɛ̃ a deklaʁe]",pos:"会話",jp:"申告するものはありません",ex:"Non, je n'ai rien à déclarer.",exjp:"いいえ、何もありません。"},
  {w:"Ouvrez votre valise.",ipa:"[uvʁe vɔtʁ valiz]",pos:"会話",jp:"スーツケースを開けて",ex:"Ouvrez votre valise, s'il vous plaît.",exjp:"スーツケースを開けてください。"},
  {w:"C'est pour mon usage personnel.",ipa:"[sɛ puʁ mɔn‿yzaʒ pɛʁsɔnɛl]",pos:"会話",jp:"個人使用です",ex:"C'est pour mon usage personnel.",exjp:"これは個人で使うものです。"},
  {w:"Ce sont des cadeaux.",ipa:"[sə sɔ̃ de kado]",pos:"会話",jp:"お土産です",ex:"Ce sont des cadeaux pour ma famille.",exjp:"家族へのお土産です。"},
@@ -11614,7 +11616,7 @@ Object.assign(DECKS.theme.tabs,{
  ]},
  "ことわざ・名言4":{label:"ことわざ・名言4",items:[
   {w:"Qui vivra verra.",ipa:"[ki vivʁa veʁa]",pos:"ことわざ",jp:"今に分かる・なるようになる",pri:1,ex:"Qui vivra verra.",exjp:"今に分かるさ。"},
-  {w:"Petit à petit, l'oiseau fait son nid.",ipa:"[pəti a pəti lwazo fɛ sɔ̃ ni]",pos:"ことわざ",jp:"塵も積もれば山となる",ex:"Petit à petit, l'oiseau fait son nid.",exjp:"少しずつ成し遂げられる。"},
+  {w:"Petit à petit, l'oiseau fait son nid.",ipa:"[pəti t‿a pəti lwazo fɛ sɔ̃ ni]",pos:"ことわざ",jp:"塵も積もれば山となる",ex:"Petit à petit, l'oiseau fait son nid.",exjp:"少しずつ成し遂げられる。"},
   {w:"Il ne faut pas vendre la peau de l'ours avant de l'avoir tué.",ipa:"[il nə fo pa vɑ̃dʁ la po də luʁs avɑ̃ də lavwaʁ tɥe]",pos:"ことわざ",jp:"捕らぬ狸の皮算用",ex:"Attends : il ne faut pas vendre la peau de l'ours.",exjp:"焦るな、皮算用は禁物だ。"},
   {w:"L'habit ne fait pas le moine.",ipa:"[labi nə fɛ pa lə mwan]",pos:"ことわざ",jp:"人は見かけによらぬ",pri:1,ex:"L'habit ne fait pas le moine.",exjp:"見かけで判断するな。"},
   {w:"Mieux vaut tard que jamais.",ipa:"[mjø vo taʁ kə ʒamɛ]",pos:"ことわざ",jp:"遅くてもやらぬよりまし",pri:1,ex:"Mieux vaut tard que jamais.",exjp:"遅くてもやらぬよりまし。"},
@@ -11639,7 +11641,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"une synecdoque",ipa:"[yn sinɛkdɔk]",pos:"修辞",jp:"提喩(類と種の換喩)",ex:"Parler de voiles pour des navires relève de la synecdoque.",exjp:"船を帆と言うのは提喩にあたる。"},
   {w:"une hyperbole",ipa:"[yn ipɛʁbɔl]",pos:"修辞",jp:"誇張法",ex:"Mourir de faim est une hyperbole expressive.",exjp:"餓死しそうは表現的な誇張だ。"},
   {w:"une litote",ipa:"[yn litɔt]",pos:"修辞",jp:"緩叙法(控えめに強調)",ex:"Ce n'est pas mauvais est une litote élégante.",exjp:"悪くないは上品な緩叙法だ。"},
-  {w:"un oxymore",ipa:"[œ̃n ɔksimɔʁ]",pos:"修辞",jp:"撞着語法(矛盾した語の併置)",pri:1,ex:"Une obscure clarté est un célèbre oxymore.",exjp:"暗き光は有名な撞着語法だ。"},
+  {w:"un oxymore",ipa:"[œ̃n‿ɔksimɔʁ]",pos:"修辞",jp:"撞着語法(矛盾した語の併置)",pri:1,ex:"Une obscure clarté est un célèbre oxymore.",exjp:"暗き光は有名な撞着語法だ。"},
   {w:"une allitération",ipa:"[yn aliteʁasjɔ̃]",pos:"修辞",jp:"頭韻(子音の反復)",ex:"Les serpents qui sifflent forment une allitération.",exjp:"シューッと鳴く蛇は頭韻をなす。"},
   {w:"une assonance",ipa:"[yn asɔnɑ̃s]",pos:"修辞",jp:"母音の反復(類韻)",ex:"L'assonance en a colore tout le vers.",exjp:"母音アの類韻が詩句全体を彩る。"},
   {w:"une anaphore",ipa:"[yn anafɔʁ]",pos:"修辞",jp:"首句反復",ex:"L'anaphore répète le même mot en début de phrase.",exjp:"首句反復は文頭に同じ語を繰り返す。"},
@@ -11698,7 +11700,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"se lever du pied gauche",ipa:"[sə ləve dy pje ɡoʃ]",pos:"慣用",jp:"朝から機嫌が悪い",ex:"Ne lui parle pas, il s'est levé du pied gauche.",exjp:"彼に話しかけるな、今朝から機嫌が悪い。"},
   {w:"avoir bon pied bon œil",ipa:"[avwaʁ bɔ̃ pje bɔ̃n‿œj]",pos:"慣用",jp:"歳のわりに元気だ",ex:"À soixante-dix ans, il a encore bon pied bon œil.",exjp:"七十歳でも彼はまだかくしゃくとしている。"},
   {w:"couper l'herbe sous le pied à quelqu'un",ipa:"[kupe lɛʁb su lə pje a kɛlkœ̃]",pos:"慣用",jp:"人の出鼻をくじく",ex:"Mon collègue m'a coupé l'herbe sous le pied.",exjp:"同僚が私の出鼻をくじいた。"},
-  {w:"marcher sur des œufs",ipa:"[maʁʃe syʁ de zø]",pos:"慣用",jp:"細心の注意を払って慎重に振る舞う",ex:"Avec ce sujet sensible, il faut marcher sur des œufs.",exjp:"この微妙な話題では細心の注意を払って振る舞う必要がある。"},
+  {w:"marcher sur des œufs",ipa:"[maʁʃe syʁ de z‿ø]",pos:"慣用",jp:"細心の注意を払って慎重に振る舞う",ex:"Avec ce sujet sensible, il faut marcher sur des œufs.",exjp:"この微妙な話題では細心の注意を払って振る舞う必要がある。"},
   {w:"avoir les deux pieds sur terre",ipa:"[avwaʁ le dø pje syʁ tɛʁ]",pos:"慣用",jp:"現実的で地に足が着く",ex:"Malgré son succès, elle a les deux pieds sur terre.",exjp:"成功しても彼女は地に足が着いている。"},
   {w:"prendre son pied",ipa:"[pʁɑ̃dʁə sɔ̃ pje]",pos:"慣用",jp:"大いに楽しむ(俗)",ex:"On a pris notre pied à ce concert hier soir.",exjp:"昨夜のコンサートで私たちは大いに楽しんだ。"},
   {w:"trouver chaussure à son pied",ipa:"[tʁuve ʃosyʁ a sɔ̃ pje]",pos:"慣用",jp:"理想の相手を見つける",ex:"Après des années, il a enfin trouvé chaussure à son pied.",exjp:"何年も経ってやっと彼は理想の相手を見つけた。"},
@@ -11768,11 +11770,11 @@ Object.assign(DECKS.theme.tabs,{
   {w:"Chassez le naturel, il revient au galop.",ipa:"[ʃase lə natyʁɛl il ʁəvjɛ̃ o ɡalo]",pos:"ことわざ",jp:"本性は追い払っても駆け戻る",ex:"Il a vite repris ses habitudes : chassez le naturel, il revient au galop.",exjp:"すぐ元の癖に戻った、本性は追い払っても駆け戻る"},
   {w:"À chaque jour suffit sa peine.",ipa:"[a ʃak ʒuʁ syfi sa pɛn]",pos:"ことわざ",jp:"一日の苦労は一日で足りる",ex:"Ne t'inquiète pas pour demain : à chaque jour suffit sa peine.",exjp:"明日を心配するな、一日の苦労は一日で足りる"},
   {w:"Bien mal acquis ne profite jamais.",ipa:"[bjɛ̃ mal aki nə pʁɔfit ʒamɛ]",pos:"ことわざ",jp:"不正に得た物は身につかない",ex:"Il a tout perdu : bien mal acquis ne profite jamais.",exjp:"彼は全て失った、不正に得た物は身につかない"},
-  {w:"Les murs ont des oreilles.",ipa:"[le myʁ ɔ̃ de zɔʁɛj]",pos:"ことわざ",jp:"壁に耳あり",ex:"Parle moins fort, les murs ont des oreilles.",exjp:"声を落として、壁に耳あり"},
-  {w:"On ne fait pas d'omelette sans casser des œufs.",ipa:"[ɔ̃ nə fɛ pa dɔmlɛt sɑ̃ kase de zø]",pos:"ことわざ",jp:"卵を割らずにオムレツは作れない(犠牲は必要)",ex:"Des sacrifices ? On ne fait pas d'omelette sans casser des œufs.",exjp:"犠牲が要る、卵を割らずにオムレツは作れない"},
+  {w:"Les murs ont des oreilles.",ipa:"[le myʁ ɔ̃ de z‿ɔʁɛj]",pos:"ことわざ",jp:"壁に耳あり",ex:"Parle moins fort, les murs ont des oreilles.",exjp:"声を落として、壁に耳あり"},
+  {w:"On ne fait pas d'omelette sans casser des œufs.",ipa:"[ɔ̃ nə fɛ pa dɔmlɛt sɑ̃ kase de z‿ø]",pos:"ことわざ",jp:"卵を割らずにオムレツは作れない(犠牲は必要)",ex:"Des sacrifices ? On ne fait pas d'omelette sans casser des œufs.",exjp:"犠牲が要る、卵を割らずにオムレツは作れない"},
   {w:"Qui sème le vent récolte la tempête.",ipa:"[ki sɛm lə vɑ̃ ʁekɔlt la tɑ̃pɛt]",pos:"ことわざ",jp:"風を蒔く者は嵐を刈り取る",ex:"Il a trahi tout le monde : qui sème le vent récolte la tempête.",exjp:"皆を裏切った、風を蒔く者は嵐を刈り取る"},
   {w:"Faute de grives, on mange des merles.",ipa:"[fot də ɡʁiv ɔ̃ mɑ̃ʒ de mɛʁl]",pos:"ことわざ",jp:"鶫がなければ黒つぐみを食べる(ないよりまし)",ex:"Ce n'est pas idéal, mais faute de grives, on mange des merles.",exjp:"理想ではないが、鶫がなければ黒つぐみを食べる"},
-  {w:"La fortune sourit aux audacieux.",ipa:"[la fɔʁtyn suʁi o zodasjø]",pos:"ことわざ",jp:"幸運は大胆な者に微笑む",ex:"Tente ta chance : la fortune sourit aux audacieux.",exjp:"運を試せ、幸運は大胆な者に微笑む"},
+  {w:"La fortune sourit aux audacieux.",ipa:"[la fɔʁtyn suʁi o z‿odasjø]",pos:"ことわざ",jp:"幸運は大胆な者に微笑む",ex:"Tente ta chance : la fortune sourit aux audacieux.",exjp:"運を試せ、幸運は大胆な者に微笑む"},
   {w:"Tel est pris qui croyait prendre.",ipa:"[tɛl ɛ pʁi ki kʁwajɛ pʁɑ̃dʁ]",pos:"ことわざ",jp:"罠を仕掛けた者が捕まる",ex:"Son piège s'est retourné contre lui : tel est pris qui croyait prendre.",exjp:"罠が自分に返った、仕掛けた者が捕まる"},
   {w:"Nul n'est prophète en son pays.",ipa:"[nyl nɛ pʁɔfɛt ɑ̃ sɔ̃ pei]",pos:"ことわざ",jp:"故郷で予言者となる者はない",ex:"On l'admire ailleurs, pas ici : nul n'est prophète en son pays.",exjp:"よそでは評価される、故郷で予言者となる者はない"},
   {w:"L'occasion fait le larron.",ipa:"[lɔkazjɔ̃ fɛ lə laʁɔ̃]",pos:"ことわざ",jp:"機会が泥棒を作る",ex:"Range tes affaires : l'occasion fait le larron.",exjp:"物を片づけて、機会が泥棒を作る"}
@@ -11846,7 +11848,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"le dégauchissage",ipa:"[lə de.go.ʃi.saʒ]",pos:"職人",jp:"木材の反り直し(平面出し)",ex:"Le dégauchissage corrige le voile de la planche avant l'usinage.",exjp:"平面出しは加工前に板の反りを修正する。"},
   {w:"une queue d'aronde",ipa:"[yn kø da.ʁɔ̃d]",pos:"職人",jp:"蟻(あり)継ぎ",ex:"Les tiroirs sont assemblés en queue d'aronde, gage de solidité.",exjp:"引き出しは蟻継ぎで組まれ、頑丈さの証だ。"},
   {w:"le fil du bois",ipa:"[lə fil dy bwa]",pos:"職人",jp:"木目(繊維の方向)",ex:"Il faut raboter dans le sens du fil du bois pour éviter les éclats.",exjp:"ささくれを防ぐには木目に沿って鉋をかけるべきだ。"},
-  {w:"un établi",ipa:"[œ̃ ne.ta.bli]",pos:"職人",jp:"作業台(木工用の頑丈な台)",ex:"Il serre la pièce dans l'étau de l'établi pour la travailler.",exjp:"彼は加工するため作業台の万力に部材を固定する。"},
+  {w:"un établi",ipa:"[œ̃ n‿e.ta.bli]",pos:"職人",jp:"作業台(木工用の頑丈な台)",ex:"Il serre la pièce dans l'étau de l'établi pour la travailler.",exjp:"彼は加工するため作業台の万力に部材を固定する。"},
   {w:"le vernis",ipa:"[lə vɛʁ.ni]",pos:"職人",jp:"ニス(木材の保護塗料)",ex:"On applique deux couches de vernis pour protéger le meuble.",exjp:"家具を保護するためニスを二度塗りする。"}
  ]},
  "溶接・金属加工":{label:"溶接・金属加工",items:[
@@ -12300,16 +12302,16 @@ Object.assign(DECKS.theme.tabs,{
   {w:"un cyprès",ipa:"[œ̃ sipʁɛ]",pos:"自然",jp:"イトスギ(糸杉)",ex:"Les cyprès élancés ponctuent le paysage provençal.",exjp:"すらりとしたイトスギがプロヴァンスの風景に趣を添える。"}
  ]},
  "野草・高山植物":{label:"野草・高山植物",items:[
-  {w:"un edelweiss",ipa:"[edɛlvajs]",pos:"自然",jp:"エーデルワイス(高山植物)",pri:1,ex:"L'edelweiss pousse sur les rochers escarpés des Alpes.",exjp:"エーデルワイスはアルプスの険しい岩場に生える。"},
+  {w:"un edelweiss",ipa:"[œ̃n‿edɛlvajs]",pos:"自然",jp:"エーデルワイス(高山植物)",pri:1,ex:"L'edelweiss pousse sur les rochers escarpés des Alpes.",exjp:"エーデルワイスはアルプスの険しい岩場に生える。"},
   {w:"une gentiane",ipa:"[ʒɑ̃sjan]",pos:"自然",jp:"リンドウ(高山の青花)",pri:1,ex:"La gentiane bleue tapisse les alpages au printemps.",exjp:"青いリンドウが春に高山牧場を覆う。"},
-  {w:"un edelweiss cotonneux",ipa:"[edɛlvajs kɔtɔnø]",pos:"自然",jp:"綿毛状のエーデルワイス",pri:1,ex:"Le feutrage cotonneux protège la plante du gel.",exjp:"綿毛状の覆いが植物を霜から守る。"},
+  {w:"un edelweiss cotonneux",ipa:"[œ̃n‿edɛlvajs kɔtɔnø]",pos:"自然",jp:"綿毛状のエーデルワイス",pri:1,ex:"Le feutrage cotonneux protège la plante du gel.",exjp:"綿毛状の覆いが植物を霜から守る。"},
   {w:"une joubarbe",ipa:"[ʒubaʁb]",pos:"自然",jp:"ベンケイソウ(多肉の高山草)",ex:"La joubarbe s'accroche aux toits et aux murets de pierre.",exjp:"ベンケイソウは屋根や石垣にしがみつく。"},
   {w:"une saxifrage",ipa:"[saksifʁaʒ]",pos:"自然",jp:"ユキノシタ(岩割草)",ex:"La saxifrage fend la roche de ses racines tenaces.",exjp:"ユキノシタは粘り強い根で岩を割る。"},
   {w:"un rhododendron ferrugineux",ipa:"[ʁɔdɔdɛ̃dʁɔ̃ feʁyʒinø]",pos:"自然",jp:"サビイロシャクナゲ",ex:"Le rhododendron ferrugineux fleurit au-dessus de la forêt.",exjp:"サビイロシャクナゲは森林限界の上で咲く。"},
   {w:"une anémone pulsatille",ipa:"[anemɔn pylsatij]",pos:"自然",jp:"セイヨウオキナグサ",ex:"L'anémone pulsatille se couvre d'un duvet soyeux.",exjp:"セイヨウオキナグサは絹のような綿毛をまとう。"},
   {w:"une ancolie",ipa:"[ɑ̃kɔli]",pos:"自然",jp:"オダマキ(山地の花)",ex:"L'ancolie des Alpes incline ses clochettes mauves.",exjp:"アルプスのオダマキは藤色の鐘形花を傾ける。"},
   {w:"un lis martagon",ipa:"[lis maʁtaɡɔ̃]",pos:"自然",jp:"マルタゴンユリ(山地のユリ)",ex:"Le lis martagon dresse ses fleurs tachetées en sous-bois.",exjp:"マルタゴンユリは林床に斑点のある花を立てる。"},
-  {w:"un arnica",ipa:"[aʁnika]",pos:"自然",jp:"アルニカ(薬用の黄花)",ex:"On récolte l'arnica pour ses vertus anti-inflammatoires.",exjp:"アルニカは抗炎症作用のために採取される。"},
+  {w:"un arnica",ipa:"[œ̃n‿aʁnika]",pos:"自然",jp:"アルニカ(薬用の黄花)",ex:"On récolte l'arnica pour ses vertus anti-inflammatoires.",exjp:"アルニカは抗炎症作用のために採取される。"},
   {w:"une renoncule des glaciers",ipa:"[ʁənɔ̃kyl de ɡlasje]",pos:"自然",jp:"氷河キンポウゲ",ex:"La renoncule des glaciers fleurit près des névés.",exjp:"氷河キンポウゲは雪渓のそばで咲く。"},
   {w:"un chardon bleu",ipa:"[ʃaʁdɔ̃ blø]",pos:"自然",jp:"青いアザミ(アルプス産)",ex:"Le chardon bleu des Alpes est une espèce protégée.",exjp:"アルプスの青いアザミは保護種である。"},
   {w:"une linaigrette",ipa:"[linɛɡʁɛt]",pos:"自然",jp:"ワタスゲ(湿原の白穂)",ex:"La linaigrette agite ses houppes blanches dans la tourbière.",exjp:"ワタスゲは泥炭湿原で白い房を揺らす。"},
@@ -12349,13 +12351,13 @@ Object.assign(DECKS.theme.tabs,{
   {w:"une moule d'eau douce",ipa:"[yn mul do dus]",pos:"自然",jp:"淡水産二枚貝(イシガイ類)",ex:"La moule d'eau douce filtre des litres d'eau chaque jour.",exjp:"淡水二枚貝は毎日何リットルもの水を濾過する。"},
   {w:"un chevesne",ipa:"[œ̃ ʃəvɛn]",pos:"自然",jp:"ヨーロッパウグイ(コイ科)",ex:"Le chevesne se nourrit aussi bien d'insectes que de petits poissons.",exjp:"ヨーロッパウグイは昆虫も小魚も食べる。"},
   {w:"une anguille",ipa:"[yn ɑ̃ɡij]",pos:"自然",jp:"ウナギ",ex:"L'anguille parcourt des milliers de kilomètres jusqu'à la mer des Sargasses.",exjp:"ウナギはサルガッソー海まで何千キロも旅する。"},
-  {w:"un alevin",ipa:"[œ̃ alvɛ̃]",pos:"自然",jp:"稚魚(孵化したての魚)",ex:"On relâche chaque année des alevins de truite dans la rivière.",exjp:"毎年マスの稚魚を川に放流する。"},
+  {w:"un alevin",ipa:"[œ̃n‿alvɛ̃]",pos:"自然",jp:"稚魚(孵化したての魚)",ex:"On relâche chaque année des alevins de truite dans la rivière.",exjp:"毎年マスの稚魚を川に放流する。"},
   {w:"une loutre",ipa:"[yn lutʁ]",pos:"自然",jp:"カワウソ",ex:"La loutre a recolonisé peu à peu nos cours d'eau.",exjp:"カワウソは少しずつ河川に戻ってきた。"},
   {w:"un frai",ipa:"[œ̃ fʁɛ]",pos:"自然",jp:"産卵(魚の)",ex:"Au moment du frai, les saumons remontent le torrent.",exjp:"産卵期になるとサケは急流を遡る。"}
  ]},
  "爬虫類・両生類":{label:"爬虫類・両生類",items:[
   {w:"un reptile",ipa:"[œ̃ ʁɛptil]",pos:"自然",jp:"爬虫類",pri:1,ex:"Le crocodile est un reptile carnivore redoutable.",exjp:"ワニは恐るべき肉食の爬虫類だ。"},
-  {w:"un amphibien",ipa:"[œ̃n ɑ̃fibjɛ̃]",pos:"自然",jp:"両生類",pri:1,ex:"La grenouille est un amphibien à la peau humide.",exjp:"カエルは皮膚が湿った両生類だ。"},
+  {w:"un amphibien",ipa:"[œ̃n‿ɑ̃fibjɛ̃]",pos:"自然",jp:"両生類",pri:1,ex:"La grenouille est un amphibien à la peau humide.",exjp:"カエルは皮膚が湿った両生類だ。"},
   {w:"écailleux",ipa:"[ekajø]",pos:"自然",jp:"鱗で覆われた",pri:1,ex:"Le serpent possède un corps écailleux et lisse.",exjp:"ヘビは鱗で覆われた滑らかな体を持つ。"},
   {w:"une mue",ipa:"[yn my]",pos:"自然",jp:"脱皮した抜け殻",ex:"Le lézard a laissé sa mue sur le rocher.",exjp:"トカゲは岩の上に脱皮の殻を残した。"},
   {w:"venimeux",ipa:"[vənimø]",pos:"自然",jp:"毒を持つ",ex:"La vipère est un serpent venimeux à éviter.",exjp:"クサリヘビは避けるべき毒蛇だ。"},
@@ -12509,7 +12511,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"la circonférence",ipa:"[lasiʁkɔ̃feʁɑ̃s]",pos:"学術",jp:"円周",ex:"La circonférence dépend du rayon du cercle.",exjp:"円周は円の半径に依存する。"},
   {w:"un sommet",ipa:"[ɛ̃sɔmɛ]",pos:"学術",jp:"頂点",ex:"Chaque sommet du cube relie trois arêtes.",exjp:"立方体の各頂点は三つの稜を結ぶ。"},
   {w:"une arête",ipa:"[ynaʁɛt]",pos:"学術",jp:"稜(立体の辺)",ex:"Un cube comporte douze arêtes de même longueur.",exjp:"立方体は同じ長さの十二の稜を持つ。"},
-  {w:"un angle obtus",ipa:"[ɛ̃nɑ̃ɡlɔpty]",pos:"学術",jp:"鈍角",ex:"Un angle obtus mesure plus de quatre-vingt-dix degrés.",exjp:"鈍角は九十度より大きい。"},
+  {w:"un angle obtus",ipa:"[œ̃n‿ɑ̃ɡl ɔpty]",pos:"学術",jp:"鈍角",ex:"Un angle obtus mesure plus de quatre-vingt-dix degrés.",exjp:"鈍角は九十度より大きい。"},
   {w:"un angle aigu",ipa:"[ɛ̃nɑ̃ɡleɡy]",pos:"学術",jp:"鋭角",ex:"Un angle aigu est inférieur à un angle droit.",exjp:"鋭角は直角より小さい。"},
   {w:"la symétrie",ipa:"[lasimetʁi]",pos:"学術",jp:"対称性",ex:"Cette figure présente une symétrie axiale parfaite.",exjp:"この図形は完全な線対称を示す。"},
   {w:"le rayon",ipa:"[ləʁɛjɔ̃]",pos:"学術",jp:"半径",ex:"Le rayon correspond à la moitié du diamètre.",exjp:"半径は直径の半分にあたる。"},
@@ -12987,7 +12989,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"la marqueterie",ipa:"[la maʁkətʁi]",pos:"芸術",jp:"寄木細工(象嵌細工)",pri:1,ex:"Cette commode est ornée d'une marqueterie de bois précieux.",exjp:"このタンスは貴重な木材の寄木細工で飾られている。"},
   {w:"l'ébénisterie",ipa:"[lebenistəʁi]",pos:"芸術",jp:"高級家具製作(指物)",pri:1,ex:"Il a appris l'ébénisterie auprès d'un maître artisan.",exjp:"彼は熟練の職人のもとで高級家具製作を学んだ。"},
   {w:"l'orfèvrerie",ipa:"[lɔʁfɛvʁəʁi]",pos:"芸術",jp:"金銀細工(貴金属工芸)",pri:1,ex:"Ce musée expose des pièces d'orfèvrerie de la Renaissance.",exjp:"この美術館はルネサンス期の金銀細工を展示している。"},
-  {w:"un émail",ipa:"[œ̃n emaj]",pos:"芸術",jp:"七宝(エナメル装飾)",ex:"Le bijou est rehaussé d'un émail bleu translucide.",exjp:"その宝飾品は半透明の青い七宝で引き立てられている。"},
+  {w:"un émail",ipa:"[œ̃n‿emaj]",pos:"芸術",jp:"七宝(エナメル装飾)",ex:"Le bijou est rehaussé d'un émail bleu translucide.",exjp:"その宝飾品は半透明の青い七宝で引き立てられている。"},
   {w:"la dorure",ipa:"[la dɔʁyʁ]",pos:"芸術",jp:"金箔貼り(鍍金)",ex:"La dorure à la feuille demande une grande patience.",exjp:"金箔貼りは大変な忍耐を要する。"},
   {w:"la tapisserie",ipa:"[la tapisʁi]",pos:"芸術",jp:"綴織(タペストリー)",ex:"Les tapisseries d'Aubusson sont renommées dans le monde entier.",exjp:"オービュッソンのタペストリーは世界中で名高い。"},
   {w:"la ciselure",ipa:"[la sizlyʁ]",pos:"芸術",jp:"彫金(打ち出し彫り)",ex:"La ciselure du couvercle révèle un savoir-faire exceptionnel.",exjp:"蓋の彫金は卓越した技を示している。"},
@@ -13040,7 +13042,7 @@ Object.assign(DECKS.theme.tabs,{
  "慣用句(食べ物2)":{label:"慣用句(食べ物2)",items:[
   {w:"raconter des salades",ipa:"[ʁa.kɔ̃.te de sa.lad]",pos:"慣用",jp:"でたらめを並べる(嘘をつく)",pri:1,ex:"Arrête de me raconter des salades, je sais la vérité.",exjp:"でたらめを言うのはやめて、真実は知っているから。"},
   {w:"en faire tout un fromage",ipa:"[ɑ̃ fɛʁ tu tœ̃ fʁɔ.maʒ]",pos:"慣用",jp:"些細なことを大げさにする",pri:1,ex:"Ce n'est qu'un retard, n'en fais pas tout un fromage.",exjp:"ただの遅刻だよ、大げさに騒がないで。"},
-  {w:"mettre du beurre dans les épinards",ipa:"[mɛtʁ dy bœʁ dɑ̃ le ze.pi.naʁ]",pos:"慣用",jp:"暮らし向きを少し楽にする",pri:1,ex:"Ce petit boulot met du beurre dans les épinards.",exjp:"このアルバイトで家計が少し楽になる。"},
+  {w:"mettre du beurre dans les épinards",ipa:"[mɛtʁ dy bœʁ dɑ̃ le z‿e.pi.naʁ]",pos:"慣用",jp:"暮らし向きを少し楽にする",pri:1,ex:"Ce petit boulot met du beurre dans les épinards.",exjp:"このアルバイトで家計が少し楽になる。"},
   {w:"la moutarde lui monte au nez",ipa:"[la mu.taʁd lɥi mɔ̃t o ne]",pos:"慣用",jp:"堪忍袋の緒が切れかける",ex:"À la troisième excuse, la moutarde lui montait au nez.",exjp:"三度目の言い訳で、彼はだんだん腹が立ってきた。"},
   {w:"ramener sa fraise",ipa:"[ʁam.ne sa fʁɛz]",pos:"慣用",jp:"出しゃばる(口を挟む)",ex:"Personne ne t'a rien demandé, arrête de ramener ta fraise.",exjp:"誰も聞いていないのに、出しゃばるのはやめて。"},
   {w:"tomber dans les pommes",ipa:"[tɔ̃.be dɑ̃ le pɔm]",pos:"慣用",jp:"気絶する",ex:"À la vue du sang, elle est tombée dans les pommes.",exjp:"血を見て、彼女は気を失った。"},
@@ -13053,7 +13055,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"haut comme trois pommes",ipa:"[o kɔm tʁwa pɔm]",pos:"慣用",jp:"ちびっこの(背が低い)",ex:"Je le connais depuis qu'il est haut comme trois pommes.",exjp:"彼がほんの子供の頃から知っている。"},
   {w:"rouler quelqu'un dans la farine",ipa:"[ʁu.le kɛl.kœ̃ dɑ̃ la fa.ʁin]",pos:"慣用",jp:"人をうまく騙す",ex:"Le vendeur l'a roulé dans la farine sur le prix.",exjp:"店員は値段で彼をまんまと騙した。"},
   {w:"avoir la pêche",ipa:"[a.vwaʁ la pɛʃ]",pos:"慣用",jp:"元気いっぱいである",ex:"Ce matin, j'ai vraiment la pêche.",exjp:"今朝はすごく元気だ。"},
-  {w:"occupe-toi de tes oignons",ipa:"[ɔ.kyp twa də te zɔ.ɲɔ̃]",pos:"慣用",jp:"余計なお世話だ(自分のことを)",ex:"Ce ne sont pas tes affaires, occupe-toi de tes oignons.",exjp:"君には関係ない、自分のことに専念しろ。"}
+  {w:"occupe-toi de tes oignons",ipa:"[ɔ.kyp twa də te z‿ɔ.ɲɔ̃]",pos:"慣用",jp:"余計なお世話だ(自分のことを)",ex:"Ce ne sont pas tes affaires, occupe-toi de tes oignons.",exjp:"君には関係ない、自分のことに専念しろ。"}
  ]},
  "上級の動詞(抽象)":{label:"上級の動詞(抽象)",items:[
   {w:"appréhender",ipa:"[apʁeɑ̃de]",pos:"動詞",jp:"理解する また危惧する",pri:1,ex:"Il est difficile d'appréhender la portée de cette réforme.",exjp:"この改革の射程を理解するのは難しい。"},
@@ -13390,7 +13392,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"pour illustrer mon propos",ipa:"[puʁ ilystʁe mɔ̃ pʁɔpo]",pos:"表現",jp:"私の論点を例証すると",ex:"Pour illustrer mon propos, prenons un exemple concret.",exjp:"私の論点を例証するため、具体例を取り上げましょう。"},
   {w:"je m'en voudrais de ne pas mentionner",ipa:"[ʒə mɑ̃ vudʁɛ də nə pa mɑ̃sjɔne]",pos:"表現",jp:"触れずにはいられない",ex:"Je m'en voudrais de ne pas mentionner nos partenaires.",exjp:"協力者の方々に触れずにはいられません。"},
   {w:"loin de moi l'idée de",ipa:"[lwɛ̃ də mwa lide də]",pos:"表現",jp:"するつもりは毛頭ない",ex:"Loin de moi l'idée de minimiser ce risque.",exjp:"この危険を軽視するつもりは毛頭ありません。"},
-  {w:"en ouverture de mon intervention",ipa:"[ɑ̃ uvɛʁtyʁ də mɔ̃ nɛ̃tɛʁvɑ̃sjɔ̃]",pos:"表現",jp:"発表の冒頭に",ex:"En ouverture de mon intervention, un bref rappel.",exjp:"発表の冒頭に、簡単なおさらいをします。"},
+  {w:"en ouverture de mon intervention",ipa:"[ɑ̃ uvɛʁtyʁ də mɔ̃ n‿ɛ̃tɛʁvɑ̃sjɔ̃]",pos:"表現",jp:"発表の冒頭に",ex:"En ouverture de mon intervention, un bref rappel.",exjp:"発表の冒頭に、簡単なおさらいをします。"},
   {w:"je voudrais insister sur le fait que",ipa:"[ʒə vudʁɛ ɛ̃siste syʁ lə fɛ kə]",pos:"表現",jp:"という事実を力説したい",ex:"Je voudrais insister sur le fait que le temps presse.",exjp:"時間が差し迫っているという事実を力説したいです。"},
   {w:"cela m'amène à",ipa:"[s(ə)la mamɛn a]",pos:"表現",jp:"そこで次の点に移る",ex:"Cela m'amène à aborder la question budgétaire.",exjp:"そこで予算の問題に移りたいと思います。"},
   {w:"avant de céder la parole",ipa:"[avɑ̃ də sede la paʁɔl]",pos:"表現",jp:"発言を譲る前に",ex:"Avant de céder la parole, un dernier mot.",exjp:"発言を譲る前に、最後に一言申し上げます。"},
@@ -14491,7 +14493,7 @@ Object.assign(DECKS.theme.tabs,{
   {w:"un audit interne",ipa:"[œ̃ odit ɛ̃tɛʁn]",pos:"商業",jp:"内部監査",ex:"L'audit interne a révélé plusieurs non-conformités.",exjp:"内部監査で複数の不適合が判明した。"},
   {w:"une non-conformité",ipa:"[yn nɔ̃kɔ̃fɔʁmite]",pos:"商業",jp:"不適合",ex:"Toute non-conformité doit‿être signalée aussitôt.",exjp:"あらゆる不適合は直ちに報告されねばならない。"},
   {w:"l'amélioration continue (f.)",ipa:"[lameljɔʁasjɔ̃ kɔ̃tiny]",pos:"商業",jp:"継続的改善",ex:"L'amélioration continue repose sur l'implication des‿équipes.",exjp:"継続的改善はチームの関与に支えられている。"},
-  {w:"un échantillonnage",ipa:"[œ̃n eʃɑ̃tijɔnaʒ]",pos:"商業",jp:"抜取検査 標本抽出",ex:"On valide le lot par un‿échantillonnage aléatoire.",exjp:"ランダムな抜取検査でロットを承認する。"},
+  {w:"un échantillonnage",ipa:"[œ̃n‿eʃɑ̃tijɔnaʒ]",pos:"商業",jp:"抜取検査 標本抽出",ex:"On valide le lot par un‿échantillonnage aléatoire.",exjp:"ランダムな抜取検査でロットを承認する。"},
   {w:"le délai de livraison",ipa:"[lə dela də livʁɛzɔ̃]",pos:"商業",jp:"納期",ex:"Le délai de livraison a été raccourci de deux jours.",exjp:"納期は二日短縮された。"},
   {w:"la maintenance préventive",ipa:"[la mɛ̃tnɑ̃s pʁevɑ̃tiv]",pos:"商業",jp:"予防保全",ex:"La maintenance préventive réduit les‿arrêts de production.",exjp:"予防保全は生産停止を減らす。"}
  ]},
@@ -15878,12 +15880,14 @@ function buildDeckPick(){
   keys.forEach(k=>groups[deckGroupOf(k)].push(k));
   let h='<div class="tocfilter"><input type="search" id="dpFilter" placeholder="テーマ名でしぼり込み" aria-label="テーマ名でしぼり込み" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>';
   h+='<div class="toch" style="margin:2px 0 6px">'+I_GRID+'<span>'+DECKS[cat].label+' — カテゴリから選ぶ</span></div>';
+  let gi=0;
   order.forEach(name=>{
     const arr=groups[name];if(!arr.length)return;
+    gi++;
     const op=arr.indexOf(current)>=0?' open':'';
-    h+='<div class="dpgrp'+op+'"><button type="button" class="dphd">'+CHEV+'<span>'+name+'</span><span class="cnt">'+arr.length+'</span></button><div class="dpbody">';
-    arr.forEach(k=>{const its=tabs[k].items;let dn=0;its.forEach(it=>{if(marks[cat+'|'+k+'|'+it.w]==='done')dn++;});const pct=its.length?Math.round(dn/its.length*100):0;
-      h+='<button class="chip'+(k===current?' fullchip':'')+'" data-k="'+k.replace(/"/g,'&quot;')+'">'+k+' <span class="n">'+its.length+'</span>'+(pct?' <span class="pct">'+I_CHECK+pct+'%</span>':'')+'</button>';});
+    h+='<div class="dpgrp'+op+'"><button type="button" class="dphd">'+CHEV+'<span>'+gi+'. '+name+'</span><span class="cnt">'+arr.length+'</span></button><div class="dpbody">';
+    arr.forEach((k,ti)=>{const its=tabs[k].items;let dn=0;its.forEach(it=>{if(marks[cat+'|'+k+'|'+it.w]==='done')dn++;});const pct=its.length?Math.round(dn/its.length*100):0;
+      h+='<button class="chip'+(k===current?' fullchip':'')+'" data-k="'+k.replace(/"/g,'&quot;')+'"><span class="dpno">'+gi+'-'+(ti+1)+'</span> '+k+' <span class="n">'+its.length+'</span>'+(pct?' <span class="pct">'+I_CHECK+pct+'%</span>':'')+'</button>';});
     h+='</div></div>';
   });
   deckPickPanel.innerHTML=h;
