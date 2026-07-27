@@ -184,8 +184,9 @@
   .dpmulti.on{background:var(--bleu);border-color:var(--bleu);color:#fff}
   .chip.sel{border-color:var(--bleu);background:rgba(0,85,164,.10);color:var(--bleu);font-weight:700}
   body.dark .chip.sel{background:rgba(125,180,255,.16);color:#7db4ff;border-color:#7db4ff}
-  .dpbar{position:sticky;bottom:0;display:flex;align-items:center;gap:9px;margin-top:11px;padding:9px 2px;background:var(--card);border-top:1px solid var(--line)}
+  .dpbar{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:60;display:flex;align-items:center;gap:9px;padding:10px 12px;background:var(--card);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 24px rgba(10,30,70,.25);max-width:956px;margin:0 auto}
   .dpbar.hide{display:none}
+  .tocpanel.withbar{padding-bottom:74px}
   .dpcount{font-size:12px;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums}
   .dpapply{margin-left:auto;border:none;background:var(--bleu);color:#fff;border-radius:9px;padding:8px 14px;font-size:12.5px;font-weight:700;cursor:pointer}
   .dpapply:active{transform:scale(.96)}
@@ -15915,7 +15916,8 @@ function buildDeckPick(){
   const dpBar=document.getElementById('dpBar'),dpCount=document.getElementById('dpCount'),dpMulti=document.getElementById('dpMulti');
   const dpUpd=()=>{if(dpCount){let n=0;dpSel.forEach(k=>{if(tabs[k])n+=tabs[k].items.length;});dpCount.textContent=dpSel.size+'テーマ・'+n+'語';}
     deckPickPanel.querySelectorAll('.chip[data-k]').forEach(c=>c.classList.toggle('sel',dpSel.has(c.dataset.k)));};
-  if(dpMulti)dpMulti.onclick=()=>{dpOn=!dpOn;dpMulti.classList.toggle('on',dpOn);dpBar.classList.toggle('hide',!dpOn);if(dpOn)dpUpd();};
+  deckPickPanel.classList.toggle('withbar',dpOn);
+  if(dpMulti)dpMulti.onclick=()=>{dpOn=!dpOn;dpMulti.classList.toggle('on',dpOn);dpBar.classList.toggle('hide',!dpOn);deckPickPanel.classList.toggle('withbar',dpOn);if(dpOn)dpUpd();};
   const dpApply=document.getElementById('dpApply');
   if(dpApply)dpApply.onclick=()=>{if(dpSel.size<2){dpCount.textContent='2つ以上選んでください';return;}
     multiSel=Array.from(dpSel);current=multiSel[0];closeDeckPick();posFilter='all';rangeSel='all';resetSearch();buildTabs();buildRange();buildFilter();renderAll();saveNav();flashGrid();};
