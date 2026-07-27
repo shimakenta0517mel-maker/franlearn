@@ -15783,7 +15783,7 @@ window.addEventListener('beforeunload',()=>sv('fl_time',timeData));
 let mode='learn', cat='delf', current=null, posFilter='all', freqOnly=false, rangeSel='all', verbTense='pres', viewMode='visible', searchQ='';
 let multiSel=[]; // 複数選択出題: 同一デッキ内で選んだタブ群(2件以上で有効)。タブ/デッキ切替で解除
 // 前回の位置（デッキ/タブ/モード）を保存し、次回起動時に続きから開けるように
-function saveNav(){try{if(!todayMode&&!searchQ)sv('fl_nav',{m:mode,c:cat,t:current});if(typeof updateTitle==='function')updateTitle();}catch(e){}}
+function saveNav(){try{if(!todayMode&&!searchQ)sv('fl_nav',{m:mode,c:cat,t:current,ms:(multiSel.length>1?multiSel:undefined)});if(typeof updateTitle==='function')updateTitle();}catch(e){}}
 /* ---------- 品詞(POS)正規化：表記ゆれ・意味タグを正規の品詞カテゴリへ集約してフィルタに使う ---------- */
 const POS_ORDER=['名詞','動詞','形容詞','副詞','会話・表現','前置詞','接続詞','代名詞','数詞','その他'];
 const POS_CONV=new Set(['会話','表現','慣用句','ことわざ','フレーズ','口語','自分が言う','聞かれる','感嘆','返事','挨拶','相づち','疑問','雑談','つなぎ','結び','書き出し','促し','質問','招待','お祝い','緊急','議論','呼びかけ']);
@@ -16934,7 +16934,10 @@ if('mediaSession' in navigator){
   if(nv){
     if(nv.c&&DECKS[nv.c])cat=nv.c;
     if(nv.m==='learn'||nv.m==='hf')mode=nv.m;
-    if(cat!=='verb'){const keys=Object.keys(DECKS[cat].tabs);current=(nv.t&&keys.indexOf(nv.t)>=0)?nv.t:keys[0];}else current=null;
+    if(cat!=='verb'){const keys=Object.keys(DECKS[cat].tabs);current=(nv.t&&keys.indexOf(nv.t)>=0)?nv.t:keys[0];
+      // 複数選択の復元（存在するタブのみ・2件以上残る場合だけ有効化）
+      if(Array.isArray(nv.ms)){const vs=nv.ms.filter(k=>keys.indexOf(k)>=0);if(vs.length>1){multiSel=vs;current=vs[0];}}
+    }else current=null;
   }else current=tabKeys()[0];
 }catch(e){cat='delf';mode='learn';current=tabKeys()[0];}})();
 buildRange();
