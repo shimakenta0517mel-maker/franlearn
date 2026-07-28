@@ -16592,7 +16592,7 @@ function hfBuild(){
     const t=verbTense==='all'?'pres':verbTense;
     hfList=filtered().map(o=>({w:o.it[t].join(', '),ipa:o.it.ipa,jp:o.it.inf+'（'+tenseName(t)+'）'+o.it.jp,ex:'',k:'verb|'+o.it.inf+'|'+t}));
   }else{
-    hfList=filtered().map(o=>({w:o.it.w,ipa:o.it.ipa||'',jp:o.it.jp,ex:o.it.ex,exjp:o.it.exjp,k:keyOf(o.it)}));
+    hfList=filtered().map(o=>({w:o.it.w,ipa:o.it.ipa||'',jp:o.it.jp,ex:o.it.ex,exjp:o.it.exjp,k:keyOf(o.it),tk:(multiSel.length>1?o.it._tk:null)}));
   }
   hfIdx=0;hfShow();hfPresetUI();
 }
@@ -16604,7 +16604,7 @@ function hfShow(){
   hffr.textContent=it.w;hffripa.textContent=it.ipa||'';hfjp.textContent=it.jp;
   hfex.textContent=(hfexchk.checked&&it.ex)?it.ex:'';
   hfexjpEl.textContent=(hfexchk.checked&&it.exjp)?it.exjp:'';
-  hfidxEl.textContent=(hfIdx+1)+' / '+hfList.length+(rangeSel!=='all'?'　[区間 '+rangeSel[0]+'-'+rangeSel[1]+']':'');
+  hfidxEl.textContent=(hfIdx+1)+' / '+hfList.length+(it.tk?'　｜ '+it.tk:'')+(rangeSel!=='all'?'　[区間 '+rangeSel[0]+'-'+rangeSel[1]+']':'');
   hfMarkUI();
 }
 function hfMarkUI(){const it=hfList[hfIdx];const m=it?markOf(it.k):'';document.querySelectorAll('[data-hm]').forEach(b=>b.classList.toggle('on',b.dataset.hm===m));}
