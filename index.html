@@ -101,6 +101,8 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 14px;box-shadow:0 1px 2px rgba(20,30,60,.04);position:relative}
   .cardtop{display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap}
   .num{font-size:10.5px;color:#aab2c0;font-weight:700}
+  .srctag{font-size:10px;color:var(--bleu);background:rgba(0,85,164,.07);border-radius:6px;padding:1px 6px;font-weight:600;max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  body.dark .srctag{color:#7db4ff;background:rgba(125,180,255,.12)}
   .star{color:var(--gold);font-size:12px}
   .cnt{font-size:10px;color:var(--muted);background:#eef2fb;border-radius:20px;padding:1px 7px;font-weight:700}
   .cnt.err{color:#a3372f;background:#fde8e6}
@@ -16302,7 +16304,7 @@ function renderLearn(){
     ['done','review','fav'].forEach(m=>{foot+='<button class="markbtn'+(mk===m?' on':'')+'" data-m="'+m+'">'+MARKS[m].label+'</button>';});
     foot+='</div>';
     c.innerHTML=
-      '<div class="cardtop"><span class="num">#'+o.n+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="cnt" data-c>'+I_EYE+cOf(k)+'</span>'+(eOf(k)?'<span class="cnt err">'+I_LOOP+eOf(k)+'</span>':'')+(mk?'<span class="cnt">'+MARKS[mk].short+'</span>':'')+'</div>'+
+      '<div class="cardtop"><span class="num">#'+o.n+'</span>'+(multiSel.length>1&&it._tk?'<span class="srctag">'+it._tk+'</span>':'')+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="cnt" data-c>'+I_EYE+cOf(k)+'</span>'+(eOf(k)?'<span class="cnt err">'+I_LOOP+eOf(k)+'</span>':'')+(mk?'<span class="cnt">'+MARKS[mk].short+'</span>':'')+'</div>'+
       '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生" aria-label="発音を再生">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr" lang="fr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+
