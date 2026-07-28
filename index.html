@@ -16505,7 +16505,7 @@ function renderTest(){
     document.getElementById('rs').onclick=()=>{testItems().forEach(it=>{delete known[it.k];});sv('fl_known',known);buildDeck();};return;
   }
   const it=deck[idx];
-  const TG=todayMode?'📅今日':(isVerb()?'活用':current);
+  const TG=todayMode?'今日':(isVerb()?'活用':((multiSel.length>1&&it.k&&it.k.split('|')[1])||current));
   if(!flipped){
     bump(it.k); // exposure once when card first shown
     if(dir==='type'){
