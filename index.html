@@ -15902,13 +15902,13 @@ function buildDeckPick(){
   const groups={};order.forEach(n=>groups[n]=[]);
   keys.forEach(k=>groups[deckGroupOf(k)].push(k));
   let h='<div class="tocfilter"><input type="search" id="dpFilter" placeholder="テーマ名でしぼり込み" aria-label="テーマ名でしぼり込み" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"></div>';
-  h+='<div class="toch" style="margin:2px 0 6px;display:flex;align-items:center;gap:8px">'+I_GRID+'<span>'+DECKS[cat].label+' — カテゴリから選ぶ</span><button type="button" class="dpmulti'+(multiSel.length>1?' on':'')+'" id="dpMulti" title="複数のテーマを選んでまとめて学習">複数選択</button></div>';
+  h+='<div class="toch" style="margin:2px 0 6px;display:flex;align-items:center;gap:8px">'+I_GRID+'<span>'+DECKS[cat].label+' — カテゴリから選ぶ</span><button type="button" class="dpmulti'+(multiSel.length>1?' on':'')+'" id="dpMulti" aria-pressed="'+(multiSel.length>1?'true':'false')+'" title="複数のテーマを選んでまとめて学習">複数選択</button></div>';
   let gi=0;
   order.forEach(name=>{
     const arr=groups[name];if(!arr.length)return;
     gi++;
     const op=arr.indexOf(current)>=0?' open':'';
-    h+='<div class="dpgrp'+op+'"><button type="button" class="dphd">'+CHEV+'<span>'+gi+'. '+name+'</span><span class="cnt">'+arr.length+'</span></button><div class="dpbody">'+
+    h+='<div class="dpgrp'+op+'"><button type="button" class="dphd" aria-expanded="'+(op?'true':'false')+'">'+CHEV+'<span>'+gi+'. '+name+'</span><span class="cnt">'+arr.length+'</span></button><div class="dpbody">'+
        '<button type="button" class="chip dpall">分類を全選択</button>';
     arr.forEach((k,ti)=>{const its=tabs[k].items;let dn=0;its.forEach(it=>{if(marks[cat+'|'+k+'|'+it.w]==='done')dn++;});const pct=its.length?Math.round(dn/its.length*100):0;
       h+='<button class="chip'+(k===current?' fullchip':'')+'" data-k="'+k.replace(/"/g,'&quot;')+'"><span class="dpno">'+gi+'-'+(ti+1)+'</span> '+k+' <span class="n">'+its.length+'</span>'+(pct?' <span class="pct">'+I_CHECK+pct+'%</span>':'')+'</button>';});
@@ -15916,15 +15916,15 @@ function buildDeckPick(){
   });
   h+='<div class="dpbar'+(multiSel.length>1?'':' hide')+'" id="dpBar"><span class="dpcount" id="dpCount"></span><button type="button" class="dpapply" id="dpApply">この組み合わせで学習</button><button type="button" class="dpclear" id="dpClear">クリア</button></div>';
   deckPickPanel.innerHTML=h;
-  deckPickPanel.querySelectorAll('.dphd').forEach(b=>b.onclick=()=>b.parentElement.classList.toggle('open'));
+  deckPickPanel.querySelectorAll('.dphd').forEach(b=>b.onclick=()=>{const o=b.parentElement.classList.toggle('open');b.setAttribute('aria-expanded',o?'true':'false');});
   // 複数選択モード
   let dpOn=multiSel.length>1;const dpSel=new Set(multiSel);
   const dpBar=document.getElementById('dpBar'),dpCount=document.getElementById('dpCount'),dpMulti=document.getElementById('dpMulti');
   const dpUpd=()=>{if(dpCount){let n=0;dpSel.forEach(k=>{if(tabs[k])n+=tabs[k].items.length;});dpCount.textContent=dpSel.size+'テーマ・'+n+'語';}
-    deckPickPanel.querySelectorAll('.chip[data-k]').forEach(c=>c.classList.toggle('sel',dpSel.has(c.dataset.k)));
-    deckPickPanel.querySelectorAll('.dpall').forEach(b=>{const ks=[...b.parentElement.querySelectorAll('.chip[data-k]')].map(c=>c.dataset.k);const all=ks.length&&ks.every(k=>dpSel.has(k));b.textContent=all?'分類を全解除':'分類を全選択';b.classList.toggle('sel',all);});};
+    deckPickPanel.querySelectorAll('.chip[data-k]').forEach(c=>{const s=dpSel.has(c.dataset.k);c.classList.toggle('sel',s);c.setAttribute('aria-pressed',s?'true':'false');});
+    deckPickPanel.querySelectorAll('.dpall').forEach(b=>{const ks=[...b.parentElement.querySelectorAll('.chip[data-k]')].map(c=>c.dataset.k);const all=ks.length&&ks.every(k=>dpSel.has(k));b.textContent=all?'分類を全解除':'分類を全選択';b.classList.toggle('sel',all);b.setAttribute('aria-pressed',all?'true':'false');});};
   deckPickPanel.classList.toggle('withbar',dpOn);deckPickPanel.classList.toggle('multion',dpOn);
-  if(dpMulti)dpMulti.onclick=()=>{dpOn=!dpOn;dpMulti.classList.toggle('on',dpOn);dpBar.classList.toggle('hide',!dpOn);deckPickPanel.classList.toggle('withbar',dpOn);deckPickPanel.classList.toggle('multion',dpOn);if(dpOn)dpUpd();};
+  if(dpMulti)dpMulti.onclick=()=>{dpOn=!dpOn;dpMulti.classList.toggle('on',dpOn);dpMulti.setAttribute('aria-pressed',dpOn?'true':'false');dpBar.classList.toggle('hide',!dpOn);deckPickPanel.classList.toggle('withbar',dpOn);deckPickPanel.classList.toggle('multion',dpOn);if(dpOn)dpUpd();};
   const dpApply=document.getElementById('dpApply');
   if(dpApply)dpApply.onclick=()=>{if(dpSel.size<2){dpCount.textContent='2つ以上選んでください';return;}
     multiSel=Array.from(dpSel);current=multiSel[0];closeDeckPick();posFilter='all';rangeSel='all';resetSearch();buildTabs();buildRange();buildFilter();renderAll();saveNav();flashGrid();};
@@ -15942,7 +15942,7 @@ function buildDeckPick(){
   if(dpOn)dpUpd();
   const df=document.getElementById('dpFilter');
   if(df)df.addEventListener('input',()=>{const q=df.value.trim().toLowerCase();
-    deckPickPanel.querySelectorAll('.dpgrp').forEach(g=>{let any=false;g.querySelectorAll('.chip').forEach(c=>{const m=!q||c.textContent.toLowerCase().includes(q);c.style.display=m?'':'none';if(m)any=true;});g.style.display=any?'':'none';if(q&&any)g.classList.add('open');});
+    deckPickPanel.querySelectorAll('.dpgrp').forEach(g=>{let any=false;g.querySelectorAll('.chip').forEach(c=>{const m=!q||c.textContent.toLowerCase().includes(q);c.style.display=m?'':'none';if(m)any=true;});g.style.display=any?'':'none';if(q&&any){g.classList.add('open');const hd=g.querySelector('.dphd');if(hd)hd.setAttribute('aria-expanded','true');}});
   });
 }
 /* 📊 記録 panel (opened from the header utility button) */
