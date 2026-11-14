@@ -15492,7 +15492,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='0729-1928'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1114-1804'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16073,29 +16073,46 @@ function buildStats(){
       return '<div class="goalrow"><div class="goalbar"><i style="width:'+pg+'%"></i></div><div class="goaltxt">'+I_TARGET+' 週間目標 '+Math.floor(week/60)+' / '+goal+'分（'+pg+'%'+(pg>=100?' 達成！'+I_CHECK:'')+'）<button class="dirbtn" id="goalBtn">変更</button></div></div>';
     })()+
     '<div class="goaltxt" style="margin-top:10px"><span>目標レベル</span><select class="dirsel" id="tgtSel" title="今日の新規語が出るレベル">'+['A1','A2','B1','B2','C1','C2'].map(l=>'<option'+(l===ls('fl_target','"A2"')?' selected':'')+'>'+l+'</option>').join('')+'</select><button class="dirbtn" id="paceBtn">新規 '+(Number(ls('fl_newperday','12'))||12)+'語/日</button></div>'+
-    '<div class="goaltxt" style="margin-top:8px"><button class="dirbtn" id="expBtn">'+I_UP+' 進捗をコピー</button><button class="dirbtn" id="impBtn">'+I_DOWN+' 進捗を読み込み</button></div>'+
+    '<div class="goaltxt" style="margin-top:8px"><button class="dirbtn" id="expBtn">'+I_UP+' 進捗を保存</button><button class="dirbtn" id="impBtn">'+I_DOWN+' 進捗を読み込み</button></div>'+
+    '<div class="statnote" style="margin-top:4px">別端末へ引き継ぐには「保存」でファイルを作り、AirDropやメッセージで送って、相手端末の「読み込み」で選ぶだけ（完璧マーク・復習予定・学習時間すべて移ります）</div>'+
     '<div class="statnote">'+I_CHECK+'完璧率 '+(total?Math.round(d/total*100):0)+'% ｜ 過去7日間の学習時間。毎日少しずつが最強です</div>';
   const gb=document.getElementById('goalBtn');
   if(gb)gb.onclick=()=>{const cur=Number(ls('fl_goal','150'))||150;const v=prompt('週間目標を分で入力（例: 150）',cur);const n=Number(v);if(n>0){sv('fl_goal',n);buildStats();}};
-  const eb=document.getElementById('expBtn');
-  if(eb)eb.onclick=()=>{
-    const s=JSON.stringify({v:1,counts:counts,errors:errors,known:known,marks:marks,time:timeData,goal:ls('fl_goal','150')});
-    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).then(()=>alert('進捗をコピーしました。メモ等に保存するか、別端末の「読み込み」に貼り付けてください。')).catch(()=>prompt('この文字列をコピーして保存:',s));
-    else prompt('この文字列をコピーして保存:',s);
-  };
-  const ib=document.getElementById('impBtn');
-  if(ib)ib.onclick=()=>{
-    const v=prompt('バックアップ文字列を貼り付けてください:');
-    if(!v)return;
+  // 端末間の引き継ぎ: ファイル保存/読み込みが主経路（巨大な進捗でもiOSのprompt切り詰めに影響されない）。
+  // v2でSRS(復習予定)も含める。v1文字列バックアップも読み込み互換。
+  const exportPayload=()=>JSON.stringify({v:2,counts:counts,errors:errors,known:known,marks:marks,srs:srs,time:timeData,goal:ls('fl_goal','150')});
+  const importProgress=(v)=>{
     try{const d2=JSON.parse(v);
       if(d2.counts){counts=d2.counts;sv('fl_counts',counts);}
       if(d2.errors){errors=d2.errors;sv('fl_errors',errors);}
       if(d2.known){known=d2.known;sv('fl_known',known);}
       if(d2.marks){marks=d2.marks;sv('fl_marks',marks);}
+      if(d2.srs){srs=d2.srs;sv('fl_srs',srs);}
       if(d2.time){timeData=d2.time;sv('fl_time',timeData);}
       if(d2.goal)sv('fl_goal',d2.goal);
-      alert('読み込みました！');buildStats();showTime();renderAll();
-    }catch(e2){alert('読み込めませんでした。文字列をご確認ください。');}
+      alert('読み込みました！');buildStats();showTime();renderAll();return true;
+    }catch(e2){alert('読み込めませんでした。ファイル／文字列をご確認ください。');return false;}
+  };
+  window._expPayload=exportPayload;window._impProgress=importProgress;
+  const eb=document.getElementById('expBtn');
+  if(eb)eb.onclick=()=>{
+    const s=exportPayload();
+    try{
+      const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'application/json'}));
+      const d8=new Date(),pad=n=>String(n).padStart(2,'0');
+      a.download='franlearn-progress-'+d8.getFullYear()+pad(d8.getMonth()+1)+pad(d8.getDate())+'.json';
+      document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);
+    }catch(e){}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(s).catch(()=>{});
+    alert('進捗ファイルを保存しました（クリップボードにもコピー済み）。\nAirDropやメッセージでファイルを送り、別端末の「進捗を読み込み」で選んでください。');
+  };
+  const ib=document.getElementById('impBtn');
+  if(ib)ib.onclick=()=>{
+    const inp=document.createElement('input');inp.type='file';inp.accept='.json,application/json,text/plain';
+    inp.onchange=()=>{const f=inp.files&&inp.files[0];if(!f)return;
+      const r=new FileReader();r.onload=()=>importProgress(String(r.result));r.readAsText(f);};
+    inp.addEventListener('cancel',()=>{const v=prompt('（ファイルの代わりに）バックアップ文字列の貼り付けでもOK:');if(v)importProgress(v);});
+    inp.click();
   };
   const ts=document.getElementById('tgtSel');
   if(ts)ts.onchange=()=>{sv('fl_target',ts.value);buildStats();updateTodayBadge();};
