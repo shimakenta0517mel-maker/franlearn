@@ -15492,7 +15492,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1114-1804'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1115-1210'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16404,20 +16404,24 @@ function lpStop(){lpToken++;lpPlaying=false;audioStop();kaStop();if(synth)synth.
 lpBtn.onclick=()=>{if(lpPlaying)lpStop();else lpPlay();};
 
 /* ---------- GLOBAL SEARCH ---------- */
+// Fold French spelling for search; keep Japanese voicing and IPA distinctions.
+function normalizeSearchText(s){
+  return String(s).toLowerCase().normalize('NFD').replace(/([a-z])[\u0300-\u036f]+/g,'$1').normalize('NFC').replace(/œ/g,'oe').replace(/æ/g,'ae').replace(/’/g,"'");
+}
 function renderGlobalSearch(){
-  const q=searchQ.toLowerCase();
+  const rawQ=searchQ.toLowerCase(),q=normalizeSearchText(searchQ);
   hintEl.innerHTML='<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20.5 20.5-4-4" stroke-linecap="round"/></svg> <b>全デッキ横断検索</b>の結果です。カード左上のデッキ名をタップするとそのデッキに移動します。';
   const res=[];
   for(const cid in DECKS){
     const tabs=DECKS[cid].tabs;
     for(const tk in tabs){
       tabs[tk].items.forEach((it,i)=>{
-        if((it.w+' '+it.jp+' '+(it.ipa||'')+' '+it.pos).toLowerCase().includes(q))res.push({cid:cid,clabel:DECKS[cid].label,tk:tk,it:it,n:i+1});
+        if(normalizeSearchText(it.w+' '+it.jp+' '+it.pos).includes(q)||(it.ipa||'').toLowerCase().includes(rawQ))res.push({cid:cid,clabel:DECKS[cid].label,tk:tk,it:it,n:i+1});
       });
     }
   }
   VERBS.forEach((v,i)=>{
-    if((v.inf+' '+v.jp+' '+v.ipa).toLowerCase().includes(q))res.push({cid:'verb',clabel:'動詞活用',tk:'活用',it:{w:v.inf,ipa:v.ipa,pos:VERBGROUPS[v.grp],jp:v.jp,ex:v.pres[0]+', '+v.pres[4],exjp:'(現在形 je / vous)'},n:i+1,verb:true});
+    if(normalizeSearchText(v.inf+' '+v.jp).includes(q)||(v.ipa||'').toLowerCase().includes(rawQ))res.push({cid:'verb',clabel:'動詞活用',tk:'活用',it:{w:v.inf,ipa:v.ipa,pos:VERBGROUPS[v.grp],jp:v.jp,ex:v.pres[0]+', '+v.pres[4],exjp:'(現在形 je / vous)'},n:i+1,verb:true});
   });
   levelhead.textContent='「'+searchQ+'」 検索結果 '+res.length+' 件'+(res.length>100?'（先頭100件を表示）':'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
