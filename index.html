@@ -806,8 +806,9 @@
 </header>
 
 <div class="tabs" id="tabs"></div>
-<div class="barrow" id="rangebar"></div>
 <div class="barrow" id="filterbar"></div>
+<div class="barrow" id="posbar"></div>
+<div class="barrow" id="rangebar" title="表示と品詞で絞り込んだ結果の中から区間を選択"></div>
 
 <main>
   <section id="learnView">
@@ -16083,7 +16084,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-1746'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-1858'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16418,15 +16419,28 @@ function baseList(){
   }
   return curTabs()[current].items.map((it,i)=>({it:it,n:i+1}));
 }
+// 表示（状態・頻出）→ 品詞 → その結果内の区間。item と進捗キーは変えない。
+function statusList(){
+  const arr=baseList();
+  if(isVerb()||viewMode==='all')return arr;
+  return arr.filter(o=>viewMode==='visible'?markOf(keyOf(o.it))!=='done':markOf(keyOf(o.it))===viewMode);
+}
+function posList(){
+  const arr=statusList();
+  return isVerb()||!freqOnly?arr:arr.filter(o=>o.it.pri);
+}
+function rangeList(){
+  const arr=posList().filter(o=>isVerb()||posFilter==='all'||posCat(o.it.pos)===posFilter);
+  return arr.map((o,i)=>({it:o.it,n:i+1}));
+}
+function normalizeRange(total){
+  if(!total){rangeSel='all';return;}
+  if(Array.isArray(rangeSel))rangeSel=[Math.min(rangeSel[0],total),Math.min(rangeSel[1],total)];
+}
 function filtered(){
-  let arr=baseList();
-  if(rangeSel!=='all')arr=arr.filter(o=>o.n>=rangeSel[0]&&o.n<=rangeSel[1]);
-  if(!isVerb()){
-    arr=arr.filter(o=>(posFilter==='all'||posCat(o.it.pos)===posFilter)&&(!freqOnly||o.it.pri));
-    if(viewMode==='visible')arr=arr.filter(o=>markOf(keyOf(o.it))!=='done');
-    else if(viewMode!=='all')arr=arr.filter(o=>markOf(keyOf(o.it))===viewMode);
-  }
-  return arr;
+  const arr=rangeList();
+  normalizeRange(arr.length);
+  return rangeSel==='all'?arr:arr.slice(rangeSel[0]-1,rangeSel[1]);
 }
 // 複数選択時は各itemに出典タブ(_tk)を刻印してキーを組む。単一タブ時は従来どおり=既存の学習記録と完全互換
 function keyOf(it){return cat+'|'+(it._tk||current)+'|'+it.w;}
@@ -16745,17 +16759,15 @@ const rangebar=document.getElementById('rangebar');
 const RSIZE=25;
 function buildRange(){
   rangebar.innerHTML='';
-  const total=baseList().length;
-  if(total<=RSIZE&&!isVerb()){
-    // still show label + 全 for small sets but no need for chunks
-  }
+  const total=rangeList().length;
+  normalizeRange(total);
   const lab=document.createElement('span');lab.className='barlabel';lab.textContent='区間';rangebar.appendChild(lab);
   rangebar.appendChild(mkRange('all','全 ('+total+')'));
   for(let s=1;s<=total;s+=RSIZE){
     const e=Math.min(s+RSIZE-1,total);
     rangebar.appendChild(mkRange([s,e],s+'-'+e));
   }
-  rangebar.appendChild(mkCustomRange(total));
+  if(total)rangebar.appendChild(mkCustomRange(total));
 }
 // 自由に範囲を指定（例：1-10 / 1-5 / 1-20）。Enter または OK で適用。
 function mkCustomRange(total){
@@ -16780,17 +16792,17 @@ function mkRange(val,label){
   return c;
 }
 
-/* ---------- filter bar (pos+freq, or verb tense) ---------- */
-const filterbar=document.getElementById('filterbar');
+/* ---------- filter bars: status/frequency → POS ---------- */
+const filterbar=document.getElementById('filterbar'), posbar=document.getElementById('posbar');
 function buildFilter(){
-  filterbar.innerHTML='';
+  filterbar.innerHTML='';posbar.innerHTML='';
+  posbar.classList.toggle('hide',isVerb()||mode==='num'||mode==='book'||mode==='rfi');
   if(isVerb()){
     const lab=document.createElement('span');lab.className='barlabel';lab.textContent='時制';filterbar.appendChild(lab);
     TENSES.forEach(([id,name])=>filterbar.appendChild(mkTense(id,name)));
     filterbar.appendChild(mkTense('all','全部表示'));
-    return;
+    buildRange();return;
   }
-  const items=baseList().map(o=>o.it);
   const mc={done:0,review:0,fav:0};baseList().forEach(o=>{const m=markOf(keyOf(o.it));if(m)mc[m]++;});
   const vlab=document.createElement('span');vlab.className='barlabel';vlab.textContent='表示';filterbar.appendChild(vlab);
   filterbar.appendChild(mkView('visible',I_EYE+' 学習中'));
@@ -16798,20 +16810,22 @@ function buildFilter(){
   filterbar.appendChild(mkView('done',I_CHECK+' 完璧',mc.done));
   filterbar.appendChild(mkView('review',I_LOOP+' 復習',mc.review));
   filterbar.appendChild(mkView('fav',I_STAR+' 保存',mc.fav));
-  const freqCount=items.filter(i=>i.pri).length;
+  const freqCount=statusList().filter(o=>o.it.pri).length;
   const fc=document.createElement('div');fc.className='chip freq'+(freqOnly?' active':'');
   fc.innerHTML=I_STAR+' 頻出のみ <span class="n">'+freqCount+'</span>';
-  fc.onclick=()=>{freqOnly=!freqOnly;buildFilter();renderAll();};
+  fc.onclick=()=>{freqOnly=!freqOnly;rangeSel='all';renderAll();};
   filterbar.appendChild(fc);
+  const items=posList().map(o=>o.it);
   const counts2={};items.forEach(i=>{const c=posCat(i.pos);counts2[c]=(counts2[c]||0)+1;});
-  const plab=document.createElement('span');plab.className='barlabel grp';plab.textContent='品詞';filterbar.appendChild(plab);
-  filterbar.appendChild(mkChip('all','すべて',items.length));
-  POS_ORDER.forEach(p=>{if(counts2[p])filterbar.appendChild(mkChip(p,p,counts2[p]));});
+  const plab=document.createElement('span');plab.className='barlabel';plab.textContent='品詞';posbar.appendChild(plab);
+  posbar.appendChild(mkChip('all','すべて',items.length));
+  POS_ORDER.forEach(p=>{if(counts2[p]||posFilter===p)posbar.appendChild(mkChip(p,p,counts2[p]||0));});
+  buildRange();
 }
 function mkChip(val,label,n){
   const c=document.createElement('div');c.className='chip'+(posFilter===val?' active':'');
   c.innerHTML=label+' <span class="n">'+n+'</span>';
-  c.onclick=()=>{posFilter=val;buildFilter();renderAll();};
+  c.onclick=()=>{posFilter=val;rangeSel='all';renderAll();};
   return c;
 }
 function mkTense(id,name){
@@ -16822,7 +16836,7 @@ function mkTense(id,name){
 function mkView(id,label,n){
   const c=document.createElement('div');c.className='chip view'+(viewMode===id?' active':'');
   c.innerHTML=label+(n!==undefined?' <span class="n">'+n+'</span>':'');
-  c.onclick=()=>{viewMode=id;buildFilter();renderAll();};
+  c.onclick=()=>{viewMode=id;rangeSel='all';renderAll();};
   return c;
 }
 
@@ -16846,8 +16860,8 @@ function setMode(m){
   document.getElementById('numView').classList.toggle('hide',m!=='num');
   document.getElementById('matchView').classList.toggle('hide',m!=='match');
   // 数字は語彙デッキを使わないので、デッキ行・タブ・区間・絞り込みを隠す
-  if(m==='num'||m==='book'||m==='rfi'){deckbar.classList.add('hide');tabsEl.classList.add('hide');rangebar.classList.add('hide');filterbar.classList.add('hide');}
-  else{deckbar.classList.remove('hide');rangebar.classList.remove('hide');filterbar.classList.remove('hide');buildTabs();buildFilter();}
+  if(m==='num'||m==='book'||m==='rfi'){deckbar.classList.add('hide');tabsEl.classList.add('hide');rangebar.classList.add('hide');filterbar.classList.add('hide');posbar.classList.add('hide');}
+  else{deckbar.classList.remove('hide');rangebar.classList.remove('hide');filterbar.classList.remove('hide');buildTabs();}
   if(m!=='hf')hfStop();
   if(m!=='learn')lpStop();
   if(m!=='match')matchStopTimer();
@@ -16900,7 +16914,7 @@ function renderLearn(){
   if(typeof updateTitle==='function')updateTitle();
   if(isVerb()){learnplayEl.classList.add('hide');renderVerbs();return;}
   learnplayEl.classList.remove('hide');
-  hintEl.innerHTML=I_BULB+' 青い<b>単語</b>やIPA、'+I_SPK+'例文をタップで発音。覚えた語はカード下の<b>'+I_CHECK+'完璧</b>で一覧から隠せます（「表示」の '+I_CHECK+'完璧 でいつでも確認・復帰）。'+I_STAR+'は頻出、「区間」で1-25等に絞れます。';
+  hintEl.innerHTML=I_BULB+' 青い<b>単語</b>やIPA、'+I_SPK+'例文をタップで発音。覚えた語はカード下の<b>'+I_CHECK+'完璧</b>で一覧から隠せます（「表示」の '+I_CHECK+'完璧 でいつでも確認・復帰）。'+I_STAR+'は頻出。「表示」→「品詞」で絞り、その結果の中から「区間」で1-25等を選べます。';
   const arr=filtered();
   const _tabLbl=(multiSel.length>1)?('複数選択 '+multiSel.length+'テーマ'):(current+' '+curTabs()[current].label);
   levelhead.innerHTML=(CAT_ICON[cat]||'')+' '+DECKS[cat].label+' ｜ '+_tabLbl+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeSel[0]+'-'+rangeSel[1]+']':'')+(posFilter!=='all'?'（'+posFilter+'）':'')+(freqOnly?' '+I_STAR:'');
@@ -16921,7 +16935,7 @@ function renderLearn(){
       foot;
     const pb=c.querySelector('.play'), cntEl=c.querySelector('[data-c]');
     const hit=()=>{bump(k);cntEl.innerHTML=I_EYE+cOf(k);};
-    c.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{setMark(k,b.dataset.m);renderLearn();buildFilter();});
+    c.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{setMark(k,b.dataset.m);buildFilter();renderLearn();});
     c.querySelector('.word').onclick=()=>{speak(it.w,pb);hit();};
     if(it.ipa)c.querySelector('.ipa').onclick=()=>{speak(it.w,pb);hit();};
     pb.onclick=()=>{speak(it.w,pb);hit();};
@@ -17033,7 +17047,7 @@ function renderGlobalSearch(){
     if(it.ipa)c.querySelector('.ipa').onclick=()=>speak(it.w,pb);
     const ex=c.querySelector('.exfr');ex.onclick=()=>speak(it.ex,ex.querySelector('.ico'));
     c.querySelector('[data-j]').onclick=()=>jumpTo(r.cid,r.tk,it.w);
-    c.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{setMark(k,b.dataset.m);renderLearn();});
+    c.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{setMark(k,b.dataset.m);buildFilter();renderLearn();});
     delfAppendVariants(c,it);
     grid.appendChild(c);
   });
@@ -17269,14 +17283,14 @@ document.getElementById('hfnext').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx
 document.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{
   if(!hfList.length)return;const it=hfList[hfIdx];if(!it||!it.k)return;
   const wp=hfPlaying;
-  setMark(it.k,b.dataset.hm);
+  setMark(it.k,b.dataset.hm);buildFilter();
   if(markOf(it.k)==='done'){
     hfStop();hfList.splice(hfIdx,1);if(hfIdx>=hfList.length)hfIdx=Math.max(0,hfList.length-1);
     if(hfList.length&&wp){hfPlay();return;}   // 再生中なら次の語へ自動継続
   }
   hfShow();
 });
-document.querySelectorAll('[data-hp]').forEach(b=>b.onclick=()=>{viewMode=b.dataset.hp;buildFilter();hfStop();hfBuild();});
+document.querySelectorAll('[data-hp]').forEach(b=>b.onclick=()=>{viewMode=b.dataset.hp;rangeSel='all';renderAll();});
 /* floating top button */
 const topBtn=document.createElement('button');topBtn.id='topBtn';topBtn.innerHTML='<svg viewBox="0 0 24 24"><path d="M12 7.4 4.6 14.8 6 16.2l6-6 6 6 1.4-1.4z"/></svg>';topBtn.setAttribute('aria-label','上に戻る');topBtn.title='上に戻る';document.body.appendChild(topBtn);
 topBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
@@ -18010,6 +18024,7 @@ function rfiInitialize(){
 function renderAll(){
   if(mode==='rfi'){rfiRender();return;}
   if(mode==='book'){renderBook();return;}
+  if(mode!=='num')buildFilter();
   if(mode==='learn')renderLearn();
   else if(mode==='test')buildDeck();
   else if(mode==='num'){hfStop();lpStop();}
@@ -18118,7 +18133,7 @@ setMode(mode);
     try{new MutationObserver(upd).observe(el,{childList:true});}catch(e){}
     return upd;
   }
-  const upds=['tabs','deckbar','teststyle','rangebar','filterbar'].map(id=>sf(document.getElementById(id))).filter(Boolean);
+  const upds=['tabs','deckbar','teststyle','filterbar','posbar','rangebar'].map(id=>sf(document.getElementById(id))).filter(Boolean);
   const all=()=>upds.forEach(u=>u());
   window.addEventListener('resize',all);all();setTimeout(all,300);
 })();
