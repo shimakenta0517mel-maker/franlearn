@@ -15483,7 +15483,7 @@ function delfLoadProgress(storageKey,kind){
     // Retain the first affected records locally, including conflicting marks.
     // Atomic per-map writes and no global flag make partial storage failures retryable.
     try{
-      const archiveKey='fl_delf_migration_backup_v3_'+kind;
+      const archiveKey='fl_delf_migration_backup_v4_'+kind;
       if(!localStorage.getItem(archiveKey)){
         const affected=Object.create(null);
         for(const [key,value] of Object.entries(old||{})){if(delfMigrationKeys.has(key)){affected[key]=value;const dest=delfMigrationKeys.get(key);if(Object.prototype.hasOwnProperty.call(old,dest))affected[dest]=old[dest];}}
@@ -15773,6 +15773,130 @@ const DELF_DAILY_SENSES=[
 
 /*===DELF_DAILY_20261122_END===*/
 
+/*===DELF_COLORS_MEALS_20261122_START===*/
+const DELF_COLORS_MEALS_WORDS=[
+{level:"A1",item:{w:"beige",ipa:"[bɛʒ]",pos:"形容詞",jp:"ベージュの",ex:"Je porte un pantalon beige aujourd'hui.",exjp:"今日はベージュのズボンをはいています。",pri:1}},
+{level:"A1",item:{w:"bleu clair",ipa:"[blø klɛʁ]",pos:"形容詞",jp:"薄い青の",ex:"Les murs de ma chambre sont bleu clair.",exjp:"私の部屋の壁は薄い青です。",pri:1,note:"bleu clair のように色名と濃淡を組み合わせた形容詞は、性・数で形を変えません。"}},
+{level:"A1",item:{w:"bleu foncé",ipa:"[blø fɔ̃se]",pos:"形容詞",jp:"濃い青の",ex:"Mon sac à dos est bleu foncé.",exjp:"私のリュックは濃い青です。",pri:1}},
+{level:"A1",item:{w:"bleu ciel",ipa:"[blø sjɛl]",pos:"形容詞",jp:"空色の・水色の",ex:"Elle choisit une chemise bleu ciel.",exjp:"彼女は水色のシャツを選びます。",pri:1}},
+{level:"A2",item:{w:"bleu marine",ipa:"[blø maʁin]",pos:"形容詞",jp:"紺色の・ネイビーブルーの",ex:"Ces chaussures bleu marine vont avec ma veste.",exjp:"この紺色の靴は私の上着に合います。",pri:1,note:"女性名詞や複数名詞を説明するときも、bleu marine の形は変わりません。"}},
+{level:"A1",item:{w:"vert clair",ipa:"[vɛʁ klɛʁ]",pos:"形容詞",jp:"薄い緑の・明るい緑色の",ex:"Les feuilles sont vert clair au printemps.",exjp:"春の葉は明るい緑色です。",pri:1}},
+{level:"A1",item:{w:"vert foncé",ipa:"[vɛʁ fɔ̃se]",pos:"形容詞",jp:"濃い緑の・深緑の",ex:"La porte de la maison est vert foncé.",exjp:"家のドアは深緑です。",pri:1}},
+{level:"A2",item:{w:"turquoise",ipa:"[tyʁkwaz]",pos:"形容詞",jp:"ターコイズ色の・青緑色の",ex:"J'aime cette écharpe turquoise.",exjp:"このターコイズ色のマフラーが好きです。",pri:1,note:"色を表す形容詞としては、性・数で形が変わりません。"}},
+{level:"A2",item:{w:"kaki",ipa:"[kaki]",pos:"形容詞",jp:"カーキ色の",ex:"Je mets une veste kaki pour la promenade.",exjp:"散歩にカーキ色の上着を着ていきます。",pri:1,note:"色を表す形容詞としては、性・数で形が変わりません。"}},
+{level:"A2",item:{w:"vert olive",ipa:"[vɛʁ ɔliv]",pos:"形容詞",jp:"オリーブ色の・くすんだ黄緑色の",ex:"Nous avons choisi des coussins vert olive.",exjp:"私たちはオリーブ色のクッションを選びました。",pri:1}},
+{level:"A2",item:{w:"bordeaux",ipa:"[bɔʁdo]",pos:"形容詞",jp:"ボルドー色の・ワインレッドの",ex:"Ce pull bordeaux me plaît beaucoup.",exjp:"このワインレッドのセーターがとても気に入っています。",pri:1,note:"色の名前は小文字で書き、形容詞としては性・数で形が変わりません。"}},
+{level:"A2",item:{w:"mauve",ipa:"[mov]",pos:"形容詞",jp:"薄紫色の",ex:"Les fleurs mauves décorent la table.",exjp:"薄紫色の花がテーブルを飾っています。",pri:1,note:"複数名詞を説明するときは mauves とします。"}},
+{level:"A2",item:{w:"fuchsia",ipa:"[fyʃja]",pos:"形容詞",jp:"フューシャ色の・鮮やかな赤紫色の",ex:"Cette robe fuchsia se voit de loin.",exjp:"この鮮やかな赤紫色のワンピースは遠くからでも目立ちます。",pri:1,note:"色を表す形容詞としては、性・数で形が変わりません。"}},
+{level:"A1",item:{w:"rose pâle",ipa:"[ʁoz pɑl]",pos:"形容詞",jp:"淡いピンクの",ex:"Le bébé porte un bonnet rose pâle.",exjp:"赤ちゃんは淡いピンクの帽子をかぶっています。",pri:1}},
+{level:"A2",item:{w:"rouge vif",ipa:"[ʁuʒ vif]",pos:"形容詞",jp:"鮮やかな赤の",ex:"Ces tomates sont rouge vif.",exjp:"このトマトは鮮やかな赤色です。",pri:1}},
+{level:"A2",item:{w:"argenté",ipa:"[aʁʒɑ̃te]",pos:"形容詞",jp:"銀色の",ex:"Elle porte une montre argentée.",exjp:"彼女は銀色の腕時計を着けています。",pri:1,note:"女性形は argentée、複数形は argentés、女性複数形は argentées です。"}},
+{level:"A2",item:{w:"blanc cassé",ipa:"[blɑ̃ kase]",pos:"形容詞",jp:"オフホワイトの・少し色味のある白の",ex:"Nous peignons le plafond en blanc cassé.",exjp:"天井をオフホワイトに塗ります。",pri:1}},
+{level:"A2",item:{w:"écru",ipa:"[ekʁy]",pos:"形容詞",jp:"生成り色の・黄みがかった白の",ex:"La nappe écrue est en lin.",exjp:"生成り色のテーブルクロスはリネン製です。",pri:1,note:"女性形は écrue、複数形は écrus、女性複数形は écrues です。"}},
+{level:"A2",item:{w:"crème",ipa:"[kʁɛm]",pos:"形容詞",jp:"クリーム色の",ex:"Les rideaux crème laissent passer la lumière.",exjp:"クリーム色のカーテンは光を通します。",pri:1,note:"色を表す形容詞としては、性・数で形が変わりません。"}},
+{level:"A2",item:{w:"ivoire",ipa:"[ivwaʁ]",pos:"形容詞",jp:"アイボリーの・象牙色の",ex:"J'ai choisi des enveloppes ivoire.",exjp:"アイボリーの封筒を選びました。",pri:1,note:"色を表す形容詞としては、性・数で形が変わりません。"}},
+{level:"A1",item:{w:"une pizza",ipa:"[yn pidza]",pos:"名詞",jp:"ピザ",ex:"Nous partageons une pizza aux champignons.",exjp:"私たちはキノコのピザを分けて食べます。",pri:1}},
+{level:"A1",item:{w:"un sandwich",ipa:"[œ̃ sɑ̃dwitʃ]",pos:"名詞",jp:"サンドイッチ",ex:"Je prends un sandwich pour le déjeuner.",exjp:"昼食にサンドイッチを食べます。",pri:1}},
+{level:"A1",item:{w:"un hamburger",ipa:"[œ̃ ɑ̃bœʁɡœʁ]",pos:"名詞",jp:"ハンバーガー",ex:"Je voudrais un hamburger sans oignons.",exjp:"タマネギ抜きのハンバーガーをお願いします。",pri:1}},
+{level:"A2",item:{w:"un hot-dog",ipa:"[œ̃ ɔt dɔɡ]",pos:"名詞",jp:"ホットドッグ",ex:"Il met un peu de moutarde sur son hot-dog.",exjp:"彼はホットドッグにマスタードを少しかけます。",pri:1}},
+{level:"A2",item:{w:"un croque-monsieur",ipa:"[œ̃ kʁɔk məsjø]",pos:"名詞",jp:"クロックムッシュ（ハムとチーズの温かいサンドイッチ）",ex:"Ce croque-monsieur est encore bien chaud.",exjp:"このクロックムッシュはまだ熱々です。",pri:1}},
+{level:"A2",item:{w:"un croque-madame",ipa:"[œ̃ kʁɔk madam]",pos:"名詞",jp:"クロックマダム（卵をのせたクロックムッシュ）",ex:"Je commande un croque-madame avec une salade.",exjp:"サラダ付きのクロックマダムを注文します。",pri:1}},
+{level:"A1",item:{w:"une omelette",ipa:"[yn ɔmlɛt]",pos:"名詞",jp:"オムレツ",ex:"Je prépare une omelette au fromage.",exjp:"チーズ入りのオムレツを作ります。",pri:1}},
+{level:"A1",item:{w:"des frites",ipa:"[de fʁit]",pos:"名詞",jp:"フライドポテト",ex:"Tu veux des frites avec ton sandwich ?",exjp:"サンドイッチと一緒にフライドポテトも食べる？",pri:1}},
+{level:"A2",item:{w:"de la purée",ipa:"[də la pyʁe]",pos:"名詞",jp:"マッシュポテト・ピューレ",ex:"Je sers de la purée avec le poulet.",exjp:"鶏肉にマッシュポテトを添えます。",pri:1}},
+{level:"A1",item:{w:"une soupe",ipa:"[yn sup]",pos:"名詞",jp:"スープ",ex:"Cette soupe de légumes est délicieuse.",exjp:"この野菜スープはとてもおいしいです。",pri:1}},
+{level:"A2",item:{w:"une soupe à l'oignon",ipa:"[yn sup a lɔɲɔ̃]",pos:"名詞",jp:"オニオンスープ",ex:"Je choisis une soupe à l'oignon en entrée.",exjp:"前菜にオニオンスープを選びます。",pri:1}},
+{level:"A2",item:{w:"une salade composée",ipa:"[yn salad kɔ̃poze]",pos:"名詞",jp:"具だくさんのサラダ・ミックスサラダ",ex:"Cette salade composée contient du thon et des œufs.",exjp:"この具だくさんのサラダにはツナと卵が入っています。",pri:1}},
+{level:"A2",item:{w:"une salade de pommes de terre",ipa:"[yn salad də pɔm də tɛʁ]",pos:"名詞",jp:"ポテトサラダ",ex:"J'apporte une salade de pommes de terre au pique-nique.",exjp:"ピクニックにポテトサラダを持っていきます。",pri:1}},
+{level:"A1",item:{w:"du poulet rôti",ipa:"[dy pulɛ ʁoti]",pos:"名詞",jp:"ローストチキン",ex:"Nous mangeons du poulet rôti le dimanche.",exjp:"私たちは日曜日にローストチキンを食べます。",pri:1}},
+{level:"A2",item:{w:"du poisson grillé",ipa:"[dy pwasɔ̃ ɡʁije]",pos:"名詞",jp:"焼き魚・魚のグリル",ex:"Je prends du poisson grillé avec du riz.",exjp:"焼き魚をご飯と一緒に食べます。",pri:1}},
+{level:"A1",item:{w:"un steak",ipa:"[œ̃ stɛk]",pos:"名詞",jp:"ステーキ",ex:"Je voudrais un steak bien cuit.",exjp:"よく焼いたステーキをお願いします。",pri:1}},
+{level:"A2",item:{w:"un steak haché",ipa:"[œ̃ stɛk aʃe]",pos:"名詞",jp:"牛ひき肉のステーキ・パティ",ex:"Je fais cuire deux steaks hachés dans la poêle.",exjp:"フライパンで牛ひき肉のパティを2枚焼きます。",pri:1}},
+{level:"A2",item:{w:"des boulettes de viande",ipa:"[de bulɛt də vjɑ̃d]",pos:"名詞",jp:"肉団子・ミートボール",ex:"Les boulettes de viande mijotent dans la sauce tomate.",exjp:"肉団子がトマトソースの中で煮えています。",pri:1}},
+{level:"A2",item:{w:"une escalope panée",ipa:"[yn ɛskalɔp pane]",pos:"名詞",jp:"薄切り肉のカツレツ",ex:"Cette escalope panée est bien croustillante.",exjp:"このカツレツは衣がとてもサクサクしています。",pri:1}},
+{level:"B1",item:{w:"une blanquette de veau",ipa:"[yn blɑ̃kɛt də vo]",pos:"名詞",jp:"仔牛肉のクリーム煮",ex:"La blanquette de veau est servie avec du riz.",exjp:"仔牛肉のクリーム煮にはご飯が添えられています。",pri:1}},
+{level:"B1",item:{w:"un hachis parmentier",ipa:"[œ̃ aʃi paʁmɑ̃tje]",pos:"名詞",jp:"アッシ・パルマンティエ（ひき肉とマッシュポテトの重ね焼き）",ex:"Je prépare un hachis parmentier pour toute la famille.",exjp:"家族全員分のアッシ・パルマンティエを作ります。",pri:1}},
+{level:"A2",item:{w:"un couscous",ipa:"[œ̃ kuskus]",pos:"名詞",jp:"クスクス（粒状のセモリナに肉や野菜を添えた料理）",ex:"Ce couscous est servi avec beaucoup de légumes.",exjp:"このクスクスにはたくさんの野菜が添えられています。",pri:1}},
+{level:"A2",item:{w:"un tajine",ipa:"[œ̃ taʒin]",pos:"名詞",jp:"タジン（肉や野菜の蒸し煮料理）",ex:"Nous partageons un tajine au poulet et au citron.",exjp:"私たちは鶏肉とレモンのタジンを分けて食べます。",pri:1}},
+{level:"A2",item:{w:"une paella",ipa:"[yn paelja]",pos:"名詞",jp:"パエリア",ex:"Je prépare une paella aux fruits de mer.",exjp:"魚介のパエリアを作ります。",pri:1}},
+{level:"A2",item:{w:"un risotto",ipa:"[œ̃ ʁizɔto]",pos:"名詞",jp:"リゾット",ex:"Ce risotto aux champignons est très crémeux.",exjp:"このキノコのリゾットはとてもクリーミーです。",pri:1}},
+{level:"A2",item:{w:"des lasagnes",ipa:"[de lazaɲ]",pos:"名詞",jp:"ラザニア",ex:"Les lasagnes sont encore dans le four.",exjp:"ラザニアはまだオーブンの中にあります。",pri:1}},
+{level:"A1",item:{w:"des spaghettis",ipa:"[de spaɡeti]",pos:"名詞",jp:"スパゲッティ",ex:"Je fais des spaghettis à la sauce tomate.",exjp:"トマトソースのスパゲッティを作ります。",pri:1}},
+{level:"A2",item:{w:"des raviolis",ipa:"[de ʁavjɔli]",pos:"名詞",jp:"ラビオリ（具を包んだパスタ）",ex:"Ces raviolis sont farcis aux épinards et au fromage.",exjp:"このラビオリにはホウレンソウとチーズが詰めてあります。",pri:1}},
+{level:"A2",item:{w:"des pâtes à la carbonara",ipa:"[de pɑt a la kaʁbɔnaʁa]",pos:"名詞",jp:"カルボナーラ",ex:"Je commande des pâtes à la carbonara.",exjp:"カルボナーラを注文します。",pri:1}},
+{level:"A2",item:{w:"du riz sauté",ipa:"[dy ʁi sote]",pos:"名詞",jp:"チャーハン・炒めご飯",ex:"Je prépare du riz sauté avec les restes du frigo.",exjp:"冷蔵庫の残り物でチャーハンを作ります。",pri:1}},
+{level:"A2",item:{w:"un curry",ipa:"[œ̃ kyʁi]",pos:"名詞",jp:"カレー料理",ex:"Ce curry de légumes n'est pas trop épicé.",exjp:"この野菜カレーは辛すぎません。",pri:1}},
+{level:"A2",item:{w:"des nouilles sautées",ipa:"[de nuj sote]",pos:"名詞",jp:"焼きそば・炒め麺",ex:"Je mange des nouilles sautées aux légumes.",exjp:"野菜入りの焼きそばを食べます。",pri:1}},
+{level:"A1",item:{w:"des sushis",ipa:"[de suʃi]",pos:"名詞",jp:"寿司",ex:"Nous achetons des sushis pour ce soir.",exjp:"今夜の食事に寿司を買います。",pri:1}},
+{level:"A2",item:{w:"des makis",ipa:"[de maki]",pos:"名詞",jp:"巻き寿司",ex:"Je choisis des makis au concombre.",exjp:"キュウリの巻き寿司を選びます。",pri:1}},
+{level:"A2",item:{w:"un ramen",ipa:"[œ̃ ʁamɛn]",pos:"名詞",jp:"ラーメン",ex:"Je commande un ramen avec un œuf.",exjp:"卵入りのラーメンを注文します。",pri:1}},
+{level:"A2",item:{w:"des gyozas",ipa:"[de ɡjɔza]",pos:"名詞",jp:"餃子",ex:"Les gyozas sont dorés sur le dessous.",exjp:"餃子の底に焼き色が付いています。",pri:1}},
+{level:"A2",item:{w:"de la soupe miso",ipa:"[də la sup mizo]",pos:"名詞",jp:"みそ汁",ex:"Je bois de la soupe miso avec mon repas.",exjp:"食事と一緒にみそ汁を飲みます。",pri:1}},
+{level:"A2",item:{w:"un onigiri",ipa:"[œ̃n‿ɔniɡiʁi]",pos:"名詞",jp:"おにぎり",ex:"J'emporte deux onigiris pour le déjeuner.",exjp:"昼食におにぎりを2個持っていきます。",pri:1}},
+{level:"A2",item:{w:"des sashimis",ipa:"[de saʃimi]",pos:"名詞",jp:"刺身",ex:"Ces sashimis de saumon sont bien frais.",exjp:"このサーモンの刺身はとても新鮮です。",pri:1}},
+{level:"A2",item:{w:"des nems",ipa:"[de nɛm]",pos:"名詞",jp:"ベトナム風の揚げ春巻き",ex:"Je prends des nems avec un peu de salade.",exjp:"少しのサラダと一緒に揚げ春巻きを食べます。",pri:1}},
+{level:"A2",item:{w:"un rouleau de printemps",ipa:"[œ̃ ʁulo də pʁɛ̃tɑ̃]",pos:"名詞",jp:"生春巻き",ex:"Ce rouleau de printemps contient des crevettes.",exjp:"この生春巻きにはエビが入っています。",pri:1}},
+{level:"A2",item:{w:"du houmous",ipa:"[dy umus]",pos:"名詞",jp:"フムス（ヒヨコ豆のペースト料理）",ex:"Je mange du houmous avec du pain.",exjp:"フムスをパンと一緒に食べます。",pri:1}},
+{level:"A2",item:{w:"des falafels",ipa:"[de falafɛl]",pos:"名詞",jp:"ファラフェル（豆の揚げ団子）",ex:"Ces falafels sont servis avec une sauce au yaourt.",exjp:"このファラフェルにはヨーグルトソースが添えられています。",pri:1}},
+{level:"A2",item:{w:"un taboulé",ipa:"[œ̃ tabule]",pos:"名詞",jp:"タブレ（穀物と野菜・ハーブのサラダ）",ex:"Je prépare un taboulé pour le pique-nique.",exjp:"ピクニック用にタブレを作ります。",pri:1}},
+{level:"A2",item:{w:"une brochette",ipa:"[yn bʁɔʃɛt]",pos:"名詞",jp:"串焼き",ex:"Je fais griller des brochettes de poulet.",exjp:"鶏肉の串焼きを焼きます。",pri:1}},
+{level:"A2",item:{w:"un kebab",ipa:"[œ̃ kebab]",pos:"名詞",jp:"ケバブ・ケバブサンド",ex:"Je prends un kebab à emporter.",exjp:"持ち帰り用にケバブサンドを買います。",pri:1}},
+{level:"A1",item:{w:"du pain de mie",ipa:"[dy pɛ̃ də mi]",pos:"名詞",jp:"食パン",ex:"Je prends deux tranches de pain de mie.",exjp:"食パンを2枚取ります。",pri:1}},
+{level:"A2",item:{w:"une biscotte",ipa:"[yn biskɔt]",pos:"名詞",jp:"ビスコット・二度焼きした薄切りパン",ex:"Je mets de la confiture sur une biscotte.",exjp:"ビスコットにジャムを塗ります。",pri:1}},
+{level:"A2",item:{w:"du pain perdu",ipa:"[dy pɛ̃ pɛʁdy]",pos:"名詞",jp:"フレンチトースト",ex:"Je prépare du pain perdu avec le pain d'hier.",exjp:"昨日のパンでフレンチトーストを作ります。",pri:1}},
+{level:"A1",item:{w:"un pancake",ipa:"[œ̃ pankɛk]",pos:"名詞",jp:"パンケーキ",ex:"Je mange un pancake avec du miel.",exjp:"パンケーキに蜂蜜をかけて食べます。",pri:1}},
+{level:"A2",item:{w:"du porridge",ipa:"[dy pɔʁidʒ]",pos:"名詞",jp:"ポリッジ・オートミールのおかゆ",ex:"Je prépare du porridge pour le petit déjeuner.",exjp:"朝食にオートミールのおかゆを作ります。",pri:1}},
+{level:"A2",item:{w:"du muesli",ipa:"[dy mysli]",pos:"名詞",jp:"ミューズリー（穀物フレークとドライフルーツなどの混合食品）",ex:"Je mélange du muesli avec du yaourt.",exjp:"ミューズリーをヨーグルトと混ぜます。",pri:1}},
+{level:"A2",item:{w:"du granola",ipa:"[dy ɡʁanɔla]",pos:"名詞",jp:"グラノーラ",ex:"Ce granola est bien croustillant.",exjp:"このグラノーラはとてもサクサクしています。",pri:1}},
+{level:"A1",item:{w:"un œuf au plat",ipa:"[œ̃n‿œf o pla]",pos:"名詞",jp:"目玉焼き",ex:"Je mange un œuf au plat avec du pain.",exjp:"目玉焼きをパンと一緒に食べます。",pri:1}},
+{level:"A1",item:{w:"un œuf dur",ipa:"[œ̃n‿œf dyʁ]",pos:"名詞",jp:"固ゆで卵",ex:"Je coupe un œuf dur pour la salade.",exjp:"サラダ用に固ゆで卵を切ります。",pri:1}},
+{level:"A2",item:{w:"un œuf poché",ipa:"[œ̃n‿œf pɔʃe]",pos:"名詞",jp:"ポーチドエッグ・落とし卵",ex:"L'œuf poché est servi sur une tranche de pain.",exjp:"ポーチドエッグはパンの上にのせて出されます。",pri:1}},
+{level:"A1",item:{w:"un cookie",ipa:"[œ̃ kuki]",pos:"名詞",jp:"クッキー（チョコチップなどが入ったもの）",ex:"Je prends un cookie avec mon café.",exjp:"コーヒーと一緒にクッキーを食べます。",pri:1}},
+{level:"A2",item:{w:"un muffin",ipa:"[œ̃ mœfin]",pos:"名詞",jp:"マフィン",ex:"Ce muffin contient des morceaux de chocolat.",exjp:"このマフィンにはチョコレートのかけらが入っています。",pri:1}},
+{level:"A2",item:{w:"un brownie",ipa:"[œ̃ bʁɔni]",pos:"名詞",jp:"ブラウニー",ex:"Nous partageons un brownie après le repas.",exjp:"食後にブラウニーを分けて食べます。",pri:1}},
+{level:"A2",item:{w:"un gâteau au fromage",ipa:"[œ̃ ɡato o fʁɔmaʒ]",pos:"名詞",jp:"チーズケーキ",ex:"Je prépare un gâteau au fromage pour dimanche.",exjp:"日曜日のためにチーズケーキを作ります。",pri:1}},
+{level:"A1",item:{w:"une compote",ipa:"[yn kɔ̃pɔt]",pos:"名詞",jp:"コンポート・果物を煮たデザート",ex:"Je mange une compote de pommes au dessert.",exjp:"デザートにリンゴのコンポートを食べます。",pri:1}},
+{level:"A1",item:{w:"une salade de fruits",ipa:"[yn salad də fʁɥi]",pos:"名詞",jp:"フルーツサラダ",ex:"Je prépare une salade de fruits frais.",exjp:"新鮮な果物でフルーツサラダを作ります。",pri:1}},
+{level:"A2",item:{w:"du riz au lait",ipa:"[dy ʁi o lɛ]",pos:"名詞",jp:"ライスプディング・米を牛乳で甘く煮たデザート",ex:"Ce riz au lait est parfumé à la vanille.",exjp:"このライスプディングにはバニラの香りが付いています。",pri:1}},
+{level:"A2",item:{w:"un tiramisu",ipa:"[œ̃ tiʁamisu]",pos:"名詞",jp:"ティラミス",ex:"Je choisis un tiramisu pour le dessert.",exjp:"デザートにティラミスを選びます。",pri:1}},
+{level:"A2",item:{w:"un crumble",ipa:"[œ̃ kʁœmbœl]",pos:"名詞",jp:"クランブル（果物にそぼろ状の生地をのせた焼き菓子）",ex:"Le crumble aux pommes est encore tiède.",exjp:"リンゴのクランブルはまだほんのり温かいです。",pri:1}},
+{level:"A2",item:{w:"un mille-feuille",ipa:"[œ̃ milfœj]",pos:"名詞",jp:"ミルフィーユ",ex:"Nous avons acheté deux mille-feuilles à la pâtisserie.",exjp:"洋菓子店でミルフィーユを二つ買いました。",pri:1}},
+{level:"A2",item:{w:"un chou à la crème",ipa:"[œ̃ ʃu a la kʁɛm]",pos:"名詞",jp:"シュークリーム",ex:"Ce chou à la crème est tout frais.",exjp:"このシュークリームはできたてです。",pri:1}},
+{level:"A2",item:{w:"un financier",ipa:"[œ̃ finɑ̃sje]",pos:"名詞",jp:"フィナンシェ（アーモンド入りの小さな焼き菓子）",ex:"Je prends un financier pour le goûter.",exjp:"おやつにフィナンシェを食べます。",pri:1}},
+{level:"A2",item:{w:"un palmier",ipa:"[œ̃ palmje]",pos:"名詞",jp:"パルミエ（ハート形のパイ菓子）",ex:"Ce palmier est croustillant et légèrement sucré.",exjp:"このパルミエはサクサクしていて、ほんのり甘いです。",pri:1}},
+{level:"A2",item:{w:"une tartelette",ipa:"[yn taʁtəlɛt]",pos:"名詞",jp:"タルトレット・小さなタルト",ex:"Je choisis une tartelette aux fraises.",exjp:"イチゴのタルトレットを選びます。",pri:1}},
+{level:"A2",item:{w:"un sablé",ipa:"[œ̃ sable]",pos:"名詞",jp:"サブレ",ex:"Ces sablés ont un bon goût de beurre.",exjp:"このサブレはバターの風味がよいです。",pri:1}},
+{level:"A2",item:{w:"une meringue",ipa:"[yn məʁɛ̃ɡ]",pos:"名詞",jp:"メレンゲ菓子",ex:"Ces petites meringues sont légères et croquantes.",exjp:"この小さなメレンゲ菓子は軽くてサクサクしています。",pri:1}},
+{level:"A2",item:{w:"une sucette",ipa:"[yn sysɛt]",pos:"名詞",jp:"棒付きキャンディー",ex:"L'enfant choisit une sucette à la fraise.",exjp:"子どもはイチゴ味の棒付きキャンディーを選びます。",pri:1}},
+{level:"A2",item:{w:"de la guimauve",ipa:"[də la ɡimov]",pos:"名詞",jp:"マシュマロ",ex:"Je mets de la guimauve dans le chocolat chaud.",exjp:"ホットチョコレートにマシュマロを入れます。",pri:1}},
+{level:"A1",item:{w:"du pop-corn",ipa:"[dy pɔpkɔʁn]",pos:"名詞",jp:"ポップコーン",ex:"Nous partageons du pop-corn au cinéma.",exjp:"映画館でポップコーンを分けて食べます。",pri:1}},
+{level:"A1",item:{w:"le goûter",ipa:"[lə ɡute]",pos:"名詞",jp:"午後のおやつ・間食",ex:"Les enfants prennent leur goûter à quatre heures.",exjp:"子どもたちは4時におやつを食べます。",pri:1}},
+{level:"A2",item:{w:"un en-cas",ipa:"[œ̃n‿ɑ̃ka]",pos:"名詞",jp:"軽くつまむ食べ物・軽食",ex:"J'emporte un en-cas pour le voyage.",exjp:"旅行に軽くつまむ食べ物を持っていきます。",pri:1}},
+{level:"B1",item:{w:"une collation",ipa:"[yn kɔlasjɔ̃]",pos:"名詞",jp:"軽食・軽い食事",ex:"Une collation est prévue après la réunion.",exjp:"会議の後に軽食が用意されています。",pri:1}}
+];
+const DELF_COLORS_MEALS_SENSES=[
+{destination:"delf|B2|une nuance",level:"B2",item:{w:"une nuance",ipa:"[yn nɥɑ̃s]",pos:"名詞",jp:"色合い・同じ色の微妙な違い",ex:"Je cherche une nuance de vert plus douce.",exjp:"もっと柔らかな緑の色合いを探しています。",pri:1}},
+{destination:"delf|B1|les croquettes",level:"B1",item:{w:"les croquettes",ipa:"[le kʁɔkɛt]",pos:"名詞",jp:"コロッケ・クロケット",ex:"Je sers les croquettes de pommes de terre avec une salade.",exjp:"ジャガイモのコロッケにサラダを添えます。",pri:1}},
+{destination:"delf|C2|le biscuit",level:"A1",item:{w:"le biscuit",ipa:"[lə biskɥi]",pos:"名詞",jp:"ビスケット",ex:"Ce biscuit est parfait avec une tasse de thé.",exjp:"このビスケットは紅茶によく合います。",pri:1}}
+];
+(function(){
+  const cards=new Map(),identities=new Set();
+  for(const [level,tab] of Object.entries(DECKS.delf.tabs))for(const item of tab.items){cards.set('delf|'+level+'|'+item.w,item);identities.add(delfThemeIdentity(item.w));}
+  const plain=item=>{const {delfVariants,_tk,...rest}=item;return rest;};
+  for(const patch of DELF_COLORS_MEALS_SENSES){
+    const item=cards.get(patch.destination);if(!item)throw Error('Missing color/meal meaning destination');
+    const oldLevel=patch.destination.split('|')[1];
+    if(DELF_LEVEL_ORDER.indexOf(patch.level)<DELF_LEVEL_ORDER.indexOf(oldLevel)){
+      const original=DECKS.delf.tabs[oldLevel].items;original.splice(original.indexOf(item),1);
+      DECKS.delf.tabs[patch.level].items.push({...patch.item,delfVariants:[plain(item),...(item.delfVariants||[]).map(plain)]});
+      delfMigrationKeys.set(patch.destination,'delf|'+patch.level+'|'+item.w);
+    }else item.delfVariants=[...(item.delfVariants||[]),patch.item];
+  }
+  for(const row of DELF_COLORS_MEALS_WORDS){const identity=delfThemeIdentity(row.item.w);if(identities.has(identity))throw Error('Duplicate color/meal word: '+row.item.w);identities.add(identity);DECKS.delf.tabs[row.level].items.push(row.item);}
+  for(const [key,first] of delfMigrationKeys){let dest=first;const seen=new Set([key]);while(delfMigrationKeys.has(dest)){if(seen.has(dest))throw Error('DELF migration cycle');seen.add(dest);dest=delfMigrationKeys.get(dest);}delfMigrationKeys.set(key,dest);}
+})();
+/*===DELF_COLORS_MEALS_20261122_END===*/
+
 /* ---------- voices ---------- */
 const synth=window.speechSynthesis;
 let voices=[], frVoice=null, jaVoice=null;
@@ -15992,7 +16116,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-1418'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-1737'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
