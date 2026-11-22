@@ -15765,7 +15765,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-1235'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-1335'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16230,15 +16230,10 @@ function buildDeckPick(){
 const statsBtn=document.getElementById('statsBtn');
 if(statsBtn)statsBtn.onclick=function(){toggleStats();};
 
-/* ===== content decks (Tier 2): 今日 + DELF/頻出/場面別/テーマ別/動詞 ===== */
-let todayBtn=null;
+/* ===== content decks (Tier 2): DELF / frequently used phrases / verbs ===== */
 function buildDeckbar(){
   deckbar.innerHTML='';
   const lbl=document.createElement('span');lbl.className='barlbl';lbl.textContent='中身';deckbar.appendChild(lbl);
-  todayBtn=document.createElement('button');todayBtn.className='catbtn';todayBtn.innerHTML=IC_TODAY+'<span>今日</span>';
-  todayBtn.title='今日やるべき復習＋新規（SRS）をまとめてテスト';
-  todayBtn.onclick=function(){todayMode=true;setMode('test');};
-  deckbar.appendChild(todayBtn);
   CATS.forEach(([id,label])=>{
     const b=document.createElement('button');b.className='catbtn';b.innerHTML=(CAT_ICON[id]||'')+'<span>'+label+'</span>';b.dataset.cat=id;
     b.onclick=()=>{todayMode=false;cat=id;multiSel=[];posFilter='all';freqOnly=false;rangeSel='all';resetSearch();
@@ -16246,14 +16241,14 @@ function buildDeckbar(){
       highlightDeckbar();buildTabs();buildRange();buildFilter();renderAll();saveNav();flashGrid();};
     deckbar.appendChild(b);
   });
-  highlightDeckbar();updateTodayBadge();
+  highlightDeckbar();
 }
 function navScrollIntoView(el){if(el&&el.scrollIntoView){try{el.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'});}catch(e){try{el.scrollIntoView(false);}catch(_){}}}}
 function highlightDeckbar(){
   if(!deckbar)return;
   let act=null;
   deckbar.querySelectorAll('.catbtn').forEach(x=>{
-    const on = x===todayBtn ? todayMode : (!todayMode && x.dataset.cat===cat);
+    const on = !todayMode && x.dataset.cat===cat;
     x.classList.toggle('active',!!on);x.setAttribute('aria-current',on?'true':'false');
     if(on)act=x;
   });
@@ -16269,8 +16264,6 @@ function updateTitle(){try{
   else if(typeof DECKS!=='undefined'&&DECKS[cat]){d=DECKS[cat].label;if(current&&DECKS[cat].tabs[current])d+=' '+current;}
   document.title=(d?d+' ｜ ':'')+'FranLearn — フランス語 単語・フレーズ・活用';
 }catch(e){}}
-function updateTodayBadge(){try{const t=buildTodayDeck();if(todayBtn)todayBtn.innerHTML=IC_TODAY+'<span>今日 '+(t.due.length+t.news.length)+'</span>';}catch(e){}}
-setTimeout(updateTodayBadge,300);
 
 /* ===== test styles (inside テスト): カード / マッチ / 発音 / 数字 ===== */
 const TEST_STYLES=[['test','カード'],['match','マッチ'],['pron','発音'],['num','数字']];
@@ -16350,7 +16343,6 @@ function buildStats(){
       const pg=Math.min(100,Math.round(week/60/goal*100));
       return '<div class="goalrow"><div class="goalbar"><i style="width:'+pg+'%"></i></div><div class="goaltxt">'+I_TARGET+' 週間目標 '+Math.floor(week/60)+' / '+goal+'分（'+pg+'%'+(pg>=100?' 達成！'+I_CHECK:'')+'）<button class="dirbtn" id="goalBtn">変更</button></div></div>';
     })()+
-    '<div class="goaltxt" style="margin-top:10px"><span>目標レベル</span><select class="dirsel" id="tgtSel" title="今日の新規語が出るレベル">'+['A1','A2','B1','B2','C1','C2'].map(l=>'<option'+(l===ls('fl_target','"A2"')?' selected':'')+'>'+l+'</option>').join('')+'</select><button class="dirbtn" id="paceBtn">新規 '+(Number(ls('fl_newperday','12'))||12)+'語/日</button></div>'+
     '<div class="goaltxt" style="margin-top:8px"><button class="dirbtn" id="expBtn">'+I_UP+' 進捗を保存</button><button class="dirbtn" id="impBtn">'+I_DOWN+' 進捗を読み込み</button></div>'+
     '<div class="statnote" style="margin-top:4px">別端末へ引き継ぐには「保存」でファイルを作り、AirDropやメッセージで送って、相手端末の「読み込み」で選ぶだけ（完璧マーク・復習予定・学習時間すべて移ります）</div>'+
     '<div class="statnote">'+I_CHECK+'完璧率 '+(total?Math.round(d/total*100):0)+'% ｜ 過去7日間の学習時間。毎日少しずつが最強です</div>';
@@ -16393,10 +16385,6 @@ function buildStats(){
     inp.addEventListener('cancel',()=>{const v=prompt('（ファイルの代わりに）バックアップ文字列の貼り付けでもOK:');if(v)importProgress(v);});
     inp.click();
   };
-  const ts=document.getElementById('tgtSel');
-  if(ts)ts.onchange=()=>{sv('fl_target',ts.value);buildStats();updateTodayBadge();};
-  const pb2=document.getElementById('paceBtn');
-  if(pb2)pb2.onclick=()=>{const v=prompt('1日の新規語数（3か月でレベルアップなら12〜15、6か月なら6〜8が目安）',Number(ls('fl_newperday','12'))||12);const n=Number(v);if(n>0){sv('fl_newperday',n);buildStats();updateTodayBadge();}};
   statsPanel.querySelectorAll('.weakrow').forEach(r=>{r.onclick=()=>speak(r.dataset.w);});
 }
 /* theme */
@@ -16811,7 +16799,6 @@ function renderTest(){
     if(todayMode){
       cardArea.innerHTML='<div class="done"><div class="done-ic">'+I_TROPHY+'</div><h2>今日のノルマ完了！</h2><p>期日が来た復習と新規語を消化しました。続きはまた明日。<br>毎日続ければ3〜6か月でレベルアップが見えてきます。</p><button class="restart" id="rs2">'+I_LOOP+' 追加でもう1セット</button></div>';
       document.getElementById('rs2').onclick=()=>buildTodaySession();
-      if(typeof updateTodayBadge==='function')updateTodayBadge();
       return;
     }
     cardArea.innerHTML='<div class="done"><div class="done-ic">'+I_TROPHY+'</div><h2>完了！</h2><p>この範囲をすべて覚えました。</p><button class="restart" id="rs">'+I_LOOP+' もう一度（この範囲の進捗をリセット）</button></div>';
