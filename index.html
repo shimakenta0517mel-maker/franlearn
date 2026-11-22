@@ -104,6 +104,7 @@
   .card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:12px 14px;box-shadow:0 1px 2px rgba(20,30,60,.04);position:relative}
   .cardtop{display:flex;align-items:center;gap:7px;margin-bottom:5px;flex-wrap:wrap}
   .num{font-size:10.5px;color:#aab2c0;font-weight:700}
+  .listpos{font-size:10px;color:var(--muted)}
   .srctag{font-size:10px;color:var(--bleu);background:rgba(0,85,164,.07);border-radius:6px;padding:1px 6px;font-weight:600;max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   body.dark .srctag{color:#7db4ff;background:rgba(125,180,255,.12)}
   .star{color:var(--gold);font-size:12px}
@@ -829,12 +830,12 @@
 
 <div class="tabs" id="tabs"></div>
 <div id="vocabFrequencyInfo" class="hide" style="max-width:980px;margin:0 auto 9px;padding:0 14px;color:var(--muted);font-size:11px;line-height:1.7">
-  <span>収録語彙の頻出順（目安）</span>
-  <details><summary style="cursor:pointer">並び順について</summary><p style="margin:5px 0">Lexique 4.10 の字幕頻度を参考に、照合できた9,366項目を頻出順に並べ、頻度を判断できない234項目は「頻度未判定」に分けています。複数語の表現は構成する単語から推定した目安で、表現全体の実測頻度ではありません。番号付きタブの数字は照合できた収録項目内の順番で、フランス語全体の順位ではありません。<br>出典：<a href="https://www.lexique.org/" target="_blank" rel="noopener noreferrer">Lexique 4.10 — New, Pallier, Schalchli, Bourgin &amp; Gimenes, 2026</a> ／ <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>。並び順は本アプリで加工しています。</p></details>
+  <strong>頻出ランキング（収録語彙内の目安）</strong><div>上位100位・101〜500位・501〜1000位、以降1000位ごとに選べます。カードの頻出順位は、絞り込んでも変わりません。</div>
+  <details><summary style="cursor:pointer">ランキングの基準</summary><p style="margin:5px 0">Lexique 4.10 の字幕頻度を参考に、照合できた9,366項目を頻出順に並べ、頻度を判断できない234項目は「頻度未判定」に分けています。複数語の表現は構成する単語から推定した目安で、表現全体の実測頻度ではありません。タブとカードの順位は照合できた収録項目内の順位で、フランス語全体の順位ではありません。「区間」とカードの「表示」は、絞り込んだ結果の中での順番です。<br>出典：<a href="https://www.lexique.org/" target="_blank" rel="noopener noreferrer">Lexique 4.10 — New, Pallier, Schalchli, Bourgin &amp; Gimenes, 2026</a> ／ <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>。並び順は本アプリで加工しています。</p></details>
 </div>
 <div class="barrow" id="filterbar"></div>
 <div class="barrow" id="posbar"></div>
-<div class="barrow" id="rangebar" title="表示と品詞で絞り込んだ結果の中から区間を選択"></div>
+<div class="barrow" id="rangebar" title="表示と品詞で絞り込んだ結果の表示順から区間を選択。頻出順位とは別です"></div>
 
 <main>
   <section id="learnView">
@@ -15912,15 +15913,20 @@ const VOCAB_FREQUENCY_TABS={},vocabFrequencyByKey=new Map();
   if(originals.size!==VOCAB_FREQUENCY_ORDER.length)throw Error('Frequency order needs updating for the current vocabulary');
   VOCAB_FREQUENCY_ORDER.forEach((key,index)=>{
     const original=originals.get(key);if(!original||vocabFrequencyByKey.has(key))throw Error('Invalid or duplicate frequency key');
-    const start=Math.floor(index/1000)*1000+1,end=Math.min(start+999,VOCAB_FREQUENCY_CLASSIFIED),bucket=index<VOCAB_FREQUENCY_CLASSIFIED?start+'–'+end:'頻度未判定';
+    const rank=index+1,start=rank<=100?1:rank<=500?101:rank<=1000?501:Math.floor(index/1000)*1000+1;
+    const end=rank<=100?100:rank<=500?500:rank<=1000?1000:Math.min(start+999,VOCAB_FREQUENCY_CLASSIFIED),bucket=index<VOCAB_FREQUENCY_CLASSIFIED?start+'–'+end:'頻度未判定';
     const item={...original.item,_tk:original.tk,_ft:bucket,_rank:index+1};
-    if(!VOCAB_FREQUENCY_TABS[bucket])VOCAB_FREQUENCY_TABS[bucket]={label:index<VOCAB_FREQUENCY_CLASSIFIED?'頻出順（目安）':(VOCAB_FREQUENCY_ORDER.length-VOCAB_FREQUENCY_CLASSIFIED)+'項目',items:[]};
+    if(!VOCAB_FREQUENCY_TABS[bucket])VOCAB_FREQUENCY_TABS[bucket]={label:index<VOCAB_FREQUENCY_CLASSIFIED?'頻出順位（目安）':(VOCAB_FREQUENCY_ORDER.length-VOCAB_FREQUENCY_CLASSIFIED)+'項目',items:[]};
     VOCAB_FREQUENCY_TABS[bucket].items.push(item);vocabFrequencyByKey.set(key,item);
   });
 })();
 function vocabTabsFor(cid){return cid==='delf'?VOCAB_FREQUENCY_TABS:DECKS[cid]?.tabs||{};}
 function vocabCardKey(cid,tk,item){return cid+'|'+(item._tk||tk)+'|'+item.w;}
 function vocabRankFor(key){return vocabFrequencyByKey.get(key)?._rank??Infinity;}
+function vocabRankLabel(key){
+  const item=vocabFrequencyByKey.get(key);
+  return !item?'':item._rank<=VOCAB_FREQUENCY_CLASSIFIED?'頻出 '+item._rank.toLocaleString('ja-JP')+'位':'頻度未判定';
+}
 function vocabDisplayTab(cid,tk,word){
   if(cid!=='delf')return tk;
   const item=vocabFrequencyByKey.get(cid+'|'+tk+'|'+word);
@@ -15928,8 +15934,9 @@ function vocabDisplayTab(cid,tk,word){
 }
 function vocabRestoreNav(value){
   if(!value||value.c!=='delf')return value;
-  const keys=Object.keys(VOCAB_FREQUENCY_TABS),selected=Array.isArray(value.ms)?keys.filter(k=>value.ms.includes(k)):[];
-  const current=VOCAB_FREQUENCY_TABS[value.t]?value.t:(selected[0]||keys[0]);
+  const keys=Object.keys(VOCAB_FREQUENCY_TABS),wanted=Array.isArray(value.ms)&&value.ms.length>1?value.ms:[value.t];
+  const selected=keys.filter(k=>wanted.some(old=>old===k||(old==='1–1000'&&['1–100','101–500','501–1000'].includes(k))));
+  const current=selected.includes(value.t)?value.t:(selected[0]||keys[0]);
   return {...value,t:current,ms:selected.length>1?selected:undefined};
 }
 /*===VOCAB_FREQUENCY_END===*/
@@ -16153,7 +16160,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-2053'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-2130'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16888,11 +16895,12 @@ function buildTabs(){
       const its=curTabs()[k].items;let dn=0;its.forEach(it=>{if(marks[vocabCardKey(cat,k,it)]==='done')dn++;});
       const pct=its.length?Math.round(dn/its.length*100):0;
       const _ct=crownTierPct(pct);const _cr=_ct?'<span class="tabcrown '+_ct+'" aria-hidden="true">'+I_CROWN+'</span>':'';
-      const t=document.createElement('div');t.className='tab'+(k===current?' active':'')+(pct>=100?' tabdone':'');
-      t.tabIndex=0;t.setAttribute('role','button');t.setAttribute('aria-label',k+' '+curTabs()[k].label);if(k===current)t.setAttribute('aria-current','true');
+      const active=multiSel.length>1?multiSel.includes(k):k===current,tabName=cat==='delf'&&k!=='頻度未判定'?k+'位':k;
+      const t=document.createElement('div');t.className='tab'+(active?' active':'')+(pct>=100?' tabdone':'');
+      t.tabIndex=0;t.setAttribute('role','button');t.setAttribute('aria-label',tabName+' '+curTabs()[k].label);t.setAttribute('aria-pressed',String(active));if(k===current)t.setAttribute('aria-current','true');
       t.title=curTabs()[k].label+'（完璧 '+pct+'%・'+dn+'/'+its.length+'）';
-      t.innerHTML=k+_cr+'<span class="lv">'+curTabs()[k].label+'</span><div class="tabprog"><i style="width:'+pct+'%"></i></div>';
-      t.onclick=()=>{current=k;multiSel=[];posFilter='all';rangeSel='all';resetSearch();document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));t.classList.add('active');buildRange();buildFilter();renderAll();saveNav();flashGrid();};
+      t.innerHTML=tabName+_cr+'<span class="lv">'+curTabs()[k].label+'</span><div class="tabprog"><i style="width:'+pct+'%"></i></div>';
+      t.onclick=()=>{current=k;multiSel=[];posFilter='all';rangeSel='all';resetSearch();buildTabs();buildRange();buildFilter();renderAll();saveNav();flashGrid();};
       tabsEl.appendChild(t);
     });
   }
@@ -17078,7 +17086,7 @@ function renderLearn(){
   learnplayEl.classList.remove('hide');
   hintEl.innerHTML=I_BULB+' 青い<b>単語</b>やIPA、'+I_SPK+'例文をタップで発音。覚えた語はカード下の<b>'+I_CHECK+'完璧</b>で一覧から隠せます（「表示」の '+I_CHECK+'完璧 でいつでも確認・復帰）。'+I_STAR+'は学習のおすすめ。「表示」→「品詞」→「区間」の順に絞れます。品詞と区間は複数選択でき、再タップで解除。「すべて／全」でリセットできます。派生語・コロケーションは「関連表現あり」で探せます。';
   const arr=filtered();
-  const _tabLbl=(multiSel.length>1)?('複数選択 '+multiSel.length+'テーマ'):(current+' '+curTabs()[current].label);
+  const _tabLbl=(multiSel.length>1)?('複数選択 '+multiSel.length+(cat==='delf'?'順位帯':'テーマ')):(current+' '+curTabs()[current].label);
   levelhead.innerHTML=(CAT_ICON[cat]||'')+' '+DECKS[cat].label+' ｜ '+_tabLbl+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeLabel()+']':'')+(posFilter!=='all'?'（'+posFilter.join('・')+'）':'')+(freqOnly?' '+I_STAR:'')+(wordLinksOnly?'（関連表現あり）':'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
   if(!arr.length){grid.innerHTML='<div class="empty"><div class="empty-ic"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や「表示／品詞」の絞り込みを広げてみてください。</div></div>';return;}
@@ -17089,7 +17097,7 @@ function renderLearn(){
     ['done','review','fav'].forEach(m=>{foot+='<button class="markbtn'+(mk===m?' on':'')+'" data-m="'+m+'">'+MARKS[m].label+'</button>';});
     foot+='</div>';
     c.innerHTML=
-      '<div class="cardtop"><span class="num">#'+o.n+'</span>'+(multiSel.length>1&&it._tk?'<span class="srctag">'+(it._ft||it._tk)+'</span>':'')+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="cnt" data-c>'+I_EYE+cOf(k)+'</span>'+(eOf(k)?'<span class="cnt err">'+I_LOOP+eOf(k)+'</span>':'')+(mk?'<span class="cnt">'+MARKS[mk].short+'</span>':'')+'</div>'+
+      '<div class="cardtop"><span class="num">'+(cat==='delf'?vocabRankLabel(k):'#'+o.n)+'</span>'+(cat==='delf'?'<span class="listpos" title="絞り込んだ結果の表示順">表示 '+o.n+'</span>':'')+(multiSel.length>1&&it._tk?'<span class="srctag">'+(it._ft||it._tk)+'</span>':'')+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'<span class="cnt" data-c>'+I_EYE+cOf(k)+'</span>'+(eOf(k)?'<span class="cnt err">'+I_LOOP+eOf(k)+'</span>':'')+(mk?'<span class="cnt">'+MARKS[mk].short+'</span>':'')+'</div>'+
       '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生" aria-label="発音を再生">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr" lang="fr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+
@@ -17201,7 +17209,7 @@ function renderGlobalSearch(){
       foot+='</div>';
     }
     c.innerHTML=
-      '<div class="cardtop"><button class="deckjump" data-j>'+(CAT_ICON[r.cid]||'')+' '+r.clabel+' › '+r.tk+'</button><span class="num">'+(r.tk==='頻度未判定'?'未判定':'#'+r.n)+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'</div>'+
+      '<div class="cardtop"><button class="deckjump" data-j>'+(CAT_ICON[r.cid]||'')+' '+r.clabel+' › '+r.tk+'</button><span class="num">'+(vocabRankLabel(k)||'#'+r.n)+'</span>'+(it.pri?'<span class="star">'+I_STAR+'</span>':'')+'</div>'+
       '<div class="wordrow"><span class="word" lang="fr">'+it.w+'</span>'+(it.ipa?'<span class="ipa">'+it.ipa+'</span>':'')+'<span class="pos" data-pos="'+posCat(it.pos)+'">'+it.pos+'</span><button class="play" title="再生" aria-label="発音を再生">'+SPK+'</button></div>'+
       '<div class="jp">'+it.jp+'</div>'+
       '<div class="ex"><div class="exfr" lang="fr"><span class="ico">'+SPKSM+'</span><span>'+it.ex+'</span></div><div class="exjp">'+it.exjp+'</div></div>'+foot;
@@ -17299,7 +17307,7 @@ function renderTest(){
     document.getElementById('rs').onclick=()=>{testItems().forEach(it=>{delete known[it.k];});sv('fl_known',known);buildDeck();};return;
   }
   const it=deck[idx];
-  const TG=todayMode?'今日':(isVerb()?'活用':(cat==='delf'?vocabDisplayTab(cat,it.k.split('|')[1],it.w):((multiSel.length>1&&it.k&&it.k.split('|')[1])||current)));
+  const TG=todayMode?'今日':(isVerb()?'活用':(cat==='delf'?vocabRankLabel(it.k)+(vocabRankFor(it.k)<=VOCAB_FREQUENCY_CLASSIFIED?' ｜ '+vocabDisplayTab(cat,it.k.split('|')[1],it.w):''):((multiSel.length>1&&it.k&&it.k.split('|')[1])||current)));
   if(!flipped){
     bump(it.k); // exposure once when card first shown
     if(dir==='type'){
@@ -17402,7 +17410,7 @@ function hfShow(){
   hffr.textContent=it.w;hffripa.textContent=it.ipa||'';hfjp.textContent=it.jp;
   hfex.textContent=(hfexchk.checked&&it.ex)?it.ex:'';
   hfexjpEl.textContent=(hfexchk.checked&&it.exjp)?it.exjp:'';
-  hfidxEl.textContent=(hfIdx+1)+' / '+hfList.length+(it.tk?'　｜ '+it.tk:'')+(rangeSel!=='all'?'　[区間 '+rangeLabel()+']':'');
+  hfidxEl.textContent=(hfIdx+1)+' / '+hfList.length+(vocabRankLabel(it.k)?'　｜ '+vocabRankLabel(it.k):'')+(it.tk&&it.tk!=='頻度未判定'?'　｜ '+it.tk:'')+(rangeSel!=='all'?'　[区間 '+rangeLabel()+']':'');
   hfMarkUI();
 }
 function hfMarkUI(){const it=hfList[hfIdx];const m=it?markOf(it.k):'';document.querySelectorAll('[data-hm]').forEach(b=>b.classList.toggle('on',b.dataset.hm===m));}
