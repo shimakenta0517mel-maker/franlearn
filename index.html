@@ -15940,8 +15940,8 @@ const VOCAB_FREQUENCY_TABS={},vocabFrequencyByKey=new Map();
   const learningOrder=[...VOCAB_FREQUENCY_ORDER.filter(k=>foundation.has(k)),...VOCAB_FREQUENCY_ORDER.filter(k=>!foundation.has(k))];
   learningOrder.forEach((key,index)=>{
     const original=originals.get(key);if(!original||vocabFrequencyByKey.has(key))throw Error('Invalid or duplicate frequency key');
-    const rank=index+1,start=rank<=100?1:rank<=500?101:rank<=1000?501:Math.floor(index/1000)*1000+1;
-    const end=rank<=100?100:rank<=500?500:rank<=1000?1000:Math.min(start+999,learningOrder.length),bucket=start+'–'+end;
+    const rank=index+1,start=Math.floor(index/1000)*1000+1;
+    const end=start+999,bucket=start+'–'+end;
     const item={...original.item,_tk:original.tk,_ft:bucket,_rank:rank,_frequencyRank:frequencyRank.get(key)};
     if(!VOCAB_FREQUENCY_TABS[bucket])VOCAB_FREQUENCY_TABS[bucket]={label:'学習優先順（目安）',items:[]};
     VOCAB_FREQUENCY_TABS[bucket].items.push(item);vocabFrequencyByKey.set(key,item);
@@ -15963,8 +15963,15 @@ function vocabRestoreNav(value){
   if(!value||value.c!=='delf')return value;
   const keys=Object.keys(VOCAB_FREQUENCY_TABS);
   if(value.vo!=='learning-v1')return {...value,t:keys[0],ms:undefined,vo:'learning-v1'};
-  const wanted=(Array.isArray(value.ms)&&value.ms.length>1?value.ms:[value.t]).map(k=>keys.includes(k)?k:keys.find(n=>String(n).split('–')[0]===String(k).split('–')[0])).filter(Boolean),selected=keys.filter(k=>wanted.includes(k));
-  const restored=keys.includes(value.t)?value.t:keys.find(k=>String(k).split('–')[0]===String(value.t).split('–')[0]);
+  const restoreBucket=k=>{
+    if(keys.includes(k))return k;
+    const match=String(k).match(/^(\d+)–(\d+)$/);
+    if(!match||Number(match[1])<1||Number(match[2])<Number(match[1]))return undefined;
+    const start=Math.floor((Number(match[1])-1)/1000)*1000+1,bucket=start+'–'+(start+999);
+    return keys.includes(bucket)?bucket:undefined;
+  };
+  const wanted=(Array.isArray(value.ms)&&value.ms.length>1?value.ms:[value.t]).map(restoreBucket).filter(Boolean),selected=keys.filter(k=>wanted.includes(k));
+  const restored=restoreBucket(value.t);
   const current=selected.includes(restored)?restored:(selected[0]||keys[0]);
   return {...value,t:current,ms:selected.length>1?selected:undefined};
 }
@@ -16189,7 +16196,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-2238'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-2247'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
