@@ -318,6 +318,8 @@
   .hfexjp{font-size:11.5px;color:var(--muted);margin-top:4px;opacity:.85}
   #numIn{width:100%;margin-top:14px;border:1px solid var(--line);border-radius:10px;padding:12px;font-size:18px;text-align:center;background:#fff;color:var(--ink)}
   #numIn:focus{outline:none;border-color:var(--bleu)}
+  #numQ,#numFb{overflow-wrap:anywhere}#numQ{font-variant-numeric:tabular-nums}
+  #numChk[hidden],#numNext[hidden]{display:none}
   body.dark #numIn{background:#1a2030;color:#e8ecf5;border-color:#2a3147}
   .numlisten{display:inline-flex;align-items:center;cursor:pointer;color:var(--bleu);transition:transform .12s ease;border-radius:50%}
   .numlisten:active{transform:scale(.9)}
@@ -889,14 +891,15 @@
         <div class="hfidx" id="numScoreEl"></div>
         <div class="hffr" id="numQ"></div>
         <div class="hfjp" id="numFb" aria-live="polite">下の「出題」を押すと数字が読み上げられます</div>
-        <input id="numIn" inputmode="decimal" enterkeyhint="go" autocomplete="off" aria-label="聞こえた数字を入力" placeholder="聞こえた数字（例: 95 / 1250 / 14:30）">
+        <input id="numIn" inputmode="decimal" enterkeyhint="go" autocomplete="off" aria-label="聞こえた数字を入力" placeholder="聞こえた数字（例: 95 / 1,234,567 / 14:30）">
       </div>
       <div class="grade" style="max-width:380px;margin:14px auto 0">
         <button class="again" id="numRep"><svg class="ic" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg> 出題・もう一度</button>
         <button class="known" id="numChk">答え合わせ</button>
+        <button class="known" id="numNext" hidden>次の問題</button>
       </div>
       <div class="hfopt" id="numTypes"></div>
-      <div style="font-size:11px;color:var(--muted);margin-top:11px;text-align:center">DELF聴解の頻出パート。特に 70〜99（soixante-dix / quatre-vingt 系）を重点的に。</div>
+      <div id="numRangeInfo" style="font-size:12px;color:var(--muted);margin-top:11px;text-align:center" aria-live="polite"></div>
     </div>
   </section>
   <section id="matchView" class="hide">
@@ -16098,7 +16101,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-2007'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-2022'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -17440,24 +17443,48 @@ cardArea.addEventListener('touchend',e=>{
 
 /* ---------- NUMBER TRAINER ---------- */
 function frNum(n){
+  if(!Number.isSafeInteger(n)||n<0||n>999999999999)throw new RangeError('Number outside supported range');
   const u=['zéro','un','deux','trois','quatre','cinq','six','sept','huit','neuf','dix','onze','douze','treize','quatorze','quinze','seize','dix-sept','dix-huit','dix-neuf'];
   if(n<20)return u[n];
   if(n<70){const t=Math.floor(n/10)*10,r=n-t;const names={20:'vingt',30:'trente',40:'quarante',50:'cinquante',60:'soixante'};return r===0?names[t]:(r===1?names[t]+' et un':names[t]+'-'+u[r]);}
   if(n<80){const r=n-60;return r===11?'soixante et onze':'soixante-'+u[r];}
   if(n<100){const r=n-80;return r===0?'quatre-vingts':'quatre-vingt-'+u[r];}
   if(n<1000){const h=Math.floor(n/100),r=n%100;let s=h===1?'cent':u[h]+' cent';if(r===0)return h>1?s+'s':s;return s+' '+frNum(r);}
-  const m=Math.floor(n/1000),r=n%1000;let s=m===1?'mille':frNum(m)+' mille';return r===0?s:s+' '+frNum(r);
+  if(n<1000000){const m=Math.floor(n/1000),r=n%1000;const s=m===1?'mille':frNum(m).replace(/(cent|vingt)s$/,'$1')+' mille';return r?s+' '+frNum(r):s;}
+  const unit=n<1000000000?1000000:1000000000,label=unit===1000000?'million':'milliard';
+  const m=Math.floor(n/unit),r=n%unit,s=frNum(m)+' '+label+(m>1?'s':'');
+  return r?s+' '+frNum(r):s;
 }
-let numType='m', numTarget=null, numScoreN=0, numStreak=0;
+function numDisplay(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,',');}
+function numInteger(n,large=false){const words=frNum(n);return{kind:'integer',large,speak:large?words:String(n),digits:String(n),disp:large?numDisplay(n):String(n),words};}
+function numAnswerMatches(value,target){
+  const raw=String(value||'').normalize('NFKC').trim();
+  if(target.kind==='integer'){
+    // Plain digits or consistent 3-digit comma/space grouping; no sign or decimals.
+    if(!/^(?:\d+|\d{1,3}(?:,\d{3})+|\d{1,3}(?:[ \u00a0\u202f]\d{3})+)$/.test(raw))return false;
+    return Number(raw.replace(/[,\s]/g,''))===Number(target.digits);
+  }
+  const digits=raw.replace(/\D/g,'');return !!digits&&(digits===target.digits||digits===target.alt);
+}
+let numType='m', numTarget=null, numScoreN=0, numStreak=0, numAnswered=false, numAdvanceTimer=null;
 const numQ=document.getElementById('numQ'), numFb=document.getElementById('numFb'), numIn=document.getElementById('numIn'), numScoreEl=document.getElementById('numScoreEl');
-const NUMTYPES=[['m','ミックス'],['w','70-99'],['e','0-69'],['c','100-999'],['y','年号'],['p','値段€'],['t','時刻']];
-function buildNumTypes(){const el=document.getElementById('numTypes');el.innerHTML='';NUMTYPES.forEach(([id,lb])=>{const c=document.createElement('button');c.className='chip'+(numType===id?' active':'');c.textContent=lb;c.onclick=()=>{numType=id;buildNumTypes();numNew();};el.appendChild(c);});}
+const NUMTYPES=[['m','ミックス'],['w','70-99'],['e','0-69'],['c','100-999'],...Array.from({length:9},(_,i)=>['d'+(i+4),(i+4)+'桁']),['y','年号'],['p','値段€'],['t','時刻']];
+function buildNumTypes(){
+  const el=document.getElementById('numTypes');el.innerHTML='';
+  NUMTYPES.forEach(([id,lb])=>{const c=document.createElement('button');c.type='button';c.className='chip'+(numType===id?' active':'');c.textContent=lb;c.setAttribute('aria-pressed',String(numType===id));c.onclick=()=>{numType=id;buildNumTypes();numNew();};el.appendChild(c);});
+  const digits=/^d\d+$/.test(numType)?Number(numType.slice(1)):0;
+  const info=document.getElementById('numRangeInfo');
+  info.textContent=digits?numDisplay(10**(digits-1))+'〜'+numDisplay(10**digits-1)+'。カンマ・空白区切りでも入力できます。答えを確認したら「次の問題」へ。':'4〜12桁まで練習できます。million は100万、milliard は10億。ミックスには大きな数字も含まれます。';
+  numIn.placeholder=digits?'聞こえた'+digits+'桁の数字（カンマ・空白区切りも可）':'聞こえた数字（例: 95 / 1,234,567 / 14:30）';
+  numIn.inputMode=digits?'numeric':'decimal';
+}
 buildNumTypes();
 function genNum(){
-  let ty=numType;if(ty==='m'){const o=['w','e','c','y','p','t'];ty=o[Math.floor(Math.random()*o.length)];}
-  if(ty==='e'){const n=Math.floor(Math.random()*70);return{speak:String(n),digits:String(n),disp:String(n),words:frNum(n)};}
-  if(ty==='w'){const n=70+Math.floor(Math.random()*30);return{speak:String(n),digits:String(n),disp:String(n),words:frNum(n)};}
-  if(ty==='c'){const n=100+Math.floor(Math.random()*900);return{speak:String(n),digits:String(n),disp:String(n),words:frNum(n)};}
+  let ty=numType;if(ty==='m'){const o=['w','e','c','y','p','t','large'];ty=o[Math.floor(Math.random()*o.length)];if(ty==='large')ty='d'+(4+Math.floor(Math.random()*9));}
+  if(/^d\d+$/.test(ty)){const digits=Number(ty.slice(1)),min=10**(digits-1);return numInteger(min+Math.floor(Math.random()*9*min),true);}
+  if(ty==='e')return numInteger(Math.floor(Math.random()*70));
+  if(ty==='w')return numInteger(70+Math.floor(Math.random()*30));
+  if(ty==='c')return numInteger(100+Math.floor(Math.random()*900));
   if(ty==='y'){const n=1850+Math.floor(Math.random()*177);return{speak:String(n),digits:String(n),disp:String(n)+'年',words:frNum(n)};}
   if(ty==='p'){const e2=1+Math.floor(Math.random()*99);const cA=[0,10,20,50,80,90,99];const c2=cA[Math.floor(Math.random()*cA.length)];
     return{speak:e2+' euros'+(c2?' '+c2:''),digits:String(e2)+(c2?String(c2).padStart(2,'0'):''),alt:c2?null:String(e2)+'00',disp:e2+(c2?','+String(c2).padStart(2,'0'):'')+' €',words:frNum(e2)+' euros'+(c2?' '+frNum(c2):'')};}
@@ -17465,27 +17492,31 @@ function genNum(){
   return{speak:h+' heures'+(mn?' '+mn:''),digits:String(h)+String(mn).padStart(2,'0'),alt:mn===0?String(h):null,disp:h+':'+String(mn).padStart(2,'0'),words:frNum(h)+' heures'+(mn?' '+frNum(mn):'')};
 }
 function updNumScore(){numScoreEl.innerHTML=I_CHECK+' 正解 <b>'+numScoreN+'</b>　｜　'+I_FLAME+' 連続 <b>'+numStreak+'</b>';}
-function numNew(){numTarget=genNum();numIn.value='';
+function numNew(){clearTimeout(numAdvanceTimer);numAdvanceTimer=null;numAnswered=false;document.getElementById('numChk').hidden=false;document.getElementById('numNext').hidden=true;numTarget=genNum();numIn.value='';
   numQ.innerHTML='<span class="numlisten" title="もう一度聞く"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></span>';
   const ml=numQ.querySelector('.numlisten');if(ml)ml.onclick=()=>{if(numTarget)speakLang(numTarget.speak,'fr');};
   numFb.textContent='聞こえた数字を入力 →「答え合わせ」';speakLang(numTarget.speak,'fr');numIn.focus();}
 updNumScore();
 document.getElementById('numRep').onclick=()=>{if(numTarget)speakLang(numTarget.speak,'fr');else numNew();};
+document.getElementById('numNext').onclick=numNew;
 document.getElementById('numChk').onclick=()=>{
   if(!numTarget){numNew();return;}
-  const u=(numIn.value||'').replace(/\D/g,'');
-  if(u&&(u===numTarget.digits||(numTarget.alt&&u===numTarget.alt))){
+  if(numAnswered)return;numAnswered=true;
+  const correct=numAnswerMatches(numIn.value,numTarget);
+  if(correct){
     numScoreN++;numStreak++;updNumScore();sfxOk();
     numQ.innerHTML='<span style="color:var(--green-text)">'+I_CHECK+' '+numTarget.disp+'</span>';numFb.textContent=numTarget.words;
-    setTimeout(numNew,1500);
+
   }else{
     numStreak=0;updNumScore();sfxNg();
     var yours=(numIn.value||'').replace(/[<>&]/g,'').trim();
     numQ.innerHTML='<span style="color:var(--rouge-text)">'+I_CROSS+' 正解: '+numTarget.disp+'</span>'+(yours?' <span style="opacity:.6;font-size:13px">あなた: '+yours+'</span>':'');numFb.textContent=numTarget.words;
-    setTimeout(numNew,2600);
+
   }
+  if(numTarget.large){document.getElementById('numChk').hidden=true;document.getElementById('numNext').hidden=false;}
+  else numAdvanceTimer=setTimeout(numNew,correct?1500:2600);
 };
-numIn.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();document.getElementById('numChk').click();}});
+numIn.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();if(numAnswered&&numTarget?.large)numNew();else document.getElementById('numChk').click();}});
 
 /* ---------- MATCH GAME (Quizlet-style pairs) ---------- */
 let matchCards=[], matchSel=null, matchMiss=0, matchDoneN=0, matchSec=0, matchTimer=null, matchLock=false;
