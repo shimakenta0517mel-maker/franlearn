@@ -16167,7 +16167,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-2219'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-2220'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -17369,7 +17369,7 @@ function renderTest(){
   }else{
     const GR=[['0','もう一度','1'],['1','難しい','2'],['2','できた','3'],['3','簡単','4']];
     const gradeBtns=GR.map(([g,lbl,kc])=>'<button class="gbtn" data-g="'+g+'">'+lbl+'<span class="iv">'+srsLabel(it.k,Number(g))+'</span><span class="kc">'+kc+'</span></button>').join('');
-    cardArea.innerHTML='<div class="flash revealed"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front" lang="fr">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex" lang="fr" title="例文を再生"><span class="ico">'+SPKSM+'</span>'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
+    cardArea.innerHTML='<div class="flash revealed"><span class="tag">'+TG+'</span><span class="tag pos">'+it.pos+'</span><div class="front" lang="fr">'+it.w+'</div>'+(it.ipa?'<div class="frontipa">'+it.ipa+'</div>':'')+'<div class="answer"><div class="ansmain">'+it.jp+'</div><div class="ansex" lang="fr" title="例文を再生">'+it.ex+'</div><div class="ansexjp">'+it.exjp+'</div><button class="bigplay" id="bp">'+SPKSM+' 再生</button></div></div><div class="grade4">'+gradeBtns+'</div><div class="swipehint">キー 1〜4／スワイプ（← もう一度 ｜ できた →）でも採点</div>';
     appendWordLinks(cardArea.querySelector('.flash.revealed'),it.k);
     document.getElementById('bp').onclick=()=>speak(it.w);
     const _aex=cardArea.querySelector('.ansex');if(_aex)_aex.onclick=()=>speak(it.ex);
