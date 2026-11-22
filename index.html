@@ -8,16 +8,16 @@
 <meta name="theme-color" content="#0055A4">
 <meta name="apple-mobile-web-app-title" content="FranLearn">
 <title>FranLearn — フランス語 単語・フレーズ・活用</title>
-<meta name="description" content="8,900以上のフランス語の単語・フレーズ・動詞活用を、ネイティブ音声・IPA・例文つきで学べる学習アプリ。DELF対策、レベル別、SRS復習、ハンズフリー再生、オフライン対応。">
+<meta name="description" content="8,900以上のフランス語の単語・フレーズ・動詞活用を、音声・IPA・例文つきで学べる学習アプリ。DELF対策、レベル別、SRS復習、ハンズフリー再生、オフライン対応。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FranLearn">
 <meta property="og:title" content="FranLearn — フランス語 単語・フレーズ・活用">
-<meta property="og:description" content="8,900以上のフランス語をネイティブ音声・IPA・例文つきで。DELF対策、レベル別、SRS復習、オフライン対応の学習アプリ。">
+<meta property="og:description" content="8,900以上のフランス語を音声・IPA・例文つきで。DELF対策、レベル別、SRS復習、オフライン対応の学習アプリ。">
 <meta property="og:url" content="https://shimakenta0517mel-maker.github.io/franlearn/">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FranLearn — フランス語 単語・フレーズ・活用">
-<meta name="twitter:description" content="8,900以上のフランス語をネイティブ音声・IPA・例文つきで学べる学習アプリ。">
+<meta name="twitter:description" content="8,900以上のフランス語を音声・IPA・例文つきで学べる学習アプリ。">
 <style>
   :root{
     --bleu:#0055A4; --rouge:#EF4135; --bg:#f4f6fb; --card:#fff;
@@ -770,9 +770,9 @@
     <div class="setgrid">
       <div class="setsec">音声</div>
       <div class="setrow"><span class="setlabel">音声タイプ</span>
-        <select id="ttsModeSel" title="声優音声=事前生成の高品質ネイティブ音声(オフライン/バックグラウンド対応)"><option value="native">声優音声（高品質）</option><option value="online">オンライン音声</option><option value="auto">端末の音声</option></select></div>
+        <select id="ttsModeSel" title="合成音声=事前生成の高品質な合成音声(オフライン/バックグラウンド対応)"><option value="native">合成音声（高品質）</option><option value="online">オンライン音声</option><option value="auto">端末の音声</option></select></div>
       <div class="setrow" id="genderRow"><span class="setlabel">声（仏語）</span>
-        <select id="voiceGender" title="声優音声の声（女性=Denise / 男性=Henri）"><option value="f">女性（Denise）</option><option value="m">男性（Henri）</option></select></div>
+        <select id="voiceGender" title="合成音声の声（女性=Denise / 男性=Henri）"><option value="f">女性（Denise）</option><option value="m">男性（Henri）</option></select></div>
       <div class="setsec">再生スピードと間隔</div>
       <div class="setrow setfull"><span class="setlabel">速さ</span>
         <input type="range" id="rate" min="0.5" max="1.6" step="0.05" value="0.9"><span class="setval" id="rateval">0.90×</span></div>
@@ -803,7 +803,7 @@
       <summary>詳細設定（端末の音声・通常は変更不要）</summary>
       <div class="setrow"><span class="setlabel">端末の仏語音声</span><select id="voiceSel" aria-label="端末の仏語音声"></select></div>
       <div class="setrow"><span class="setlabel">端末の日本語音声</span><select id="voiceSelJa" aria-label="端末の日本語音声"></select></div>
-      <p>「音声タイプ＝端末の音声」を選んだとき、またはネット不通で声優音声が使えないときに使う、お使いの端末内蔵の声です。声優音声を使う場合は変更不要です。</p>
+      <p>「音声タイプ＝端末の音声」を選んだとき、またはネット不通で合成音声が使えないときに使う、お使いの端末内蔵の声です。合成音声を使う場合は変更不要です。</p>
       <p id="setDiag" style="opacity:.75;font-variant-numeric:tabular-nums">診断: 読み込み中…</p>
     </details>
     <button type="button" id="setCloseBtn" class="setclosebtn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg> 設定を閉じる</button>
@@ -1010,8 +1010,8 @@
 </main>
 
 <footer>
-  発音は「音声」で切替：ネイティブ高音質（ネット経由・推奨）／端末の音声（オフライン）。<svg class="ic" viewBox="0 0 24 24"><path d="m12 2 2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.8 6.1 20.6l1.3-6.6L2.5 8.9l6.6-.8z"/></svg>は日常頻出、<svg class="ic" viewBox="0 0 24 24"><path d="M12 5C6.5 5 2.7 8.6 1 12c1.7 3.4 5.5 7 11 7s9.3-3.6 11-7c-1.7-3.4-5.5-7-11-7zm0 11.5A4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 0 1 0 9zm0-2A2.5 2.5 0 1 0 12 9.5a2.5 2.5 0 0 0 0 5z"/></svg>は接触回数、<svg class="ic" viewBox="0 0 24 24"><path d="M12 5V2L7 7l5 5V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-7z"/></svg>は誤答回数。<br>
-  進捗・回数・学習時間はこのブラウザに保存されます。ネイティブ高音質はデータ通信を使います。
+  発音は「音声」で切替：合成音声（ネット経由・推奨）／端末の音声（オフライン）。<svg class="ic" viewBox="0 0 24 24"><path d="m12 2 2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.8 6.1 20.6l1.3-6.6L2.5 8.9l6.6-.8z"/></svg>は日常頻出、<svg class="ic" viewBox="0 0 24 24"><path d="M12 5C6.5 5 2.7 8.6 1 12c1.7 3.4 5.5 7 11 7s9.3-3.6 11-7c-1.7-3.4-5.5-7-11-7zm0 11.5A4.5 4.5 0 1 1 12 7.5a4.5 4.5 0 0 1 0 9zm0-2A2.5 2.5 0 1 0 12 9.5a2.5 2.5 0 0 0 0 5z"/></svg>は接触回数、<svg class="ic" viewBox="0 0 24 24"><path d="M12 5V2L7 7l5 5V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-7z"/></svg>は誤答回数。<br>
+  進捗・回数・学習時間はこのブラウザに保存されます。合成音声はデータ通信を使います。
 </footer>
 <script>
 const DECKS={};
@@ -15483,7 +15483,7 @@ function delfLoadProgress(storageKey,kind){
     // Retain the first affected records locally, including conflicting marks.
     // Atomic per-map writes and no global flag make partial storage failures retryable.
     try{
-      const archiveKey='fl_delf_migration_backup_v2_'+kind;
+      const archiveKey='fl_delf_migration_backup_v3_'+kind;
       if(!localStorage.getItem(archiveKey)){
         const affected=Object.create(null);
         for(const [key,value] of Object.entries(old||{})){if(delfMigrationKeys.has(key)){affected[key]=value;const dest=delfMigrationKeys.get(key);if(Object.prototype.hasOwnProperty.call(old,dest))affected[dest]=old[dest];}}
@@ -15546,11 +15546,238 @@ function delfThemeIdentity(word){const normal=delfEntryIdentity(word);return DEL
 /* ---------- End topic consolidation ---------- */
 
 /*===DELF_THEME_MIGRATION_END===*/
+/*===DELF_DAILY_20261122_START===*/
+const DELF_DAILY_WORDS=[
+{level:"A2",item:{w:"un congélateur",ipa:"[œ̃ kɔ̃ʒelatœʁ]",pos:"名詞",jp:"冷凍庫",ex:"Je mets le pain au congélateur.",exjp:"パンを冷凍庫に入れます。",pri:1}},
+{level:"A2",item:{w:"un sèche-linge",ipa:"[œ̃ sɛʃ lɛ̃ʒ]",pos:"名詞",jp:"衣類乾燥機",ex:"Le sèche-linge est plein.",exjp:"衣類乾燥機はいっぱいです。",pri:1}},
+{level:"A2",item:{w:"une cafetière",ipa:"[yn kafətjɛʁ]",pos:"名詞",jp:"コーヒーメーカー",ex:"La cafetière est sur le comptoir.",exjp:"コーヒーメーカーはカウンターの上にあります。",pri:1}},
+{level:"B1",item:{w:"un humidificateur",ipa:"[œ̃n‿ymidifikatœʁ]",pos:"名詞",jp:"加湿器",ex:"Je remplis le réservoir de l'humidificateur.",exjp:"加湿器のタンクに水を入れます。",pri:1}},
+{level:"B1",item:{w:"un déshumidificateur",ipa:"[œ̃ dezymidifikatœʁ]",pos:"名詞",jp:"除湿機",ex:"Le déshumidificateur réduit l'humidité de la pièce.",exjp:"除湿機が部屋の湿気を減らします。",pri:1}},
+{level:"B1",item:{w:"un purificateur d'air",ipa:"[œ̃ pyʁifikatœʁ dɛʁ]",pos:"名詞",jp:"空気清浄機",ex:"Le purificateur d'air fonctionne dans le salon.",exjp:"空気清浄機はリビングで動いています。",pri:1}},
+{level:"A2",item:{w:"un aspirateur robot",ipa:"[œ̃n‿aspiʁatœʁ ʁɔbo]",pos:"名詞",jp:"ロボット掃除機",ex:"L'aspirateur robot passe sous le lit.",exjp:"ロボット掃除機がベッドの下を通ります。",pri:1}},
+{level:"A1",item:{w:"un téléviseur",ipa:"[œ̃ televizœʁ]",pos:"名詞",jp:"テレビ受像機",ex:"Le téléviseur est près de la fenêtre.",exjp:"テレビは窓の近くにあります。",pri:1}},
+{level:"B1",item:{w:"un chauffe-eau",ipa:"[œ̃ ʃofo]",pos:"名詞",jp:"給湯器",ex:"Le chauffe-eau est en panne.",exjp:"給湯器が故障しています。",pri:1}},
+{level:"B1",item:{w:"une hotte aspirante",ipa:"[yn ɔt aspiʁɑ̃t]",pos:"名詞",jp:"台所のレンジフード",ex:"J'allume la hotte aspirante avant de cuisiner.",exjp:"料理をする前にレンジフードをつけます。",pri:1}},
+{level:"A2",item:{w:"une multiprise",ipa:"[yn myltipʁiz]",pos:"名詞",jp:"電源タップ",ex:"La multiprise est derrière le bureau.",exjp:"電源タップは机の後ろにあります。",pri:1}},
+{level:"A2",item:{w:"une rallonge",ipa:"[yn ʁalɔ̃ʒ]",pos:"名詞",jp:"延長コード",ex:"Il me faut une rallonge pour brancher la lampe.",exjp:"ランプをつなぐために延長コードが必要です。",pri:1}},
+{level:"A1",item:{w:"une télécommande",ipa:"[yn telekɔmɑ̃d]",pos:"名詞",jp:"リモコン",ex:"La télécommande est sur le canapé.",exjp:"リモコンはソファの上にあります。",pri:1}},
+{level:"A2",item:{w:"un interrupteur",ipa:"[œ̃n‿ɛ̃teʁyptœʁ]",pos:"名詞",jp:"電灯などのスイッチ",ex:"L'interrupteur est à côté de la porte.",exjp:"スイッチはドアの横にあります。",pri:1}},
+{level:"A1",item:{w:"une lampe",ipa:"[yn lɑ̃p]",pos:"名詞",jp:"ランプ・照明器具",ex:"J'allume la lampe pour lire.",exjp:"本を読むためにランプをつけます。",pri:1}},
+{level:"A1",item:{w:"une armoire",ipa:"[yn aʁmwaʁ]",pos:"名詞",jp:"衣装だんす",ex:"Mes vêtements sont dans l'armoire.",exjp:"私の服は衣装だんすに入っています。",pri:1}},
+{level:"A2",item:{w:"une commode",ipa:"[yn kɔmɔd]",pos:"名詞",jp:"引き出し付きの整理だんす",ex:"Je range mes chaussettes dans la commode.",exjp:"靴下を整理だんすにしまいます。",pri:1}},
+{level:"A1",item:{w:"une étagère",ipa:"[yn etaʒɛʁ]",pos:"名詞",jp:"棚",ex:"Cette étagère est trop haute pour moi.",exjp:"この棚は私には高すぎます。",pri:1}},
+{level:"A1",item:{w:"un fauteuil",ipa:"[œ̃ fotœj]",pos:"名詞",jp:"肘掛け椅子",ex:"Je lis dans mon fauteuil.",exjp:"肘掛け椅子に座って本を読みます。",pri:1}},
+{level:"A2",item:{w:"un tabouret",ipa:"[œ̃ tabuʁɛ]",pos:"名詞",jp:"背もたれのない椅子・スツール",ex:"Ce tabouret se range sous la table.",exjp:"このスツールはテーブルの下にしまえます。",pri:1}},
+{level:"A1",item:{w:"une table basse",ipa:"[yn tabl bas]",pos:"名詞",jp:"ローテーブル",ex:"Les magazines sont sur la table basse.",exjp:"雑誌はローテーブルの上にあります。",pri:1}},
+{level:"A2",item:{w:"une table de chevet",ipa:"[yn tabl də ʃəvɛ]",pos:"名詞",jp:"ベッドサイドテーブル",ex:"Je pose mon livre sur la table de chevet.",exjp:"本をベッドサイドテーブルに置きます。",pri:1}},
+{level:"A2",item:{w:"une penderie",ipa:"[yn pɑ̃dʁi]",pos:"名詞",jp:"衣服を掛ける収納スペース",ex:"Les manteaux sont dans la penderie.",exjp:"コートは衣服掛けの収納に入っています。",pri:1}},
+{level:"A1",item:{w:"un placard",ipa:"[œ̃ plakaʁ]",pos:"名詞",jp:"壁付けの戸棚・収納庫",ex:"Les produits de nettoyage sont dans ce placard.",exjp:"掃除用品はこの戸棚に入っています。",pri:1}},
+{level:"A2",item:{w:"un portemanteau",ipa:"[œ̃ pɔʁtmɑ̃to]",pos:"名詞",jp:"コート掛け",ex:"J'accroche ma veste au portemanteau.",exjp:"上着をコート掛けに掛けます。",pri:1}},
+{level:"A2",item:{w:"un meuble à chaussures",ipa:"[œ̃ mœbl a ʃosyʁ]",pos:"名詞",jp:"靴箱・シューズラック",ex:"Le meuble à chaussures est dans l'entrée.",exjp:"靴箱は玄関にあります。",pri:1}},
+{level:"B1",item:{w:"un paravent",ipa:"[œ̃ paʁavɑ̃]",pos:"名詞",jp:"間仕切り・ついたて",ex:"Un paravent sépare le lit du bureau.",exjp:"間仕切りがベッドと机の間を仕切っています。",pri:1}},
+{level:"A1",item:{w:"un coussin",ipa:"[œ̃ kusɛ̃]",pos:"名詞",jp:"クッション",ex:"Ce coussin est très doux.",exjp:"このクッションはとても柔らかいです。",pri:1}},
+{level:"A2",item:{w:"une couette",ipa:"[yn kwɛt]",pos:"名詞",jp:"中綿入りの掛け布団",ex:"Cette couette est assez chaude pour l'hiver.",exjp:"この掛け布団は冬にも十分暖かいです。",pri:1}},
+{level:"A1",item:{w:"un drap",ipa:"[œ̃ dʁa]",pos:"名詞",jp:"シーツ",ex:"Je mets un drap propre sur le lit.",exjp:"ベッドに清潔なシーツを敷きます。",pri:1}},
+{level:"A2",item:{w:"une taie d'oreiller",ipa:"[yn tɛ dɔʁeje]",pos:"名詞",jp:"枕カバー",ex:"Je change la taie d'oreiller.",exjp:"枕カバーを取り替えます。",pri:1}},
+{level:"A2",item:{w:"un matelas",ipa:"[œ̃ matla]",pos:"名詞",jp:"マットレス",ex:"Ce matelas est trop dur.",exjp:"このマットレスは硬すぎます。",pri:1}},
+{level:"B1",item:{w:"un sommier",ipa:"[œ̃ sɔmje]",pos:"名詞",jp:"マットレスを支えるベッドの土台",ex:"Le sommier grince quand je bouge.",exjp:"体を動かすとベッドの土台がきしみます。",pri:1}},
+{level:"A2",item:{w:"une housse de couette",ipa:"[yn us də kwɛt]",pos:"名詞",jp:"掛け布団カバー",ex:"La housse de couette est dans la machine à laver.",exjp:"掛け布団カバーは洗濯機に入っています。",pri:1}},
+{level:"A2",item:{w:"un cintre",ipa:"[œ̃ sɛ̃tʁ]",pos:"名詞",jp:"衣類用ハンガー",ex:"Je mets cette chemise sur un cintre.",exjp:"このシャツをハンガーに掛けます。",pri:1}},
+{level:"A2",item:{w:"un étendoir",ipa:"[œ̃n‿etɑ̃dwaʁ]",pos:"名詞",jp:"洗濯物干し",ex:"L'étendoir est sur le balcon.",exjp:"洗濯物干しはバルコニーにあります。",pri:1}},
+{level:"A2",item:{w:"une pince à linge",ipa:"[yn pɛ̃s a lɛ̃ʒ]",pos:"名詞",jp:"洗濯ばさみ",ex:"Une pince à linge est tombée par terre.",exjp:"洗濯ばさみが一つ地面に落ちました。",pri:1}},
+{level:"A2",item:{w:"un panier à linge",ipa:"[œ̃ panje a lɛ̃ʒ]",pos:"名詞",jp:"洗濯かご",ex:"Le panier à linge est plein de serviettes.",exjp:"洗濯かごはタオルでいっぱいです。",pri:1}},
+{level:"A2",item:{w:"une planche à repasser",ipa:"[yn plɑ̃ʃ a ʁəpase]",pos:"名詞",jp:"アイロン台",ex:"Je déplie la planche à repasser.",exjp:"アイロン台を広げます。",pri:1}},
+{level:"B1",item:{w:"un filet de lavage",ipa:"[œ̃ filɛ də lavaʒ]",pos:"名詞",jp:"洗濯ネット",ex:"Je mets les vêtements fragiles dans un filet de lavage.",exjp:"傷みやすい衣類を洗濯ネットに入れます。",pri:1}},
+{level:"A2",item:{w:"un plumeau",ipa:"[œ̃ plymo]",pos:"名詞",jp:"はたき",ex:"Je passe le plumeau sur l'étagère.",exjp:"棚にはたきをかけます。",pri:1}},
+{level:"A2",item:{w:"un adoucissant",ipa:"[œ̃n‿adusisɑ̃]",pos:"名詞",jp:"衣類用柔軟剤",ex:"Cet adoucissant est sans parfum.",exjp:"この柔軟剤は無香料です。",pri:1}},
+{level:"A2",item:{w:"un détachant",ipa:"[œ̃ detaʃɑ̃]",pos:"名詞",jp:"染み抜き剤",ex:"Ce détachant enlève les taches de café.",exjp:"この染み抜き剤はコーヒーの染みを落とします。",pri:1}},
+{level:"A2",item:{w:"de l'eau de Javel",ipa:"[də lo də ʒavɛl]",pos:"名詞",jp:"塩素系漂白剤",ex:"Cette bouteille contient de l'eau de Javel.",exjp:"このボトルには塩素系漂白剤が入っています。",pri:1}},
+{level:"A2",item:{w:"un désinfectant",ipa:"[œ̃ dezɛ̃fɛktɑ̃]",pos:"名詞",jp:"消毒剤",ex:"Ce désinfectant convient aux surfaces de la cuisine.",exjp:"この消毒剤は台所の表面の消毒に使えます。",pri:1}},
+{level:"A2",item:{w:"un sac-poubelle",ipa:"[œ̃ sak pubɛl]",pos:"名詞",jp:"ごみ袋",ex:"Je remplace le sac-poubelle.",exjp:"ごみ袋を取り替えます。",pri:1}},
+{level:"A2",item:{w:"une pelle à poussière",ipa:"[yn pɛl a pusjɛʁ]",pos:"名詞",jp:"ちりとり",ex:"Je ramasse les miettes avec une pelle à poussière.",exjp:"ちりとりでパンくずを集めます。",pri:1}},
+{level:"A2",item:{w:"une balayette",ipa:"[yn balejɛt]",pos:"名詞",jp:"手ぼうき",ex:"La balayette est rangée avec la pelle.",exjp:"手ぼうきはちりとりと一緒にしまってあります。",pri:1}},
+{level:"A2",item:{w:"un paillasson",ipa:"[œ̃ pajasɔ̃]",pos:"名詞",jp:"玄関の足拭きマット",ex:"J'essuie mes chaussures sur le paillasson.",exjp:"玄関マットで靴の汚れを拭き取ります。",pri:1}},
+{level:"A2",item:{w:"un store",ipa:"[œ̃ stɔʁ]",pos:"名詞",jp:"窓のブラインド・巻き上げ式の日よけ",ex:"Je baisse le store quand il y a trop de soleil.",exjp:"日差しが強すぎるときはブラインドを下ろします。",pri:1}},
+{level:"A2",item:{w:"un volet",ipa:"[œ̃ vɔlɛ]",pos:"名詞",jp:"窓の鎧戸・雨戸",ex:"Je ferme les volets le soir.",exjp:"夜は窓の鎧戸を閉めます。",pri:1}},
+{level:"B1",item:{w:"une tringle à rideaux",ipa:"[yn tʁɛ̃ɡl a ʁido]",pos:"名詞",jp:"カーテン用のポール",ex:"La tringle à rideaux est fixée au mur.",exjp:"カーテン用のポールは壁に取り付けてあります。",pri:1}},
+{level:"B1",item:{w:"une ventouse",ipa:"[yn vɑ̃tuz]",pos:"名詞",jp:"吸盤・排水口の詰まりを取るラバーカップ",ex:"Je débouche le lavabo avec une ventouse.",exjp:"ラバーカップで洗面台の詰まりを取ります。",pri:1}},
+{level:"A2",item:{w:"un pommeau de douche",ipa:"[œ̃ pɔmo də duʃ]",pos:"名詞",jp:"シャワーヘッド",ex:"Le pommeau de douche est réglable.",exjp:"シャワーヘッドは調節できます。",pri:1}},
+{level:"A2",item:{w:"un pèse-personne",ipa:"[œ̃ pɛz pɛʁsɔn]",pos:"名詞",jp:"体重計",ex:"Le pèse-personne affiche mon poids.",exjp:"体重計に私の体重が表示されます。",pri:1}},
+{level:"A2",item:{w:"un porte-savon",ipa:"[œ̃ pɔʁt savɔ̃]",pos:"名詞",jp:"石けん置き",ex:"Le porte-savon est à côté du lavabo.",exjp:"石けん置きは洗面台の横にあります。",pri:1}},
+{level:"A1",item:{w:"une serviette de bain",ipa:"[yn sɛʁvjɛt də bɛ̃]",pos:"名詞",jp:"バスタオル",ex:"Je prends une serviette de bain propre.",exjp:"清潔なバスタオルを取ります。",pri:1}},
+{level:"A2",item:{w:"un tapis de bain",ipa:"[œ̃ tapi də bɛ̃]",pos:"名詞",jp:"バスマット",ex:"Le tapis de bain est encore mouillé.",exjp:"バスマットはまだぬれています。",pri:1}},
+{level:"A2",item:{w:"un rideau de douche",ipa:"[œ̃ ʁido də duʃ]",pos:"名詞",jp:"シャワーカーテン",ex:"Je ferme le rideau de douche.",exjp:"シャワーカーテンを閉めます。",pri:1}},
+{level:"A2",item:{w:"une bouillotte",ipa:"[yn bujɔt]",pos:"名詞",jp:"湯たんぽ",ex:"La bouillotte réchauffe mes pieds.",exjp:"湯たんぽが足を温めてくれます。",pri:1}},
+{level:"A1",item:{w:"un brocoli",ipa:"[œ̃ bʁɔkɔli]",pos:"名詞",jp:"ブロッコリー",ex:"Je coupe le brocoli en petits morceaux.",exjp:"ブロッコリーを小さく切ります。",pri:1}},
+{level:"A1",item:{w:"une aubergine",ipa:"[yn obɛʁʒin]",pos:"名詞",jp:"ナス",ex:"Je fais cuire une aubergine au four.",exjp:"ナスを1本オーブンで焼きます。",pri:1}},
+{level:"A1",item:{w:"un concombre",ipa:"[œ̃ kɔ̃kɔ̃bʁ]",pos:"名詞",jp:"キュウリ",ex:"Il reste un concombre dans le frigo.",exjp:"冷蔵庫にキュウリが1本残っています。",pri:1}},
+{level:"A1",item:{w:"un chou",ipa:"[œ̃ ʃu]",pos:"名詞",jp:"キャベツ",ex:"Je coupe le chou pour la soupe.",exjp:"スープ用にキャベツを切ります。",pri:1}},
+{level:"A2",item:{w:"un chou-fleur",ipa:"[œ̃ ʃuflœʁ]",pos:"名詞",jp:"カリフラワー",ex:"Nous mangeons du chou-fleur avec du poisson.",exjp:"私たちは魚と一緒にカリフラワーを食べます。",pri:1}},
+{level:"A1",item:{w:"des épinards",ipa:"[de z‿epinaʁ]",pos:"名詞",jp:"ホウレンソウ",ex:"J'ajoute des épinards dans l'omelette.",exjp:"オムレツにホウレンソウを入れます。",pri:1}},
+{level:"A2",item:{w:"un poireau",ipa:"[œ̃ pwaʁo]",pos:"名詞",jp:"ポロネギ・リーキ",ex:"Je lave les poireaux avant de les couper.",exjp:"ポロネギを切る前に洗います。",pri:1}},
+{level:"A2",item:{w:"du céleri",ipa:"[dy sɛlʁi]",pos:"名詞",jp:"セロリ",ex:"Je mets un peu de céleri dans la soupe.",exjp:"スープにセロリを少し入れます。",pri:1}},
+{level:"A2",item:{w:"un radis",ipa:"[œ̃ ʁadi]",pos:"名詞",jp:"ラディッシュ・二十日大根",ex:"Ces radis sont bien croquants.",exjp:"このラディッシュはとてもシャキシャキしています。",pri:1}},
+{level:"A2",item:{w:"un navet",ipa:"[œ̃ navɛ]",pos:"名詞",jp:"カブ",ex:"J'ai acheté trois navets au marché.",exjp:"市場でカブを3個買いました。",pri:1}},
+{level:"A2",item:{w:"une betterave",ipa:"[yn bɛtʁav]",pos:"名詞",jp:"ビーツ",ex:"Je prépare une salade de betteraves.",exjp:"ビーツのサラダを作ります。",pri:1}},
+{level:"A2",item:{w:"un potiron",ipa:"[œ̃ pɔtiʁɔ̃]",pos:"名詞",jp:"カボチャ（西洋カボチャの一種）",ex:"Cette soupe au potiron est très douce.",exjp:"このカボチャのスープはとてもまろやかです。",pri:1}},
+{level:"A2",item:{w:"une patate douce",ipa:"[yn patat dus]",pos:"名詞",jp:"サツマイモ",ex:"Je fais cuire deux patates douces au four.",exjp:"サツマイモを2本オーブンで焼きます。",pri:1}},
+{level:"A2",item:{w:"une asperge",ipa:"[yn aspɛʁʒ]",pos:"名詞",jp:"アスパラガス",ex:"Les asperges sont prêtes à servir.",exjp:"アスパラガスはもう食卓に出せます。",pri:1}},
+{level:"A2",item:{w:"une endive",ipa:"[yn ɑ̃div]",pos:"名詞",jp:"アンディーブ・チコリ（白い葉を食べる野菜）",ex:"Je coupe les endives pour la salade.",exjp:"サラダ用にアンディーブを切ります。",pri:1}},
+{level:"A2",item:{w:"une échalote",ipa:"[yn eʃalɔt]",pos:"名詞",jp:"エシャロット（小型のタマネギの仲間）",ex:"Une échalote suffit pour cette sauce.",exjp:"このソースにはエシャロット1個で十分です。",pri:1}},
+{level:"A1",item:{w:"du maïs",ipa:"[dy mais]",pos:"名詞",jp:"トウモロコシ",ex:"J'ajoute du maïs à la salade.",exjp:"サラダにトウモロコシを入れます。",pri:1}},
+{level:"A1",item:{w:"des petits pois",ipa:"[de pəti pwa]",pos:"名詞",jp:"グリーンピース",ex:"Nous mangeons des petits pois avec le poulet.",exjp:"鶏肉と一緒にグリーンピースを食べます。",pri:1}},
+{level:"A2",item:{w:"des haricots verts",ipa:"[de aʁiko vɛʁ]",pos:"名詞",jp:"サヤインゲン",ex:"Je fais cuire les haricots verts à la vapeur.",exjp:"サヤインゲンを蒸します。",pri:1}},
+{level:"A2",item:{w:"un artichaut",ipa:"[œ̃ n‿aʁtiʃo]",pos:"名詞",jp:"アーティチョーク",ex:"J'ai acheté deux artichauts au marché.",exjp:"市場でアーティチョークを2個買いました。",pri:1}},
+{level:"A1",item:{w:"une poire",ipa:"[yn pwaʁ]",pos:"名詞",jp:"洋ナシ",ex:"Cette poire est bien mûre.",exjp:"この洋ナシはよく熟しています。",pri:1}},
+{level:"A1",item:{w:"une cerise",ipa:"[yn səʁiz]",pos:"名詞",jp:"サクランボ",ex:"Je lave les cerises avant de les manger.",exjp:"サクランボを食べる前に洗います。",pri:1}},
+{level:"A1",item:{w:"un abricot",ipa:"[œ̃ n‿abʁiko]",pos:"名詞",jp:"アンズ",ex:"Je prends deux abricots pour le goûter.",exjp:"おやつにアンズを2個持っていきます。",pri:1}},
+{level:"A2",item:{w:"une prune",ipa:"[yn pʁyn]",pos:"名詞",jp:"プラム・スモモ",ex:"Ces prunes sont un peu acides.",exjp:"このプラムは少し酸っぱいです。",pri:1}},
+{level:"A1",item:{w:"un kiwi",ipa:"[œ̃ kiwi]",pos:"名詞",jp:"キウイフルーツ",ex:"Je coupe un kiwi en deux.",exjp:"キウイを半分に切ります。",pri:1}},
+{level:"A1",item:{w:"un melon",ipa:"[œ̃ məlɔ̃]",pos:"名詞",jp:"メロン",ex:"Ce melon sent très bon.",exjp:"このメロンはとてもよい香りがします。",pri:1}},
+{level:"A1",item:{w:"une pastèque",ipa:"[yn pastɛk]",pos:"名詞",jp:"スイカ",ex:"Nous partageons une pastèque bien fraîche.",exjp:"私たちはよく冷えたスイカを分けて食べます。",pri:1}},
+{level:"A2",item:{w:"un pamplemousse",ipa:"[œ̃ pɑ̃pləmus]",pos:"名詞",jp:"グレープフルーツ（一般的な呼び方）",ex:"Je mange un demi-pamplemousse au petit déjeuner.",exjp:"朝食にグレープフルーツを半分食べます。",pri:1}},
+{level:"A1",item:{w:"une clémentine",ipa:"[yn klemɑ̃tin]",pos:"名詞",jp:"クレマンティーヌ（小型のミカン）",ex:"Cette clémentine n'a pas de pépins.",exjp:"このクレマンティーヌには種がありません。",pri:1}},
+{level:"A2",item:{w:"une mandarine",ipa:"[yn mɑ̃daʁin]",pos:"名詞",jp:"マンダリン（ミカンの一種）",ex:"Il reste trois mandarines dans le panier.",exjp:"かごにマンダリンが3個残っています。",pri:1}},
+{level:"A2",item:{w:"une figue",ipa:"[yn fig]",pos:"名詞",jp:"イチジク",ex:"Ces figues sont très sucrées.",exjp:"このイチジクはとても甘いです。",pri:1}},
+{level:"A2",item:{w:"une datte",ipa:"[yn dat]",pos:"名詞",jp:"デーツ・ナツメヤシの実",ex:"J'emporte quelques dattes pour le voyage.",exjp:"旅行にデーツを少し持っていきます。",pri:1}},
+{level:"A2",item:{w:"une grenade",ipa:"[yn gʁənad]",pos:"名詞",jp:"ザクロ",ex:"J'ajoute des graines de grenade dans le yaourt.",exjp:"ヨーグルトにザクロの粒を入れます。",pri:1}},
+{level:"A2",item:{w:"une nectarine",ipa:"[yn nɛktaʁin]",pos:"名詞",jp:"ネクタリン",ex:"Cette nectarine est encore un peu dure.",exjp:"このネクタリンはまだ少し硬いです。",pri:1}},
+{level:"A2",item:{w:"un citron vert",ipa:"[œ̃ sitʁɔ̃ vɛʁ]",pos:"名詞",jp:"ライム",ex:"Je presse un citron vert pour la sauce.",exjp:"ソース用にライムを1個搾ります。",pri:1}},
+{level:"A2",item:{w:"une amande",ipa:"[yn amɑ̃d]",pos:"名詞",jp:"アーモンド",ex:"Je mets quelques amandes dans mon yaourt.",exjp:"ヨーグルトにアーモンドを数粒入れます。",pri:1}},
+{level:"A2",item:{w:"une noisette",ipa:"[yn nwazɛt]",pos:"名詞",jp:"ヘーゼルナッツ",ex:"Ce gâteau contient des noisettes.",exjp:"このケーキにはヘーゼルナッツが入っています。",pri:1}},
+{level:"A2",item:{w:"une noix",ipa:"[yn nwa]",pos:"名詞",jp:"クルミ",ex:"J'ajoute des noix à la salade.",exjp:"サラダにクルミを加えます。",pri:1}},
+{level:"A2",item:{w:"une pistache",ipa:"[yn pistaʃ]",pos:"名詞",jp:"ピスタチオ",ex:"Je préfère les pistaches sans sel.",exjp:"塩を加えていないピスタチオのほうが好きです。",pri:1}},
+{level:"A2",item:{w:"une noix de cajou",ipa:"[yn nwa də kaʒu]",pos:"名詞",jp:"カシューナッツ",ex:"J'ai acheté un sachet de noix de cajou.",exjp:"カシューナッツを1袋買いました。",pri:1}},
+{level:"A2",item:{w:"des lentilles",ipa:"[de lɑ̃tij]",pos:"名詞",jp:"レンズ豆",ex:"Je prépare une soupe de lentilles.",exjp:"レンズ豆のスープを作ります。",pri:1}},
+{level:"A2",item:{w:"des pois chiches",ipa:"[de pwa ʃiʃ]",pos:"名詞",jp:"ヒヨコ豆",ex:"J'ajoute des pois chiches dans la salade.",exjp:"サラダにヒヨコ豆を加えます。",pri:1}},
+{level:"A2",item:{w:"des haricots secs",ipa:"[de aʁiko sɛk]",pos:"名詞",jp:"乾燥インゲン豆",ex:"Je laisse tremper les haricots secs toute la nuit.",exjp:"乾燥インゲン豆を一晩水につけておきます。",pri:1}},
+{level:"A1",item:{w:"du tofu",ipa:"[dy tɔfu]",pos:"名詞",jp:"豆腐",ex:"Je coupe le tofu en petits cubes.",exjp:"豆腐を小さな角切りにします。",pri:1}},
+{level:"A2",item:{w:"du soja",ipa:"[dy sɔʒa]",pos:"名詞",jp:"大豆",ex:"Le tofu est fabriqué à partir de soja.",exjp:"豆腐は大豆から作られています。",pri:1}},
+{level:"A2",item:{w:"des flocons d'avoine",ipa:"[de flɔkɔ̃ davwan]",pos:"名詞",jp:"オートミール用のオーツ麦フレーク",ex:"Je mélange des flocons d'avoine avec du lait.",exjp:"オーツ麦フレークを牛乳と混ぜます。",pri:1}},
+{level:"A2",item:{w:"de la semoule",ipa:"[də la səmul]",pos:"名詞",jp:"セモリナ（穀物の粗びき粉・粒）",ex:"Je prépare de la semoule pour accompagner les légumes.",exjp:"野菜に添えるセモリナを用意します。",pri:1}},
+{level:"A2",item:{w:"de la chapelure",ipa:"[də la ʃaplyʁ]",pos:"名詞",jp:"パン粉",ex:"Je couvre le gratin de chapelure.",exjp:"グラタンの表面にパン粉をかけます。",pri:1}},
+{level:"A2",item:{w:"du cacao",ipa:"[dy kakao]",pos:"名詞",jp:"ココア・カカオ",ex:"J'ajoute une cuillère de cacao à la pâte.",exjp:"生地にココアをスプーン1杯加えます。",pri:1}},
+{level:"A2",item:{w:"du sésame",ipa:"[dy sezam]",pos:"名詞",jp:"ゴマ",ex:"Je mets un peu de sésame sur le riz.",exjp:"ご飯にゴマを少しかけます。",pri:1}},
+{level:"A2",item:{w:"du bouillon",ipa:"[dy bujɔ̃]",pos:"名詞",jp:"ブイヨン・だし汁",ex:"J'ajoute du bouillon dans la casserole.",exjp:"鍋にブイヨンを加えます。",pri:1}},
+{level:"A2",item:{w:"de la fécule de pomme de terre",ipa:"[də la fekyl də pɔm də tɛʁ]",pos:"名詞",jp:"ジャガイモでんぷん・片栗粉",ex:"J'épaissis la sauce avec un peu de fécule de pomme de terre.",exjp:"片栗粉を少し使ってソースにとろみをつけます。",pri:1}},
+{level:"A2",item:{w:"de la gélatine",ipa:"[də la ʒelatin]",pos:"名詞",jp:"ゼラチン",ex:"Cette recette contient deux feuilles de gélatine.",exjp:"このレシピでは板ゼラチンを2枚使います。",pri:1}},
+{level:"A1",item:{w:"du fromage blanc",ipa:"[dy fʁɔmaʒ blɑ̃]",pos:"名詞",jp:"フロマージュブラン（熟成させない白いチーズ）",ex:"Je mange du fromage blanc avec des fruits.",exjp:"果物と一緒にフロマージュブランを食べます。",pri:1}},
+{level:"A2",item:{w:"des lardons",ipa:"[de laʁdɔ̃]",pos:"名詞",jp:"ラルドン（豚ばら肉を小さな棒状などに切ったもの）",ex:"Je fais revenir les lardons dans une poêle.",exjp:"フライパンでラルドンを炒めます。",pri:1}},
+{level:"A2",item:{w:"du lait de coco",ipa:"[dy lɛ də koko]",pos:"名詞",jp:"ココナッツミルク",ex:"J'ajoute du lait de coco à la soupe.",exjp:"スープにココナッツミルクを加えます。",pri:1}},
+{level:"A2",item:{w:"du riz complet",ipa:"[dy ʁi kɔ̃plɛ]",pos:"名詞",jp:"玄米",ex:"Ce soir, je prépare du riz complet.",exjp:"今夜は玄米を炊きます。",pri:1}},
+{level:"A2",item:{w:"un épluche-légumes",ipa:"[œ̃ n‿eplyʃ leɡym]",pos:"名詞",jp:"ピーラー・皮むき器",ex:"Cet épluche-légumes est facile à utiliser.",exjp:"このピーラーは使いやすいです。",pri:1}},
+{level:"A2",item:{w:"une spatule",ipa:"[yn spatyl]",pos:"名詞",jp:"へら・フライ返し",ex:"Je retourne la crêpe avec une spatule.",exjp:"へらでクレープを裏返します。",pri:1}},
+{level:"A2",item:{w:"une râpe",ipa:"[yn ʁap]",pos:"名詞",jp:"おろし器",ex:"J'utilise une râpe pour le fromage.",exjp:"チーズ用におろし器を使います。",pri:1}},
+{level:"A2",item:{w:"un rouleau à pâtisserie",ipa:"[œ̃ ʁulo a patisʁi]",pos:"名詞",jp:"麺棒・めん棒",ex:"J'étale la pâte avec un rouleau à pâtisserie.",exjp:"麺棒で生地をのばします。",pri:1}},
+{level:"A2",item:{w:"un presse-citron",ipa:"[œ̃ pʁɛs sitʁɔ̃]",pos:"名詞",jp:"レモン搾り器",ex:"Ce presse-citron retient les pépins.",exjp:"このレモン搾り器は種を取り除いてくれます。",pri:1}},
+{level:"A2",item:{w:"un ouvre-boîte",ipa:"[œ̃ n‿uvʁəbwat]",pos:"名詞",jp:"缶切り",ex:"L'ouvre-boîte est dans le tiroir.",exjp:"缶切りは引き出しの中にあります。",pri:1}},
+{level:"A2",item:{w:"un verre doseur",ipa:"[œ̃ vɛʁ dozœʁ]",pos:"名詞",jp:"計量カップ",ex:"Je mesure le lait avec un verre doseur.",exjp:"計量カップで牛乳を量ります。",pri:1}},
+{level:"A2",item:{w:"un couvercle",ipa:"[œ̃ kuvɛʁkl]",pos:"名詞",jp:"ふた",ex:"Je pose le couvercle sur la casserole.",exjp:"鍋にふたをします。",pri:1}},
+{level:"A2",item:{w:"une écumoire",ipa:"[yn ekymwaʁ]",pos:"名詞",jp:"あく取り・穴あきおたま",ex:"J'enlève l'écume avec une écumoire.",exjp:"あく取りであくを取り除きます。",pri:1}},
+{level:"A2",item:{w:"une manique",ipa:"[yn manik]",pos:"名詞",jp:"鍋つかみ（フランスでの呼び方）",ex:"Je prends une manique pour sortir le plat du four.",exjp:"オーブンから料理の容器を取り出すために鍋つかみを使います。",pri:1}},
+{level:"A2",item:{w:"un plat à gratin",ipa:"[œ̃ pla a ɡʁatɛ̃]",pos:"名詞",jp:"グラタン皿・オーブン用の耐熱皿",ex:"Je mets les légumes dans un plat à gratin.",exjp:"グラタン皿に野菜を入れます。",pri:1}},
+{level:"A2",item:{w:"une pince de cuisine",ipa:"[yn pɛ̃s də kɥizin]",pos:"名詞",jp:"料理用トング",ex:"Je retourne les légumes avec une pince de cuisine.",exjp:"料理用トングで野菜を裏返します。",pri:1}},
+{level:"A2",item:{w:"une cocotte",ipa:"[yn kɔkɔt]",pos:"名詞",jp:"厚手のふた付き煮込み鍋",ex:"Je laisse mijoter la viande dans une cocotte.",exjp:"厚手のふた付き鍋で肉をじっくり煮込みます。",pri:1}},
+{level:"A2",item:{w:"un hamster",ipa:"[œ̃ amstɛʁ]",pos:"名詞",jp:"ハムスター",ex:"Mon hamster dort pendant la journée.",exjp:"私のハムスターは昼間に眠ります。",pri:1}},
+{level:"A2",item:{w:"un cochon d'Inde",ipa:"[œ̃ kɔʃɔ̃ dɛ̃d]",pos:"名詞",jp:"モルモット",ex:"Notre cochon d'Inde mange du foin.",exjp:"うちのモルモットは干し草を食べます。",pri:1}},
+{level:"A2",item:{w:"un écureuil",ipa:"[œ̃n‿ekyʁœj]",pos:"名詞",jp:"リス",ex:"Un écureuil grimpe dans cet arbre.",exjp:"リスがこの木に登っています。",pri:1}},
+{level:"A2",item:{w:"un renard",ipa:"[œ̃ ʁənaʁ]",pos:"名詞",jp:"キツネ",ex:"J'ai vu un renard près du village.",exjp:"村の近くでキツネを見ました。",pri:1}},
+{level:"A2",item:{w:"une chèvre",ipa:"[yn ʃɛvʁ]",pos:"名詞",jp:"ヤギ",ex:"La chèvre mange de l'herbe.",exjp:"ヤギが草を食べています。",pri:1}},
+{level:"A2",item:{w:"un âne",ipa:"[œ̃n‿ɑn]",pos:"名詞",jp:"ロバ",ex:"Un âne nous regarde derrière la clôture.",exjp:"ロバが柵の向こうから私たちを見ています。",pri:1}},
+{level:"A2",item:{w:"un poney",ipa:"[œ̃ pɔnɛ]",pos:"名詞",jp:"ポニー",ex:"Ma fille apprend à monter à poney.",exjp:"娘はポニーに乗る練習をしています。",pri:1}},
+{level:"A2",item:{w:"un poussin",ipa:"[œ̃ pusɛ̃]",pos:"名詞",jp:"ひよこ",ex:"Les poussins suivent leur mère.",exjp:"ひよこたちは母鶏の後についていきます。",pri:1}},
+{level:"A2",item:{w:"un veau",ipa:"[œ̃ vo]",pos:"名詞",jp:"子牛",ex:"Le veau reste près de la vache.",exjp:"子牛は母牛のそばにいます。",pri:1}},
+{level:"B1",item:{w:"un porcelet",ipa:"[œ̃ pɔʁsəlɛ]",pos:"名詞",jp:"子豚",ex:"Les porcelets dorment dans la paille.",exjp:"子豚たちはわらの中で眠っています。",pri:1}},
+{level:"A2",item:{w:"une perruche",ipa:"[yn pɛʁyʃ]",pos:"名詞",jp:"インコ",ex:"Cette perruche a des plumes vertes.",exjp:"このインコの羽は緑色です。",pri:1}},
+{level:"A2",item:{w:"un canari",ipa:"[œ̃ kanaʁi]",pos:"名詞",jp:"カナリア",ex:"Le canari chante près de la fenêtre.",exjp:"カナリアが窓の近くで鳴いています。",pri:1}},
+{level:"A2",item:{w:"un panda",ipa:"[œ̃ pɑ̃da]",pos:"名詞",jp:"パンダ",ex:"Le panda tient une tige de bambou.",exjp:"パンダは竹の茎を持っています。",pri:1}},
+{level:"A2",item:{w:"un koala",ipa:"[œ̃ koala]",pos:"名詞",jp:"コアラ",ex:"Le koala dort dans un arbre.",exjp:"コアラが木の上で眠っています。",pri:1}},
+{level:"A2",item:{w:"un phoque",ipa:"[œ̃ fɔk]",pos:"名詞",jp:"アザラシ",ex:"Un phoque se repose sur le rocher.",exjp:"アザラシが岩の上で休んでいます。",pri:1}},
+{level:"B1",item:{w:"un sanglier",ipa:"[œ̃ sɑ̃ɡlje]",pos:"名詞",jp:"イノシシ",ex:"Un sanglier traverse le chemin.",exjp:"イノシシが道を横切っています。",pri:1}},
+{level:"A2",item:{w:"un cerf",ipa:"[œ̃ sɛʁ]",pos:"名詞",jp:"シカ（特に雄ジカ）",ex:"Nous observons un cerf à la lisière du bois.",exjp:"私たちは林の端にいるシカを観察しています。",pri:1}},
+{level:"B1",item:{w:"une chauve-souris",ipa:"[yn ʃov suʁi]",pos:"名詞",jp:"コウモリ",ex:"Une chauve-souris vole au-dessus du jardin.",exjp:"コウモリが庭の上を飛んでいます。",pri:1}},
+{level:"A2",item:{w:"un rat",ipa:"[œ̃ ʁa]",pos:"名詞",jp:"大型のネズミ（ドブネズミなど）",ex:"Un rat se cache derrière la poubelle.",exjp:"ネズミがごみ箱の後ろに隠れています。",pri:1}},
+{level:"B1",item:{w:"un poulain",ipa:"[œ̃ pulɛ̃]",pos:"名詞",jp:"子馬",ex:"Le poulain court dans le pré.",exjp:"子馬が牧草地を走っています。",pri:1}},
+{level:"A2",item:{w:"un taille-crayon",ipa:"[œ̃ taj kʁɛjɔ̃]",pos:"名詞",jp:"鉛筆削り",ex:"Ce taille-crayon est dans ma trousse.",exjp:"この鉛筆削りは私の筆箱に入っています。",pri:1}},
+{level:"A2",item:{w:"un porte-mine",ipa:"[œ̃ pɔʁtəmin]",pos:"名詞",jp:"シャープペンシル",ex:"J'écris avec un porte-mine.",exjp:"私はシャープペンシルで書きます。",pri:1}},
+{level:"A1",item:{w:"un crayon de couleur",ipa:"[œ̃ kʁɛjɔ̃ də kulœʁ]",pos:"名詞",jp:"色鉛筆",ex:"Prends un crayon de couleur bleu.",exjp:"青い色鉛筆を取って。",pri:1}},
+{level:"A2",item:{w:"un feutre",ipa:"[œ̃ føtʁ]",pos:"名詞",jp:"フェルトペン・サインペン",ex:"Remets le capuchon sur le feutre.",exjp:"フェルトペンにキャップを戻して。",pri:1}},
+{level:"A2",item:{w:"un stylo-plume",ipa:"[œ̃ stilo plym]",pos:"名詞",jp:"万年筆",ex:"Ce stylo-plume écrit très bien.",exjp:"この万年筆はとても書きやすいです。",pri:1}},
+{level:"A2",item:{w:"une cartouche d'encre",ipa:"[yn kaʁtuʃ dɑ̃kʁ]",pos:"名詞",jp:"インクカートリッジ",ex:"Je change la cartouche d'encre de mon stylo.",exjp:"ペンのインクカートリッジを交換します。",pri:1}},
+{level:"A2",item:{w:"un carnet",ipa:"[œ̃ kaʁnɛ]",pos:"名詞",jp:"メモ帳・小型のノート",ex:"Je note les nouveaux mots dans un carnet.",exjp:"新しい単語をメモ帳に書き留めます。",pri:1}},
+{level:"A2",item:{w:"un marque-page",ipa:"[œ̃ maʁkəpaʒ]",pos:"名詞",jp:"しおり",ex:"Je glisse un marque-page dans mon livre.",exjp:"本にしおりを挟みます。",pri:1}},
+{level:"B1",item:{w:"une perforatrice",ipa:"[yn pɛʁfɔʁatʁis]",pos:"名詞",jp:"穴あけパンチ",ex:"Cette perforatrice fait deux trous dans la feuille.",exjp:"この穴あけパンチは紙に二つの穴を開けます。",pri:1}},
+{level:"A2",item:{w:"une équerre",ipa:"[yn ekɛʁ]",pos:"名詞",jp:"三角定規",ex:"J'utilise une équerre pour tracer un angle droit.",exjp:"直角を描くために三角定規を使います。",pri:1}},
+{level:"A2",item:{w:"un compas",ipa:"[œ̃ kɔ̃pa]",pos:"名詞",jp:"コンパス（円を描く道具）",ex:"Trace un cercle avec ton compas.",exjp:"コンパスで円を描いて。",pri:1}},
+{level:"B1",item:{w:"un rapporteur",ipa:"[œ̃ ʁapɔʁtœʁ]",pos:"名詞",jp:"分度器",ex:"Je mesure cet angle avec un rapporteur.",exjp:"分度器でこの角度を測ります。",pri:1}},
+{level:"A2",item:{w:"un bâton de colle",ipa:"[œ̃ bɑtɔ̃ də kɔl]",pos:"名詞",jp:"スティックのり",ex:"Je colle la photo avec un bâton de colle.",exjp:"スティックのりで写真を貼ります。",pri:1}},
+{level:"B1",item:{w:"un ruban correcteur",ipa:"[œ̃ ʁybɑ̃ kɔʁɛktœʁ]",pos:"名詞",jp:"修正テープ",ex:"J'efface cette faute avec un ruban correcteur.",exjp:"修正テープでこの間違いを消します。",pri:1}},
+{level:"B1",item:{w:"un intercalaire",ipa:"[œ̃n‿ɛ̃tɛʁkalɛʁ]",pos:"名詞",jp:"ファイルの仕切り紙",ex:"Je sépare les chapitres avec des intercalaires.",exjp:"仕切り紙で章を分けます。",pri:1}},
+{level:"A2",item:{w:"une pochette plastique",ipa:"[yn pɔʃɛt plastik]",pos:"名詞",jp:"透明の書類用ポケット・クリアファイル",ex:"Je range la feuille dans une pochette plastique.",exjp:"紙を透明の書類用ポケットに入れます。",pri:1}},
+{level:"A2",item:{w:"une étiquette",ipa:"[yn etikɛt]",pos:"名詞",jp:"ラベル・荷札",ex:"Écris ton nom sur cette étiquette.",exjp:"このラベルに名前を書いて。",pri:1}},
+{level:"A2",item:{w:"une ardoise",ipa:"[yn aʁdwaz]",pos:"名詞",jp:"学習用の小型ボード・石板",ex:"Les élèves écrivent la réponse sur leur ardoise.",exjp:"生徒たちは自分の小型ボードに答えを書きます。",pri:1}},
+{level:"B1",item:{w:"un pince-notes",ipa:"[œ̃ pɛ̃s nɔt]",pos:"名詞",jp:"ダブルクリップ",ex:"Un pince-notes maintient toutes ces feuilles ensemble.",exjp:"ダブルクリップでこれらの紙をまとめて留めています。",pri:1}},
+{level:"B1",item:{w:"un tampon encreur",ipa:"[œ̃ tɑ̃pɔ̃ ɑ̃kʁœʁ]",pos:"名詞",jp:"スタンプ台",ex:"Le tampon encreur est presque sec.",exjp:"スタンプ台はほとんど乾いています。",pri:1}},
+{level:"A2",item:{w:"un protège-cahier",ipa:"[œ̃ pʁɔtɛʒ kaje]",pos:"名詞",jp:"ノートカバー",ex:"Je mets un protège-cahier sur mon cahier de français.",exjp:"フランス語のノートにカバーをかけます。",pri:1}},
+{level:"A2",item:{w:"une barrette",ipa:"[yn baʁɛt]",pos:"名詞",jp:"髪留め・バレッタ",ex:"Cette barrette retient ma mèche.",exjp:"この髪留めで前に垂れる髪を留めています。",pri:1}},
+{level:"A2",item:{w:"un serre-tête",ipa:"[œ̃ sɛʁ tɛt]",pos:"名詞",jp:"カチューシャ",ex:"Elle porte un serre-tête rouge.",exjp:"彼女は赤いカチューシャを着けています。",pri:1}},
+{level:"A2",item:{w:"un élastique",ipa:"[œ̃n‿elastik]",pos:"名詞",jp:"輪ゴム・ヘアゴム",ex:"J'attache mes cheveux avec un élastique.",exjp:"ヘアゴムで髪を結びます。",pri:1}},
+{level:"A1",item:{w:"un peigne",ipa:"[œ̃ pɛɲ]",pos:"名詞",jp:"くし",ex:"Je garde un peigne dans mon sac.",exjp:"かばんにくしを入れています。",pri:1}},
+{level:"A1",item:{w:"une brosse à cheveux",ipa:"[yn bʁɔs a ʃəvø]",pos:"名詞",jp:"ヘアブラシ",ex:"Ma brosse à cheveux est dans le tiroir.",exjp:"私のヘアブラシは引き出しの中にあります。",pri:1}},
+{level:"A2",item:{w:"un coupe-ongles",ipa:"[œ̃ kup ɔ̃ɡl]",pos:"名詞",jp:"爪切り",ex:"Ce coupe-ongles est facile à utiliser.",exjp:"この爪切りは使いやすいです。",pri:1}},
+{level:"A2",item:{w:"une lime à ongles",ipa:"[yn lim a ɔ̃ɡl]",pos:"名詞",jp:"爪やすり",ex:"Je lisse le bord de mon ongle avec une lime à ongles.",exjp:"爪やすりで爪の端を滑らかにします。",pri:1}},
+{level:"A2",item:{w:"un étui à lunettes",ipa:"[œ̃n‿etɥi a lynɛt]",pos:"名詞",jp:"眼鏡ケース",ex:"Mon étui à lunettes est dans mon sac.",exjp:"眼鏡ケースはかばんの中にあります。",pri:1}},
+{level:"A2",item:{w:"un étui à lentilles",ipa:"[œ̃n‿etɥi a lɑ̃tij]",pos:"名詞",jp:"コンタクトレンズケース",ex:"J'emporte mon étui à lentilles pour le voyage.",exjp:"旅行にコンタクトレンズケースを持っていきます。",pri:1}},
+{level:"A2",item:{w:"un bouchon d'oreille",ipa:"[œ̃ buʃɔ̃ dɔʁɛj]",pos:"名詞",jp:"耳栓",ex:"Je mets des bouchons d'oreille pour dormir.",exjp:"眠るために耳栓をします。",pri:1}},
+{level:"A2",item:{w:"un masque de nuit",ipa:"[œ̃ mask də nɥi]",pos:"名詞",jp:"睡眠用アイマスク",ex:"Ce masque de nuit bloque la lumière.",exjp:"このアイマスクは光を遮ります。",pri:1}},
+{level:"A2",item:{w:"un badge",ipa:"[œ̃ badʒ]",pos:"名詞",jp:"名札・入館証",ex:"Je présente mon badge à l'entrée.",exjp:"入り口で入館証を見せます。",pri:1}},
+{level:"A2",item:{w:"un sac banane",ipa:"[œ̃ sak banan]",pos:"名詞",jp:"ウエストポーチ",ex:"Je mets mes clés dans mon sac banane.",exjp:"ウエストポーチに鍵を入れます。",pri:1}},
+{level:"B1",item:{w:"une épingle de sûreté",ipa:"[yn epɛ̃ɡl də syʁte]",pos:"名詞",jp:"安全ピン",ex:"Cette épingle de sûreté maintient le tissu en place.",exjp:"この安全ピンで布を固定しています。",pri:1}},
+{level:"A1",item:{w:"un mouchoir en papier",ipa:"[œ̃ muʃwaʁ ɑ̃ papje]",pos:"名詞",jp:"ティッシュペーパー（1枚）",ex:"Tu as un mouchoir en papier ?",exjp:"ティッシュを1枚持っている？",pri:1}}
+];
+const DELF_DAILY_SENSES=[
+{destination:"delf|B1|un canapé",level:"A1",item:{w:"un canapé",ipa:"[œ̃ kanape]",pos:"名詞",jp:"ソファ",ex:"Nous regardons un film sur le canapé.",exjp:"私たちはソファに座って映画を見ます。",pri:1}},
+{destination:"delf|A1|une serviette",level:"A1",item:{w:"une serviette",ipa:"[yn sɛʁvjɛt]",pos:"名詞",jp:"タオル",ex:"Je me sèche les mains avec une serviette.",exjp:"タオルで手を拭きます。",pri:1}},
+{destination:"delf|A2|un buffet",level:"A2",item:{w:"un buffet",ipa:"[œ̃ byfɛ]",pos:"名詞",jp:"食器棚・サイドボード",ex:"Les assiettes sont rangées dans le buffet.",exjp:"皿は食器棚にしまってあります。",pri:1}},
+{destination:"delf|A2|l'avocat",level:"A1",item:{w:"l'avocat",ipa:"[lavɔka]",pos:"名詞",jp:"アボカド",ex:"Je coupe un avocat pour la salade.",exjp:"サラダ用にアボカドを1個切ります。",pri:1}}
+];
+/* ---------- Add everyday nouns to the existing DELF levels ---------- */
+(function(){
+  const key=(level,item)=>'delf|'+level+'|'+item.w;
+  const find=oldKey=>{
+    const destination=delfMigrationKeys.get(oldKey)||oldKey;
+    for(const level of DELF_LEVEL_ORDER){const items=DECKS.delf.tabs[level].items,index=items.findIndex(item=>key(level,item)===destination);if(index>=0)return {level,items,index,item:items[index],key:destination};}
+    throw Error('Missing everyday vocabulary destination: '+oldKey);
+  };
+  const plain=item=>{const {delfVariants,_tk,...rest}=item;return rest;};
+  for(const patch of DELF_DAILY_SENSES){
+    const entry=find(patch.destination),variants=[plain(entry.item),...(entry.item.delfVariants||[]).map(plain)];
+    if(DELF_LEVEL_ORDER.indexOf(patch.level)<DELF_LEVEL_ORDER.indexOf(entry.level)){
+      const promoted={...patch.item,w:entry.item.w,delfVariants:variants};
+      entry.items.splice(entry.index,1);DECKS.delf.tabs[patch.level].items.push(promoted);
+      delfMigrationKeys.set(entry.key,key(patch.level,promoted));
+    }else{
+      entry.item.delfVariants=[...(entry.item.delfVariants||[]),plain(patch.item)];
+    }
+  }
+  const identities=new Set(Object.values(DECKS.delf.tabs).flatMap(tab=>tab.items.map(item=>delfThemeIdentity(item.w))));
+  for(const row of DELF_DAILY_WORDS){
+    const identity=delfThemeIdentity(row.item.w);
+    if(identities.has(identity))throw Error('Duplicate everyday vocabulary: '+row.item.w);
+    identities.add(identity);DECKS.delf.tabs[row.level].items.push(row.item);
+  }
+  // Resolve older scene/topic aliases through any promoted everyday meaning.
+  for(const [oldKey,first] of delfMigrationKeys){let dest=first;const seen=new Set([oldKey]);while(delfMigrationKeys.has(dest)){if(seen.has(dest))throw Error('DELF migration cycle');seen.add(dest);dest=delfMigrationKeys.get(dest);}delfMigrationKeys.set(oldKey,dest);}
+})();
+/* ---------- End everyday vocabulary ---------- */
+
+/*===DELF_DAILY_20261122_END===*/
+
 /* ---------- voices ---------- */
 const synth=window.speechSynthesis;
 let voices=[], frVoice=null, jaVoice=null;
-let ttsMode=ls('fl_ttsmode','"native"')||'native';   // 'native'(事前生成声優音声) | 'online'(Google) | 'auto'(端末) — loadVoices()が参照するため早期宣言
-let voiceGender=ls('fl_voicegender','"f"')||'f';      // 声優音声の声: 'f'(Denise/audio/) | 'm'(Henri/audio/m/)
+let ttsMode=ls('fl_ttsmode','"native"')||'native';   // 'native'(事前生成合成音声) | 'online'(Google) | 'auto'(端末) — loadVoices()が参照するため早期宣言
+let voiceGender=ls('fl_voicegender','"f"')||'f';      // 合成音声の声: 'f'(Denise/audio/) | 'm'(Henri/audio/m/)
 let _onlineFails=0;                                   // consecutive online failures → auto-fallback for the session
 const voiceSel=document.getElementById('voiceSel'), voiceSelJa=document.getElementById('voiceSelJa'), warn=document.getElementById('voicewarn');
 // higher = more natural. Prefer neural/natural/online network voices over old robotic SAPI ones.
@@ -15575,9 +15802,9 @@ function loadVoices(){
   const ja=voices.filter(v=>v.lang&&v.lang.toLowerCase().startsWith('ja')).sort((a,b)=>vRank(b)-vRank(a));
   voiceSel.innerHTML='';voiceSelJa.innerHTML='';
   if(fr.length===0){
-    // 声優音声/オンライン音声なら端末の仏語音声は不要なので警告を出さない（端末の音声を選んだ時だけ）
+    // 合成音声/オンライン音声なら端末の仏語音声は不要なので警告を出さない（端末の音声を選んだ時だけ）
     warn.style.display=(ttsMode==='auto')?'block':'none';
-    warn.innerHTML='⚠️ 端末にフランス語音声がありません。⚙️設定の「音声タイプ」を <b>声優音声（高品質）</b> にすると自然な発音で再生できます（推奨）。iPhoneは 設定→アクセシビリティ→読み上げコンテンツ→声→フランス語 で高品質版も追加できます。';
+    warn.innerHTML='⚠️ 端末にフランス語音声がありません。⚙️設定の「音声タイプ」を <b>合成音声（高品質）</b> にすると自然な発音で再生できます（推奨）。iPhoneは 設定→アクセシビリティ→読み上げコンテンツ→声→フランス語 で高品質版も追加できます。';
     voices.forEach(v=>addOpt(voiceSel,v)); frVoice=voices[0]||null;
   }else{
     warn.style.display='none';
@@ -15615,7 +15842,7 @@ let itemRepeat=Math.max(1,Math.min(10,Number(ls('fl_itemrep','1'))||1)); // ハ�
 rate.value=ls('fl_rate','"0.9"')||'0.9';rateval.textContent=Number(rate.value).toFixed(2)+'×';
 gapCtl.value=ls('fl_gap','"0.7"')||'0.7';gapval.textContent=Number(gapCtl.value).toFixed(1)+'秒';
 gapInner.value=ls('fl_gapinner','"0.3"')||'0.3';gapival.textContent=Number(gapInner.value).toFixed(1)+'秒';
-// 再生中の声優音声(mp3)にも速度変更を即反映（playbackRate＋preservesPitchで音程を保ったまま）
+// 再生中の合成音声(mp3)にも速度変更を即反映（playbackRate＋preservesPitchで音程を保ったまま）
 function applyLiveRate(){if(curAudio){try{curAudio.playbackRate=rateFor('fr');}catch(e){}}}
 function syncRateChips(){const v=Number(rate.value);document.querySelectorAll('#rateChips .setchip').forEach(b=>b.classList.toggle('on',Math.abs(Number(b.dataset.rate)-v)<0.001));}
 function syncGapChips(){const gi=Number(gapInner.value),gw=Number(gapCtl.value);document.querySelectorAll('#gapChips .setchip').forEach(b=>b.classList.toggle('on',Math.abs(Number(b.dataset.gi)-gi)<0.001&&Math.abs(Number(b.dataset.gw)-gw)<0.001));}
@@ -15675,7 +15902,7 @@ if(settingsPanel){
   settingsPanel.addEventListener('touchend',_ssEnd,{passive:true});
   settingsPanel.addEventListener('touchcancel',_ssEnd,{passive:true});
 }
-// 性別(声)は声優音声(native)のときだけ意味があるので、それ以外は隠す
+// 性別(声)は合成音声(native)のときだけ意味があるので、それ以外は隠す
 function updGenderRow(){const gr=document.getElementById('genderRow');if(gr)gr.style.display=(ttsMode==='native')?'':'none';}
 updGenderRow();
 
@@ -15765,7 +15992,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-1335'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-1418'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16720,6 +16947,7 @@ function renderGlobalSearch(){
     const ex=c.querySelector('.exfr');ex.onclick=()=>speak(it.ex,ex.querySelector('.ico'));
     c.querySelector('[data-j]').onclick=()=>jumpTo(r.cid,r.tk,it.w);
     c.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{setMark(k,b.dataset.m);renderLearn();});
+    delfAppendVariants(c,it);
     grid.appendChild(c);
   });
 }
