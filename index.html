@@ -26,7 +26,7 @@
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Hiragino Sans","Noto Sans JP",sans-serif;
     background:var(--bg);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
-  .jp,.exjp,.ansmain,.ansex,.ansexjp,.empty-s,.empty-t,.hint,.note,.pronjp,.typefb-ex{text-wrap:pretty}
+  .jp,.exjp,.ansmain,.ansex,.ansexjp,.empty-s,.empty-t,.hint,.note,.typefb-ex{text-wrap:pretty}
   .front,.hffr,.clozeq{text-wrap:balance}
   header{background:linear-gradient(135deg,var(--bleu),#3b7ddd);color:#fff;padding:14px 16px 11px;position:sticky;top:0;z-index:30}
   .brand{display:flex;align-items:center;gap:10px;max-width:980px;margin:0 auto}
@@ -106,7 +106,7 @@
   .star{color:var(--gold);font-size:12px}
   .cnt{font-size:10px;color:var(--muted);background:#eef2fb;border-radius:20px;padding:1px 7px;font-weight:700}
   .cnt.err{color:#a3372f;background:#fde8e6}
-  .cnt,.cnt2,.hfidx,.pronscore{font-variant-numeric:tabular-nums}
+  .cnt,.cnt2,.hfidx{font-variant-numeric:tabular-nums}
   .cardfoot{display:flex;gap:6px;margin-top:9px;padding-top:9px;border-top:1px solid var(--line)}
   .markbtn{flex:1;border:1px solid var(--line);background:#fafbfe;color:var(--muted);border-radius:8px;padding:6px 4px;font-size:11px;font-weight:700;cursor:pointer;transition:.12s}
   .markbtn:hover{background:#eef2fb}
@@ -492,21 +492,6 @@
   .typefb .ipa{color:var(--muted);font-size:13px}
   .typefb-ex{margin-top:7px;font-size:12.5px;color:var(--muted);line-height:1.5}
   body.dark .typefb{color:#e8ecf5}
-  /* ===== pronunciation (speech) mode ===== */
-  .pronword{font-size:40px;font-weight:700;color:var(--bleu);font-family:Georgia,'Times New Roman',serif;margin:6px 0 2px}
-  body.dark .pronword{color:#7db4ff}
-  .pronipa{font-size:16px;color:var(--muted);margin-bottom:2px}
-  .pronjp{font-size:14px;color:var(--muted)}
-  .micbtn{width:96px;height:96px;border-radius:50%;border:none;background:var(--bleu);color:#fff;cursor:pointer;
-    display:flex;align-items:center;justify-content:center;margin:18px auto 6px;box-shadow:0 6px 20px rgba(0,60,140,.32);transition:.15s}
-  .micbtn svg{width:42px;height:42px;fill:#fff}
-  .micbtn:hover{background:#004282}
-  .micbtn.rec{background:var(--rouge);animation:micpulse 1s infinite}
-  @keyframes micpulse{0%{box-shadow:0 0 0 0 rgba(239,65,53,.5)}70%{box-shadow:0 0 0 18px rgba(239,65,53,0)}100%{box-shadow:0 0 0 0 rgba(239,65,53,0)}}
-  .pronfb{text-align:center;font-size:16px;margin-top:6px;min-height:46px;font-weight:600}
-  .pronfb .heard{font-weight:400;font-size:13px;color:var(--muted);display:block;margin-top:3px}
-  .pronfb.ok{color:var(--green-text)}.pronfb.ng{color:var(--rouge-text)}
-  .pronscore{font-size:12px;color:var(--muted)}
   .sfxbtn{border:none;background:rgba(255,255,255,.18);color:#fff;border-radius:8px;padding:4px 9px;font-size:14px;cursor:pointer}
   /* ===== match game ===== */
   .matchwrap{max-width:680px;margin:0 auto}
@@ -897,24 +882,6 @@
       </div>
       <div class="hfopt" id="numTypes"></div>
       <div style="font-size:11px;color:var(--muted);margin-top:11px;text-align:center">DELF聴解の頻出パート。特に 70〜99（soixante-dix / quatre-vingt 系）を重点的に。</div>
-    </div>
-  </section>
-  <section id="pronView" class="hide">
-    <div class="hfwrap">
-      <div class="hfcard">
-        <div class="hfidx"><span id="pronIdx"></span> ｜ <span class="pronscore" id="pronScore"></span></div>
-        <div class="pronword" id="pronWord" lang="fr"></div>
-        <div class="pronipa" id="pronIpa"></div>
-        <div class="pronjp" id="pronJp">マイクを押してフランス語を発音してみましょう</div>
-        <button class="micbtn" id="micBtn" title="話す（録音開始）"></button>
-        <div class="pronfb" id="pronFb" aria-live="polite"></div>
-      </div>
-      <div class="hfctrl">
-        <button id="pronPrev" title="前へ"><svg viewBox="0 0 24 24"><path d="M6 6h2.4v12H6z"/><path d="M20 6v12l-9-6z"/></svg></button>
-        <button id="pronReplay" title="お手本を聞く"><svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg></button>
-        <button id="pronNext" title="次へ"><svg viewBox="0 0 24 24"><path d="M15.6 6H18v12h-2.4z"/><path d="M4 6v12l9-6z"/></svg></button>
-      </div>
-      <div style="font-size:11px;color:var(--muted);margin-top:11px;text-align:center">対象は上の「区間／表示」で絞れます。判定はAIの目安です。<br>※音声認識は Chrome・Edge 推奨（Safari一部対応）。</div>
     </div>
   </section>
   <section id="matchView" class="hide">
@@ -16116,7 +16083,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-1737'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-1746'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16196,7 +16163,6 @@ function webSpeakLang(text,lang){
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const SPK='<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
 const SPKSM='<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>';
-const MIC='<svg viewBox="0 0 24 24"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
 // ヘッダーのトグル用アイコン（絵文字→SVGで統一・洗練）
 const IC_SNDON='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
 const IC_SNDOFF='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3z"/><path d="M22 9.41 20.59 8l-2.09 2.09L16.41 8 15 9.41l2.09 2.09L15 13.59 16.41 15l2.09-2.09L20.59 15 22 13.59l-2.09-2.09z"/></svg>';
@@ -16221,15 +16187,13 @@ const I_TARGET='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d=
 const I_ALERT='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2 1 21h22L12 2zm0 5.5 7.5 13h-15L12 7.5zM11 11v4h2v-4h-2zm0 5v2h2v-2h-2z"/></svg>';
 const I_UP='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 6.5 8.5 7.9 9.9 11 6.8V16h2V6.8l3.1 3.1 1.4-1.4zM5 18h14v2H5z"/></svg>';
 const I_DOWN='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 16 6.5 10.5 7.9 9.1 11 12.2V3h2v9.2l3.1-3.1 1.4 1.4zM5 18h14v2H5z"/></svg>';
-// メディア操作（ハンズフリー/発音の丸ボタン用。.hfctrl button svg でサイズ指定）
+// メディア操作（ハンズフリーの丸ボタン用。.hfctrl button svg でサイズ指定）
 const SVG_PREV='<svg viewBox="0 0 24 24"><path d="M6 6h2.4v12H6z"/><path d="M20 6v12l-9-6z"/></svg>';
 const SVG_NEXT='<svg viewBox="0 0 24 24"><path d="M15.6 6H18v12h-2.4z"/><path d="M4 6v12l9-6z"/></svg>';
 const SVG_PLAY='<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>';
 const SVG_PAUSE='<svg viewBox="0 0 24 24"><path d="M6 5h4v14H6zm8 0h4v14h-4z"/></svg>';
 const SVG_SPK='<svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>';
-const I_MICSM='<svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>';
-// デッキ／今日／テスト形式のアイコン（絵文字→単色SVGで統一）
-const IC_TODAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 2a1 1 0 0 1 1 1v1h8V3a1 1 0 1 1 2 0v1h1a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1V3a1 1 0 0 1 1-1zM5 9v10h14V9H5z"/></svg>';
+// デッキ／テスト形式のアイコン（絵文字→単色SVGで統一）
 const CAT_ICON={
   delf:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 2h11a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2zm0 15.5a.5.5 0 0 0 .5.5H17v-2H6.5a.5.5 0 0 0-.5.5z"/></svg>',
   freq:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-4 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 4v2h10V8H7zm0 4v2h7v-2H7z"/></svg>',
@@ -16240,7 +16204,6 @@ const CAT_ICON={
 const TS_ICON={
   test:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm3 3v2h10V8zm0 4v2h10v-2zm0 4v2h6v-2z"/></svg>',
   match:'<svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="6" width="9" height="12" rx="2"/><rect x="12.5" y="6" width="9" height="12" rx="2" opacity=".55"/></svg>',
-  pron:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"/></svg>',
   num:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 3 7 21M17 3l-2 18M4 8.5h16M4 15.5h16"/></svg>'
 };
 
@@ -16616,14 +16579,14 @@ function updateTitle(){try{
   document.title=(d?d+' ｜ ':'')+'FranLearn — フランス語 単語・フレーズ・活用';
 }catch(e){}}
 
-/* ===== test styles (inside テスト): カード / マッチ / 発音 / 数字 ===== */
-const TEST_STYLES=[['test','カード'],['match','マッチ'],['pron','発音'],['num','数字']];
+/* ===== test styles (inside テスト): カード / マッチ / 数字 ===== */
+const TEST_STYLES=[['test','カード'],['match','マッチ'],['num','数字']];
 function buildTeststyle(){
   teststyle.innerHTML='';
   const lbl=document.createElement('span');lbl.className='barlbl';lbl.textContent='形式';teststyle.appendChild(lbl);
   TEST_STYLES.forEach(([m,label])=>{
     const b=document.createElement('button');b.className='tsbtn';b.innerHTML=(TS_ICON[m]||'')+'<span>'+label+'</span>';b.dataset.ts=m;
-    b.title=({test:'カード式テスト（仏→日／日→仏／4択／穴埋め／入力。カード上のボタンで切替）',match:'仏語と日本語をペアで合わせるゲーム',pron:'マイクに発音して判定（Chrome/Edge推奨）',num:'フランス語の数字を聞き取って入力'})[m]||'';
+    b.title=({test:'カード式テスト（仏→日／日→仏／4択／穴埋め／入力。カード上のボタンで切替）',match:'仏語と日本語をペアで合わせるゲーム',num:'フランス語の数字を聞き取って入力'})[m]||'';
     b.onclick=()=>{todayMode=false;setMode(m);};
     teststyle.appendChild(b);
   });
@@ -16865,13 +16828,15 @@ function mkView(id,label,n){
 
 /* ---------- mode switch ---------- */
 function setMode(m){
+  // Retired menu modes fall back to the standard card test.
+  if(m==='pron'||m==='today')m='test';
   mode=m;
   document.getElementById('offlineBtn').title=m==='rfi'?'RFIの最新10回をこのブラウザーに保存。1回あたり約10 MBです。':'選択中の声(仏語)＋日本語の音声をまとめて端末に保存。オフライン/バックグラウンドで再生';
   if(m!=='rfi')rfiPause();
   document.getElementById('rfiView').classList.toggle('hide',m!=='rfi');
   if(m!=='book')bookPause();
   document.getElementById('bookView').classList.toggle('hide',m!=='book');
-  // カード/マッチ/発音/数字 はすべて「テスト」系。上段モードバーは3つだけ光らせる
+  // カード/マッチ/数字 はすべて「テスト」系。上段モードバーは3つだけ光らせる
   const pm=m==='rfi'?'rfi':m==='book'?'book':(m==='learn')?'learn':(m==='hf')?'hf':'test';
   document.querySelectorAll('.modebtn').forEach(x=>{const a=x.dataset.mode===pm;x.classList.toggle('active',a);x.setAttribute('aria-current',a?'true':'false');});
   teststyle.classList.toggle('hide',pm!=='test'); highlightTeststyle();
@@ -16879,14 +16844,12 @@ function setMode(m){
   document.getElementById('testView').classList.toggle('hide',m!=='test');
   document.getElementById('hfView').classList.toggle('hide',m!=='hf');
   document.getElementById('numView').classList.toggle('hide',m!=='num');
-  document.getElementById('pronView').classList.toggle('hide',m!=='pron');
   document.getElementById('matchView').classList.toggle('hide',m!=='match');
   // 数字は語彙デッキを使わないので、デッキ行・タブ・区間・絞り込みを隠す
   if(m==='num'||m==='book'||m==='rfi'){deckbar.classList.add('hide');tabsEl.classList.add('hide');rangebar.classList.add('hide');filterbar.classList.add('hide');}
   else{deckbar.classList.remove('hide');rangebar.classList.remove('hide');filterbar.classList.remove('hide');buildTabs();buildFilter();}
   if(m!=='hf')hfStop();
   if(m!=='learn')lpStop();
-  if(m!=='pron')pronStop();
   if(m!=='match')matchStopTimer();
   highlightDeckbar();
   renderAll();
@@ -17329,7 +17292,6 @@ function stopAllAudio(){
   try{if(synth)synth.cancel();}catch(e){}
   try{lpStop();}catch(e){}
   try{hfStop();}catch(e){}
-  try{if(typeof pronStop==='function')pronStop();}catch(e){}
   document.querySelectorAll('.card.playing').forEach(x=>x.classList.remove('playing'));
   stopFab.classList.remove('show');
 }
@@ -17404,58 +17366,6 @@ document.getElementById('numChk').onclick=()=>{
   }
 };
 numIn.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();document.getElementById('numChk').click();}});
-
-/* ---------- PRONUNCIATION (speech recognition) ---------- */
-let pronList=[], pronI=0, pronOk=0, pronTotal=0, pronRec=null, pronRecActive=false;
-const micBtn=document.getElementById('micBtn');
-const pronWord=document.getElementById('pronWord'),pronIpa=document.getElementById('pronIpa'),pronJp=document.getElementById('pronJp'),pronFb=document.getElementById('pronFb'),pronIdxEl=document.getElementById('pronIdx'),pronScoreEl=document.getElementById('pronScore');
-const SpeechRec=window.SpeechRecognition||window.webkitSpeechRecognition;
-if(micBtn)micBtn.innerHTML=MIC;
-function pronBuild(){
-  if(isVerb()){pronList=filtered().map(o=>({w:o.it.inf,ipa:o.it.ipa,jp:o.it.jp,k:'verb|'+o.it.inf}));}
-  else{pronList=filtered().map(o=>({w:o.it.w,ipa:o.it.ipa||'',jp:o.it.jp,k:keyOf(o.it)}));}
-  pronI=0;pronShow();
-}
-function pronShow(){
-  pronFb.textContent='';pronFb.className='pronfb';
-  if(!SpeechRec){pronWord.textContent='⚠️';pronIpa.textContent='';pronJp.innerHTML='このブラウザは音声認識に未対応です。<br><b>Chrome</b> か <b>Edge</b> で開いてください。';if(micBtn)micBtn.style.display='none';pronIdxEl.textContent='';return;}
-  if(micBtn)micBtn.style.display='';
-  if(!pronList.length){pronWord.textContent='—';pronIpa.textContent='';pronJp.textContent='対象がありません（区間/表示を確認）';pronIdxEl.textContent='';return;}
-  const it=pronList[pronI];
-  pronWord.textContent=it.w;pronIpa.textContent=it.ipa||'';pronJp.textContent=it.jp;
-  pronIdxEl.textContent=(pronI+1)+' / '+pronList.length+(rangeSel!=='all'?'　[区間 '+rangeSel[0]+'-'+rangeSel[1]+']':'');
-  pronScoreEl.innerHTML=I_CHECK+' '+pronOk+' / '+pronTotal;
-}
-function pronStop(){if(pronRec){try{pronRec.abort();}catch(e){}pronRec=null;}pronRecActive=false;if(micBtn)micBtn.classList.remove('rec');}
-function pronStart(){
-  if(!SpeechRec||!pronList.length)return;
-  if(pronRecActive){pronStop();return;}
-  audioStop();if(synth)synth.cancel();
-  const it=pronList[pronI];
-  const rec=new SpeechRec();pronRec=rec;rec.lang='fr-FR';rec.interimResults=false;rec.maxAlternatives=6;
-  pronRecActive=true;micBtn.classList.add('rec');pronFb.className='pronfb';pronFb.innerHTML=I_MICSM+' 聞いています…';
-  rec.onresult=(e)=>{const alts=[];for(let i=0;i<e.results[0].length;i++)alts.push(e.results[0][i].transcript);pronJudge(alts,it);};
-  rec.onerror=(e)=>{pronStop();pronFb.className='pronfb';pronFb.innerHTML=(e.error==='not-allowed'||e.error==='service-not-allowed')?'マイクの使用を許可してください':'うまく聞き取れませんでした。もう一度どうぞ';};
-  rec.onend=()=>{pronRecActive=false;if(micBtn)micBtn.classList.remove('rec');};
-  try{rec.start();}catch(e){pronStop();}
-}
-function pronJudge(alts,it){
-  pronStop();
-  const target=frAnswers(it.w), heard=alts[0]||'';
-  const hit=alts.some(a=>{const n=normFr(a);if(!n)return false;return target.some(t=>t&&(t===n||t.indexOf(n)>=0||n.indexOf(t)>=0));});
-  pronTotal++;
-  if(hit){pronOk++;pronFb.className='pronfb ok';pronFb.innerHTML=I_CHECK+' いいね！<span class="heard">認識: '+heard+'</span>';sfxOk();bump(it.k);}
-  else{pronFb.className='pronfb ng';pronFb.innerHTML=I_LOOP+' もう一度<span class="heard">認識: '+(heard||'(聞き取れず)')+'</span>';sfxNg();}
-  pronScoreEl.innerHTML=I_CHECK+' '+pronOk+' / '+pronTotal;
-  setTimeout(()=>speak(it.w),300);
-  if(hit)setTimeout(()=>{if(mode==='pron'&&pronI<pronList.length-1){pronI++;pronShow();}},1400);
-}
-if(micBtn){
-  micBtn.onclick=pronStart;
-  document.getElementById('pronReplay').onclick=()=>{if(pronList[pronI])speak(pronList[pronI].w);};
-  document.getElementById('pronPrev').onclick=()=>{pronStop();pronI=Math.max(0,pronI-1);pronShow();};
-  document.getElementById('pronNext').onclick=()=>{pronStop();pronI=Math.min(pronList.length-1,pronI+1);pronShow();};
-}
 
 /* ---------- MATCH GAME (Quizlet-style pairs) ---------- */
 let matchCards=[], matchSel=null, matchMiss=0, matchDoneN=0, matchSec=0, matchTimer=null, matchLock=false;
@@ -18103,7 +18013,6 @@ function renderAll(){
   if(mode==='learn')renderLearn();
   else if(mode==='test')buildDeck();
   else if(mode==='num'){hfStop();lpStop();}
-  else if(mode==='pron'){hfStop();lpStop();pronBuild();}
   else if(mode==='match'){hfStop();lpStop();matchBuild();}
   else{hfStop();hfBuild();}
 }
