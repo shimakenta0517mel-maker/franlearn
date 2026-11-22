@@ -91,6 +91,9 @@
   body.dark .rngnum{background:#1a2030;color:#e8ecf5;border-color:#2a3147}
   .chip.freq.active{background:var(--gold);border-color:var(--gold);color:#fff}
   .chip.rng.active{background:var(--bleu);border-color:var(--bleu);color:#fff}
+  .chip.rng.partial{border-style:dashed;border-color:var(--bleu);box-shadow:inset 0 0 0 1px var(--bleu)}
+  button.chip{font-family:inherit}
+  button.chip:focus-visible{outline:2px solid var(--bleu);outline-offset:2px}
   .chip.tense.active{background:var(--green);border-color:var(--green-text);color:#fff}
   .chip.view.active{background:#6b4ea8;border-color:#6b4ea8;color:#fff}
   main{max-width:980px;margin:0 auto;padding:13px 14px}
@@ -16084,7 +16087,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-1858'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-1950'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16429,18 +16432,52 @@ function posList(){
   const arr=statusList();
   return isVerb()||!freqOnly?arr:arr.filter(o=>o.it.pri);
 }
+function posSelected(p){return posFilter!=='all'&&posFilter.includes(p);}
+function togglePos(p){
+  if(p==='all'){posFilter='all';return;}
+  const selected=posFilter==='all'?[]:posFilter;
+  const next=selected.includes(p)?selected.filter(x=>x!==p):[...selected,p];
+  posFilter=next.length?POS_ORDER.filter(x=>next.includes(x)):'all';
+}
 function rangeList(){
-  const arr=posList().filter(o=>isVerb()||posFilter==='all'||posCat(o.it.pos)===posFilter);
+  const arr=posList().filter(o=>isVerb()||posFilter==='all'||posSelected(posCat(o.it.pos)));
   return arr.map((o,i)=>({it:o.it,n:i+1}));
+}
+function mergeRanges(ranges){
+  const out=[];
+  ranges.map(r=>r.slice()).sort((a,b)=>a[0]-b[0]).forEach(r=>{
+    const last=out[out.length-1];
+    if(last&&r[0]<=last[1]+1)last[1]=Math.max(last[1],r[1]);else out.push(r);
+  });
+  return out;
 }
 function normalizeRange(total){
   if(!total){rangeSel='all';return;}
-  if(Array.isArray(rangeSel))rangeSel=[Math.min(rangeSel[0],total),Math.min(rangeSel[1],total)];
+  if(rangeSel==='all')return;
+  const ranges=rangeSel.filter(r=>r[0]<=total).map(r=>[r[0],Math.min(r[1],total)]);
+  rangeSel=ranges.length?mergeRanges(ranges):[[total,total]];
 }
+function rangeSelected(r){return rangeSel!=='all'&&rangeSel.some(x=>x[0]<=r[0]&&x[1]>=r[1]);}
+function rangeOverlaps(r){return rangeSel!=='all'&&rangeSel.some(x=>x[0]<=r[1]&&x[1]>=r[0]);}
+function addRange(r){rangeSel=mergeRanges([...(rangeSel==='all'?[]:rangeSel),r]);}
+function toggleRange(r){
+  if(r==='all'){rangeSel='all';return;}
+  if(!rangeSelected(r)){addRange(r);return;}
+  const next=[];
+  rangeSel.forEach(x=>{
+    if(x[1]<r[0]||x[0]>r[1])next.push(x);
+    else{
+      if(x[0]<r[0])next.push([x[0],r[0]-1]);
+      if(x[1]>r[1])next.push([r[1]+1,x[1]]);
+    }
+  });
+  rangeSel=next.length?next:'all';
+}
+function rangeLabel(){return rangeSel==='all'?'全':rangeSel.map(r=>r[0]+'-'+r[1]).join('・');}
 function filtered(){
   const arr=rangeList();
   normalizeRange(arr.length);
-  return rangeSel==='all'?arr:arr.slice(rangeSel[0]-1,rangeSel[1]);
+  return rangeSel==='all'?arr:arr.filter(o=>rangeSel.some(r=>o.n>=r[0]&&o.n<=r[1]));
 }
 // 複数選択時は各itemに出典タブ(_tk)を刻印してキーを組む。単一タブ時は従来どおり=既存の学習記録と完全互換
 function keyOf(it){return cat+'|'+(it._tk||current)+'|'+it.w;}
@@ -16761,34 +16798,42 @@ function buildRange(){
   rangebar.innerHTML='';
   const total=rangeList().length;
   normalizeRange(total);
-  const lab=document.createElement('span');lab.className='barlabel';lab.textContent='区間';rangebar.appendChild(lab);
+  const lab=document.createElement('span');lab.className='barlabel';lab.textContent='区間（複数可）';rangebar.appendChild(lab);
   rangebar.appendChild(mkRange('all','全 ('+total+')'));
+  // 25件区切りでは表せない選択区間も、先頭から直接解除できるようにする。
+  if(rangeSel!=='all')rangeSel.forEach(r=>{
+    if((r[0]-1)%RSIZE!==0||(r[1]%RSIZE!==0&&r[1]!==total)){
+      const c=mkRange(r,r[0]+'-'+r[1]+' ×');c.title='選択中の区間を解除';rangebar.appendChild(c);
+    }
+  });
   for(let s=1;s<=total;s+=RSIZE){
     const e=Math.min(s+RSIZE-1,total);
     rangebar.appendChild(mkRange([s,e],s+'-'+e));
   }
   if(total)rangebar.appendChild(mkCustomRange(total));
 }
-// 自由に範囲を指定（例：1-10 / 1-5 / 1-20）。Enter または OK で適用。
+// Enter または「追加」で現在の選択にカスタム区間を加える。重なる区間は統合。
 function mkCustomRange(total){
-  const isCustom=Array.isArray(rangeSel);
-  const box=document.createElement('span');box.className='chip rngcustom'+(isCustom?' active':'');
+  const box=document.createElement('span');box.className='chip rngcustom';
   box.style.cssText='display:inline-flex;align-items:center;gap:3px;padding:2px 8px';
   const a=document.createElement('input'),b=document.createElement('input');
   for(const el of [a,b]){el.type='number';el.min='1';el.max=String(total);el.className='rngnum';}
   a.placeholder='1';b.placeholder=String(total);a.title='開始';b.title='終了';
-  if(isCustom){a.value=rangeSel[0];b.value=rangeSel[1];}
-  const apply=()=>{let s=Math.max(1,Math.min(total,parseInt(a.value)||1)),e=Math.max(1,Math.min(total,parseInt(b.value)||total));if(s>e){const t=s;s=e;e=t;}rangeSel=[s,e];buildRange();renderAll();};
-  a.onkeydown=b.onkeydown=ev=>{if(ev.key==='Enter')apply();};
-  const ok=document.createElement('button');ok.textContent='OK';ok.style.cssText='border:none;border-radius:6px;padding:3px 8px;cursor:pointer;font:inherit;background:var(--bleu);color:#fff';ok.onclick=apply;
+  if(rangeSel!=='all'&&rangeSel.length===1){a.value=rangeSel[0][0];b.value=rangeSel[0][1];}
+  const apply=()=>{let s=Math.max(1,Math.min(total,parseInt(a.value)||1)),e=Math.max(1,Math.min(total,parseInt(b.value)||total));if(s>e){const t=s;s=e;e=t;}addRange([s,e]);renderAll();};
+  a.onkeydown=b.onkeydown=ev=>{if(ev.key==='Enter'){ev.preventDefault();apply();}};
+  const ok=document.createElement('button');ok.type='button';ok.textContent='追加';ok.style.cssText='border:none;border-radius:6px;padding:3px 8px;cursor:pointer;font:inherit;background:var(--bleu);color:#fff';ok.onclick=apply;
   const lbl=document.createElement('span');lbl.textContent='カスタム';lbl.style.cssText='font-size:11px;opacity:.85;margin-right:2px';
   box.append(lbl,a,document.createTextNode('-'),b,ok);
   return box;
 }
 function mkRange(val,label){
-  const active=(val==='all'&&rangeSel==='all')||(Array.isArray(val)&&Array.isArray(rangeSel)&&val[0]===rangeSel[0]&&val[1]===rangeSel[1]);
-  const c=document.createElement('div');c.className='chip rng'+(active?' active':'');c.textContent=label;
-  c.onclick=()=>{rangeSel=val;buildRange();renderAll();};
+  const active=val==='all'?rangeSel==='all':rangeSelected(val);
+  const partial=val!=='all'&&!active&&rangeOverlaps(val);
+  const c=document.createElement('button');c.type='button';c.className='chip rng'+(active?' active':'')+(partial?' partial':'');c.textContent=label;
+  c.setAttribute('aria-pressed',partial?'mixed':String(active));
+  c.title=val==='all'?'区間の選択をリセット':active?'もう一度押すと解除':partial?'一部を選択中。押すとこの区間全体を追加':'押すとこの区間を追加';
+  c.onclick=()=>{toggleRange(val);renderAll();};
   return c;
 }
 
@@ -16817,15 +16862,18 @@ function buildFilter(){
   filterbar.appendChild(fc);
   const items=posList().map(o=>o.it);
   const counts2={};items.forEach(i=>{const c=posCat(i.pos);counts2[c]=(counts2[c]||0)+1;});
-  const plab=document.createElement('span');plab.className='barlabel';plab.textContent='品詞';posbar.appendChild(plab);
+  const plab=document.createElement('span');plab.className='barlabel';plab.textContent='品詞（複数可）';posbar.appendChild(plab);
   posbar.appendChild(mkChip('all','すべて',items.length));
-  POS_ORDER.forEach(p=>{if(counts2[p]||posFilter===p)posbar.appendChild(mkChip(p,p,counts2[p]||0));});
+  POS_ORDER.forEach(p=>{if(counts2[p]||posSelected(p))posbar.appendChild(mkChip(p,p,counts2[p]||0));});
   buildRange();
 }
 function mkChip(val,label,n){
-  const c=document.createElement('div');c.className='chip'+(posFilter===val?' active':'');
+  const active=val==='all'?posFilter==='all':posSelected(val);
+  const c=document.createElement('button');c.type='button';c.className='chip'+(active?' active':'');
+  c.setAttribute('aria-pressed',String(active));
+  c.title=val==='all'?'品詞の選択をリセット':active?'もう一度押すと解除':'押すとこの品詞を追加';
   c.innerHTML=label+' <span class="n">'+n+'</span>';
-  c.onclick=()=>{posFilter=val;rangeSel='all';renderAll();};
+  c.onclick=()=>{togglePos(val);rangeSel='all';renderAll();};
   return c;
 }
 function mkTense(id,name){
@@ -16884,7 +16932,7 @@ searchBox.addEventListener('keydown',e=>{if(e.key==='Escape'&&searchBox.value){e
 updSearchClear();
 // keyboard shortcuts (desktop) for test: Space=めくる, ←=もう一度, →=覚えた
 document.addEventListener('keydown',e=>{
-  if(mode!=='test')return;const tn=(e.target&&e.target.tagName)||'';if(tn==='INPUT'||tn==='SELECT'||tn==='TEXTAREA')return;
+  if(mode!=='test')return;const tn=(e.target&&e.target.tagName)||'';if(tn==='INPUT'||tn==='SELECT'||tn==='TEXTAREA'||tn==='BUTTON')return;
   if(!flipped){
     if(dir==='choice'){if(/^Digit[1-4]$/.test(e.code)){const i2=Number(e.code.slice(5))-1;const bs=document.querySelectorAll('.choicebtn');if(bs[i2]){e.preventDefault();bs[i2].click();}}return;}
     if(dir==='type')return;
@@ -16914,10 +16962,10 @@ function renderLearn(){
   if(typeof updateTitle==='function')updateTitle();
   if(isVerb()){learnplayEl.classList.add('hide');renderVerbs();return;}
   learnplayEl.classList.remove('hide');
-  hintEl.innerHTML=I_BULB+' 青い<b>単語</b>やIPA、'+I_SPK+'例文をタップで発音。覚えた語はカード下の<b>'+I_CHECK+'完璧</b>で一覧から隠せます（「表示」の '+I_CHECK+'完璧 でいつでも確認・復帰）。'+I_STAR+'は頻出。「表示」→「品詞」で絞り、その結果の中から「区間」で1-25等を選べます。';
+  hintEl.innerHTML=I_BULB+' 青い<b>単語</b>やIPA、'+I_SPK+'例文をタップで発音。覚えた語はカード下の<b>'+I_CHECK+'完璧</b>で一覧から隠せます（「表示」の '+I_CHECK+'完璧 でいつでも確認・復帰）。'+I_STAR+'は頻出。「表示」→「品詞」→「区間」の順に絞れます。品詞と区間は複数選択でき、再タップで解除。「すべて／全」でリセットできます。';
   const arr=filtered();
   const _tabLbl=(multiSel.length>1)?('複数選択 '+multiSel.length+'テーマ'):(current+' '+curTabs()[current].label);
-  levelhead.innerHTML=(CAT_ICON[cat]||'')+' '+DECKS[cat].label+' ｜ '+_tabLbl+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeSel[0]+'-'+rangeSel[1]+']':'')+(posFilter!=='all'?'（'+posFilter+'）':'')+(freqOnly?' '+I_STAR:'');
+  levelhead.innerHTML=(CAT_ICON[cat]||'')+' '+DECKS[cat].label+' ｜ '+_tabLbl+' ｜ '+arr.length+'件'+(rangeSel!=='all'?' ['+rangeLabel()+']':'')+(posFilter!=='all'?'（'+posFilter.join('・')+'）':'')+(freqOnly?' '+I_STAR:'');
   grid.innerHTML='';grid.style.gridTemplateColumns='';
   if(!arr.length){grid.innerHTML='<div class="empty"><div class="empty-ic"><svg class="ic" viewBox="0 0 24 24" fill="currentColor"><path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/></svg></div><div class="empty-t">該当する項目がありません</div><div class="empty-s">「区間」や「表示／品詞」の絞り込みを広げてみてください。</div></div>';return;}
   arr.forEach(o=>{
@@ -17233,7 +17281,7 @@ function hfShow(){
   hffr.textContent=it.w;hffripa.textContent=it.ipa||'';hfjp.textContent=it.jp;
   hfex.textContent=(hfexchk.checked&&it.ex)?it.ex:'';
   hfexjpEl.textContent=(hfexchk.checked&&it.exjp)?it.exjp:'';
-  hfidxEl.textContent=(hfIdx+1)+' / '+hfList.length+(it.tk?'　｜ '+it.tk:'')+(rangeSel!=='all'?'　[区間 '+rangeSel[0]+'-'+rangeSel[1]+']':'');
+  hfidxEl.textContent=(hfIdx+1)+' / '+hfList.length+(it.tk?'　｜ '+it.tk:'')+(rangeSel!=='all'?'　[区間 '+rangeLabel()+']':'');
   hfMarkUI();
 }
 function hfMarkUI(){const it=hfList[hfIdx];const m=it?markOf(it.k):'';document.querySelectorAll('[data-hm]').forEach(b=>b.classList.toggle('on',b.dataset.hm===m));}
