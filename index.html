@@ -8,11 +8,11 @@
 <meta name="theme-color" content="#0055A4">
 <meta name="apple-mobile-web-app-title" content="FranLearn">
 <title>FranLearn — フランス語 単語・フレーズ・活用</title>
-<meta name="description" content="8,900以上のフランス語の単語・フレーズ・動詞活用を、ネイティブ音声・IPA・例文つきで学べる学習アプリ。DELF対策、場面別・テーマ別、SRS復習、ハンズフリー再生、オフライン対応。">
+<meta name="description" content="8,900以上のフランス語の単語・フレーズ・動詞活用を、ネイティブ音声・IPA・例文つきで学べる学習アプリ。DELF対策、レベル別・テーマ別、SRS復習、ハンズフリー再生、オフライン対応。">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="FranLearn">
 <meta property="og:title" content="FranLearn — フランス語 単語・フレーズ・活用">
-<meta property="og:description" content="8,900以上のフランス語をネイティブ音声・IPA・例文つきで。DELF対策、場面別・テーマ別、SRS復習、オフライン対応の学習アプリ。">
+<meta property="og:description" content="8,900以上のフランス語をネイティブ音声・IPA・例文つきで。DELF対策、レベル別・テーマ別、SRS復習、オフライン対応の学習アプリ。">
 <meta property="og:url" content="https://shimakenta0517mel-maker.github.io/franlearn/">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary">
@@ -745,6 +745,7 @@
   body.dark .rfiscript,body.dark #rfiLevelFilter{background:#1a2030;border-color:#30394c;color:#e8ecf5}body.dark .rfiscriptja,body.dark .rfilevelguide{color:#b9c5d8}body.dark .rfiepisode .rfilevelbadge{color:#9ac8ff}body.dark .rfiscriptmodes .rfibtn[aria-pressed=true]{background:#126fc3;border-color:#126fc3;color:#fff}
   @media(max-width:760px){.rfiside{grid-row:1}.rfilist{max-height:240px}.rfiscript{padding:18px}.rfiscriptbody{max-height:60vh;padding-right:6px}.rfiscripttools{gap:10px}.rfiscriptmodes .rfibtn{padding:10px}.rfiscriptplay{width:100%}.rfiscriptplay .rfismall{margin-left:auto}}
 
+  .delfvariants{margin:12px 0;border-top:1px solid var(--line);padding-top:12px}.delfvariants summary{cursor:pointer;font-size:14px;color:var(--muted)}.delfvariant{padding:10px 0;border-bottom:1px solid var(--line)}.delfvariantex{display:block;width:100%;border:0;background:transparent;color:var(--bleu);font:inherit;font-size:15px;line-height:1.7;padding:6px 0;text-align:left;cursor:pointer}.delfvariant .jp,.delfvariant .exjp{margin:5px 0}body.dark .delfvariantex{color:#9ac8ff}
 </style>
 </head>
 <body>
@@ -15394,6 +15395,114 @@ VERBS.push(
   imper:["lève-toi","levons-nous","levez-vous"]}
 );
 /*===VERBS2===*/
+/*===DELF_SCENE_MIGRATION_START===*/
+const DELF_SCENE_LEVELS={"レストラン":["A1","A1","A1","A1","A2","A2","A2","A1","A2","A2","A2","A2","A1","A1","A1","A1","A1","A1","A1","A1","A1","A1"],"買い物":["A1","A1","A1","A2","A1","A2","A1","A2","A2","A1","A1","A2","A2","A1","A1","A1","A2"],"交通・移動":["A1","A1","A1","A1","A2","A2","A1","A1","A2","A2","A2","A2","A2"],"ホテル":["A1","A1","A1","A1","A2","A1","A1","A2","A1","A1","A2"],"道案内":["A1","A1","A1","A1","A1","A1","A2","A1","A1","A1"],"健康・緊急":["A1","A2","A1","A1","A2","A1","A1","A2","A2","A2","A1"],"あいさつ・雑談":["A2","A2","A1","A1","A2","A2","A1","A2","A1"],"銀行・郵便":["A2","A2","A2","A1","B1","A2","A1","A1","A1"],"カフェ・バー":["A1","A2","A2","A1","A2","A2","A2","A1","A2"],"トラブル・緊急":["A1","A2","A2","A1","A2","A2","A2","A1","A1"],"家での日常":["A2","A1","A2","A2","A1","A2","A1","B1","A1","B1"],"励まし・なぐさめ":["A2","A2","A1","A2","A2","A2","A2","A2","B1","B1"],"食事中の会話":["A2","A1","A2","A1","A2","A2","A2","A2","A2","A1"],"子供への声かけ":["A2","A2","A1","A1","A1","A1","A1","A2","A1","A2"],"天気の雑談":["A1","B1","B1","A2","A1","A1","B1","B1","A1","B1"],"友達を誘う":["A2","B1","A1","A1","A2","A1","A2","A2","A2","A2"],"気分・体調を伝える":["A1","B1","A2","A2","A2","B1","A2","A2","A2","B1"],"職場での会話":["A2","A2","A2","B1","B1","B1","B1","B2","A2","A2"],"病院・診察":["A2","B1","A2","A1","A2","A2","B1","A2","A2","A2"],"ご近所づきあい":["A2","A1","B1","A1","A2","B1","A2","A2","B1","B2"],"恋愛・デート":["A2","A2","A2","A1","A1","A2","A2","A1","A2","B1"],"クレーム・苦情":["B1","B1","B1","B1","A1","A2","A2","B1","A2","B2"],"役所の窓口":["B1","A2","A2","A1","A2","A2","B1","B1","B1","A2"],"オンライン会議":["A1","A2","A2","B1","A2","A2","A1","A2","A2","A2"],"道でのとっさ":["A1","A2","A2","A1","A2","A1","B1","A2","A1","A2"],"タクシー・配車":["A1","A1","A1","A1","A2","A2","A1","A2","B1","A1"],"携帯ショップ":["B1","A2","B1","A2","B1","A2","B1","B1","A2","B1"],"パーティー・集まり":["A2","A2","A2","A1","A2","A2","A2","B1","A1","B2"],"引っ越し":["A2","A2","A1","A1","A2","A2","A2","A2","B1","A1"],"ペットの話":["A1","A1","A2","A2","A2","A2","B1","B1","A2","B1"],"旅行の計画":["A1","A2","A1","A2","A2","A2","A1","A2","B1","A1"],"レッスン・習い事":["A1","A1","A1","A2","A2","A1","A2","A1","A2","A1"],"チャット返信":["A2","A2","A2","B1","B1","A1","A1","B1","A2","B2"],"面接・就活":["B1","A1","A2","A2","A2","A2","B2","A2","A1","A2"],"服を買う":["A2","A1","A2","A1","A2","A2","A2","B1","A2","A2"],"ジムで":["A2","A2","A2","A2","A2","A2","B1","B1","A2","B1"],"レンタカー":["A2","A1","A2","B1","A2","B1","A1","A2","B1","A2"],"ほめる・お祝い":["A1","A1","A2","A2","A2","B1","A1","A2","A1","B1"],"断る・遠慮":["A1","A2","A2","A1","A2","B1","A1","B1","A2","A2"],"学校・保護者":["A2","A2","B1","A2","A2","A1","A1","A2","A2","A1"],"バー・飲み会":["A1","A2","A2","B1","B1","A1","B1","B1","A1","A2"],"歯医者":["A1","A2","B1","A1","A2","B1","B1","A2","A2","B1"],"図書館":["A2","A2","A1","A2","A2","B1","A1","A1","A1","A2"],"映画館・劇場":["A1","A2","A2","A1","A1","A1","A2","A2","A2","B1"],"修理業者":["A2","A2","A1","A1","A1","B1","B1","B1","B1","A2"],"デリバリー":["A2","A2","A2","A2","A2","A2","A2","A1","A2","A1"],"ガソリンスタンド":["A2","B1","A2","A2","A2","B1","A2","B1","A2","A1"],"駅・切符":["A1","A1","A2","A1","A2","A2","A2","A1","A2","B1"],"ホームステイ":["A2","A1","A1","A1","B1","A2","A2","A2","A2","A1"],"郵便・宅配":["A2","B1","A1","A2","A2","A1","B1","A2","A2","B1"],"美容院・床屋":["A2","A2","A1","A2","A1","A2","A2","A1","A1","A2"],"薬局・処方":["A1","A2","A2","A1","A2","A2","A2","A2","A1","A2"],"空港・搭乗":["A2","A2","A2","A1","A2","A2","A2","B1","A2","A2"],"不動産の内見":["A2","A1","B1","A2","A1","A2","A2","B1","A2","A2"],"プレゼン・発表":["A2","B1","A2","B1","A1","A2","B1","B2","A2","A2"],"交渉・商談":["A2","A1","B1","B1","B1","A2","B2","B1","B1","B1"],"電話で問い合わせ":["A1","B1","B1","A2","A2","A2","A2","A2","A1","A1"],"警察・盗難届":["A2","B1","A2","A2","A2","B1","A1","A2","B1","B1"],"事故・救急":["A1","A1","A2","A2","A2","A1","A1","A1","A1","A2"],"けんか・仲直り":["A2","A2","A2","A2","A2","A1","B1","A2","B1","B1"],"返品・交換":["A2","A2","A2","A2","A2","B1","B1","B1","A2","B1"],"口座開設・契約":["A2","A2","B1","A2","A1","A2","A2","B1","B1","B1"],"聞き返す・確認":["A1","A1","A1","A2","A1","A2","B1","A1","A2","B1"],"許可を求める":["A1","B1","A2","A1","A2","A2","A1","A2","A2","A1"],"提案する・誘う":["B1","A2","B1","A1","A2","A2","A2","A2","A1","A2"],"別れのあいさつ":["A1","A1","A1","A2","A2","A1","A1","A1","B1","A2"],"約束・アポを取る":["A1","A2","A2","A2","A2","B1","B1","A2","A2","A2"],"あいづち・共感":["A1","A1","A1","A2","A2","B1","A1","B1","A2","A2"],"お願い・頼みごと":["A2","B1","A2","B1","A2","B1","B1","A2","A1","A1"],"自己紹介くわしく":["A1","A1","A1","A1","A1","A1","A1","A1","A1","A1"],"賛成・反対する":["A1","A1","A2","A2","A2","A2","B1","B1","A2","B1"],"困っている人を助ける":["A1","A1","A2","A2","A1","A2","B1","A1","A1","A1"],"オンライン注文・配達":["A2","B1","A2","B1","B1","A1","A2","A1","B1","A1"],"待ち合わせ":["A2","A2","A1","A1","A1","A2","A1","B1","A2","A1"],"アレルギー・食事制限":["A2","B1","A1","A1","A2","A2","B1","A1","A1","A2"],"賃貸トラブル":["A2","A2","B1","A2","B1","A2","A2","B1","B1","B1"],"旅行ハプニング":["A2","A2","A2","A2","A2","A2","B1","A2","A2","A1"],"痛み・症状を伝える":["A1","A1","A1","A1","A2","A2","A2","A2","B1","B1"],"久しぶりの再会":["A2","A2","A2","A1","B1","A2","A2","B1","A2","A2"],"写真を頼む・撮る":["A2","A1","A1","A1","A2","A2","A2","A2","A2","A2"],"機器の不具合":["A2","A2","B1","A2","A2","A2","A2","A2","A2","A2"],"ほめられた時の返し":["A1","A2","B1","A2","A2","B1","B1","A2","B1","B1"],"両替・支払い":["A2","B1","A1","A1","A2","A2","B1","A2","A2","A1"],"スポーツ観戦・応援":["A1","A1","A1","A2","B1","B1","A2","A2","A2","A2"],"チケット売り場":["A1","A2","A1","A1","A2","A2","A2","A2","B1","A1"],"会計・チップ":["A1","A2","A2","B1","A2","A2","B1","A2","A2","A2"],"電車・バスのマナー":["A1","A1","A2","A2","B1","A2","A2","B1","A1","B1"],"子供と遊ぶ":["A2","A2","B1","A2","A2","A2","A1","A2","A2","A2"],"動物病院":["A1","A2","A2","A2","B1","B1","B1","A1","A1","A2"],"結婚式で":["A2","A2","A2","B1","A1","A2","A2","A1","A2","B1"],"お悔やみ・弔問":["B1","B1","A2","A2","A2","A2","A1","A2","B1","B1"],"出産・お祝い":["A1","A1","A2","A1","A1","A2","B1","B1","A2","A1"],"接客・クレーム対応":["A1","A2","B1","A1","B1","A2","B1","A2","B1","A2"],"ハイキング・山登り":["A2","B1","A1","A1","B1","A1","A1","B1","A2","A2"],"在宅勤務・テレワーク":["A2","A1","A2","A2","A2","A2","A2","B1","A2","A2"],"温泉・スパ":["A1","A1","A1","A2","A1","A2","B1","A1","A1","B1"],"レビュー・口コミ":["B1","B1","A2","A2","A2","A2","A2","A1","B1","A2"],"ボランティア・地域活動":["B1","A2","B1","B1","A2","A2","B1","B1","A2","B1"],"上司に報告・相談":["A2","A2","A2","A1","A2","B1","B1","B1","B1","A1"],"部下に指示する":["B1","A1","A2","B1","B1","A2","A2","A1","B1","A2"],"仕事の電話を受ける":["A1","A2","B1","A1","A2","A2","A2","A2","B1","A1"],"市場で値切る":["A1","A2","B1","A2","A2","B1","A1","A2","B1","A2"],"ガイドツアーで":["A1","A1","A2","A2","A2","A2","A2","A1","A2","A1"],"空港の保安・税関":["A1","A2","B1","A1","B1","A2","A1","A2","A1","A1"],"お見舞い・入院":["A1","A2","B1","A1","A1","B1","A2","A2","A2","A2"],"遅刻・お詫び":["A1","B1","A2","A1","A1","B1","A2","A1","B1","B1"],"観光案内所で":["A1","A1","A2","A1","A2","A2","A1","A2","A1","A2"],"新生活の手続き":["B1","B1","A2","B1","B1","A2","B1","A2","A2","A2"],"パーソナルトレーニング":["A2","A2","A2","A2","A1","A1","B1","A1","A2","A2"],"子供の送り迎え":["A1","A1","A2","A1","A2","A2","A1","A2","A2","A1"],"健康診断・検査":["B1","B1","B1","A2","A2","A1","B1","A2","A1","A2"],"法律相談":["B1","B1","A2","B1","B1","A2","B1","A2","B2","B1"],"保険の手続き":["B1","B1","B2","B1","B1","B1","B1","B1","B1","A2"],"税金・確定申告":["B1","A2","B1","A2","A2","B1","B1","B1","B1","A2"],"選挙・投票":["A2","A2","A2","B1","B1","B1","B1","A2","B1","A2"],"車の故障・ロードサービス":["A2","A2","B1","B1","B1","B1","A2","A1","B1","B1"],"作品の感想を言う":["A1","B1","B1","A2","A1","B1","B1","A2","B1","B1"],"コンサート・ライブで":["B1","A2","A1","A1","A1","A1","A2","A2","A2","A2"],"カウンセリング・悩み相談":["A2","A2","B1","A2","B1","B1","A1","A2","A2","A2"],"勧誘を断る":["A1","A1","A1","A2","A2","A2","B1","A2","A2","A2"],"アンケートに答える":["A1","A2","B1","B1","A2","A2","A2","B1","B1","A1"],"電話で予約する":["A1","A1","A1","A1","A1","A2","A1","A2","A1","A2"],"住宅ローン相談":["B1","B1","A2","B1","B1","B2","B1","B2","A2","A2"],"不動産の契約・購入":["A2","A2","B1","A1","A2","B1","B1","A2","B1","B2"],"旅行代理店で":["A2","A2","A2","A2","A2","B1","A1","A2","A2","A1"],"クリーニング店で":["B1","A1","A2","A2","B1","A2","A1","B1","B1","B1"],"証明写真・写真スタジオ":["A2","A1","A1","A2","B1","B1","A2","A2","A2","A2"],"ペットショップで":["A2","A1","A1","A2","B1","B1","B1","A2","A2","B1"],"園芸店で":["A2","B1","A2","A2","A2","B1","A2","B1","B1","B1"],"楽器店で":["A2","B1","A1","B1","A2","A2","A2","A2","A2","A1"],"スポーツ用品店で":["A1","A1","A1","A1","A2","A1","A1","A2","A2","A2"],"フリマ・中古売買":["A1","A2","A2","A2","A1","B1","A1","B1","A2","A2"],"子供の入学手続き":["A2","A2","A2","A1","A2","A2","A2","B1","B1","A2"],"美容クリニック相談":["A2","A2","A2","A2","A2","B1","A1","A2","A2","A2"],"運転教習所で":["A2","A2","A2","B1","B1","A2","A2","B1","A2","A2"],"結婚式の準備":["A1","A2","A2","A2","A1","A2","B1","A2","A2","A2"],"退職の挨拶":["A1","A1","A2","A2","B1","B1","B1","A1","B1","A2"],"入社初日":["A1","A1","A1","A2","A1","A1","A2","A1","A2","B1"],"取引先を訪問する":["A2","A2","A1","B1","B1","A2","A2","A2","A2","B1"],"出張の手配":["A2","A2","A2","A1","B1","B1","A1","A1","A1","A2"],"ホームパーティーを開く":["A1","A2","A1","A1","A2","A2","A2","A2","A2","A2"],"ピクニック・バーベキュー":["A1","A2","A2","A2","A1","A2","A2","A2","A2","A2"],"カラオケで":["A1","A1","A2","A2","A2","A1","A1","A2","B1","A2"],"プール・海水浴で":["A1","A1","A1","A2","A2","A2","A1","A2","A2","A1"],"ネイルサロンで":["A2","A1","A2","A2","A2","A2","A2","B1","A2","A1"],"ヨガ・瞑想クラス":["A2","A2","A2","A1","A2","B1","B1","A2","B1","B1"],"高速のサービスエリアで":["B1","A2","A1","A1","A1","B1","A1","A2","A2","A2"],"電車の遅延・運休":["A2","A2","A1","A2","B1","B1","B1","A2","B1","B1"],"バス停で":["A2","A2","A2","A1","A1","A2","A2","A1","A2","A2"],"ホテルでのトラブル":["A2","A1","A1","A2","A2","A2","A2","A2","B1","A2"],"カード紛失・不正利用":["A2","B1","B1","B1","A2","B1","B1","B1","A2","A2"],"パスポート申請・更新":["B1","A2","A1","A1","B1","A2","A2","B1","A2","A1"],"ビザ・在留手続き":["B1","B1","B1","B1","B1","B1","A2","B1","B1","B1"],"迷子・館内放送":["A2","A2","A1","A2","A2","A2","A2","A1","A2","A2"],"デパートで":["A2","A1","A1","A2","A1","A2","A1","A1","A1","A1"],"スーパーのレジで":["A2","A1","A1","A1","A1","A1","A2","A2","A1","A1"],"コインランドリーで":["A1","A1","A2","A1","A1","A2","A2","A1","A2","B1"],"宅配ボックス・置き配":["A2","A2","A2","A2","A2","A2","A2","A1","A2","A1"],"銀行ATMで":["A2","A2","A2","A2","A2","A2","A2","A2","B1","A1"],"市役所で証明書を取る":["B1","A2","A2","A2","A1","A2","A2","A1","A1","A2"],"国際郵便を送る":["A1","A2","A2","A1","A1","B1","A1","A2","A2","A2"],"病院の受付で":["A1","A1","A2","B1","A2","A2","A2","A1","A2","A2"],"メガネ・コンタクトを作る":["A1","A2","B1","A2","B1","B1","A2","B1","A1","A2"],"料理教室で":["A2","A2","A2","A2","B1","B1","B1","B1","A2","A2"],"言語交換・国際交流":["A2","A1","A1","A2","A1","A1","A2","A2","A2","A2"],"ボードゲームで":["A2","A2","A2","A2","A2","A2","B1","A1","A2","A2"],"キャンプ場で":["A2","A2","A2","A2","B1","A2","A2","A2","A2","A2"],"釣り場で":["B1","B1","B1","A2","A2","B1","B1","B2","B1","B2"],"動物園・水族館で":["A1","A1","A2","A2","A2","A2","A2","A2","A1","A2"],"遊園地で":["A2","A2","A1","A2","A2","A2","B1","B1","A2","A2"],"小児科で":["A2","A2","A1","A2","B1","A2","A2","A2","A1","B1"],"産婦人科・妊婦健診":["A2","B1","A1","A2","A1","B1","B1","A2","A2","A2"],"皮膚科で":["A2","A2","B1","B1","A1","B1","A2","A2","B1","A2"],"絵画教室で":["B1","A2","A2","A2","A2","B1","B1","A2","B1","A2"],"ダンス教室で":["A2","A1","A2","A2","A2","A2","B1","A2","B1","A2"],"水泳教室で":["A2","A2","A2","A2","A2","A2","A2","A2","A2","A2"],"サッカーの練習で":["A2","A2","B1","A1","A2","A2","A2","A2","A1","A2"],"陶芸教室で":["B1","B1","A2","A2","A1","A2","A2","B1","A2","B1"],"写真撮影会で":["B1","B1","A2","B1","A2","A2","A2","A2","B1","A1"],"合唱・コーラスで":["A2","A2","A2","A2","A2","A2","A2","B1","B1","A1"],"茶道・華道体験":["A2","A1","A2","B1","B1","B1","B1","B1","B1","A2"],"演劇ワークショップで":["A2","B1","B1","B1","B1","B1","A2","B1","A2","A2"],"税務署・確定申告で":["B1","A2","B1","B1","B1","B1","A1","A2","B1","B1"],"引っ越しの手続き":["A2","B1","B1","B1","B1","A2","B1","B1","A2","A2"],"電気・ガス・水道の開通":["B1","B1","A2","A2","B1","B1","A2","A2","B1","B1"],"インターネット契約":["A2","B1","B1","A1","A2","A2","A2","A2","B1","A2"],"携帯電話の契約":["A2","A2","A2","A2","A2","B1","A2","A2","B1","B1"],"車の修理工場で":["A2","A2","A2","A1","A1","A2","A2","B1","B1","A1"],"車検・点検で":["B1","B1","A2","A2","B1","A2","B1","A2","A2","A2"],"駐車場で":["A2","A2","A1","A2","A2","A2","A2","B1","A1","A2"],"交通違反で":["A2","A2","A2","B1","A2","B1","B1","B1","B1","A2"],"カーシェア・レンタカー":["A2","A1","A2","B1","B1","A2","B2","A2","A2","A2"],"不用品・リサイクルで":["A2","B1","B1","A2","A2","A2","A2","A2","A2","B1"],"町内会・近所付き合い":["A2","A2","A2","A2","A1","A2","A2","A2","A2","A2"],"結婚式に参列する":["A2","A2","A1","A1","A2","A2","B1","A2","A2","A1"],"お葬式・お悔やみ":["B1","B1","A2","B1","A2","A2","B1","A2","B1","A2"],"誕生日を祝う":["A1","A1","A2","A2","A1","A1","B1","B1","A1","A2"],"出産祝い・お見舞い":["A1","A2","A1","A1","A2","A1","A2","A1","A1","A1"],"教会・ミサで":["A2","B1","A1","B1","A2","A2","B1","B1","B1","A1"],"クリスマスの準備":["A2","A2","B1","A2","A2","A2","A1","A2","A1","A2"],"大晦日・新年":["A1","A2","A1","B1","B1","A2","B1","A2","A2","A2"],"記念日のお祝い":["A2","A2","A1","A1","A2","A2","A1","A1","A2","A2"],"送別会・歓迎会":["B1","A1","A2","A2","A2","A2","A2","A2","A2","A2"],"同窓会で":["A2","A2","A2","B1","A2","A2","A2","A2","A2","A2"],"お見合い・デート":["A2","A1","A1","A2","A2","A2","A2","A2","A1","A2"],"プロポーズ・婚約":["A2","A2","A2","A1","A1","B1","A2","A2","A2","A2"],"美容院・理髪店で":["A2","A2","A1","A1","A2","B1","A2","A1","A2","A2"],"マッサージ・スパで":["A2","A1","A2","A1","A2","A2","A2","A2","A2","A2"],"ヨガ教室で":["A2","A2","A2","A2","B1","A2","A2","A2","A2","A2"],"靴の修理店で":["A2","B1","B1","A2","A2","A2","A2","B1","A2","A2"],"鍵屋・カギ紛失で":["B1","A2","A1","A2","A2","B1","A2","B1","A2","A2"],"動物病院で":["A1","A2","A2","A2","B1","A2","A2","A2","B1","A1"],"花屋で":["A2","A1","A2","A1","A2","A2","A2","A2","A1","A2"],"文房具店で":["A1","A1","A2","A1","A2","A2","A2","A2","A2","A1"],"温泉・銭湯で":["A2","A1","A2","A2","A2","A1","A2","A1","A2","A2"],"占い・タロットで":["A2","A2","A1","A2","A2","B1","A2","A2","B1","A2"],"ボウリング場で":["A2","A2","A2","A2","B1","A2","A1","A2","A2","A2"],"日曜大工・DIYで":["A2","A2","A2","A2","A2","A2","A2","A1","A2","A2"],"選挙・投票所で":["A2","A2","A2","A2","B1","B1","A2","A2","B1","A2"],"劇場・観劇で":["A1","A1","A2","A2","B1","A2","B1","A2","A2","B1"],"スポーツ観戦で":["A2","A2","A1","B1","A2","A2","A1","B1","A1","B1"],"質屋・買取店で":["A2","A2","A2","A2","B2","A1","A2","A2","B1","B1"],"フリーマーケットで":["A1","A2","A2","A2","A2","A1","A2","B1","A1","B1"],"不動産の内見で":["A2","A2","A2","A1","A2","B1","A1","A1","A2","A2"],"保険の相談で":["B1","B1","B2","B1","B2","B1","B2","B1","B1","B2"],"銀行で口座開設":["A2","A2","B1","A2","A2","B2","A2","A2","A2","A2"],"献血ルームで":["A2","A1","A2","A2","A2","A2","A2","A1","B1","A2"],"職業相談・ハローワークで":["A1","A2","A1","A2","A2","A2","B1","B1","A2","A2"],"警察に届け出る":["B1","A2","A2","B1","B1","B1","B2","B1","B2","B1"],"募金・チャリティで":["A2","A2","A2","B1","B1","A2","B1","B1","B1","A2"],"美術館・展覧会で":["A1","A2","A1","A1","A2","A2","A1","A2","A1","A1"],"図書館で":["A2","A1","A2","A1","A2","A2","A2","A1","A2","A2"],"スキー場で":["A2","A2","A2","A2","A1","B1","A1","A1","A2","A2"],"市民プールで":["A1","A2","A1","A2","A2","A2","A1","B1","A1","B1"],"ゴルフ場で":["A2","A2","A1","A2","A2","A1","A2","A2","A2","A1"],"城・遺跡の見学で":["A2","A2","A2","A2","B1","B1","A1","A2","B1","A2"],"ワイナリー見学で":["A2","A2","A2","B1","A2","B1","A2","A2","A2","B1"],"朝市で":["A2","A2","A1","A1","A1","B1","A1","A1","A2","B1"],"遊覧船・クルーズで":["A1","A2","A2","A2","A2","A2","A2","A1","B1","B1"],"展望台で":["B1","A2","A1","A2","A1","A2","A2","A2","B1","A2"],"プラネタリウムで":["A2","A2","B1","B1","B1","B1","A2","A2","A2","B1"],"テニスコートで":["A2","A2","A1","A2","B1","A2","A2","B1","A2","A1"],"証明写真・写真館で":["A2","A1","A2","A1","A2","B1","A2","B1","A2","B1"],"入国審査で":["A1","A2","A1","A1","A1","A1","A2","A1","A1","A1"],"税関で":["A2","A2","A1","B1","A1","A2","A2","B1","A2","A2"],"両替所で":["A2","B1","A2","B1","A2","A1","A2","A1","B1","A2"],"空港チェックインで":["A2","A1","A2","A2","A2","A2","A2","A2","A2","B1"],"ロストバゲージで":["A2","B1","A1","A1","A2","A2","A2","A2","A2","A2"],"機内で":["A1","A2","B1","A1","A2","A1","B1","B1","B1","A2"],"乗り継ぎで":["A2","A2","A2","A2","B1","A2","A2","B1","A1","A2"],"大使館でビザ申請":["A2","A2","A2","A2","A2","A2","B1","B1","B1","A2"],"通訳を頼む":["A1","A2","A2","A1","A1","A1","A2","B1","A1","A1"],"領事館で":["B1","A2","A2","A2","A2","B1","A2","A1","A2","A1"],"免税手続きで":["B1","A2","A1","A2","B1","A2","A2","A2","B1","A2"],"入院手続きで":["B1","B1","A1","A2","A2","B1","B1","B1","A2","A2"],"手術前の説明で":["A2","A1","A2","B1","A2","B1","A2","A1","A2","A2"],"リハビリ室で":["B1","A2","A1","A2","A2","B1","B1","A2","A2","A2"],"保護者面談で":["A2","A1","A2","A2","A2","A2","A2","A2","A1","B1"],"塾・予備校で":["A2","A2","A2","A2","A2","A2","A2","B1","A1","A2"],"オンライン会議で":["A1","A2","A2","A2","A2","A1","A2","A2","A2","A1"],"プレゼンテーションで":["A2","A2","B1","B1","A2","A1","A2","B1","B1","A2"],"商談・取引先と":["A2","A2","A2","B1","B1","A2","B1","B1","B1","A2"],"昇給の交渉で":["A2","B1","A2","B1","B1","B1","A2","B1","B1","A2"],"退職の手続きで":["B1","B1","B1","A1","A2","A2","B2","A1","A2","A2"],"起業・開業相談で":["B1","B2","B1","B1","B1","B2","B2","B2","B1","A2"],"健康診断で":["A2","A2","A2","A2","A2","A2","B1","A2","B1","A1"],"紳士服店で":["A1","A1","A1","A1","A2","A2","B1","A2","A1","A1"],"靴屋で":["A2","A1","A1","A2","A2","A2","A2","A1","A1","A2"],"帽子・アクセサリー店で":["A1","A1","A1","A1","A2","A1","A2","A1","A2","A2"],"時計店で":["A1","B1","B1","A2","A2","B1","A2","B1","A1","A1"],"アウトレットで":["A2","A2","B1","B1","B1","A2","A1","A2","A1","A2"],"仕立屋で":["B1","A2","A2","B1","A2","A1","A2","B1","B1","B1"],"古着屋で":["A2","A2","A2","A1","A2","A1","A2","A2","A2","B1"],"アウトドアショップで":["A2","A2","A2","A2","A2","A2","A1","B1","B1","A2"],"レコード店で":["B1","A1","A2","A1","A1","B1","A1","A2","A2","A1"],"宝飾店で":["A2","A2","A2","B1","A2","A2","A2","B1","A2","A2"],"化粧品店で":["A2","B1","A2","A1","A2","A1","A2","A2","A2","A2"],"かばん店で":["A2","A1","A1","B1","B1","A1","A1","A1","A2","A2"]};
+/* ---------- Consolidate former situation cards into CEFR learning levels ---------- */
+const DELF_LEVEL_ORDER=['A1','A2','B1','B2','C1','C2'];
+const delfMigrationKeys=new Map(),delfFormerSceneLevels=new Map();
+function delfEntryIdentity(word){
+  const normal=word.normalize('NFC').toLocaleLowerCase('fr').replace(/[’‘ʼ`]/g,"'").replace(/…/g,'...').replace(/[‐‑–—]/g,'-').replace(/\s+/g,' ').trim().replace(/[.!?,;:…\s]+$/g,'').trim();
+  // Same noun and meaning, differing only in the article; other article changes
+  // such as pouvoir/le pouvoir or santé/la santé have different uses and stay separate.
+  return normal==='une réduction'?'la réduction':normal;
+}
+(function(){
+  const canonical=new Map(),levels=Object.fromEntries(DELF_LEVEL_ORDER.map(level=>[level,[]]));
+  function keep(item,level,oldKey){
+    const identity=delfEntryIdentity(item.w);let entry=canonical.get(identity);
+    if(!entry){entry={item,level,key:'delf|'+level+'|'+item.w};canonical.set(identity,entry);levels[level].push(item);}
+    else{
+      const signature=x=>JSON.stringify([x.w,x.ipa,x.pos,x.jp,x.ex,x.exjp,x.note||'']);
+      const alternatives=entry.item.delfVariants||[];
+      if(signature(item)!==signature(entry.item)&&!alternatives.some(x=>signature(x)===signature(item))){
+        alternatives.push({...item});entry.item.delfVariants=alternatives;
+      }
+    }
+    if(oldKey!==entry.key)delfMigrationKeys.set(oldKey,entry.key);
+    return entry;
+  }
+  // Existing DELF entries and their established levels take precedence.
+  for(const level of DELF_LEVEL_ORDER)for(const item of DECKS.delf.tabs[level].items)keep(item,level,'delf|'+level+'|'+item.w);
+  const sceneEntries=[];
+  for(const [tab,data] of Object.entries(DECKS.scene.tabs)){
+    const assigned=DELF_SCENE_LEVELS[tab];
+    if(!assigned||assigned.length!==data.items.length)throw Error('Incomplete DELF assignment: '+tab);
+    data.items.forEach((item,index)=>sceneEntries.push({tab,item,level:assigned[index]}));
+  }
+  // Identical phrases share the same lowest appropriate entry point across contexts.
+  for(const level of DELF_LEVEL_ORDER)for(const row of sceneEntries)if(row.level===level)keep(row.item,level,'scene|'+row.tab+'|'+row.item.w);
+  for(const [tab,data] of Object.entries(DECKS.scene.tabs)){
+    const counts={};for(const item of data.items){const level=delfMigrationKeys.get('scene|'+tab+'|'+item.w).split('|')[1];counts[level]=(counts[level]||0)+1;}
+    delfFormerSceneLevels.set(tab,DELF_LEVEL_ORDER.filter(l=>counts[l]).sort((a,b)=>counts[b]-counts[a]||DELF_LEVEL_ORDER.indexOf(a)-DELF_LEVEL_ORDER.indexOf(b)));
+  }
+  for(const level of DELF_LEVEL_ORDER)DECKS.delf.tabs[level].items=levels[level];
+  delete DECKS.scene;
+})();
+function delfAppendVariants(card,item,onPlay){
+  if(!item.delfVariants?.length)return;
+  const details=document.createElement('details');details.className='delfvariants';
+  const summary=document.createElement('summary');summary.textContent='ほかの意味・例文（'+item.delfVariants.length+'）';details.appendChild(summary);
+  for(const variant of item.delfVariants){
+    const row=document.createElement('div');row.className='delfvariant';
+    const meaning=document.createElement('p');meaning.className='jp';meaning.textContent=variant.jp;row.appendChild(meaning);
+    if(variant.ex){const example=document.createElement('button');example.type='button';example.className='delfvariantex';example.lang='fr';example.title='例文を再生';example.textContent=variant.ex;example.onclick=()=>{speak(variant.ex,example);if(onPlay)onPlay();};row.appendChild(example);}
+    if(variant.exjp){const translation=document.createElement('p');translation.className='exjp';translation.textContent=variant.exjp;row.appendChild(translation);}
+    details.appendChild(row);
+  }
+  card.insertBefore(details,card.querySelector('.cardfoot'));
+}
+/* ---------- End DELF consolidation ---------- */
+
+/* ---------- Preserve progress from the former situation categories ---------- */
+function delfNormalizeProgress(value,kind){
+  if(!value||typeof value!=='object'||Array.isArray(value))return {};
+  const out=Object.create(null),has=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
+  const number=n=>Number.isFinite(Number(n))?Math.max(0,Number(n)):0;
+  const rank={done:1,fav:2,review:3};
+  function earlier(a,b){
+    if(!a||typeof a!=='object')return b;if(!b||typeof b!=='object')return a;
+    const due=r=>Number.isFinite(Number(r.d))?Number(r.d):Infinity;
+    if(due(a)!==due(b))return due(a)<due(b)?a:b;
+    const interval=r=>number(r.iv??r.s??0);return interval(a)<=interval(b)?a:b;
+  }
+  for(const [oldKey,item] of Object.entries(value)){
+    const key=delfMigrationKeys.get(oldKey)||oldKey;
+    if(!has(out,key)){out[key]=item;continue;}
+    if(kind==='counts'||kind==='errors')out[key]=number(out[key])+number(item);
+    else if(kind==='known'||kind==='hidden')out[key]=out[key]||item?1:0;
+    else if(kind==='marks')out[key]=(rank[item]||0)>(rank[out[key]]||0)?item:out[key];
+    else if(kind==='srs')out[key]=earlier(out[key],item);
+  }
+  return out;
+}
+function delfLoadProgress(storageKey,kind){
+  const old=ls(storageKey,'{}'),next=delfNormalizeProgress(old,kind);
+  if(JSON.stringify(old)!==JSON.stringify(next)){
+    // Retain the first affected records locally, including conflicting marks.
+    // Atomic per-map writes and no global flag make partial storage failures retryable.
+    try{
+      const archiveKey='fl_delf_migration_backup_v1_'+kind;
+      if(!localStorage.getItem(archiveKey)){
+        const affected=Object.create(null);
+        for(const [key,value] of Object.entries(old||{})){if(delfMigrationKeys.has(key)){affected[key]=value;const dest=delfMigrationKeys.get(key);if(Object.prototype.hasOwnProperty.call(old,dest))affected[dest]=old[dest];}}
+        if(Object.keys(affected).length)localStorage.setItem(archiveKey,JSON.stringify(affected));
+      }
+      localStorage.setItem(storageKey,JSON.stringify(next));
+    }catch(e){}
+  }
+  return next;
+}
+function delfMigrateNavigation(value){
+  if(!value||value.c!=='scene')return value;
+  const tabs=Array.isArray(value.ms)&&value.ms.length>1?value.ms:[value.t];
+  const represented=new Set(tabs.flatMap(tab=>delfFormerSceneLevels.get(tab)||[]));
+  const ordered=DELF_LEVEL_ORDER.filter(l=>represented.has(l));
+  const primary=delfFormerSceneLevels.get(value.t)?.[0]||ordered[0]||'A1';
+  return {...value,c:'delf',t:primary,ms:tabs.length>1&&ordered.length>1?[primary,...ordered.filter(l=>l!==primary)]:undefined};
+}
+/* ---------- End progress migration ---------- */
+
+/*===DELF_SCENE_MIGRATION_END===*/
 /* ---------- voices ---------- */
 const synth=window.speechSynthesis;
 let voices=[], frVoice=null, jaVoice=null;
@@ -15613,7 +15722,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-1102'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-1216'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -15819,10 +15928,10 @@ function wireAccentBar(scope,inp){
 /* ---------- storage: counts / errors / known / time ---------- */
 function ls(k,d){try{return JSON.parse(localStorage.getItem(k)||d);}catch(e){return JSON.parse(d);}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-let counts=ls('fl_counts','{}'), errors=ls('fl_errors','{}'), known=ls('fl_known','{}'), marks=ls('fl_marks','{}');
+let counts=delfLoadProgress('fl_counts','counts'), errors=delfLoadProgress('fl_errors','errors'), known=delfLoadProgress('fl_known','known'), marks=delfLoadProgress('fl_marks','marks');
 const MARKS={done:{label:I_CHECK+' 完璧',short:I_CHECK},review:{label:I_LOOP+' 復習',short:I_LOOP},fav:{label:I_STAR+' 保存',short:I_STAR}};
 // migrate old single hidden flag -> 完璧
-(function(){const oh=ls('fl_hidden','{}');let ch=false;for(const k in oh){if(!marks[k]){marks[k]='done';ch=true;}}if(ch)sv('fl_marks',marks);})();
+(function(){const oh=delfLoadProgress('fl_hidden','hidden');if(!Object.keys(oh).length)return;for(const k in oh){if(!marks[k])marks[k]='done';}try{localStorage.setItem('fl_marks',JSON.stringify(marks));localStorage.removeItem('fl_hidden');}catch(e){}})();
 function markOf(key){return marks[key]||'';}
 function setMark(key,m){if(marks[key]===m)delete marks[key];else marks[key]=m;sv('fl_marks',marks);}
 /* ---- 習熟クラウン: 各デッキ(タブ)の「完璧」達成度を 銅(着手)→銀(半分)→金(全完璧) で可視化 ---- */
@@ -15831,7 +15940,7 @@ function crownTierPct(p){return p>=100?'gold':(p>=50?'silver':(p>0?'bronze':''))
 function allCrowns(){const out={gold:0,silver:0,bronze:0};for(const cid in DECKS){if(cid==='verb')continue;const tabs=DECKS[cid].tabs;for(const k in tabs){const its=tabs[k].items;if(!its.length)continue;let dn=0;for(const it of its){if(marks[cid+'|'+k+'|'+it.w]==='done')dn++;}const t=crownTierPct(Math.round(dn/its.length*100));if(t)out[t]++;}}return out;}
 function isHidden(key){return markOf(key)==='done';}
 /* Anki式 間隔反復（SM-2: ease factor + 4段階評価） */
-let srs=ls('fl_srs','{}');
+let srs=delfLoadProgress('fl_srs','srs');
 const SRS_INT=[1,3,7,14,30,60]; // 旧データ移行用
 let todayMode=false, todayTotal=0, todayDueN=0, todayNewN=0;
 // 旧 {s,d} 形式からも引ける読み取り
@@ -15967,7 +16076,7 @@ function keyOf(it){return cat+'|'+(it._tk||current)+'|'+it.w;}
 
 /* ---------- category bar ---------- */
 const deckbar=document.getElementById('deckbar'), teststyle=document.getElementById('teststyle');
-const CATS=[["delf","DELF単語"],["freq","よく使うフレーズ"],["scene","場面別"],["theme","テーマ別"],["verb","動詞活用"]];
+const CATS=[["delf","DELF単語"],["freq","よく使うフレーズ"],["theme","テーマ別"],["verb","動詞活用"]];
 /* ☰ 目次 panel (opened from the header utility button) */
 const tocBtn=document.getElementById('tocBtn');
 const tocPanel=document.createElement('div');tocPanel.id='tocPanel';tocPanel.className='tocpanel hide';
@@ -16209,11 +16318,11 @@ function buildStats(){
   const exportPayload=()=>JSON.stringify({v:2,counts:counts,errors:errors,known:known,marks:marks,srs:srs,time:timeData,goal:ls('fl_goal','150'),bookProgress:bookProgress});
   const importProgress=(v)=>{
     try{const d2=JSON.parse(v);
-      if(d2.counts){counts=d2.counts;sv('fl_counts',counts);}
-      if(d2.errors){errors=d2.errors;sv('fl_errors',errors);}
-      if(d2.known){known=d2.known;sv('fl_known',known);}
-      if(d2.marks){marks=d2.marks;sv('fl_marks',marks);}
-      if(d2.srs){srs=d2.srs;sv('fl_srs',srs);}
+      if(d2.counts){counts=delfNormalizeProgress(d2.counts,'counts');sv('fl_counts',counts);}
+      if(d2.errors){errors=delfNormalizeProgress(d2.errors,'errors');sv('fl_errors',errors);}
+      if(d2.known){known=delfNormalizeProgress(d2.known,'known');sv('fl_known',known);}
+      if(d2.marks){marks=delfNormalizeProgress(d2.marks,'marks');sv('fl_marks',marks);}
+      if(d2.srs){srs=delfNormalizeProgress(d2.srs,'srs');sv('fl_srs',srs);}
       if(d2.time){timeData=d2.time;sv('fl_time',timeData);}
       if(d2.goal)sv('fl_goal',d2.goal);
       if(d2.bookProgress){bookProgress=bookCleanProgress(d2.bookProgress);sv('fl_book_progress',bookProgress);}
@@ -16472,6 +16581,7 @@ function renderLearn(){
     if(it.ipa)c.querySelector('.ipa').onclick=()=>{speak(it.w,pb);hit();};
     pb.onclick=()=>{speak(it.w,pb);hit();};
     const ex=c.querySelector('.exfr');ex.onclick=()=>{speak(it.ex,ex.querySelector('.ico'));hit();};
+    delfAppendVariants(c,it,hit);
     grid.appendChild(c);
   });
 }
@@ -16548,7 +16658,7 @@ function renderGlobalSearch(){
     const tabs=DECKS[cid].tabs;
     for(const tk in tabs){
       tabs[tk].items.forEach((it,i)=>{
-        if(normalizeSearchText(it.w+' '+it.jp+' '+it.pos).includes(q)||(it.ipa||'').toLowerCase().includes(rawQ))res.push({cid:cid,clabel:DECKS[cid].label,tk:tk,it:it,n:i+1});
+        if(normalizeSearchText(it.w+' '+it.jp+' '+it.pos+' '+(it.delfVariants||[]).map(v=>v.w+' '+v.jp+' '+v.ex+' '+v.exjp).join(' ')).includes(q)||(it.ipa||'').toLowerCase().includes(rawQ))res.push({cid:cid,clabel:DECKS[cid].label,tk:tk,it:it,n:i+1});
       });
     }
   }
@@ -17695,7 +17805,8 @@ if('mediaSession' in navigator){
 
 // 前回の位置を復元（デッキ・タブ。モードは安全な learn / hf のみ復元し、テスト等は自動起動しない）
 (function(){try{
-  const nv=ls('fl_nav','null');
+  const nv=delfMigrateNavigation(ls('fl_nav','null'));
+  if(nv)sv('fl_nav',nv);
   if(nv){
     if(nv.c&&DECKS[nv.c])cat=nv.c;
     if(nv.m==='learn'||nv.m==='hf'||nv.m==='book'||nv.m==='rfi')mode=nv.m;
