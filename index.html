@@ -350,6 +350,12 @@
   .hfmark button.on[data-hm="fav"]{background:var(--gold);border-color:var(--gold);color:#fff}
   .hfopt{display:flex;gap:13px;justify-content:center;margin-top:15px;font-size:11.5px;color:var(--muted);flex-wrap:wrap}
   .hfopt label{display:flex;align-items:center;gap:5px}
+  .hfpace{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .hfpace button{border:1px solid var(--line);border-radius:18px;padding:8px 16px;background:var(--card);color:var(--ink);font:inherit;font-size:13px;cursor:pointer}
+  .hfpace button[aria-pressed="true"]{background:var(--bleu);border-color:var(--bleu);color:#fff}
+  .hfpace button:focus-visible{outline:2px solid var(--bleu);outline-offset:3px}
+  .hfpacehint{font-size:12px;line-height:1.7;color:var(--muted);text-align:center;margin:8px 0 0}
+  .hfopt label:has(:disabled){opacity:.55}
   footer{text-align:center;color:var(--muted);font-size:11px;padding:20px 16px 40px;line-height:1.7}
   .hide{display:none!important}
   /* ===== mobile / iPhone ===== */
@@ -869,6 +875,11 @@
         <button data-hm="review"><svg class="ic" viewBox="0 0 24 24"><path d="M12 5V2L7 7l5 5V8a4 4 0 1 1-4 4H6a6 6 0 1 0 6-7z"/></svg> 復習</button>
         <button data-hm="fav"><svg class="ic" viewBox="0 0 24 24"><path d="m12 2 2.9 6.1 6.6.8-4.9 4.5 1.3 6.6L12 17.8 6.1 20.6l1.3-6.6L2.5 8.9l6.6-.8z"/></svg> 保存</button>
       </div>
+      <div class="hfpace" role="group" aria-label="ハンズフリーの再生方法">
+        <button type="button" data-hfpace="normal" aria-pressed="true">通常</button>
+        <button type="button" data-hfpace="quick" aria-pressed="false">高速・各1回</button>
+      </div>
+      <p class="hfpacehint" id="hfPaceHint" aria-live="polite"></p>
       <div class="hfopt">
         <label title="区間の最後まで行ったら最初へ戻り、止めるまで止まらず連続再生します"><input type="checkbox" id="hfloop" checked> 連続ループ</label>
         <label><input type="checkbox" id="hfex_chk" checked> 例文も読む</label>
@@ -16101,7 +16112,7 @@ function _silentWav(sec){
 function kaStart(){try{if(!_ka){_ka=new Audio(_silentWav(0.5));_ka.loop=true;_ka.volume=0.001;_ka.preload='auto';}if(_ka.paused){const p=_ka.play();if(p&&p.catch)p.catch(()=>{});}}catch(e){}}
 function kaStop(){try{if(_ka)_ka.pause();}catch(e){}}
 // 実機切り分け用の診断（ビルド識別／indexロード状況／直近に実際に鳴った音源）
-const BUILD_ID='1122-2022'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
+const BUILD_ID='1122-2035'; // deploy-gh.ps1 が本番反映時に日時スタンプへ自動置換する
 let _lastSrc='—';
 function setDiag(){var e=document.getElementById('setDiag');if(!e)return;
   e.textContent='診断: ビルド '+BUILD_ID+' ／ AI音声index 仏'+audioSet.size+'・男'+audioSetM.size+'・日'+audioSetJa.size+' ／ 直近の音源: '+_lastSrc;}
@@ -16154,15 +16165,17 @@ function webSpeak(text,lang,btn){
   synth.speak(u);
 }
 // awaitable (used by hands-free / continuous play / numbers)
-function speakLang(text,lang){
+function speakLang(text,lang,isCurrent=()=>true){
   return new Promise(res=>{
+    if(!isCurrent()){res();return;}
     _softSwitch();if(synth)synth.cancel();
     if(ttsMode==='auto'){webSpeakLang(text,lang).then(res);return;}
     if(lang==='fr')setMedia(text,'');
     resolveUrl(text,lang).then(url=>{
+      if(!isCurrent()){res();return;}
       if(!url){webSpeakLang(text,lang).then(res);return;}
-      playUrl(url,lang,null).then(ok=>{if(ok===true){_onlineFails=0;res();return;}if(ok!==false){res();return;}
-        if(!_isGoogle(url)){playUrl(url,lang,null).then(ok2=>{if(ok2===true){_onlineFails=0;res();}else if(ok2===false){webSpeakLang(text,lang).then(res);}else res();});} // ニューラル音声を一度だけ再試行してから機械音声へ
+      playUrl(url,lang,null).then(ok=>{if(!isCurrent()){res();return;}if(ok===true){_onlineFails=0;res();return;}if(ok!==false){res();return;}
+        if(!_isGoogle(url)){playUrl(url,lang,null).then(ok2=>{if(!isCurrent()){res();return;}if(ok2===true){_onlineFails=0;res();}else if(ok2===false){webSpeakLang(text,lang).then(res);}else res();});} // ニューラル音声を一度だけ再試行してから機械音声へ
         else{_onlineFails++;webSpeakLang(text,lang).then(res);}});
     });
   });
@@ -17321,9 +17334,12 @@ function doFlip(){flipped=true;renderTest();const it=deck[idx];setTimeout(()=>sp
 /* ---------- HANDS-FREE ---------- */
 let hfList=[], hfIdx=0, hfToken=0, hfPlaying=false;
 let hfDir=ls('fl_hfdir','"fr2jp"'); // 'fr2jp'=仏→日 / 'jp2fr'=日→仏
+let hfPace=ls('fl_hfpace','"normal"')==='quick'?'quick':'normal';
+let hfExamples=ls('fl_hfexamples','true')!==false;
 const hfloop=document.getElementById('hfloop'), hfexchk=document.getElementById('hfex_chk');
 const hfRepeat=document.getElementById('hfRepeat');
-if(hfRepeat){hfRepeat.value=String(itemRepeat);hfRepeat.addEventListener('change',()=>{itemRepeat=Math.max(1,Math.min(10,Number(hfRepeat.value)||1));sv('fl_itemrep',itemRepeat);});}
+if(hfRepeat)hfRepeat.addEventListener('change',()=>{if(hfPace==='quick')return;itemRepeat=Math.max(1,Math.min(10,Number(hfRepeat.value)||1));sv('fl_itemrep',itemRepeat);hfSettingsChanged();});
+hfexchk.addEventListener('change',()=>{if(hfPace==='quick')return;hfExamples=hfexchk.checked;sv('fl_hfexamples',hfExamples);hfSettingsChanged();});
 const hffr=document.getElementById('hffr'), hffripa=document.getElementById('hffripa'), hfjp=document.getElementById('hfjp'), hfex=document.getElementById('hfex'), hfidxEl=document.getElementById('hfidx'), hfstage=document.getElementById('hfstage'), hfplayBtn=document.getElementById('hfplay');
 function hfBuild(){
   if(isVerb()){
@@ -17346,30 +17362,46 @@ function hfShow(){
   hfMarkUI();
 }
 function hfMarkUI(){const it=hfList[hfIdx];const m=it?markOf(it.k):'';document.querySelectorAll('[data-hm]').forEach(b=>b.classList.toggle('on',b.dataset.hm===m));}
+function hfSteps(it){
+  const quick=hfPace==='quick';
+  if(hfDir==='jp2fr'){
+    const steps=[['日本語',it.jp,'ja'],['仏語',it.w,'fr']];
+    if(!quick&&hfExamples&&it.ex){if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}
+    return steps;
+  }
+  const steps=[['仏語',it.w,'fr'],['日本語',it.jp,'ja']];
+  if(!quick){steps.push(['仏語',it.w,'fr']);if(hfExamples&&it.ex){steps.push(['例文(仏)',it.ex,'fr']);if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}}
+  return steps;
+}
+function hfPaceUI(){
+  const quick=hfPace==='quick';
+  document.querySelectorAll('[data-hfpace]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.hfpace===hfPace)));
+  hfexchk.disabled=quick;hfexchk.checked=quick?false:hfExamples;
+  if(hfRepeat){hfRepeat.disabled=quick;hfRepeat.value=String(quick?1:itemRepeat);}
+  document.getElementById('hfPaceHint').textContent=quick?'フランス語・日本語を各1回。例文なし・音声の間と次の語まで0.2秒。':'復唱しながら練習。例文・くり返し回数・間隔を調整できます。';
+  const link=document.getElementById('hfSetLink');link.title=quick?'音声の速さを調整（高速の間隔は0.2秒固定）':'速さ・音の間隔・語の間隔を調整';
+  hfDirUI();
+}
+function hfSettingsChanged(){
+  const playing=hfPlaying;if(playing)hfStop();
+  hfPaceUI();hfShow();if(playing)hfPlay();
+}
+document.querySelectorAll('[data-hfpace]').forEach(b=>b.onclick=()=>{const pace=b.dataset.hfpace;if(pace===hfPace)return;hfPace=pace==='quick'?'quick':'normal';sv('fl_hfpace',hfPace);hfSettingsChanged();});
 async function hfPlay(){
   if(!hfList.length)return;
   const token=++hfToken;hfPlaying=true;hfplayBtn.innerHTML=SVG_PAUSE;kaStart(); // 無音キープアライブ開始（ロック中も継続再生）
   while(hfIdx<hfList.length){
     if(token!==hfToken)return;
     const it=hfList[hfIdx];hfShow();bump(it.k);
-    let steps;
-    if(hfDir==='jp2fr'){
-      // 日→仏：日本語1回 → 仏語1回（例文も 日→仏）
-      steps=[['日本語',it.jp,'ja'],['仏語',it.w,'fr']];
-      if(hfexchk.checked&&it.ex){if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}
-    }else{
-      // 仏→日：仏語 → 日本語 → 仏語 →（例文）仏語例文 → 日本語例文 → 仏語例文
-      steps=[['仏語',it.w,'fr'],['日本語',it.jp,'ja'],['仏語',it.w,'fr']];
-      if(hfexchk.checked&&it.ex){steps.push(['例文(仏)',it.ex,'fr']);if(it.exjp)steps.push(['例文(日)',it.exjp,'ja']);steps.push(['例文(仏)',it.ex,'fr']);}
-    }
-    for(let rep=0;rep<itemRepeat;rep++){
+    const quick=hfPace==='quick',steps=hfSteps(it),repeats=quick?1:itemRepeat;
+    for(let rep=0;rep<repeats;rep++){
       for(let si=0;si<steps.length;si++){
         if(token!==hfToken)return;
-        hfstage.textContent='▶ '+steps[si][0]+(itemRepeat>1?'　('+(rep+1)+'/'+itemRepeat+')':'');
-        await speakLang(steps[si][1],steps[si][2]);
+        hfstage.textContent=steps[si][0]+(repeats>1?'　('+(rep+1)+'/'+repeats+')':'');
+        await speakLang(steps[si][1],steps[si][2],()=>token===hfToken);
         if(token!==hfToken)return;
-        const last=(rep===itemRepeat-1&&si===steps.length-1);
-        await playGap(last?gapMs():gapInnerMs()); // 語内=音間スライダー / 次の単語へ=語間スライダー（無音再生で埋める＝ロック中も進む）
+        const last=(rep===repeats-1&&si===steps.length-1);
+        await playGap(quick?200:(last?gapMs():gapInnerMs())); // 無音クリップで再生セッションを維持
       }
     }
     if(token!==hfToken)return;
@@ -17384,9 +17416,12 @@ hfplayBtn.onclick=()=>{if(hfPlaying)hfStop();else hfPlay();};
 function hfDirUI(){
   const lbl=document.getElementById('hfDirLbl');if(lbl)lbl.textContent=(hfDir==='jp2fr'?'日→仏':'仏→日');
   const btn=document.getElementById('hfDirBtn');if(btn)btn.setAttribute('aria-label','読み上げ方向: '+(hfDir==='jp2fr'?'日本語→仏語':'仏語→日本語')+'（タップで切替）');
-  const h=document.getElementById('hfOrderHint');if(h)h.textContent=(hfDir==='jp2fr'?'再生順：日本語 → 仏語 →（例文）日本語例文 → 仏語例文。':'再生順：仏語 → 日本語 → 仏語 → 仏語例文 → 日本語例文 → 仏語例文。');
+  const h=document.getElementById('hfOrderHint');if(h){
+    const labels=hfSteps({w:'',jp:'',ex:'example',exjp:'translation'}).map(s=>s[0]);
+    h.textContent='再生順：'+labels.join(' → ')+' → 次の項目。';
+  }
 }
-(function(){const b=document.getElementById('hfDirBtn');if(b)b.onclick=()=>{hfDir=(hfDir==='jp2fr'?'fr2jp':'jp2fr');sv('fl_hfdir',hfDir);hfDirUI();const wp=hfPlaying;if(wp){hfStop();hfPlay();}};hfDirUI();})();
+(function(){const b=document.getElementById('hfDirBtn');if(b)b.onclick=()=>{hfDir=(hfDir==='jp2fr'?'fr2jp':'jp2fr');sv('fl_hfdir',hfDir);hfSettingsChanged();};hfPaceUI();})();
 document.getElementById('hfprev').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.max(0,hfIdx-1);if(wp)hfPlay();else hfShow();};
 document.getElementById('hfnext').onclick=()=>{const wp=hfPlaying;hfStop();hfIdx=Math.min(hfList.length-1,hfIdx+1);if(wp)hfPlay();else hfShow();};
 document.querySelectorAll('[data-hm]').forEach(b=>b.onclick=()=>{
